@@ -22,6 +22,7 @@ export default function ContactForm() {
           </a>
         </div>
         <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="name-of-form" />
           <div className="field">
             <input
               type="text"
@@ -49,7 +50,10 @@ export default function ContactForm() {
             />
           </div>
           <div className="field">
-            <button type="submit" className="button is-montserrat is-uppercase is-black">
+            <button
+              type="submit"
+              className="button is-montserrat is-uppercase is-black"
+            >
               submit
             </button>
           </div>
