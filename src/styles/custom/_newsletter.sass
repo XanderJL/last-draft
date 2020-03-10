@@ -1,0 +1,21 @@
+.newsletter
+    margin: 0 auto
+    background-color: black
+
+    form
+        padding: 10rem 5rem
+
+        .input
+            border-radius: 0
+
+            &::placeholder
+                color: $text
+
+@media screen and (max-width: $tablet)
+
+    .newsletter
+        width: 100%
+        min-height: 300px
+
+        form
+            padding: $section-padding

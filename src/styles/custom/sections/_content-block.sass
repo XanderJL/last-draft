@@ -1,0 +1,52 @@
+.section-content-block
+    height: 500px
+    background-color: $mint
+    overflow: hidden
+    display: flex
+    flex-direction: row-reverse
+    align-items: center
+    justify-content: center
+
+    .title-wrapper
+        margin: 2rem auto
+        padding: $section-padding
+
+    .image-container
+        height: 100%
+        width: 50vw
+        object-fit: cover
+        object-position: 50% 65%
+        clip-path: circle(75% at 60% 50%)
+        transition: clip-path .25s ease-in-out
+
+        @media screen and (max-width: 1850px)
+            clip-path: circle(70% at 65% 50%)
+            transition: clip-path .25s ease-in-out
+
+        @media screen and (max-width: 1450px)
+            clip-path: circle(65% at 60% 50%)
+            transition: clip-path .25s ease-in-out
+
+        @media screen and (max-width: 1160px)
+            clip-path: none
+            transition: clip-path 1s ease-in-out
+
+    @media screen and (max-width: $tablet)
+
+        height: auto
+        flex-direction: column
+
+        .title-wrapper
+            height: 400px
+            width: 100%
+            display: flex
+            justify-content: space-around
+            align-items: center
+            margin: 0
+
+        h2
+
+        .image-container
+            height: 400px
+            width: 100%
+            clip-path: none

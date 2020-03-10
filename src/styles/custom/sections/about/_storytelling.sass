@@ -1,0 +1,26 @@
+.section
+    &-storytelling
+        @extend .section
+        max-width: 100%
+        
+        .container
+            padding: $container-padding
+            display: grid
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+            align-items: center
+            grid-gap: $gap * 3
+
+            @media screen and (max-width: $desktop)
+                grid-template-columns: 1fr
+                grid-gap: $gap * 2
+                justify-items: center
+
+            .copy
+                max-width: 50ch
+
+                .title
+                    margin-bottom: $title-margin
+
+            .image
+                box-shadow: $card-shadow
+                width: 100%

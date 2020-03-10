@@ -1,0 +1,23 @@
+.hero
+    &-about
+        @extend .hero
+
+        .hero-body
+            display: flex
+            justify-content: center
+
+.card
+    &-about
+        @extend .card
+        box-shadow: $card-shadow
+        width: fit-content
+
+        .card-content
+            max-width: 50ch
+            padding: $card-padding
+
+            @media screen and (max-width: $tablet)
+                padding: $card-padding-mobile
+
+            .title
+                margin-bottom: $title-margin

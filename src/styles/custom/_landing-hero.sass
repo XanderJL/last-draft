@@ -1,0 +1,23 @@
+.landing-hero
+
+    .hero-content
+        padding: $section-padding
+        display: flex
+        justify-content: flex-start
+        
+        .hero-copy
+            text-shadow: 1px 1px rgba(0, 0, 0, 0.3)
+
+            h1
+                margin-bottom: 1em
+            h2
+                margin-bottom: 0
+
+@media screen and (max-width: $desktop)
+
+    .hero-content
+        display: block
+        text-shadow: none
+        background-color: black
+        height: auto
+        padding: $section-padding
