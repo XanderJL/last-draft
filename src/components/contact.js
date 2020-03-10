@@ -49,7 +49,7 @@ export default function ContactForm() {
             />
           </div>
           <div className="field">
-            <button className="button is-montserrat is-uppercase is-black">
+            <button type="submit" className="button is-montserrat is-uppercase is-black">
               submit
             </button>
           </div>
