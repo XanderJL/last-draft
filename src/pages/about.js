@@ -5,6 +5,7 @@ import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/layout"
 import Contact from "../components/contact"
+import SEO from "../components/seo"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -34,6 +35,10 @@ export default function About() {
   `)
   return (
     <Layout>
+      <SEO
+        title="About"
+        description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
+      />
       <BackgroundImage
         fluid={data.headerImage.childImageSharp.fluid}
         className="hero-about is-fullheight-with-navbar"
