@@ -21,7 +21,7 @@ export default function ContactForm() {
             <img src={Twitter} alt="Twitter Icon" />
           </a>
         </div>
-        <form name="contact" method="POST" data-netlify="true">
+        <form name="contact" method="POST" data-netlify="true" action="/success">
           <input type="hidden" name="form-name" value="contact" />
           <div className="field">
             <input
