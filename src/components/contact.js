@@ -22,7 +22,7 @@ export default function ContactForm() {
           </a>
         </div>
         <form name="contact" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="name-of-form" />
+          <input type="hidden" name="form-name" value="contact" />
           <div className="field">
             <input
               type="text"
