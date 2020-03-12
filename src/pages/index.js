@@ -13,21 +13,21 @@ const IndexPage = () => {
     {
       headerImage: file(relativePath: { eq: "header-image.png" }) {
         childImageSharp {
-          fluid(quality: 100) {
+          fluid(quality: 60, maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       newsLetterImage: file(relativePath: { eq: "newsletter-header.png" }) {
         childImageSharp {
-          fluid(quality: 100) {
+          fluid(quality: 60, maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       glassesImage: file(relativePath: { eq: "glasses.jpeg" }) {
         childImageSharp {
-          fluid(quality: 100) {
+          fluid(quality: 60) {
             ...GatsbyImageSharpFluid
           }
         }

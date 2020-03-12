@@ -12,21 +12,21 @@ export default function About() {
     {
       headerImage: file(relativePath: { eq: "about/about-header.png" }) {
         childImageSharp {
-          fluid(quality: 100) {
+          fluid(quality: 60, maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       typeWriterImage: file(relativePath: { eq: "about/type-writer.png" }) {
         childImageSharp {
-          fluid(quality: 100) {
+          fluid(quality: 60) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       jacobImage: file(relativePath: { eq: "about/jacob.png" }) {
         childImageSharp {
-          fluid(quality: 100) {
+          fluid(quality: 60) {
             ...GatsbyImageSharpFluid
           }
         }
