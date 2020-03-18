@@ -30,8 +30,16 @@ export default function Testimonials() {
             <p>Tom Mohr</p>
             <p>Founder, CEO Quest</p>
           </div>
-          <a href="http://ceoquest.com" target="_blank">
-            <img class="testimonial-logo" src={ceoquest} alt="CEO Quest logo" />
+          <a
+            href="http://ceoquest.com"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img
+              className="testimonial-logo"
+              src={ceoquest}
+              alt="CEO Quest logo"
+            />
           </a>
         </div>
         <div className="quote">
@@ -45,9 +53,13 @@ export default function Testimonials() {
             <p>Bob Bausmith</p>
             <p>Founder, Accelerate Innovation</p>
           </div>
-          <a href="https://www.accelerateinnovation.com/" target="_blank">
+          <a
+            href="https://www.accelerateinnovation.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             <img
-              class="testimonial-logo"
+              className="testimonial-logo"
               src={accelerate}
               alt="Accelerate Innovation logo"
             />

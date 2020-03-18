@@ -35,6 +35,10 @@ const IndexPage = () => {
     }
   `)
 
+  const headerImage = data.headerImage.childImageSharp.fluid
+  const newsLetterImage = data.newsLetterImage.childImageSharp.fluid
+  const glassesImage = data.glassesImage.childImageSharp.fluid
+
   return (
     <Layout>
       <SEO
@@ -43,7 +47,7 @@ const IndexPage = () => {
       />
       <BackgroundImage
         className="is-hidden-touch hero landing-hero is-fullheight-with-navbar"
-        fluid={data.headerImage.childImageSharp.fluid}
+        fluid={headerImage}
         style={{ backgroundAttachment: "fixed" }}
       >
         <div className="hero-content">
@@ -64,7 +68,7 @@ const IndexPage = () => {
       </BackgroundImage>
       <section className="is-hidden-desktop">
         <div className="image">
-          <Img fluid={data.headerImage.childImageSharp.fluid} alt="Beer" />
+          <Img loading="eager" fluid={headerImage} alt="Beer" />
         </div>
         <div className="hero-content">
           <div className="hero-copy">
@@ -116,7 +120,7 @@ const IndexPage = () => {
       <div className="is-hidden-touch hero newsletter-hero is-fullheight">
         <BackgroundImage
           className="hero-content"
-          fluid={data.newsLetterImage.childImageSharp.fluid}
+          fluid={newsLetterImage}
           style={{ backgroundAttachment: "fixed" }}
         >
           <div className="newsletter">
@@ -161,17 +165,15 @@ const IndexPage = () => {
           </form>
         </div>
         <div className="image">
-          <Img
-            fluid={data.newsLetterImage.childImageSharp.fluid}
-            alt="Typewriter"
-          />
+          <Img loading="eager" fluid={newsLetterImage} alt="Typewriter" />
         </div>
       </section>
       <Testimonials />
       <section className="section-content-block">
         <Img
+          loading="eager"
           className="image-container"
-          fluid={data.glassesImage.childImageSharp.fluid}
+          fluid={glassesImage}
           alt="image of glasses on a table"
         />
         <div className="title-wrapper">

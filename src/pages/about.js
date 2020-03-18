@@ -33,6 +33,11 @@ export default function About() {
       }
     }
   `)
+
+  const headerImage = data.headerImage.childImageSharp.fluid
+  const typeWriterImage = data.typeWriterImage.childImageSharp.fluid
+  const jacobImage = data.jacobImage.childImageSharp.fluid
+
   return (
     <Layout>
       <SEO
@@ -40,7 +45,7 @@ export default function About() {
         description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
       />
       <BackgroundImage
-        fluid={data.headerImage.childImageSharp.fluid}
+        fluid={headerImage}
         className="hero-about is-fullheight-with-navbar"
         style={{ backgroundAttachment: "fixed" }}
       >
@@ -89,8 +94,9 @@ export default function About() {
           </div>
           <div className="image">
             <Img
+              loading="eager"
               className="type-writer"
-              fluid={data.typeWriterImage.childImageSharp.fluid}
+              fluid={typeWriterImage}
             />
           </div>
         </div>
@@ -98,10 +104,7 @@ export default function About() {
       <section className="section-who-we-are">
         <div className="container">
           <div className="jacob">
-            <Img
-              className="jacob-image"
-              fluid={data.jacobImage.childImageSharp.fluid}
-            />
+            <Img loading="eager" className="jacob-image" fluid={jacobImage} />
             <div className="card">
               <div className="card-content">
                 <div className="quote">
