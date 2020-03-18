@@ -68,7 +68,7 @@ const IndexPage = () => {
       </BackgroundImage>
       <section className="is-hidden-desktop">
         <div className="image">
-          <Img loading="eager" fluid={headerImage} alt="Beer" />
+          <Img fluid={headerImage} alt="Beer" />
         </div>
         <div className="hero-content">
           <div className="hero-copy">
@@ -165,13 +165,12 @@ const IndexPage = () => {
           </form>
         </div>
         <div className="image">
-          <Img loading="eager" fluid={newsLetterImage} alt="Typewriter" />
+          <Img fluid={newsLetterImage} alt="Typewriter" />
         </div>
       </section>
       <Testimonials />
       <section className="section-content-block">
         <Img
-          loading="eager"
           className="image-container"
           fluid={glassesImage}
           alt="image of glasses on a table"

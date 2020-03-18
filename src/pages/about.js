@@ -94,7 +94,6 @@ export default function About() {
           </div>
           <div className="image">
             <Img
-              loading="eager"
               className="type-writer"
               fluid={typeWriterImage}
             />
@@ -104,7 +103,7 @@ export default function About() {
       <section className="section-who-we-are">
         <div className="container">
           <div className="jacob">
-            <Img loading="eager" className="jacob-image" fluid={jacobImage} />
+            <Img className="jacob-image" fluid={jacobImage} />
             <div className="card">
               <div className="card-content">
                 <div className="quote">
