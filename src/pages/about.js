@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/layout"
@@ -99,19 +99,21 @@ export default function About() {
       </section>
       <section className="section-who-we-are">
         <div className="container">
-          <Img className="jacob-image" fluid={jacobImage} />
-          <div className="card-jacob">
-            <div className="card-content">
-              <div className="quote">
-                <p>
-                  “Stories are existential. Not just inseparable from the way we
-                  communicate and play out our lives, but actually the very
-                  basis of our existence.”
-                </p>
-              </div>
-              <div className="author">
-                <p>Jacob Sandler</p>
-                <p>Founder + CEO</p>
+          <div className="jacob-wrapper">
+            <Img className="jacob-image" fluid={jacobImage} objectFit="cover" />
+            <div className="card-jacob">
+              <div className="card-content">
+                <div className="quote">
+                  <p>
+                    “Stories are existential. Not just inseparable from the way we
+                    communicate and play out our lives, but actually the very
+                    basis of our existence.”
+                  </p>
+                </div>
+                <div className="author">
+                  <p>Jacob Sandler</p>
+                  <p>Founder + CEO</p>
+                </div>
               </div>
             </div>
           </div>
@@ -124,14 +126,15 @@ export default function About() {
                 Jacob founded Last Draft in early 2018 while working as an
                 Associate for the Silicon Valley-based CEO advisory firm, CEO
                 Quest. His first company, Last Draft Editors (2016-2019), helped
-                more than 50 Canadian doctors obtain residency positions in top
-                choice specialties.
+                more than 50 Canadian doctors obtain residency positions in{" "}
+                <span className="no-wrap">top choice specialties.</span>
               </p>
               <br />
               <p>
                 Jacob holds a combined honours BA in English & Canadian Studies
                 from Dalhousie University. He received the University Medal in
-                Canadian Studies for highest academic standing.
+                Canadian Studies for highest{" "}
+                <span className="no-wrap">academic standing.</span>
               </p>
             </div>
           </div>

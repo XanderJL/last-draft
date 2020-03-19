@@ -182,6 +182,7 @@ const IndexPage = () => {
           className="image-container"
           fluid={glassesImage}
           alt="image of glasses on a table"
+          objectFit="cover"
           objectPosition="50% 70%"
         />
         <div className="title-wrapper">
