@@ -4,6 +4,7 @@
         background-color: $mint
         position: relative
         margin-bottom: 25px
+        padding: $section-padding-medium
 
         &::after
             position: absolute
@@ -19,58 +20,52 @@
             transform: rotate(45deg)
 
         .container
-            padding: $container-padding
             display: grid
-            // grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
-            grid-template-columns: repeat(12, 1fr)
-            grid-template-rows: repeat(6, 1fr)
-            grid-column-gap: $gap * 2
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+            grid-gap: $gap * 2
+            align-items: center
 
             @media screen and (max-width: $tablet)
                 grid-template-columns: 1fr
+                justify-items: center
 
-            // .jacob
-            //     grid-column: 1 / 7
-            //     grid-row: 1 / 6
-            //     display: grid
-            //     grid-template-columns: repeat(6, 1fr)
-            //     grid-template-rows: repeat(6, 1fr)
-                
-            .jacob-image
-                grid-column: 1 / 7
-                grid-row: 1 / 6
-                box-shadow: $card-shadow
-                max-height: 600px
+            .jacob-wrapper
+                display: grid
+                grid-template-columns: repeat(6, 1fr)    
+                grid-template-rows: repeat(6, 1fr)
 
-            .card
-                &-jacob
-                    @extend .card
+                .jacob-image
+                    grid-column: 1 / 7
+                    grid-row: 1 / 6
+                    box-shadow: $card-shadow
+                    // max-height: 600px
 
-                    grid-column: 2 / 6
-                    grid-row: 5 / 7
-                    display: flex
-                    flex-direction: column
-                    justify-content: center
-                    align-content: center
-                
-                .quote
-                    font-style: italic
-                
-                .author
-                    padding-top: 1rem 
-                    font-weight: bold
-                    color: black
+                .card
+                    &-jacob
+                        @extend .card
+
+                        grid-column: 2 / 6
+                        grid-row: 5 / 7
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-content: center
+                    
+                    .quote
+                        font-style: italic
+                    
+                    .author
+                        padding-top: 1rem 
+                        font-weight: bold
+                        color: black
             
             .copy
-                grid-column: 7 / 13
-                grid-row: 1 / 6
-                align-self: center
                 height: fit-content
                 width: fit-content
 
                 .card-content
                     padding: $card-padding
-                    max-width: 55ch
+                    max-width: 50ch
 
                     @media screen and (max-width: $tablet)
                         padding: $card-padding-mobile
