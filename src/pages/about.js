@@ -99,21 +99,19 @@ export default function About() {
       </section>
       <section className="section-who-we-are">
         <div className="container">
-          <div className="jacob">
-            <Img className="jacob-image" fluid={jacobImage} />
-            <div className="card">
-              <div className="card-content">
-                <div className="quote">
-                  <p>
-                    “Stories are existential. Not just inseparable from the way
-                    we communicate and play out our lives, but actually the very
-                    basis of our existence.”
-                  </p>
-                </div>
-                <div className="author">
-                  <p>Jacob Sandler</p>
-                  <p>Founder + CEO</p>
-                </div>
+          <Img className="jacob-image" fluid={jacobImage} />
+          <div className="card-jacob">
+            <div className="card-content">
+              <div className="quote">
+                <p>
+                  “Stories are existential. Not just inseparable from the way we
+                  communicate and play out our lives, but actually the very
+                  basis of our existence.”
+                </p>
+              </div>
+              <div className="author">
+                <p>Jacob Sandler</p>
+                <p>Founder + CEO</p>
               </div>
             </div>
           </div>
