@@ -186,7 +186,7 @@ const IndexPage = () => {
           </h2>
         </div>
       </section>
-      {/* <ContactForm /> */}
+      <ContactForm />
     </Layout>
   )
 }

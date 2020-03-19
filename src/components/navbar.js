@@ -1,6 +1,5 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image/withIEPolyfill"
+import { Link } from "gatsby"
 import Logo from "../images/icons/logo.png"
 export default function Navbar() {
   function burgerMenu() {
@@ -11,28 +10,13 @@ export default function Navbar() {
     nav.classList.toggle("is-active")
   }
 
-  const data = useStaticQuery(graphql`
-    {
-      logo: file(relativePath: { eq: "icons/logo.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `)
-
-  const logo = data.logo.childImageSharp.fluid
-
   return (
     <>
       <div className="navbar">
         <div className="container">
           <div className="navbar-brand">
             <Link to="/" className="navbar-logo navbar-item">
-              {/* <img id="logo" src={Logo} alt="Last Draft Logo" /> */}
-              <Img id="logo" fluid={logo} alt="Last Draft logo" objectFit="contain"/>
+              <img id="logo" src={Logo} alt="Last Draft Logo" />
               <span className="is-montserrat is-uppercase has-text-black">
                 last draft
               </span>
