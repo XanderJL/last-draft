@@ -34,6 +34,13 @@ export default function Navbar() {
           <div id="nav-menu" className="navbar-menu">
             <div className="navbar-end">
               <Link
+                to="/"
+                className="navbar-item is-montserrat is-uppercase"
+                activeClassName="is-active"
+              >
+                home
+              </Link>
+              <Link
                 to="/about"
                 className="navbar-item is-montserrat is-uppercase"
                 activeClassName="is-active"
