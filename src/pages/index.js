@@ -176,7 +176,7 @@ const IndexPage = () => {
           className="image-container"
           fluid={glassesImage}
           alt="image of glasses on a table"
-          objectPosition="50% 100%"
+          objectPosition="50% 60%"
         />
         <div className="title-wrapper">
           <h2 className="title">
@@ -186,7 +186,7 @@ const IndexPage = () => {
           </h2>
         </div>
       </section>
-      <ContactForm />
+      {/* <ContactForm /> */}
     </Layout>
   )
 }

@@ -1,8 +1,7 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image/withIEPolyfill"
 import Slider from "react-slick"
-
-import ceoquest from "../images/index/ceo-quest-logo.png"
-import accelerate from "../images/index/accelerate-innovation-logo.png"
 
 export default function Testimonials() {
   const slickSettings = {
@@ -14,7 +13,29 @@ export default function Testimonials() {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
+  const data = useStaticQuery(graphql`
+    {
+      ceoLogo: file(relativePath: { eq: "index/ceo-quest-logo.png" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      accelerateLogo: file(
+        relativePath: { eq: "index/accelerate-innovation-logo.png" }
+      ) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
 
+  const ceoLogo = data.ceoLogo.childImageSharp.fluid
+  const accelerateLogo = data.accelerateLogo.childImageSharp.fluid
   return (
     <section className="section-testimonials">
       <Slider {...slickSettings} className="quote-carousel">
@@ -35,10 +56,11 @@ export default function Testimonials() {
             target="_blank"
             rel="noreferrer noopener"
           >
-            <img
+            <Img
               className="testimonial-logo"
-              src={ceoquest}
+              fluid={ceoLogo}
               alt="CEO Quest logo"
+              objectFit="contain"
             />
           </a>
         </div>
@@ -58,10 +80,11 @@ export default function Testimonials() {
             target="_blank"
             rel="noreferrer noopener"
           >
-            <img
+            <Img
               className="testimonial-logo"
-              src={accelerate}
+              fluid={accelerateLogo}
               alt="Accelerate Innovation logo"
+              objectFit="contain"
             />
           </a>
         </div>
