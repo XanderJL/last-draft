@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/layout"
@@ -11,23 +11,25 @@ import SEO from "../components/seo"
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     {
-      headerImage: file(relativePath: { eq: "header-image.png" }) {
+      headerImage: file(relativePath: { eq: "index/header-image.jpg" }) {
         childImageSharp {
-          fluid(quality: 60, maxWidth: 1920) {
+          fluid(maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      newsLetterImage: file(relativePath: { eq: "newsletter-header.png" }) {
+      newsLetterImage: file(
+        relativePath: { eq: "index/newsletter-header.jpg" }
+      ) {
         childImageSharp {
-          fluid(quality: 60, maxWidth: 1920) {
+          fluid(maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      glassesImage: file(relativePath: { eq: "glasses.jpeg" }) {
+      glassesImage: file(relativePath: { eq: "index/glasses.jpeg" }) {
         childImageSharp {
-          fluid(quality: 60) {
+          fluid {
             ...GatsbyImageSharpFluid
           }
         }
@@ -174,6 +176,7 @@ const IndexPage = () => {
           className="image-container"
           fluid={glassesImage}
           alt="image of glasses on a table"
+          objectPosition="50% 100%"
         />
         <div className="title-wrapper">
           <h2 className="title">

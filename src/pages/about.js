@@ -10,23 +10,23 @@ import SEO from "../components/seo"
 export default function About() {
   const data = useStaticQuery(graphql`
     {
-      headerImage: file(relativePath: { eq: "about/about-header.png" }) {
+      headerImage: file(relativePath: { eq: "about/about-header.jpg" }) {
         childImageSharp {
-          fluid(quality: 60, maxWidth: 1920) {
+          fluid(maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      typeWriterImage: file(relativePath: { eq: "about/type-writer.png" }) {
+      typeWriterImage: file(relativePath: { eq: "about/type-writer.jpg" }) {
         childImageSharp {
-          fluid(quality: 60) {
+          fluid {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      jacobImage: file(relativePath: { eq: "about/jacob.png" }) {
+      jacobImage: file(relativePath: { eq: "about/jacob.jpg" }) {
         childImageSharp {
-          fluid(quality: 60) {
+          fluid {
             ...GatsbyImageSharpFluid
           }
         }
@@ -93,10 +93,7 @@ export default function About() {
             </p>
           </div>
           <div className="image">
-            <Img
-              className="type-writer"
-              fluid={typeWriterImage}
-            />
+            <Img className="type-writer" fluid={typeWriterImage} />
           </div>
         </div>
       </section>

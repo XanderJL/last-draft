@@ -1,8 +1,8 @@
 import React from "react"
 import Slider from "react-slick"
 
-import ceoquest from "../images/ceo-quest-logo.png"
-import accelerate from "../images/accelerate-innovation-logo.png"
+import ceoquest from "../images/index/ceo-quest-logo.png"
+import accelerate from "../images/index/accelerate-innovation-logo.png"
 
 export default function Testimonials() {
   const slickSettings = {
