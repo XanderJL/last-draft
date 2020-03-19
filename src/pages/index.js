@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
@@ -90,30 +90,36 @@ const IndexPage = () => {
         <div className="container">
           <div className="grid-wrapper">
             <div className="ethical">
-              <h2 className="is-size-3">ethical</h2>
+              <Link to="/about">
+                <h2 className="is-size-3">ethical</h2>
+              </Link>
               <p className="has-text-centered">
                 We practice{" "}
                 <span className="has-text-weight-bold">
                   ethical storytelling
                 </span>
                 . We feel a moral obligation to communicate with honesty,
-                accuracy, and respect.
+                accuracy, <span className="no-wrap">and respect.</span>
               </p>
             </div>
             <div className="sustainable">
-              <h2 className="is-size-3">sustainable</h2>
+              <Link to="/about">
+                <h2 className="is-size-3">engaging</h2>
+              </Link>
               <p className="has-text-centered">
-                We recognize the power of longevity. We forge impactful{" "}
-                <span className="has-text-weight-bold">brand legacies</span>{" "}
-                that stand the test of time.
+                Connection is rooted in{" "}
+                <span className="has-text-weight-bold">engagement</span>. We
+                create content that calls people <span className="no-wrap">into conversation.</span>
               </p>
             </div>
             <div className="human">
-              <h2 className="is-size-3">human</h2>
+              <Link to="/about">
+                <h2 className="is-size-3">human</h2>
+              </Link>
               <p className="has-text-centered">
                 We believe stories define us. We restore the element of{" "}
                 <span className="has-text-weight-bold">human connection</span>{" "}
-                between brands and their publics.
+                between brands <span className="no-wrap">and their publics.</span>
               </p>
             </div>
           </div>
@@ -176,7 +182,7 @@ const IndexPage = () => {
           className="image-container"
           fluid={glassesImage}
           alt="image of glasses on a table"
-          objectPosition="50% 60%"
+          objectPosition="50% 70%"
         />
         <div className="title-wrapper">
           <h2 className="title">
