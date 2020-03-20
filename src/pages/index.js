@@ -27,7 +27,7 @@ const IndexPage = () => {
           }
         }
       }
-      glassesImage: file(relativePath: { eq: "index/glasses.jpeg" }) {
+      glassesImage: file(relativePath: { eq: "index/glasses-1.jpg" }) {
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
@@ -98,8 +98,7 @@ const IndexPage = () => {
                 <span className="has-text-weight-bold">
                   ethical storytelling
                 </span>
-                . We feel a moral obligation to communicate with honesty,
-                accuracy, <span className="no-wrap">and respect.</span>
+                . We feel an obligation to communicate with honesty <span className="no-wrap">and respect.</span>
               </p>
             </div>
             <div className="sustainable">
@@ -183,7 +182,7 @@ const IndexPage = () => {
           fluid={glassesImage}
           alt="image of glasses on a table"
           objectFit="cover"
-          objectPosition="50% 70%"
+          objectPosition="50% 50%"
         />
         <div className="title-wrapper">
           <h2 className="title">

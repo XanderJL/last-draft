@@ -99,21 +99,19 @@ export default function About() {
       </section>
       <section className="section-who-we-are">
         <div className="container">
-          <div className="jacob-wrapper">
-            <Img className="jacob-image" fluid={jacobImage} objectFit="cover" />
-            <div className="card-jacob">
-              <div className="card-content">
-                <div className="quote">
-                  <p>
-                    “Stories are existential. Not just inseparable from the way we
-                    communicate and play out our lives, but actually the very
-                    basis of our existence.”
-                  </p>
-                </div>
-                <div className="author">
-                  <p>Jacob Sandler</p>
-                  <p>Founder + CEO</p>
-                </div>
+          <Img className="jacob-image" fluid={jacobImage} objectFit="cover" />
+          <div className="card-jacob">
+            <div className="card-content">
+              <div className="quote">
+                <p>
+                  “Stories are existential. Not just inseparable from the way we
+                  communicate and play out our lives, but actually the very
+                  basis <span className="no-wrap">of our existence.”</span>
+                </p>
+              </div>
+              <div className="author">
+                <p>Jacob Sandler</p>
+                <p>Founder + CEO</p>
               </div>
             </div>
           </div>
@@ -133,8 +131,8 @@ export default function About() {
               <p>
                 Jacob holds a combined honours BA in English & Canadian Studies
                 from Dalhousie University. He received the University Medal in
-                Canadian Studies for highest{" "}
-                <span className="no-wrap">academic standing.</span>
+                Canadian Studies for{" "}
+                <span className="no-wrap">highest academic standing.</span>
               </p>
             </div>
           </div>
