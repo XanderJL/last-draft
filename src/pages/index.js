@@ -98,7 +98,8 @@ const IndexPage = () => {
                 <span className="has-text-weight-bold">
                   ethical storytelling
                 </span>
-                . We feel an obligation to communicate with honesty <span className="no-wrap">and respect.</span>
+                . We feel an obligation to communicate with honesty{" "}
+                <span className="no-wrap">and respect.</span>
               </p>
             </div>
             <div className="sustainable">
@@ -108,7 +109,8 @@ const IndexPage = () => {
               <p className="has-text-centered">
                 Connection is rooted in{" "}
                 <span className="has-text-weight-bold">engagement</span>. We
-                create content that calls people <span className="no-wrap">into conversation.</span>
+                create content that calls people{" "}
+                <span className="no-wrap">into conversation.</span>
               </p>
             </div>
             <div className="human">
@@ -118,7 +120,8 @@ const IndexPage = () => {
               <p className="has-text-centered">
                 We believe stories define us. We restore the element of{" "}
                 <span className="has-text-weight-bold">human connection</span>{" "}
-                between brands <span className="no-wrap">and their publics.</span>
+                between brands{" "}
+                <span className="no-wrap">and their publics.</span>
               </p>
             </div>
           </div>
