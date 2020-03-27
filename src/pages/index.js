@@ -48,44 +48,24 @@ const IndexPage = () => {
         description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
       />
       <BackgroundImage
-        className="is-hidden-touch hero landing-hero is-fullheight-with-navbar"
+        className="hero-landing is-fullheight-with-navbar"
         fluid={headerImage}
         style={{ backgroundAttachment: "fixed" }}
       >
-        <div className="hero-content">
+        <div className="hero-body">
           <div className="container">
-            <div className="hero-copy">
-              <h1 className="is-montserrat is-uppercase title is-size-1 has-text-white">
-                a story company
-              </h1>
-              <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white">
-                pr + communications
-              </h2>
-              <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white">
-                content marketing
-              </h2>
-            </div>
-          </div>
-        </div>
-      </BackgroundImage>
-      <section className="is-hidden-desktop">
-        <div className="image">
-          <Img fluid={headerImage} alt="Beer" />
-        </div>
-        <div className="hero-content">
-          <div className="hero-copy">
-            <h1 className="is-montserrat is-uppercase title is-size-4-mobile has-text-white">
+            <h1 className="is-montserrat is-uppercase title is-size-1 has-text-white">
               a story company
             </h1>
-            <h2 className="is-montserrat is-uppercase title is-size-6-mobile has-text-white is-marginless">
+            <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white">
               pr + communications
             </h2>
-            <h2 className="is-montserrat is-uppercase title is-size-6-mobile has-text-white">
+            <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white">
               content marketing
             </h2>
           </div>
         </div>
-      </section>
+      </BackgroundImage>
       <section className="section-ethical-storytelling">
         <div className="container">
           <div className="grid-wrapper">
@@ -98,7 +78,8 @@ const IndexPage = () => {
                 <span className="has-text-weight-bold">
                   ethical storytelling
                 </span>
-                . We feel an obligation to communicate with honesty <span className="no-wrap">and respect.</span>
+                . We feel an obligation to communicate with honesty{" "}
+                <span className="no-wrap">and respect.</span>
               </p>
             </div>
             <div className="sustainable">
@@ -108,7 +89,8 @@ const IndexPage = () => {
               <p className="has-text-centered">
                 Connection is rooted in{" "}
                 <span className="has-text-weight-bold">engagement</span>. We
-                create content that calls people <span className="no-wrap">into conversation.</span>
+                create content that calls people{" "}
+                <span className="no-wrap">into conversation.</span>
               </p>
             </div>
             <div className="human">
@@ -118,7 +100,8 @@ const IndexPage = () => {
               <p className="has-text-centered">
                 We believe stories define us. We restore the element of{" "}
                 <span className="has-text-weight-bold">human connection</span>{" "}
-                between brands <span className="no-wrap">and their publics.</span>
+                between brands{" "}
+                <span className="no-wrap">and their publics.</span>
               </p>
             </div>
           </div>
