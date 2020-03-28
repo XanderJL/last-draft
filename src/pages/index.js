@@ -48,46 +48,35 @@ const IndexPage = () => {
         description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
       />
       <BackgroundImage
-        className="is-hidden-touch hero landing-hero is-fullheight-with-navbar"
+        className="hero-landing is-fullheight-with-navbar"
         fluid={headerImage}
-        style={{ backgroundAttachment: "fixed" }}
+        style={{
+          objectPosition: "60% 40%",
+          backgroundAttachment: "fixed",
+        }}
       >
-        <div className="hero-content">
-          <div className="container">
-            <div className="hero-copy">
-              <h1 className="is-montserrat is-uppercase title is-size-1 has-text-white">
-                a story company
-              </h1>
-              <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white">
-                pr + communications
-              </h2>
-              <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white">
-                content marketing
-              </h2>
-            </div>
+        <Img
+          fluid={headerImage}
+          className="is-hidden-desktop"
+          objectFit="contain"
+          alt="Image of beer"
+        />
+        <div className="hero-body">
+          <div className="container is-widescreen">
+            <h1 className="is-montserrat is-uppercase title is-size-1 has-text-white is-spaced is-size-4-mobile">
+              a story company
+            </h1>
+            <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white is-size-5-mobile">
+              pr + communications
+              <br />
+              content marketing
+            </h2>
+            <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white"></h2>
           </div>
         </div>
       </BackgroundImage>
-      <section className="is-hidden-desktop">
-        <div className="image">
-          <Img fluid={headerImage} alt="Beer" />
-        </div>
-        <div className="hero-content">
-          <div className="hero-copy">
-            <h1 className="is-montserrat is-uppercase title is-size-4-mobile has-text-white">
-              a story company
-            </h1>
-            <h2 className="is-montserrat is-uppercase title is-size-6-mobile has-text-white is-marginless">
-              pr + communications
-            </h2>
-            <h2 className="is-montserrat is-uppercase title is-size-6-mobile has-text-white">
-              content marketing
-            </h2>
-          </div>
-        </div>
-      </section>
       <section className="section-ethical-storytelling">
-        <div className="container">
+        <div className="container is-widescreen">
           <div className="grid-wrapper">
             <div className="ethical">
               <Link to="/about">
@@ -127,13 +116,19 @@ const IndexPage = () => {
           </div>
         </div>
       </section>
-      <div className="is-hidden-touch hero newsletter-hero is-fullheight">
-        <BackgroundImage
-          className="hero-content"
+      <BackgroundImage
+        className="hero-newsletter is-fullheight"
+        fluid={newsLetterImage}
+        style={{ backgroundAttachment: "fixed" }}
+      >
+        <Img
           fluid={newsLetterImage}
-          style={{ backgroundAttachment: "fixed" }}
-        >
-          <div className="newsletter">
+          className="is-hidden-desktop"
+          objectFit="contain"
+          alt="Image of a typewriter"
+        />
+        <div className="hero-body">
+          <div className="container">
             <form action="">
               <div className="field">
                 <h1 className="title is-montserrat has-text-white">
@@ -152,49 +147,8 @@ const IndexPage = () => {
               </div>
             </form>
           </div>
-        </BackgroundImage>
-      </div>
-      <section className="is-hidden-desktop">
-        <div className="newsletter">
-          <form action="">
-            <div className="field">
-              <h1 className="title is-montserrat has-text-white">
-                Sign Up For Our Newsletter
-              </h1>
-            </div>
-            <div className="field">
-              <input type="text" className="input" placeholder="Email" />
-            </div>
-            <div className="field">
-              <div className="control">
-                <button className="button is-white is-montserrat is-uppercase">
-                  submit
-                </button>
-              </div>
-            </div>
-          </form>
         </div>
-        <div className="image">
-          <Img fluid={newsLetterImage} alt="Typewriter" />
-        </div>
-      </section>
-      <Testimonials />
-      <section className="section-content-block">
-        <Img
-          className="image-container"
-          fluid={glassesImage}
-          alt="image of glasses on a table"
-          objectFit="cover"
-          objectPosition="50% 50%"
-        />
-        <div className="title-wrapper">
-          <h2 className="title">
-            There's power in language.
-            <br />
-            Your words matter.
-          </h2>
-        </div>
-      </section>
+      </BackgroundImage>
       <ContactForm />
     </Layout>
   )
