@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <>
       <div className="navbar">
-        <div className="container">
+        <div className="container is-widescreen">
           <div className="navbar-brand">
             <Link to="/" className="navbar-logo navbar-item">
               <img id="logo" src={Logo} alt="Last Draft Logo" />

@@ -1,9 +1,36 @@
-.newsletter
-    margin: 0 auto
-    background-color: black
 
-    form
-        padding: 10rem 5rem
+@media screen and (max-width: $tablet)
+
+    // .newsletter
+    //     width: 100%
+    //     min-height: 300px
+
+    //     form
+    //         padding: $section-padding
+
+$custom-height: 270px
+
+.hero
+    &-newsletter
+        @extend .hero
+
+        .hero-body
+            .container
+                display: flex
+                justify-content: center
+
+                form
+                    display: flex
+                    flex-direction: column
+                    // align-items: center
+                    justify-content: center
+                    max-width: 800px
+                    background-color: black
+                    padding: 10rem 5rem
+
+                    .input
+                        max-width: 550px
+        
 
         .input
             border-radius: 0
@@ -11,11 +38,22 @@
             &::placeholder
                 color: $text
 
-@media screen and (max-width: $tablet)
+        @media screen and ( max-width: $desktop )
+            &.is-fullheight
+                min-height: 100%
+                display: block
+                position: relative
+                margin-bottom: $custom-height
 
-    .newsletter
-        width: 100%
-        min-height: 300px
-
-        form
-            padding: $section-padding
+            .hero-body
+                padding: 0
+                .container
+                    form
+                        position: absolute
+                        width: 100%
+                        max-width: 100%
+                        height: $custom-height
+                        bottom: 0
+                        transform: translateY($custom-height)
+                        background-color: #000000
+                        text-shadow: none

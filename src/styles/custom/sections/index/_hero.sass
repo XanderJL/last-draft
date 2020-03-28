@@ -1,23 +1,25 @@
-.landing-hero
+$custom-height: 270px
 
-    .hero-content
-        padding: $section-padding
-        display: flex
-        justify-content: flex-start
-        
-        .hero-copy
-            text-shadow: 1px 1px rgba(0, 0, 0, 0.3)
+.hero
+    &-landing
+        @extend .hero
 
-            h1
-                margin-bottom: 1em
-            h2
-                margin-bottom: 0
+        .hero-body
+            background-color: rgba(0, 0, 0, 0.07)
+            text-shadow: 2px 2px rgba(0, 0, 0, 0.2)
 
-@media screen and (max-width: $desktop)
+        @media screen and ( max-width: $desktop )
+            &.is-fullheight-with-navbar
+                min-height: 100%
+                display: block
+                position: relative
+                margin-bottom: $custom-height
 
-    .hero-content
-        display: block
-        text-shadow: none
-        background-color: black
-        height: auto
-        padding: $section-padding
+            .hero-body
+                position: absolute
+                width: 100%
+                height: $custom-height
+                bottom: 0
+                transform: translateY($custom-height)
+                background-color: #000000
+                text-shadow: none
