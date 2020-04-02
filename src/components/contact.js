@@ -1,5 +1,5 @@
 import React from "react"
-import Modal from "./modal"
+import Modal from "./Modal"
 import Linkedin from "../images/icons/linkedin.svg"
 import Instagram from "../images/icons/instagram.svg"
 import Twitter from "../images/icons/twitter.svg"
@@ -155,7 +155,7 @@ export default class ContactForm extends React.Component {
             <div className="field">
               <button
                 type="submit"
-                className="button is-montserrat is-uppercase is-black"
+                className="button is-montserrat is-uppercase"
               >
                 submit
               </button>

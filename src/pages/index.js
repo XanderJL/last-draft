@@ -3,10 +3,10 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
-import Layout from "../components/layout"
-import ContactForm from "../components/contact"
-import Testimonials from "../components/testimonial-carousel"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import ContactForm from "../components/Contact"
+import Testimonials from "../components/TestimonialCarousel"
+import SEO from "../components/SEO"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`

@@ -3,9 +3,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
-import Layout from "../components/layout"
-import Contact from "../components/contact"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import Contact from "../components/Contact"
+import SEO from "../components/SEO"
+import Headshot from "../components/Headshot"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -19,14 +20,28 @@ export default function About() {
       }
       typeWriterImage: file(relativePath: { eq: "about/type-writer.jpg" }) {
         childImageSharp {
-          fluid {
+          fluid(maxWidth: 1200) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      jacobImage: file(relativePath: { eq: "about/jacob.jpg" }) {
+      jacobImage: file(relativePath: { eq: "about/jacob-headshot.jpg" }) {
         childImageSharp {
-          fluid {
+          fluid(maxWidth: 1200) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      lenaImage: file(relativePath: { eq: "about/lena-headshot.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 1200) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      hillaryImage: file(relativePath: { eq: "about/hillary-headshot.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 1200) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -37,6 +52,8 @@ export default function About() {
   const headerImage = data.headerImage.childImageSharp.fluid
   const typeWriterImage = data.typeWriterImage.childImageSharp.fluid
   const jacobImage = data.jacobImage.childImageSharp.fluid
+  const lenaImage = data.lenaImage.childImageSharp.fluid
+  const hillaryImage = data.hillaryImage.childImageSharp.fluid
 
   return (
     <Layout>
@@ -97,24 +114,16 @@ export default function About() {
           </div>
         </div>
       </section>
-      <section className="section-who-we-are">
+      <section className="section-jacob">
         <div className="container">
-          <Img className="jacob-image" fluid={jacobImage} objectFit="cover" />
-          <div className="card-jacob">
-            <div className="card-content">
-              <div className="quote">
-                <p>
-                  “Stories are existential. Not just inseparable from the way we
-                  communicate and play out our lives, but actually the very
-                  basis <span className="no-wrap">of our existence.”</span>
-                </p>
-              </div>
-              <div className="author">
-                <p>Jacob Sandler</p>
-                <p>Founder + CEO</p>
-              </div>
-            </div>
-          </div>
+          <Headshot
+            image={jacobImage}
+            quote={`"Stories are existential. Not just inseparable from the way we
+            communicate and play out our lives, but actually the very basis of our existence."`}
+            employee="Jacob Sandler"
+            title="Founder + CEO"
+            url="https://www.linkedin.com/in/jacobsandler/"
+          />
           <div className="card copy">
             <div className="card-content">
               <h1 className="title is-montserrat is-uppercase has-text-black">
@@ -133,6 +142,74 @@ export default function About() {
                 from Dalhousie University. He received the University Medal in
                 Canadian Studies for{" "}
                 <span className="no-wrap">highest academic standing.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section-lena">
+        <div className="container">
+          <Headshot
+            image={lenaImage}
+            quote={`“Stories bring people together in the most universal ways and the most minuscule. They are both finite and infinite, reminding us how connected we inevitably are.”`}
+            employee="Lena Slanisky"
+            title="Content Manager"
+            url="https://www.linkedin.com/in/lena-slanisky-b82271163/​"
+          />
+          <div className="card copy">
+            <div className="card-content">
+              <p>
+                Lena is a poet, director, journalist, and creative collaborator.
+                As a writer for a Montreal-based media outlet,{" "}
+                <strong>
+                  Lena has penned articles that have resulted in over 9 million
+                  unique page views
+                </strong>
+                . As a copywriter for solopreneurs, Lena has managed marketing
+                initiatives that have driven over $1M revenue. Her time working
+                in both theatre and experiential marketing have honed an adept
+                skill for facilitating and creating distinct and dynamic
+                content.
+              </p>
+              <br />
+              <p>
+                Lena is an award-winning director, published fiction writer, and
+                graduate of Dalhousie University’s Creative Writing program.
+                Find her <a href="https://www.lvbs.net/">online</a> writing for
+                your favourite entrepreneur or blogging about Montreal’s newest
+                gourmet food hall.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section-hillary">
+        <div className="container">
+          <Headshot
+            image={hillaryImage}
+            quote={`“Stories provide connection. Connection to yourself, to others, to the earth, even across space and time.”`}
+            employee="Hillary Watson"
+            title="Illustrator + Editor"
+            url="https://www.linkedin.com/in/hillary-watson-39919646/​"
+          />
+          <div className="card copy">
+            <div className="card-content">
+              <p>
+                Hillary is a singer-songwriter, illustrator, tattoo artist, and
+                multi-disciplinary creative. She is a classically trained
+                musician and a member of the London-based 3-part harmony folk
+                group, <a href="https://www.thepairsmusic.com/">The Pairs</a>.
+              </p>
+              <br />
+              <p>
+                In her illustration, Hillary incorporates varied mediums,
+                including writing, drawing, collage, watercolour, and
+                photography. She is influenced heavily by her father, a
+                surrealist painter and life-long visual artist, her mother, a
+                piano teacher, and by time spent as crew on anti-whaling vessels
+                patrolling the Southern Ocean with Sea Shephard. Her love of art
+                and music were fostered early, over kitchen table art lessons
+                and through play, song, and dance.
               </p>
             </div>
           </div>

@@ -1,16 +1,16 @@
 .section
-    &-who-we-are
+    &-jacob,
+    &-lena,
+    &-hillary
         @extend .section
-        background-color: $mint
         position: relative
-        margin-bottom: 25px
         padding: $section-padding-medium
 
         &::after
             position: absolute
             content: ''
             display: block
-            background-color: $mint
+            background-color: $white
             width: 50px
             height: 50px
             left: 50%
@@ -18,6 +18,7 @@
             margin-left: -25px
             margin-top: -25px
             transform: rotate(45deg)
+            z-index: 2
 
         .container
             display: grid
@@ -26,27 +27,28 @@
             grid-gap: $gap * 2
             align-items: center
 
-            @media screen and (max-width: $tablet)
+            @media screen and (max-width: $desktop)
                 grid-template-columns: minmax(0, 1fr)
-                grid-template-rows: 1fr 0.5fr 0.1fr 0.5fr
+                grid-template-rows: auto 0.5fr 0.1fr 0.5fr
                 grid-gap: 0
                 justify-items: center
                 align-items: stretch
                 min-width: 0
 
-            .jacob-image
+            .header-image
                 grid-column: 1 / 7
                 grid-row: 1 / span 2
-                width: 100%
                 box-shadow: $card-shadow
+                width: 100%
 
-                @media screen and (max-width: $tablet)
+                @media screen and (max-width: $desktop)
                     grid-column: 1
                     grid-row: 1 / span 1
 
             .card
-                &-jacob
+                &-quote
                     @extend .card
+                    padding: 1em 0.5em 2em 0.5em
                     grid-column: 2 / 6
                     grid-row: 2 / span 2
                     display: flex
@@ -55,19 +57,34 @@
                     align-content: center
 
                     @media screen and (max-width: $desktop)
+                        width: 100%
                         grid-column: 1
                         grid-row: 2 / span 1
 
                 .quote
                     font-style: italic
 
-                .author
-                    padding-top: 1rem
-                    font-weight: bold
-                    color: black
+                .media
+                    padding-top: 1.75em
+                    display: flex
+                    flex: 1
+                    align-items: center
+
+                    img
+                        padding: 0.25em
+                        margin-right: 0.75em
+
+                        &:hover
+                          background-color: $background
+                          transform: scale(1.1)
+
+                    .author
+                        font-weight: bold
+                        color: black
 
             .copy
-                grid-column: 7 / 13
+                padding: 0.5em 0.5em 2em 0.5em
+                grid-column: 7 / -1
                 grid-row: 1 / span 2
                 height: fit-content
                 width: fit-content
@@ -80,8 +97,28 @@
                     padding: $card-padding
                     max-width: 50ch
 
-                    @media screen and (max-width: $tablet)
+                    @media screen and (max-width: $desktop)
                         padding: $card-padding-mobile
 
                     .title
                         margin-bottom: $title-margin
+    &-jacob
+        @extend .section
+        background-color: $mint
+
+        &::after
+            background-color: $mint
+    &-hillary
+        @extend .section
+        background-color: $mint
+
+        &::after
+            background-color: $mint
+
+    &-lena
+        @extend .section
+
+        .copy,
+        .card
+            &-quote
+            background-color: $pastel-pink
