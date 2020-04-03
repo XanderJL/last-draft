@@ -168,6 +168,8 @@ export default function About() {
               <a
                 className="has-text-weight-bold has-text-black"
                 href="https://www.lvbs.net/"
+                target="_blank"
+                rel="noreferrer noopener"
               >
                 online
               </a>{" "}
@@ -194,6 +196,8 @@ export default function About() {
               <a
                 className="has-text-weight-bold has-text-black"
                 href="https://www.thepairsmusic.com/"
+                target="_blank"
+                rel="noreferrer noopener"
               >
                 The Pairs
               </a>

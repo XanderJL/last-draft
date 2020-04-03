@@ -10,12 +10,20 @@ function BioCard(props) {
         {props.linkedin || props.instagram ? (
           <div className="social">
             {props.linkedin ? (
-              <a href={props.linkedin}>
+              <a
+                href={props.linkedin}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <img className="icon" src={LinkedIn} alt="LinkedIn logo" />
               </a>
             ) : null}
             {props.instagram ? (
-              <a href={props.instagram}>
+              <a
+                href={props.instagram}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <img className="icon" src={Instagram} alt="Instagram logo" />
               </a>
             ) : null}
