@@ -210,9 +210,8 @@ export default function About() {
               She is influenced heavily by her father, a surrealist painter and
               life-long visual artist, her mother, a piano teacher, and by time
               spent as crew on anti-whaling vessels patrolling the Southern
-              Ocean with Sea Shephard. Her love of art and music were fostered
-              early, over kitchen table art lessons and through play, song, and
-              dance.
+              Ocean. Her love of art and music were fostered early, over kitchen
+              table art lessons and through play, song, and dance.
             </p>
           </BioCard>
         </div>
