@@ -154,10 +154,10 @@ export default function About() {
             <p>
               Lena is a poet, director, journalist, and creative collaborator.
               As a writer for a Montreal-based media outlet, Lena has penned
-              articles that has resulted in over 9 million unique page views. As
+              articles that have resulted in over 9 million unique page views. As
               a copywriter for solopreneurs, Lena has managed marketing
               initiatives that have driven over $1M revenue. Her time working in
-              both theatre and experiential marketing have honed an adept skill
+              both theatre and experiential marketing has honed an adept skill
               for facilitating and creating distinct and dynamic content.
             </p>
             <br />
