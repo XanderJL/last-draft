@@ -51,7 +51,7 @@ export default function Navbar() {
                 href="#contact"
                 className="navbar-item is-montserrat is-uppercase"
               >
-                <div className="button is-solid is-black is-montserrat is-uppercase">
+                <div className="button is-solid is-montserrat is-uppercase">
                   contact
                 </div>
               </a>
