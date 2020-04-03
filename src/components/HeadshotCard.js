@@ -1,5 +1,4 @@
 import React from "react"
-import LinkedIn from "../images/icons/linkedin.svg"
 
 function HeadshotCard(props) {
   return (

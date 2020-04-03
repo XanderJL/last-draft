@@ -5,7 +5,6 @@ import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
 import ContactForm from "../components/Contact"
-import Testimonials from "../components/TestimonialCarousel"
 import SEO from "../components/SEO"
 
 const IndexPage = () => {
@@ -39,7 +38,7 @@ const IndexPage = () => {
 
   const headerImage = data.headerImage.childImageSharp.fluid
   const newsLetterImage = data.newsLetterImage.childImageSharp.fluid
-  const glassesImage = data.glassesImage.childImageSharp.fluid
+  // const glassesImage = data.glassesImage.childImageSharp.fluid
 
   return (
     <Layout>

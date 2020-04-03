@@ -154,8 +154,8 @@ export default function About() {
             <p>
               Lena is a poet, director, journalist, and creative collaborator.
               As a writer for a Montreal-based media outlet, Lena has penned
-              articles that have resulted in over 9 million unique page views.
-              As a copywriter for solopreneurs, Lena has managed marketing
+              articles that has resulted in over 9 million unique page views. As
+              a copywriter for solopreneurs, Lena has managed marketing
               initiatives that have driven over $1M revenue. Her time working in
               both theatre and experiential marketing have honed an adept skill
               for facilitating and creating distinct and dynamic content.
@@ -207,7 +207,7 @@ export default function About() {
             <p>
               In her illustration, Hillary incorporates varied mediums,
               including writing, drawing, collage, watercolour, and photography.
-              She is influenced heavily by her father, a surrealist painter and
+              She is influenced by her father, a surrealist painter and
               life-long visual artist, her mother, a piano teacher, and by time
               spent as crew on anti-whaling vessels patrolling the Southern
               Ocean. Her love of art and music were fostered early, over kitchen
