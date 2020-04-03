@@ -14,7 +14,6 @@ function Headshot(props) {
         quote={props.quote}
         employee={props.employee}
         title={props.title}
-        url={props.url}
       />
     </>
   )
