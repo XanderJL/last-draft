@@ -5,6 +5,7 @@ import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
 import ContactForm from "../components/Contact"
+import NewsLetter from "../components/NewsLetter"
 import SEO from "../components/SEO"
 
 const IndexPage = () => {
@@ -128,23 +129,7 @@ const IndexPage = () => {
         />
         <div className="hero-body">
           <div className="container">
-            <form action="">
-              <div className="field">
-                <h1 className="title is-montserrat has-text-white">
-                  Sign Up For Our Newsletter
-                </h1>
-              </div>
-              <div className="field">
-                <input type="text" className="input" placeholder="Email" />
-              </div>
-              <div className="field">
-                <div className="control">
-                  <button className="button is-white is-montserrat is-uppercase">
-                    submit
-                  </button>
-                </div>
-              </div>
-            </form>
+            <NewsLetter />
           </div>
         </div>
       </BackgroundImage>
