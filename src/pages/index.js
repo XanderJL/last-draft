@@ -6,7 +6,6 @@ import BackgroundImage from "gatsby-background-image"
 import Layout from "../components/Layout"
 import NewsLetter from "../components/NewsLetter"
 import ContactForm from "../components/Contact"
-import NewsLetter from "../components/NewsLetter"
 import SEO from "../components/SEO"
 
 const IndexPage = () => {
