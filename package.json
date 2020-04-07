@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Alex Low <alexanderjameslow@gmail.com>",
   "dependencies": {
+    "axios": "^0.19.2",
     "bulma": "^0.8.0",
     "dotenv": "^8.2.0",
     "gatsby": "^2.19.7",
@@ -29,6 +30,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "netlify-lambda": "^1.6.3",
     "prettier": "^1.19.1"
   },
   "keywords": [
@@ -38,11 +40,14 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "prod": "npm run build; npm run build:lambda",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "start:lambda": "netlify-lambda serve functions",
+    "build:lambda": "netlify-lambda build functions"
   },
   "repository": {
     "type": "git",

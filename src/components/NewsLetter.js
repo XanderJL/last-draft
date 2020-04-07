@@ -1,8 +1,18 @@
 import React, { Component } from "react"
+import BackgroundImage from "gatsby-background-image"
+import Img from "gatsby-image"
 
 export class NewsLetter extends Component {
-  state = {
-    email: "",
+  constructor(props) {
+    super(props)
+    this.state = {
+      first_name: "",
+      email: "",
+    }
+  }
+
+  addSubscriber = async () => {
+      await (await fetch("http:/localhost:8888/.netlify/functions/subscribe")).json()
   }
 
   handleChange = e => {
@@ -15,35 +25,66 @@ export class NewsLetter extends Component {
     })
   }
 
-  handleSubmit = e => {}
+  handleSubmit = e => {
+      e.preventDefault()
+      console.log(e)
+  }
 
   render() {
-    const { email } = this.state
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="field">
-          <h1 className="title is-montserrat has-text-white">
-            Sign Up For Our Newsletter
-          </h1>
-        </div>
-        <div className="field">
-          <input
-            type="text"
-            name="email"
-            onChange={this.handleChange}
-            value={email}
-            className="input"
-            placeholder="Email"
-          />
-        </div>
-        <div className="field">
-          <div className="control">
-            <button type="submit" className="button is-white is-montserrat is-uppercase">
-              submit
-            </button>
+      <BackgroundImage
+        className="hero-newsletter is-fullheight"
+        fluid={this.props.image}
+        style={{ backgroundAttachment: "fixed" }}
+      >
+        <Img
+          fluid={this.props.image}
+          className="is-hidden-desktop"
+          objectFit="contain"
+          alt="Image of a typewriter"
+        />
+        <div className="hero-body">
+          <div className="container">
+            <form onSubmit={this.handleSubmit}>
+              <div className="field">
+                <h1 className="title is-montserrat has-text-white">
+                  Sign Up For Our Newsletter
+                </h1>
+              </div>
+              <div className="field">
+                <input
+                  type="text"
+                  name="first_name"
+                  value={this.state.first_name}
+                  onChange={this.handleChange}
+                  className="input"
+                  placeholder="First Name"
+                />
+              </div>
+              <div className="field">
+                <input
+                  type="text"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  className="input"
+                  placeholder="Email"
+                />
+              </div>
+              <div className="field">
+                <div className="control">
+                  <button
+                    type="submit"
+                    className="button is-white is-montserrat is-uppercase has-text-weight-bold"
+                  >
+                    submit
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
+      </BackgroundImage>
     )
   }
 }

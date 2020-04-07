@@ -22,8 +22,11 @@ export default function Navbar() {
               </span>
             </Link>
             <div
+              role="button"
+              tabindex="0"
               className="navbar-burger burger"
               onClick={burgerMenu}
+              onKeyDown={burgerMenu}
               data-target="nav-menu"
             >
               <span></span>
@@ -47,6 +50,14 @@ export default function Navbar() {
               >
                 about
               </Link>
+              <a
+                href="https://medium.com/lastdraft"
+                className="navbar-item is-montserrat is-uppercase"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                stories
+              </a>
               <a
                 href="#contact"
                 className="navbar-item is-montserrat is-uppercase"
