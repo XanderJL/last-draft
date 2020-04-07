@@ -4,6 +4,7 @@ import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
+import NewsLetter from "../components/NewsLetter"
 import ContactForm from "../components/Contact"
 import SEO from "../components/SEO"
 
@@ -115,39 +116,7 @@ const IndexPage = () => {
           </div>
         </div>
       </section>
-      <BackgroundImage
-        className="hero-newsletter is-fullheight"
-        fluid={newsLetterImage}
-        style={{ backgroundAttachment: "fixed" }}
-      >
-        <Img
-          fluid={newsLetterImage}
-          className="is-hidden-desktop"
-          objectFit="contain"
-          alt="Image of a typewriter"
-        />
-        <div className="hero-body">
-          <div className="container">
-            <form action="">
-              <div className="field">
-                <h1 className="title is-montserrat has-text-white">
-                  Sign Up For Our Newsletter
-                </h1>
-              </div>
-              <div className="field">
-                <input type="text" className="input" placeholder="Email" />
-              </div>
-              <div className="field">
-                <div className="control">
-                  <button className="button is-white is-montserrat is-uppercase">
-                    submit
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </BackgroundImage>
+      <NewsLetter image={newsLetterImage} />
       <ContactForm />
     </Layout>
   )

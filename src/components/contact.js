@@ -25,14 +25,12 @@ const initState = {
 export default class ContactForm extends React.Component {
   state = initState
 
-  errorStyle = () => {
-    return {
-      backgroundColor: "#FFC3C3",
-      color: "#FF0000",
-      border: "1px solid #FF0000",
-      margin: "15px 0",
-      padding: "5px 10px",
-    }
+  errorStyle = {
+    backgroundColor: "#FFC3C3",
+    color: "#FF0000",
+    border: "1px solid #FF0000",
+    margin: "15px 0",
+    padding: "5px 10px",
   }
 
   validateForm = () => {
@@ -121,7 +119,7 @@ export default class ContactForm extends React.Component {
                 onChange={this.handleChange}
               />
               {this.state.formErrors.name ? (
-                <p style={this.errorStyle()}>{this.state.formErrors.name}</p>
+                <p style={this.errorStyle}>{this.state.formErrors.name}</p>
               ) : null}
             </div>
             <div className="field">
@@ -135,7 +133,7 @@ export default class ContactForm extends React.Component {
               />
             </div>
             {this.state.formErrors.email ? (
-              <p style={this.errorStyle()}>{this.state.formErrors.email}</p>
+              <p style={this.errorStyle}>{this.state.formErrors.email}</p>
             ) : null}
             <div className="field">
               <textarea
@@ -150,7 +148,7 @@ export default class ContactForm extends React.Component {
               />
             </div>
             {this.state.formErrors.message ? (
-              <p style={this.errorStyle()}>{this.state.formErrors.message}</p>
+              <p style={this.errorStyle}>{this.state.formErrors.message}</p>
             ) : null}
             <div className="field">
               <button
