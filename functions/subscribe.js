@@ -2,9 +2,7 @@ require("dotenv").config()
 const axios = require("axios")
 
 exports.handler = function(event, context, callback) {
-  // const { GATSBY_CONVERTKIT_KEY, GATSBY_NEWSLETTER_ID } = process.env
-  const GATSBY_CONVERTKIT_KEY = "gnVcOhRtU3gzdp9bGGaTwQ"
-  const GATSBY_NEWSLETTER_ID = "1302311"
+  const { GATSBY_CONVERTKIT_KEY, GATSBY_NEWSLETTER_ID } = process.env
   const API_URL = "https://api.convertkit.com/v3/forms"
 
   const FORMS_URL = `/${API_URL}?api_key=${GATSBY_CONVERTKIT_KEY}`
