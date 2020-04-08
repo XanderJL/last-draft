@@ -152,7 +152,7 @@ export default function About() {
           />
           <BioCard linkedin="https://www.linkedin.com/in/lena-slanisky-b82271163/​">
             <p>
-              Lena is a poet, director, journalist, and creative collaborator.
+              Lena is a poet, director, writer, and creative collaborator.
               As a writer for a Montreal-based media outlet, Lena has penned
               articles that have resulted in over 9 million unique page views. As
               a copywriter for solopreneurs, Lena has managed marketing
