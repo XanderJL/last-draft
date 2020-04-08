@@ -1,15 +1,11 @@
-const axios = require("axios")
 require("dotenv").config()
+const axios = require("axios")
 
 exports.handler = function(event, context, callback) {
-  const {
-    GATSBY_CONVERTKIT_SECRET,
-    GATSBY_CONVERTKIT_KEY,
-    GATSBY_NEWSLETTER_ID,
-  } = process.env
-  const API_URL = "https://api.convertkit.com/v3/forms/"
+  const { GATSBY_CONVERTKIT_KEY, GATSBY_NEWSLETTER_ID } = process.env
+  const API_URL = "https://api.convertkit.com/v3/forms"
 
-  const FORMS_URL = `${API_URL}?api_key=${GATSBY_CONVERTKIT_KEY}`
+  const FORMS_URL = `/${API_URL}?api_key=${GATSBY_CONVERTKIT_KEY}`
   const SUBSCRIBE_URL = `${API_URL}/${GATSBY_NEWSLETTER_ID}/subscribe`
 
   // Send form response
@@ -17,11 +13,9 @@ exports.handler = function(event, context, callback) {
     callback(null, {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type, Accept",
+        "Content-Type: application/json; charset=utf-8"
       },
-      body: JSON.stringify(body, null, 2),
+      body: JSON.stringify(body),
     })
   }
 
@@ -40,13 +34,9 @@ exports.handler = function(event, context, callback) {
 
   const addSubscriber = () => {
     axios
-      .post(SUBSCRIBE_URL, {
-        api_key: GATSBY_CONVERTKIT_KEY,
-        first_name: body.first_name,
-        email: body.email,
-      })
+      .post(SUBSCRIBE_URL)
       .then(res => send(res.data))
-      .catch(err => send(err))
+      .catch(err => JSON.stringify(send(err), null, 2))
   }
 
   if (event.httpMethod == "POST") {

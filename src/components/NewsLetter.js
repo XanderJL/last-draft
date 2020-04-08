@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"
+import axios from "axios"
 
 export class NewsLetter extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ export class NewsLetter extends Component {
   }
 
   addSubscriber = async () => {
-      await (await fetch("http:/localhost:8888/.netlify/functions/subscribe")).json()
+    await (
+      await fetch("http:/localhost:8888/.netlify/functions/subscribe")
+    ).json()
   }
 
   handleChange = e => {
@@ -26,8 +29,14 @@ export class NewsLetter extends Component {
   }
 
   handleSubmit = e => {
-      e.preventDefault()
-      console.log(e)
+    const formData = new FormData()
+
+    formData.append("first_name", this.state.first_name)
+    formData.append("email", this.state.email)
+
+    axios.post("/.netlify/functions/subscribe", formData)
+
+    e.preventDefault()
   }
 
   render() {
