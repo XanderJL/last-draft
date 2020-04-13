@@ -7,7 +7,6 @@ exports.handler = function(event, context, callback) {
     GATSBY_NEWSLETTER_ID,
   } = process.env
 
-  const FORMS_URL = `/${GATSBY_CONVERTKIT_API}?api_key=${GATSBY_CONVERTKIT_KEY}`
   const SUBSCRIBE_URL = `${GATSBY_CONVERTKIT_API}/${GATSBY_NEWSLETTER_ID}/subscribe`
 
   // Send form response
@@ -18,24 +17,11 @@ exports.handler = function(event, context, callback) {
     })
   }
 
-  // Get list of forms
-  const getForms = () => {
-    axios
-      .get(FORMS_URL)
-      .then(res => send(res.data))
-      .catch(err => send(err))
-  }
-
-  // Make sure method is GET
-  if (event.httpMethod == "GET") {
-    getForms()
-  }
-
   const addSubscriber = () => {
     axios
       .post(SUBSCRIBE_URL)
       .then(res => send(res.data))
-      .catch(err => JSON.stringify(send(err), null, 2))
+      .catch(err => send(err))
   }
 
   if (event.httpMethod == "POST") {

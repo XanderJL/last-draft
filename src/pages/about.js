@@ -65,7 +65,6 @@ export default function About() {
       <BackgroundImage
         fluid={headerImage}
         className="hero-about is-fullheight-with-navbar"
-        style={{ backgroundAttachment: "fixed" }}
       >
         <div className="hero-body">
           <div className="card-about">
