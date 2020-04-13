@@ -72,4 +72,4 @@ yarn-error.log
 .netlify
 
 # Lambda functions build output
-/lambda
+/functions

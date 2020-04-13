@@ -2,6 +2,11 @@
     &-about
         @extend .hero
 
+        @media screen and ( min-width: $desktop )
+            &::before,
+            &::after
+                background-attachment: fixed
+
         .hero-body
             display: flex
             justify-content: center

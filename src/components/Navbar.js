@@ -23,7 +23,7 @@ export default function Navbar() {
             </Link>
             <div
               role="button"
-              tabindex="0"
+              tabIndex="0"
               className="navbar-burger burger"
               onClick={burgerMenu}
               onKeyDown={burgerMenu}

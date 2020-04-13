@@ -23,7 +23,7 @@ module.exports = {
       options: {
         useMoxJpeg: true,
         defaultQuality: 75,
-      }
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
