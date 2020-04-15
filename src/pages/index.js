@@ -5,6 +5,7 @@ import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
 import NewsLetter from "../components/NewsLetter"
+import Testimonials from "../components/TestimonialCarousel"
 import ContactForm from "../components/Contact"
 import SEO from "../components/SEO"
 
@@ -117,6 +118,7 @@ const IndexPage = () => {
         </div>
       </section>
       <NewsLetter image={newsLetterImage} />
+      <Testimonials />
       <ContactForm />
     </Layout>
   )
