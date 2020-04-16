@@ -18,8 +18,12 @@ exports.handler = function(event, context, callback) {
   }
 
   const addSubscriber = () => {
+    const apiKey = { api_key: GATSBY_CONVERTKIT_KEY }
+    const eventBody = JSON.parse(event.body)
+    const dataObj = { ...apiKey, ...eventBody }
+
     axios
-      .post(SUBSCRIBE_URL)
+      .post(SUBSCRIBE_URL, dataObj)
       .then(res => send(res.data))
       .catch(err => send(err))
   }

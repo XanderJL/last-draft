@@ -12,12 +12,6 @@ export class NewsLetter extends Component {
     }
   }
 
-  addSubscriber = async () => {
-    await (
-      await fetch("http:/localhost:8888/.netlify/functions/subscribe")
-    ).json()
-  }
-
   handleChange = e => {
     const target = e.target
     const name = target.name
@@ -29,12 +23,12 @@ export class NewsLetter extends Component {
   }
 
   handleSubmit = e => {
-    const formData = new FormData()
+    axios.post("/.netlify/functions/subscribe", {
+      first_name: this.state.first_name,
+      email: this.state.email,
+    })
 
-    formData.append("first_name", this.state.first_name)
-    formData.append("email", this.state.email)
-
-    axios.post("/.netlify/functions/subscribe", formData)
+    this.setState({ first_name: "", email: "" })
 
     e.preventDefault()
   }
