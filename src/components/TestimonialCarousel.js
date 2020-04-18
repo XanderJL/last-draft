@@ -6,7 +6,7 @@ import Slider from "react-slick"
 export default function Testimonials() {
   const slickSettings = {
     dots: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 10000,
     infinite: true,
     speed: 500,
