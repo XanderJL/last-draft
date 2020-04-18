@@ -30,8 +30,8 @@ export default class Modal extends React.Component {
           <div className="modal-content">
             <div className="card" style={this.modalStyle}>
               <div className="card-content">
-                <h1 className="title is-montserrat">Success!</h1>
-                <p>Your email has been forwarded.</p>
+                <h1 className="title is-montserrat">{this.props.header}</h1>
+                <p>{this.props.body}</p>
               </div>
             </div>
           </div>
