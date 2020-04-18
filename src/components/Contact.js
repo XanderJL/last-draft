@@ -194,7 +194,9 @@ export default class ContactForm extends React.Component {
               </button>
             </div>
           </form>
-          {this.state.modalState ? <Modal /> : null}
+          {this.state.modalState ? (
+            <Modal header="Success!" body="Your email has been forwarded." />
+          ) : null}
         </section>
       </>
     )
