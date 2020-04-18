@@ -112,13 +112,25 @@ export default class ContactForm extends React.Component {
           </h1>
           <div className="icons">
             <a href="https://www.linkedin.com/company/last-draft/">
-              <img src={Linkedin} alt="LinkedIn Icon" />
+              <img
+                src={Linkedin}
+                alt="LinkedIn Icon"
+                style={this.props.inverted ? { filter: "invert(1)" } : null}
+              />
             </a>
             <a href="https://instagram.com/lastdraftinc">
-              <img src={Instagram} alt="Instagram Icon" />
+              <img
+                src={Instagram}
+                alt="Instagram Icon"
+                style={this.props.inverted ? { filter: "invert(1)" } : null}
+              />
             </a>
             <a href="https://twitter.com/LastDraftInc">
-              <img src={Twitter} alt="Twitter Icon" />
+              <img
+                src={Twitter}
+                alt="Twitter Icon"
+                style={this.props.inverted ? { filter: "invert(1)" } : null}
+              />
             </a>
           </div>
           <form onSubmit={this.handleSubmit}>
