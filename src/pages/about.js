@@ -73,8 +73,8 @@ export default function About() {
                 A Story Company
               </h1>
               <p>
-                Last Draft is a boutique Public Relations, Communications, and
-                Content Marketing agency.
+                Last Draft is a personal brand management and content writing
+                company for professionals with personality.
               </p>
               <br />
               <p>
@@ -125,10 +125,12 @@ export default function About() {
           />
           <BioCard linkedin="https://www.linkedin.com/in/jacobsandler/">
             <p>
-              Jacob founded Last Draft in early 2018 while working as an
-              Associate for the Silicon Valley-based CEO advisory firm, CEO
-              Quest. His first company, Last Draft Editors (2016-2019), helped
-              more than 50 Canadian doctors obtain residency positions in{" "}
+              Jacob is a writer, editor, and avid producer and consumer of
+              physical and digital media. He founded Last Draft in early 2018
+              while working as an Associate for the Silicon Valley-based CEO
+              advisory firm, CEO Quest. His first company, Last Draft Editors
+              (2016-2019), helped more than 50 Canadian doctors obtain residency
+              positions in{" "}
               <span className="no-wrap">top choice specialties.</span>
             </p>
             <br />
@@ -151,13 +153,13 @@ export default function About() {
           />
           <BioCard linkedin="https://www.linkedin.com/in/lena-slanisky-b82271163/​">
             <p>
-              Lena is a poet, director, writer, and creative collaborator.
-              As a writer for a Montreal-based media outlet, Lena has penned
-              articles that have resulted in over 9 million unique page views. As
-              a copywriter for solopreneurs, Lena has managed marketing
-              initiatives that have driven over $1M revenue. Her time working in
-              both theatre and experiential marketing has honed an adept skill
-              for facilitating and creating distinct and dynamic content.
+              Lena is a poet, director, writer, and creative collaborator. As a
+              reporter for a Montreal-based media outlet, Lena penned articles
+              that resulted in over 9 million unique page views. As a copywriter
+              for solopreneurs, Lena has managed marketing initiatives that have
+              driven over $1M revenue. Her time working in both theatre and
+              experiential marketing has honed an adept skill for facilitating
+              and creating distinct and dynamic content.
             </p>
             <br />
             <p>
@@ -182,7 +184,7 @@ export default function About() {
         <div className="container">
           <Headshot
             image={hillaryImage}
-            quote={`“Stories provide connection. Connection to yourself, to others, to the earth, even across space and time.”`}
+            quote={`"Stories provide connection. Connection to ourselves, to others, to the earth, even across space and time."`}
             employee="Hillary Watson"
             title="Illustrator + Editor"
             url="https://www.linkedin.com/in/hillary-watson-39919646/​"
@@ -206,11 +208,11 @@ export default function About() {
             <p>
               In her illustration, Hillary incorporates varied mediums,
               including writing, drawing, collage, watercolour, and photography.
-              She is influenced by her father, a surrealist painter and
-              life-long visual artist, her mother, a piano teacher, and by time
-              spent as crew on anti-whaling vessels patrolling the Southern
-              Ocean. Her love of art and music were fostered early, over kitchen
-              table art lessons and through play, song, and dance.
+              She is influenced by her mother, a piano teacher, her father, a
+              surrealist painter and visual artist, and by time spent as crew on
+              anti-whaling vessels patrolling the Southern Ocean. Her love of
+              art and music were fostered early, over kitchen table drawing
+              lessons and through play, song, and dance.
             </p>
           </BioCard>
         </div>
