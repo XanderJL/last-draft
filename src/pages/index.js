@@ -68,9 +68,9 @@ const IndexPage = () => {
               a story company
             </h1>
             <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white is-size-5-mobile">
-              pr + communications
+              Personal Brand Management,
               <br />
-              content marketing
+              Content Writing
             </h2>
             <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white"></h2>
           </div>
@@ -78,6 +78,11 @@ const IndexPage = () => {
       </BackgroundImage>
       <section className="section-ethical-storytelling">
         <div className="container is-widescreen">
+          <div className="copy">
+            <p className="has-text-centered has-text-weight-light is-italic is-size-5">
+              Amplifying authenticity online.
+            </p>
+          </div>
           <div className="grid-wrapper">
             <div className="ethical">
               <Link to="/about">
@@ -97,7 +102,7 @@ const IndexPage = () => {
                 <h2 className="is-size-3">engaging</h2>
               </Link>
               <p className="has-text-centered">
-                Connection is rooted in{" "}
+                Connection is rooted in authentic{" "}
                 <span className="has-text-weight-bold">engagement</span>. We
                 create content that calls people{" "}
                 <span className="no-wrap">into conversation.</span>
