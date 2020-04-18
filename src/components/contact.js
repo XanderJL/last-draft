@@ -22,16 +22,21 @@ const initState = {
   modalState: false,
 }
 
+const errorStyle = {
+  backgroundColor: "#FFC3C3",
+  color: "#FF0000",
+  border: "1px solid #FF0000",
+  margin: "15px 0",
+  padding: "5px 10px",
+}
+
+const invertedStyle = {
+  backgroundColor: "#000000",
+  color: "#FFFFFF",
+}
+
 export default class ContactForm extends React.Component {
   state = initState
-
-  errorStyle = {
-    backgroundColor: "#FFC3C3",
-    color: "#FF0000",
-    border: "1px solid #FF0000",
-    margin: "15px 0",
-    padding: "5px 10px",
-  }
 
   validateForm = () => {
     let name = ""
@@ -92,8 +97,17 @@ export default class ContactForm extends React.Component {
 
     return (
       <>
-        <section id="contact" className="section-contact">
-          <h1 className="title is-montserrat is-uppercase form-title has-text-black has-text-centered">
+        <section
+          id="contact"
+          className="section-contact"
+          style={this.props.inverted ? invertedStyle : null}
+        >
+          <h1
+            className={
+              "title is-montserrat is-uppercase form-title has-text-centered" +
+              (this.props.inverted ? " has-text-white" : " has-text-black")
+            }
+          >
             connect with us
           </h1>
           <div className="icons">
@@ -119,7 +133,7 @@ export default class ContactForm extends React.Component {
                 onChange={this.handleChange}
               />
               {this.state.formErrors.name ? (
-                <p style={this.errorStyle}>{this.state.formErrors.name}</p>
+                <p style={errorStyle}>{this.state.formErrors.name}</p>
               ) : null}
             </div>
             <div className="field">
@@ -133,7 +147,7 @@ export default class ContactForm extends React.Component {
               />
             </div>
             {this.state.formErrors.email ? (
-              <p style={this.errorStyle}>{this.state.formErrors.email}</p>
+              <p style={errorStyle}>{this.state.formErrors.email}</p>
             ) : null}
             <div className="field">
               <textarea
@@ -148,12 +162,17 @@ export default class ContactForm extends React.Component {
               />
             </div>
             {this.state.formErrors.message ? (
-              <p style={this.errorStyle}>{this.state.formErrors.message}</p>
+              <p style={errorStyle}>{this.state.formErrors.message}</p>
             ) : null}
             <div className="field">
               <button
                 type="submit"
                 className="button is-montserrat is-uppercase"
+                style={
+                  this.props.inverted
+                    ? { color: "#000000", backgroundColor: "#FFFFFF" }
+                    : null
+                }
               >
                 submit
               </button>

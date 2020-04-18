@@ -124,7 +124,7 @@ const IndexPage = () => {
       </section>
       <NewsLetter image={newsLetterImage} />
       <Testimonials />
-      <ContactForm />
+      <ContactForm inverted={true} />
     </Layout>
   )
 }
