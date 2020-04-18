@@ -182,7 +182,11 @@ export default class ContactForm extends React.Component {
                 className="button is-montserrat is-uppercase"
                 style={
                   this.props.inverted
-                    ? { color: "#000000", backgroundColor: "#FFFFFF" }
+                    ? {
+                        color: "#000000",
+                        backgroundColor: "#FFFFFF",
+                        fontWeight: "700",
+                      }
                     : null
                 }
               >
