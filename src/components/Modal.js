@@ -25,10 +25,7 @@ export default class Modal extends React.Component {
     let clickState = this.state.clicked ? "modal" : "modal is-active"
     return (
       <>
-        <div
-          className={clickState}
-          onKeyDown={this.handleKeyDown}
-        >
+        <div className={clickState} onKeyDown={this.handleKeyDown}>
           <div className="modal-background" onClick={this.handleClick}></div>
           <div className="modal-content">
             <div className="card" style={this.modalStyle}>
