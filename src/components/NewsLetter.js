@@ -46,49 +46,51 @@ export class NewsLetter extends Component {
         >
           <Img
             fluid={this.props.image}
-            className="is-hidden-desktop"
+            className="is-hidden-tablet"
             objectFit="contain"
             alt="Image of a typewriter"
           />
           <div className="hero-body">
             <div className="container">
-              <form onSubmit={this.handleSubmit}>
-                <div className="field">
-                  <h1 className="title is-montserrat has-text-white">
-                    Sign Up For Our Newsletter
-                  </h1>
-                </div>
-                <div className="field">
-                  <input
-                    type="text"
-                    name="first_name"
-                    value={this.state.first_name}
-                    onChange={this.handleChange}
-                    className="input"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="field">
-                  <input
-                    type="text"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    className="input"
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="field">
-                  <div className="control">
-                    <button
-                      type="submit"
-                      className="button is-white is-montserrat is-uppercase has-text-weight-bold"
-                    >
-                      submit
-                    </button>
+              <div className="form-wrapper">
+                <form onSubmit={this.handleSubmit}>
+                  <div className="field">
+                    <h1 className="title is-montserrat has-text-white">
+                      Sign Up For Our Newsletter
+                    </h1>
                   </div>
-                </div>
-              </form>
+                  <div className="field">
+                    <input
+                      type="text"
+                      name="first_name"
+                      value={this.state.first_name}
+                      onChange={this.handleChange}
+                      className="input"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div className="field">
+                    <input
+                      type="text"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      className="input"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <button
+                        type="submit"
+                        className="button is-white is-montserrat is-uppercase has-text-weight-bold"
+                      >
+                        submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </BackgroundImage>
