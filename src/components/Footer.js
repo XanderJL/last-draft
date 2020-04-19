@@ -30,14 +30,16 @@ export default function Footer() {
               <a
                 href="mailto: jacob@lastdraft.ca"
                 className="navbar-item is-montserrat is-uppercase"
+                target="_blank"
+                rel="noreferrer noopener"
               >
                 Email Us
               </a>
             </div>
+            <span className="copyright">
+              &copy; Copyright 2020 by Lastdraft Inc.
+            </span>
           </div>
-        </div>
-        <div className="copyright has-text-centered">
-          <span>&copy; Copyright 2020 by Lastdraft Inc.</span>
         </div>
       </footer>
     </React.Fragment>
