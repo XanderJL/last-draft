@@ -11,13 +11,13 @@ export default class Modal extends React.Component {
   }
 
   handleClick = () => {
-    this.setState({ clicked: true })
+    this.setState({ clicked: !this.state.clicked })
   }
 
   handleKeyDown = e => {
     console.log(e.key)
     if (e.key === "Escape") {
-      this.setState({ clicked: true })
+      this.setState({ clicked: !this.state.clicked })
     }
   }
 
@@ -25,8 +25,14 @@ export default class Modal extends React.Component {
     let clickState = this.state.clicked ? "modal" : "modal is-active"
     return (
       <>
-        <div className={clickState} onKeyDown={this.handleKeyDown}>
-          <div className="modal-background" onClick={this.handleClick}></div>
+        <div
+          className={clickState}
+          onKeyDown={(this.handleKeyDown, this.props.action)}
+        >
+          <div
+            className="modal-background"
+            onClick={(this.handleClick, this.props.action)}
+          ></div>
           <div className="modal-content">
             <div className="card" style={this.modalStyle}>
               <div className="card-content">
@@ -37,7 +43,7 @@ export default class Modal extends React.Component {
           </div>
           <button
             className="modal-close is-large"
-            onClick={this.handleClick}
+            onClick={(this.handleClick, this.props.action)}
           ></button>
         </div>
       </>

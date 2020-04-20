@@ -25,13 +25,17 @@ export class NewsLetter extends Component {
     })
   }
 
+  handleModal = () => {
+    this.setState({ setModal: !this.state.setModal })
+  }
+
   handleSubmit = e => {
     axios.post("/.netlify/functions/subscribe", {
       first_name: this.state.first_name,
       email: this.state.email,
     })
 
-    this.setState({ first_name: "", email: "", setModal: true })
+    this.setState({ first_name: "", email: "", setModal: !this.state.setModal })
 
     e.preventDefault()
   }
@@ -98,6 +102,7 @@ export class NewsLetter extends Component {
           <Modal
             header="Thank You!"
             body="Please check your inbox to confirm your email address."
+            action={this.handleModal}
           />
         ) : null}
       </>
