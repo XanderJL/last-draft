@@ -19,7 +19,7 @@ const initState = {
     email: "",
     message: "",
   },
-  modalState: false,
+  setModal: false,
 }
 
 const errorStyle = {
@@ -74,6 +74,10 @@ export default class ContactForm extends React.Component {
     })
   }
 
+  handleModal = () => {
+    this.setState({ setModal: !this.state.setModal })
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     const isValid = this.validateForm()
@@ -85,7 +89,7 @@ export default class ContactForm extends React.Component {
         body: encode({ "form-name": "contact", ...this.state }),
       })
         .then(() => {
-          this.setState({ modalState: true })
+          this.setState({ setModal: true })
         })
         .catch(error => alert(error))
       this.setState(initState)
@@ -194,8 +198,12 @@ export default class ContactForm extends React.Component {
               </button>
             </div>
           </form>
-          {this.state.modalState ? (
-            <Modal header="Success!" body="Your email has been forwarded." />
+          {this.state.setModal ? (
+            <Modal
+              header="Success!"
+              body="Your email has been forwarded."
+              action={this.handleModal}
+            />
           ) : null}
         </section>
       </>
