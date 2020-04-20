@@ -1,8 +1,11 @@
 import React from "react"
 
 export default class Modal extends React.Component {
-  state = {
-    clicked: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      clicked: false,
+    }
   }
 
   modalStyle = {
@@ -27,11 +30,17 @@ export default class Modal extends React.Component {
       <>
         <div
           className={clickState}
-          onKeyDown={(this.handleKeyDown, this.props.action)}
+          onKeyDown={() => {
+            this.handleKeyDown()
+            this.props.action()
+          }}
         >
           <div
             className="modal-background"
-            onClick={(this.handleClick, this.props.action)}
+            onClick={() => {
+              this.handleClick()
+              this.props.action()
+            }}
           ></div>
           <div className="modal-content">
             <div className="card" style={this.modalStyle}>
@@ -43,7 +52,10 @@ export default class Modal extends React.Component {
           </div>
           <button
             className="modal-close is-large"
-            onClick={(this.handleClick, this.props.action)}
+            onClick={() => {
+              this.handleClick()
+              this.props.action()
+            }}
           ></button>
         </div>
       </>

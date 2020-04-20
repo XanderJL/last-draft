@@ -89,7 +89,7 @@ export default class ContactForm extends React.Component {
         body: encode({ "form-name": "contact", ...this.state }),
       })
         .then(() => {
-          this.setState({ setModal: true })
+          this.setState({ setModal: !this.state.setModal })
         })
         .catch(error => alert(error))
       this.setState(initState)

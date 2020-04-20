@@ -6,13 +6,10 @@ import axios from "axios"
 import Modal from "../components/Modal"
 
 export class NewsLetter extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      first_name: "",
-      email: "",
-      setModal: false,
-    }
+  state = {
+    first_name: "",
+    email: "",
+    setModal: false,
   }
 
   handleChange = e => {
