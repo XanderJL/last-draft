@@ -68,7 +68,7 @@ const IndexPage = () => {
               a story company
             </h1>
             <h2 className="is-montserrat is-uppercase subtitle is-size-3 has-text-white is-size-5-mobile">
-              Personal Brand Management,
+              Personal Brand Management
               <br />
               Content Writing
             </h2>
@@ -79,14 +79,14 @@ const IndexPage = () => {
       <section className="section-ethical-storytelling">
         <div className="container is-widescreen">
           <div className="copy">
-            <p className="has-text-centered has-text-weight-light is-italic is-size-5">
-              Amplifying authenticity online.
-            </p>
+            <h1 className="title-heading has-text-centered is-montserrat is-size-4-mobile">
+              amplifying authenticity for <span className="no-wrap">artists + professionals</span>
+            </h1>
           </div>
           <div className="grid-wrapper">
             <div className="ethical">
               <Link to="/about">
-                <h2 className="is-size-3">ethical</h2>
+                <h2 className="is-size-3 is-size-4-mobile">ethical</h2>
               </Link>
               <p className="has-text-centered">
                 We practice{" "}
@@ -99,7 +99,7 @@ const IndexPage = () => {
             </div>
             <div className="sustainable">
               <Link to="/about">
-                <h2 className="is-size-3">engaging</h2>
+                <h2 className="is-size-3 is-size-4-mobile">engaging</h2>
               </Link>
               <p className="has-text-centered">
                 Connection is rooted in authentic{" "}
@@ -110,7 +110,7 @@ const IndexPage = () => {
             </div>
             <div className="human">
               <Link to="/about">
-                <h2 className="is-size-3">human</h2>
+                <h2 className="is-size-3 is-size-4-mobile">human</h2>
               </Link>
               <p className="has-text-centered">
                 We believe stories define us. We restore the element of{" "}
