@@ -1,8 +1,9 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import HeadshotCard from "./HeadshotCard"
 
-function Headshot(props) {
+const Headshot = props => {
   return (
     <>
       <Img
@@ -12,11 +13,17 @@ function Headshot(props) {
       />
       <HeadshotCard
         quote={props.quote}
-        employee={props.employee}
-        title={props.title}
+        name={props.name}
+        jobTitle={props.jobTitle}
       />
     </>
   )
+}
+
+Headshot.propTypes = {
+  image: PropTypes.object.isRequired,
+  quote: PropTypes.array.isRequired,
+  jobTitle: PropTypes.string.isRequired,
 }
 
 export default Headshot

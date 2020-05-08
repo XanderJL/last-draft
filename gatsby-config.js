@@ -11,6 +11,13 @@ module.exports = {
     `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: `khue65vd`,
+        dataset: `production`,
+      }
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,

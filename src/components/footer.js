@@ -3,9 +3,9 @@ import { Link } from "gatsby"
 
 import Logo from "../images/last-draft-logo.png"
 
-export default function Footer() {
+function Footer() {
   return (
-    <React.Fragment>
+    <>
       <footer className="footer">
         <div className="container">
           <div className="footer-wrapper">
@@ -18,6 +18,12 @@ export default function Footer() {
                 className="navbar-item is-montserrat is-uppercase"
               >
                 About
+              </Link>
+              <Link
+                to="/team"
+                className="navbar-item is-montserrat is-uppercase"
+              >
+                Team
               </Link>
               <a
                 href="https://medium.com/lastdraft"
@@ -42,6 +48,8 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-    </React.Fragment>
+    </>
   )
 }
+
+export default Footer

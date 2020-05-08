@@ -50,6 +50,13 @@ export default function Navbar() {
               >
                 about
               </Link>
+              <Link
+                to="/team"
+                className="navbar-item is-montserrat is-uppercase"
+                activeClassName="is-active"
+              >
+                team
+              </Link>
               <a
                 href="https://medium.com/lastdraft"
                 className="navbar-item is-montserrat is-uppercase"

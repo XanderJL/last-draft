@@ -7,7 +7,6 @@ import Layout from "../components/Layout"
 import NewsLetter from "../components/NewsLetter"
 import Testimonials from "../components/TestimonialCarousel"
 import ContactForm from "../components/Contact"
-import SEO from "../components/SEO"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -43,11 +42,10 @@ const IndexPage = () => {
   // const glassesImage = data.glassesImage.childImageSharp.fluid
 
   return (
-    <Layout>
-      <SEO
-        title="Home"
-        description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
-      />
+    <Layout
+      title="Home"
+      description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
+    >
       <BackgroundImage
         className="hero-landing is-fullheight-with-navbar"
         fluid={headerImage}
@@ -80,7 +78,8 @@ const IndexPage = () => {
         <div className="container is-widescreen">
           <div className="copy">
             <h1 className="title-heading has-text-centered is-montserrat is-size-4-mobile">
-              amplifying authenticity for <span className="no-wrap">artists + professionals</span>
+              amplifying authenticity for{" "}
+              <span className="no-wrap">artists + professionals</span>
             </h1>
           </div>
           <div className="grid-wrapper">

@@ -1,64 +1,43 @@
-import React from "react"
+import React, { useState } from "react"
 
-export default class Modal extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      clicked: false,
-    }
-  }
-
-  modalStyle = {
+const Modal = props => {
+  const [clicked, setClicked] = useState(false)
+  const modalStyle = {
     maxWidth: "contain",
     maxHeight: "contain",
   }
+  let clickState = clicked ? "modal" : "modal is-active"
 
-  handleClick = () => {
-    this.setState({ clicked: !this.state.clicked })
-  }
-
-  handleKeyDown = e => {
-    console.log(e.key)
-    if (e.key === "Escape") {
-      this.setState({ clicked: !this.state.clicked })
-    }
-  }
-
-  render() {
-    let clickState = this.state.clicked ? "modal" : "modal is-active"
-    return (
-      <>
+  return (
+    <>
+      <div
+        role="button"
+        tabIndex={-1}
+        className={clickState}
+        onKeyDown={() => setClicked(!clicked)}
+      >
         <div
-          className={clickState}
-          onKeyDown={() => {
-            this.handleKeyDown()
-            this.props.action()
-          }}
-        >
-          <div
-            className="modal-background"
-            onClick={() => {
-              this.handleClick()
-              this.props.action()
-            }}
-          ></div>
-          <div className="modal-content">
-            <div className="card" style={this.modalStyle}>
-              <div className="card-content">
-                <h1 className="title is-montserrat">{this.props.header}</h1>
-                <p>{this.props.body}</p>
-              </div>
+          role="button"
+          tabIndex={-1}
+          className="modal-background"
+          onClick={() => setClicked(!clicked)}
+          onKeyDown={() => setClicked(!clicked)}
+        ></div>
+        <div className="modal-content">
+          <div className="card" style={modalStyle}>
+            <div className="card-content">
+              <h1 className="title is-montserrat">{props.header}</h1>
+              <p>{props.body}</p>
             </div>
           </div>
-          <button
-            className="modal-close is-large"
-            onClick={() => {
-              this.handleClick()
-              this.props.action()
-            }}
-          ></button>
         </div>
-      </>
-    )
-  }
+        <button
+          className="modal-close is-large"
+          onClick={() => setClicked(!clicked)}
+        ></button>
+      </div>
+    </>
+  )
 }
+
+export default Modal
