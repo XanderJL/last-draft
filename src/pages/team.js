@@ -11,7 +11,7 @@ const Team = ({ data }) => {
     <Layout title="Team">
       <BackgroundImage
         fluid={data.headerImage.childImageSharp.fluid}
-        className="hero is-fullheight-with-navbar"
+        className="hero-about is-fullheight-with-navbar"
       >
         <div className="hero-body">
           <div

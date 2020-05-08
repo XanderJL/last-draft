@@ -15,7 +15,13 @@ module.exports = {
       options: {
         projectId: `khue65vd`,
         dataset: `production`,
-      }
+      },
+    },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `lastdraftinc`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,

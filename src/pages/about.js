@@ -4,6 +4,8 @@ import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
+import Brands from "../components/Brands"
+import InstagramFeed from "../components/InstagramFeed"
 import Contact from "../components/Contact"
 
 export default function About() {
@@ -41,19 +43,20 @@ export default function About() {
         <div className="hero-body">
           <div className="card-about">
             <div className="card-content">
-              <h1 className="title is-montserrat is-uppercase has-text-black">
-                A Story Company
-              </h1>
-              <p>
-                Last Draft is a personal brand management and content writing
-                company for professionals with personality.
-              </p>
-              <br />
-              <p>
-                We represent narrative integrity. We restore the element of
-                human connection between our clients and their publics through
-                the practice of ethical storytelling.
-              </p>
+              <div className="content">
+                <h1 className="title is-montserrat is-uppercase has-text-black">
+                  A Story Company
+                </h1>
+                <p>
+                  Last Draft is a personal brand management and content writing
+                  company for professionals with personality.
+                </p>
+                <p>
+                  We represent narrative integrity. We restore the element of
+                  human connection between our clients and their publics through
+                  the practice of ethical storytelling.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -86,6 +89,8 @@ export default function About() {
           </div>
         </div>
       </section>
+      <Brands />
+      <InstagramFeed />
       <Contact />
     </Layout>
   )
