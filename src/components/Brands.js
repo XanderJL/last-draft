@@ -14,7 +14,7 @@ const Brands = () => {
             brandUrl
             logo {
               asset {
-                fluid {
+                fluid(maxWidth: 600) {
                   ...GatsbySanityImageFluid
                 }
               }
@@ -26,12 +26,27 @@ const Brands = () => {
   `)
 
   return (
-    <section className="section">
-      <div className="container">
-        <h1 className="title is-montserrat is-uppercase has-text-black">
+    <section className="section-brands">
+      <div
+        className="container"
+        style={{
+          maxWidth: "70ch",
+        }}
+      >
+        <h1
+          className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-2-tablet"
+          style={{ marginBottom: "3.25rem" }}
+        >
           brands we work with
         </h1>
-        <div className="grid-wrapper">
+        <div
+          className=""
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            flexWrap: "wrap",
+          }}
+        >
           {data.brands.edges.map(({ node: brand }) => (
             <a
               key={brand.id}
@@ -39,6 +54,11 @@ const Brands = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{
+                flex: 1,
+                padding: "1rem",
+                minWidth: "250px",
+                maxWidth: "400px",
+                minHeight: "auto",
                 alignSelf: "center",
               }}
             >

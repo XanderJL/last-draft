@@ -14,12 +14,7 @@ const Team = ({ data }) => {
         className="hero-about is-fullheight-with-navbar"
       >
         <div className="hero-body">
-          <div
-            className="container"
-            style={{
-              maxWidth: "600px",
-            }}
-          >
+          <div className="container">
             <EmployeesCard />
           </div>
         </div>
@@ -34,6 +29,7 @@ const Team = ({ data }) => {
             name={employee.name}
             jobTitle={employee.jobTitle}
             bio={employee._rawBio}
+            socials={employee.socials}
           />
         ))}
       </div>
@@ -70,6 +66,12 @@ export const data = graphql`
           jobTitle
           name
           startDate
+          socials {
+            facebook
+            instagram
+            linkedin
+            twitter
+          }
         }
       }
     }

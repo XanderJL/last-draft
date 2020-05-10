@@ -25,6 +25,20 @@ export default function About() {
           }
         }
       }
+      publicationImage: file(relativePath: { eq: "about/the-last-draft.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 1200) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      beerImage: file(relativePath: { eq: "about/beers-1.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 800) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
 
@@ -90,6 +104,56 @@ export default function About() {
         </div>
       </section>
       <Brands />
+      <section className="section-publication">
+        <div className="container">
+          <div className="card-publication">
+            <div className="card-content">
+              <div className="content">
+                <h1 className="title is-montserrat is-uppercase has-text-black is-size-3-tablet">
+                  Our Multimedia Publication:
+                </h1>
+                <a
+                  role="button"
+                  href="https://medium.com/lastdraft"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    fluid={data.publicationImage.childImageSharp.fluid}
+                    alt="The Last Draft publication"
+                    style={{
+                      flex: 1,
+                      margin: "2rem 0",
+                      maxWidth: "400px",
+                    }}
+                  />
+                </a>
+                <p>
+                  Art and narrative are portals through which we explore new
+                  ways to see ourselves in each other. Through these
+                  experiences, we become kinder, more connected beings.
+                </p>
+                <p>
+                  The Last Draft is a stage that has been set to take readers
+                  and viewers into artists homes, histories, and imaginations.
+                  It is a virtual space for artists to share their work, discuss
+                  their creative process, and learn from industry experts. We
+                  aim to traverse the intersection of art, technology, and
+                  business, curating a publication that functions both as
+                  information hub and as creative outlet. Stories and content
+                  are produced and shared through a variety of mediums.
+                </p>
+              </div>
+              <Img
+                fluid={data.beerImage.childImageSharp.fluid}
+                style={{
+                  flex: "1 1 500px",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
       <InstagramFeed />
       <Contact />
     </Layout>

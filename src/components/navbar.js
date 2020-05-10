@@ -27,7 +27,10 @@ export default function Navbar() {
               className="navbar-burger burger"
               onClick={burgerMenu}
               onKeyDown={burgerMenu}
-              data-target="nav-menu"
+              style={{
+                border: "none",
+                outline: "none",
+              }}
             >
               <span></span>
               <span></span>

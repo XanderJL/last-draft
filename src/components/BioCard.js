@@ -1,34 +1,56 @@
 import React from "react"
+import {
+  FaLinkedin,
+  FaFacebookSquare,
+  FaTwitter,
+  FaInstagram,
+} from "react-icons/fa"
 import PropTypes from "prop-types"
 import BlockContent from "@sanity/block-content-to-react"
 import LinkedIn from "../images/icons/linkedin.svg"
 import Instagram from "../images/icons/instagram.svg"
 
 function BioCard(props) {
+  const { bio, socials } = props
+  const serializers = {
+    marks: {
+      link: ({ children, mark }) =>
+        mark.blank ? (
+          <a href={mark.href} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        ) : (
+          <a href={mark.href}>{children}</a>
+        ),
+    },
+  }
+
   return (
     <div className="card copy">
       <div className="card-content">
         <div className="content">
-          <BlockContent blocks={props.bio} />
+          <BlockContent blocks={bio} serializers={serializers} />
         </div>
-        {props.linkedin || props.instagram ? (
+        {socials ? (
           <div className="social">
-            {props.linkedin ? (
-              <a
-                href={props.linkedin}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img className="icon" src={LinkedIn} alt="LinkedIn logo" />
+            {socials.linkedin ? (
+              <a href={socials.linkedin} target="_blank" rel="noopener noreferrer">
+                <FaLinkedin className="icon is-large" />
               </a>
             ) : null}
-            {props.instagram ? (
-              <a
-                href={props.instagram}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img className="icon" src={Instagram} alt="Instagram logo" />
+            {socials.twitter ? (
+              <a href={socials.twitter} target="_blank" rel="noopener noreferrer">
+                <FaTwitter className="icon is-large" />
+              </a>
+            ) : null}
+            {socials.instagram ? (
+              <a href={socials.instagram} target="_blank" rel="noopener noreferrer">
+                <FaInstagram className="icon is-large" />
+              </a>
+            ) : null}
+            {socials.facebook ? (
+              <a href={socials.facebook} target="_blank" rel="noopener noreferrer">
+                <FaFacebookSquare className="icon is-large" />
               </a>
             ) : null}
           </div>

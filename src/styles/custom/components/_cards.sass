@@ -1,0 +1,33 @@
+.card
+  &-employees,
+  &-publication
+    @extend .card
+    padding: $card-padding
+
+
+  &-employees
+    .card-content
+      .team
+        display: flex
+        margin-top: 2rem
+        flex-wrap: wrap
+        justify-content: space-around
+        align-items: center
+
+
+  &-publication
+    .card-content
+      display: flex
+      flex-wrap: wrap
+      align-items: center
+      justify-content: space-between
+      .content
+        max-width: 60ch
+        margin-right: $gap * 2
+
+      @media screen and ( max-width: $fullhd )
+
+        .content
+          margin-right: 0
+          margin-bottom: $gap * 2
+          

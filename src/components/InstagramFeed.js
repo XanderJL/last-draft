@@ -29,7 +29,6 @@ const InstagramFeed = () => {
   const modalRef = useRef()
 
   const InstagramModal = () => {
-
     useEffect(() => {
       modalRef.current.focus()
     })
@@ -64,30 +63,32 @@ const InstagramFeed = () => {
 
   return (
     <>
-      <section className="section">
+      <section className="section-insta-feed">
         <div className="container">
-          <h1 className="title is-montserrat is-uppercase has-text-black">
-            instagram feed
+          <h1
+            className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-2-tablet"
+            style={{ marginBottom: "3.25rem" }}
+          >
+            <a
+              href="https://instagram.com/lastdraftinc"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @lastdraftinc
+            </a>
           </h1>
           <div className="grid-wrapper">
             {data.allInstaNode.edges.map(({ node: post }) => (
-              <button
+              <a
                 key={post.id}
                 role="button"
                 onClick={() => {
                   setOpenPost(!openPost)
                   setPostID(post.id)
                 }}
-                style={{
-                  border: "none",
-                  outline: "none",
-                  "&:hover": {
-                    color: "#fefefefe",
-                  },
-                }}
               >
                 <Img fluid={post.localFile.childImageSharp.fluid} />
-              </button>
+              </a>
             ))}
           </div>
         </div>

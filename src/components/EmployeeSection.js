@@ -11,8 +11,9 @@ const EmployeeSection = props => {
           quote={props.quote}
           name={props.name}
           jobTitle={props.jobTitle}
+          socials={props.socials}
         />
-        <BioCard bio={props.bio} />
+        <BioCard bio={props.bio} socials={props.socials} />
       </div>
     </section>
   )
