@@ -7,8 +7,6 @@ import {
 } from "react-icons/fa"
 import PropTypes from "prop-types"
 import BlockContent from "@sanity/block-content-to-react"
-import LinkedIn from "../images/icons/linkedin.svg"
-import Instagram from "../images/icons/instagram.svg"
 
 function BioCard(props) {
   const { bio, socials } = props
