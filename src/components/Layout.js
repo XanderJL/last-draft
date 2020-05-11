@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import SEO from "../components/SEO"
+import SEO from "./SEO"
 
 import Navbar from "./Navbar"
 import Footer from "./Footer"
