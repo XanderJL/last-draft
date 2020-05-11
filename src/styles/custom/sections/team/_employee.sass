@@ -5,6 +5,9 @@
       position: relative
       padding: $section-padding-medium
 
+      // @media screen and ( max-width: $tablet )
+      //   padding: $section-padding
+
       &::after
         position: absolute
         content: ''
@@ -22,9 +25,10 @@
       .container
         display: grid
         grid-template-columns: repeat(12, minmax(0, 1fr))
-        grid-template-rows: 4fr 1fr 1fr
+        grid-template-rows: 3fr 1fr 1fr
         grid-column-gap: $gap * 2
         align-items: center
+        max-width: $desktop
 
         @media screen and (max-width: $desktop)
           grid-template-columns: minmax(0, 1fr)
@@ -69,7 +73,8 @@
             font-weight: bold
             color: black
 
-        .copy
+        .card-copy
+          @extend .card
           padding: 0.5em 0.5em 2em 0.5em
           grid-column: 7 / -1
           grid-row: 1 / span 2
@@ -112,10 +117,10 @@
               grid-column: 8 / -2
             .header-image
               grid-column: 7 / -1
-            .copy
+            .card-copy
               grid-column: 1 / 7
 
-        .copy,
         .card
+          &-copy,
           &-quote
-          background-color: $pastel-pink
+            background-color: $pastel-pink
