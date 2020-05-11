@@ -69,7 +69,7 @@ export default function Navbar() {
                 stories
               </a>
               <a
-                href="#contact"
+                href="/#contact"
                 className="navbar-item is-montserrat is-uppercase"
               >
                 <div className="button is-solid is-montserrat is-uppercase">
