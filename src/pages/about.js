@@ -6,7 +6,6 @@ import BackgroundImage from "gatsby-background-image"
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
 import InstagramFeed from "../components/InstagramFeed"
-import Contact from "../components/Contact"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -78,25 +77,25 @@ export default function About() {
       <section className="section-storytelling">
         <div className="container">
           <div className="copy">
-            <h1 className="title is-montserrat is-uppercase has-text-black is-size-4-mobile">
-              What Is Ethical Storytelling?
-            </h1>
-            <p>
-              Stories construct and define the lens through which we see the
-              world. They are the catalysts of technological development,
-              economic progress, social evolution, and positive change.
-            </p>
-            <br />
-            <p>
-              When we say we practice ethical storytelling, we mean the creation
-              and promotion of narratives that are honest, accurate, and
-              grounded in a practice of mutual respect.
-            </p>
-            <br />
-            <p>
-              We are all in relationship with one another. It’s why we are
-              relationship-focused in everything we do.
-            </p>
+            <div className="content">
+              <h1 className="title is-montserrat is-uppercase has-text-black is-size-4-mobile">
+                What Is Ethical Storytelling?
+              </h1>
+              <p>
+                Stories construct and define the lens through which we see the
+                world. They are the catalysts of technological development,
+                economic progress, social evolution, and positive change.
+              </p>
+              <p>
+                When we say we practice ethical storytelling, we mean the
+                creation and promotion of narratives that are honest, accurate,
+                and grounded in a practice of mutual respect.
+              </p>
+              <p>
+                We are all in relationship with one another. It’s why we are
+                relationship-focused in everything we do.
+              </p>
+            </div>
           </div>
           <div className="image">
             <Img className="type-writer" fluid={typeWriterImage} />
@@ -109,7 +108,7 @@ export default function About() {
           <div className="card-publication">
             <div className="card-content">
               <div className="content">
-                <h1 className="title is-montserrat is-uppercase has-text-black is-size-3-tablet">
+                <h1 className="title is-montserrat is-uppercase has-text-black is-size-4-mobile">
                   Our Multimedia Publication:
                 </h1>
                 <a
@@ -130,7 +129,7 @@ export default function About() {
                 </a>
                 <p>
                   Art and narrative are portals through which we explore new
-                  ways to see ourselves in each other. Through these
+                  ways to see in ourselves and each other. Through these
                   experiences, we become kinder, more connected beings.
                 </p>
                 <p>
@@ -145,17 +144,14 @@ export default function About() {
                 </p>
               </div>
               <Img
+                className="image"
                 fluid={data.beerImage.childImageSharp.fluid}
-                style={{
-                  flex: "1 1 500px",
-                }}
               />
             </div>
           </div>
         </div>
       </section>
       <InstagramFeed />
-      <Contact />
     </Layout>
   )
 }
