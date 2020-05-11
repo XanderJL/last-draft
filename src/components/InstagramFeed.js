@@ -66,8 +66,8 @@ const InstagramFeed = () => {
       <section className="section-insta-feed">
         <div className="container">
           <h1
-            className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-2-tablet"
-            style={{ marginBottom: "3.25rem" }}
+            className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile"
+            // style={{ marginBottom: "3.25rem" }}
           >
             <a
               href="https://instagram.com/lastdraftinc"
@@ -87,7 +87,9 @@ const InstagramFeed = () => {
                   setPostID(post.id)
                 }}
               >
-                <Img fluid={post.localFile.childImageSharp.fluid} />
+                <Img
+                  fluid={post.localFile.childImageSharp.fluid}
+                />
               </a>
             ))}
           </div>

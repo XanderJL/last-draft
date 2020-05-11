@@ -1,10 +1,51 @@
 .section
+  // About Page
+  &-storytelling,
   &-brands,
+  // Team page
   &-insta-feed,
   &-publication
     @extend .section
-    padding: $section-padding-medium
+    padding: $section-padding
+
+  &-storytelling
+    .container
+      display: grid
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+      align-items: center
+      grid-gap: $gap * 3
+
+      @media screen and (max-width: $tablet)
+        grid-template-columns: 1fr
+        grid-gap: $gap * 2
+        justify-items: center
+
+      .copy
+        max-width: 50ch
+
+        .title
+          margin-bottom: $title-margin
+
+      .image
+        box-shadow: $card-shadow
+        width: 100%
+        height: auto
 
   &-publication
-    @extend .section
     background-color: $mint
+
+  &-brands
+    .container
+      .logos
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-around
+        align-items: center
+
+        .logo
+          flex: 1
+          padding: 1rem
+          min-width: 200px
+          max-width: 250px
+          max-height: auto
+          

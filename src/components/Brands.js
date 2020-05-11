@@ -5,7 +5,7 @@ import Img from "gatsby-image"
 const Brands = () => {
   const data = useStaticQuery(graphql`
     query {
-      brands: allSanityBrands {
+      brands: allSanityBrands(sort: { fields: brandName }) {
         edges {
           node {
             id
@@ -33,34 +33,17 @@ const Brands = () => {
           maxWidth: "70ch",
         }}
       >
-        <h1
-          className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-2-tablet"
-          style={{ marginBottom: "3.25rem" }}
-        >
-          brands we work with
+        <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
+          clients + partners
         </h1>
-        <div
-          className=""
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="logos">
           {data.brands.edges.map(({ node: brand }) => (
             <a
               key={brand.id}
+              className="logo"
               href={brand.brandUrl}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                flex: 1,
-                padding: "1rem",
-                minWidth: "250px",
-                maxWidth: "400px",
-                minHeight: "auto",
-                alignSelf: "center",
-              }}
             >
               <Img fluid={brand.logo.asset.fluid} alt={brand.alt} />
             </a>
