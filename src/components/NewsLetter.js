@@ -3,7 +3,7 @@ import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"
 import axios from "axios"
 
-import Modal from "../components/Modal"
+import Modal from "./Modal"
 
 export class NewsLetter extends Component {
   state = {
