@@ -20,15 +20,17 @@ const EmployeesCard = () => {
         <div className="team">
           {data.employees.edges.map(({ node: employee }) => (
             <Link
+              className="avatar-link"
               to={"/team#" + employee.slug.current}
               key={employee.id}
-              style={{
-                flex: "1 1 300px",
-                display: "flex",
-                justifyContent: "center",
-              }}
             >
               <Avatar fluid={employee.headshot.asset.fluid} />
+              <h2
+                className="subtitle has-text-black has-text-centered"
+                style={{ marginTop: "1rem" }}
+              >
+                {employee.name}
+              </h2>
             </Link>
           ))}
         </div>

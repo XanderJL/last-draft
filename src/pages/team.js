@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
 import Layout from "../components/Layout"
-import Contact from "../components/Contact"
 import EmployeesCard from "../components/EmployeesCard"
 import EmployeeSection from "../components/EmployeeSection"
 
@@ -33,7 +32,6 @@ const Team = ({ data }) => {
           />
         ))}
       </div>
-      <Contact />
     </Layout>
   )
 }
