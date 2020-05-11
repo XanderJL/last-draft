@@ -24,7 +24,7 @@ function BioCard(props) {
   }
 
   return (
-    <div className="card copy">
+    <div className="card-copy">
       <div className="card-content">
         <div className="content">
           <BlockContent blocks={bio} serializers={serializers} />

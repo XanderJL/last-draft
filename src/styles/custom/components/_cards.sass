@@ -3,7 +3,10 @@
   &-publication
     @extend .card
     padding: $card-padding
-
+    @media screen and ( max-width: $tablet )
+      padding: 0
+      .card-content
+        padding: $card-content-padding
 
   &-employees
     .card-content
@@ -14,20 +17,28 @@
         justify-content: space-around
         align-items: center
 
-
   &-publication
     .card-content
       display: flex
       flex-wrap: wrap
       align-items: center
       justify-content: space-between
+      
+      @media screen and ( max-width: $tablet )
+        flex-direction: column
+        
       .content
-        max-width: 60ch
-        margin-right: $gap * 2
+        max-width: 50%
+        margin-right: $gap
+      
+      .image
+        flex: 1
+        max-width: 500px
 
-      @media screen and ( max-width: $fullhd )
-
+      @media screen and ( max-width: $tablet )
         .content
+          min-width: 100%
           margin-right: 0
-          margin-bottom: $gap * 2
-          
+
+        .image
+          min-width: 100%
