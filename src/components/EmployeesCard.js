@@ -29,7 +29,9 @@ const EmployeesCard = () => {
                 className="subtitle has-text-black has-text-centered"
                 style={{ marginTop: "1rem" }}
               >
-                {employee.firstName + " " + employee.lastName}
+                <span>{employee.firstName}</span>
+                <br className="employee-name-break" />{" "}
+                <span>{employee.lastName}</span>
               </h2>
             </Link>
           ))}
