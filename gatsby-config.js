@@ -5,6 +5,7 @@ module.exports = {
     title: `Last Draft`,
     description: `Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change.`,
     author: `Alex Low`,
+    siteUrl: `https://lastdraft.ca/`
   },
   plugins: [
     `gatsby-plugin-netlify`,
