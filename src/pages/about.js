@@ -149,7 +149,7 @@ export default function About() {
                   rel="noopener noreferrer"
                   className="button is-solid is-montserrat is-uppercase"
                 >
-                  &nbsp; go to site &rang;
+                  &nbsp; stories &rang;
                 </a>
               </div>
               <Img
