@@ -109,7 +109,7 @@ export default function About() {
             <div className="card-content">
               <div className="content">
                 <h1 className="title is-montserrat is-uppercase has-text-black is-size-4-mobile">
-                  Our Multimedia Publication:
+                  Multimedia Publication:
                 </h1>
                 <a
                   role="button"
@@ -142,6 +142,15 @@ export default function About() {
                   information hub and as creative outlet. Stories and content
                   are produced and shared through a variety of mediums.
                 </p>
+                <a
+                  role="button"
+                  href="https://medium.com/lastdraft"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button is-solid is-montserrat is-uppercase"
+                >
+                  &nbsp; go to site &rang;
+                </a>
               </div>
               <Img
                 className="image"

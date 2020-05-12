@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import Img from "gatsby-image"
+import Img from "gatsby-image/withIEPolyfill"
 
 const Brands = () => {
   const data = useStaticQuery(graphql`
@@ -14,8 +14,8 @@ const Brands = () => {
             brandUrl
             logo {
               asset {
-                fluid(maxWidth: 600) {
-                  ...GatsbySanityImageFluid
+                fixed(width: 175) {
+                  ...GatsbySanityImageFixed
                 }
               }
             }
@@ -27,12 +27,7 @@ const Brands = () => {
 
   return (
     <section className="section-brands">
-      <div
-        className="container"
-        style={{
-          maxWidth: "70ch",
-        }}
-      >
+      <div className="container">
         <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
           clients + partners
         </h1>
@@ -45,7 +40,12 @@ const Brands = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Img fluid={brand.logo.asset.fluid} alt={brand.alt} />
+              <Img
+                fixed={brand.logo.asset.fixed}
+                alt={brand.alt}
+                objectFit="contain"
+                objectPosition="center"
+              />
             </a>
           ))}
         </div>

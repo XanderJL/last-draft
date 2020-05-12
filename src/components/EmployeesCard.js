@@ -29,7 +29,7 @@ const EmployeesCard = () => {
                 className="subtitle has-text-black has-text-centered"
                 style={{ marginTop: "1rem" }}
               >
-                {employee.name}
+                {employee.firstName + " " + employee.lastName}
               </h2>
             </Link>
           ))}
@@ -58,7 +58,8 @@ export const query = graphql`
             current
           }
           jobTitle
-          name
+          firstName
+          lastName
           startDate
         }
       }

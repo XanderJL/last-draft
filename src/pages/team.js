@@ -25,7 +25,7 @@ const Team = ({ data }) => {
             slug={employee.slug.current}
             image={employee.headshot.asset.fluid}
             quote={employee._rawQuote}
-            name={employee.name}
+            name={employee.firstName + " " + employee.lastName}
             jobTitle={employee.jobTitle}
             bio={employee._rawBio}
             socials={employee.socials}
@@ -62,7 +62,8 @@ export const data = graphql`
             current
           }
           jobTitle
-          name
+          firstName
+          lastName
           startDate
           socials {
             facebook
