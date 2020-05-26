@@ -54,6 +54,13 @@ export default function Navbar() {
                 about
               </Link>
               <Link
+                to="/services"
+                className="navbar-item is-montserrat is-uppercase"
+                activeClassName="is-active"
+              >
+                services
+              </Link>
+              <Link
                 to="/team"
                 className="navbar-item is-montserrat is-uppercase"
                 activeClassName="is-active"

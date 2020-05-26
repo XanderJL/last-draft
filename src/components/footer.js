@@ -20,6 +20,12 @@ function Footer() {
                 About
               </Link>
               <Link
+                to="/services"
+                className="navbar-item is-montserrat is-uppercase"
+              >
+                Services
+              </Link>
+              <Link
                 to="/team"
                 className="navbar-item is-montserrat is-uppercase"
               >

@@ -45,6 +45,7 @@ const InstagramFeed = () => {
           tabIndex={0}
           className="modal-background"
           onClick={() => setOpenPost(!openPost)}
+          onKeyDown={e => (e.key === "Escape" ? setOpenPost(!openPost) : null)}
         ></div>
         <div className="modal-content">
           <figure className="image">
@@ -52,10 +53,10 @@ const InstagramFeed = () => {
           </figure>
         </div>
         <button
-          role="button"
           tabIndex={0}
           className="modal-close is-large"
           onClick={() => setOpenPost(!openPost)}
+          onKeyDown={e => (e.key === "Escape" ? setOpenPost(!openPost) : null)}
         ></button>
       </div>
     )
@@ -65,10 +66,7 @@ const InstagramFeed = () => {
     <>
       <section className="section-insta-feed">
         <div className="container">
-          <h1
-            className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile"
-            // style={{ marginBottom: "3.25rem" }}
-          >
+          <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
             <a
               href="https://instagram.com/lastdraftinc"
               target="_blank"
@@ -79,18 +77,23 @@ const InstagramFeed = () => {
           </h1>
           <div className="grid-wrapper">
             {data.allInstaNode.edges.map(({ node: post }) => (
-              <a
+              <button
                 key={post.id}
-                role="button"
                 onClick={() => {
                   setOpenPost(!openPost)
                   setPostID(post.id)
                 }}
+                onKeyDown={e =>
+                  e.key === "Enter" ? setOpenPost(!openPost) : null
+                }
+                style={{
+                  cursor: "pointer",
+                  border: "0",
+                  padding: "0",
+                }}
               >
-                <Img
-                  fluid={post.localFile.childImageSharp.fluid}
-                />
-              </a>
+                <Img fluid={post.localFile.childImageSharp.fluid} />
+              </button>
             ))}
           </div>
         </div>
