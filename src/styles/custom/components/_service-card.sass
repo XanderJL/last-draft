@@ -1,6 +1,5 @@
 .service-card
   display: flex
-  max-height: 100%
   background-color: #ffffff
   align-items: center
   justify-content: space-between
@@ -8,23 +7,29 @@
   box-shadow: $card-shadow
 
   .card-image
-    flex: 1 1 0
-    max-width: 500px
-    max-height: 100%
-  
-  .service-card-body
     flex: 1
-    display: flex
-    justify-content: center
-    padding: 1.25rem
+    max-width: 540px
+    max-height: 360px
 
-    .card-copy
-      flex: 1
-      max-width: 60ch
-  
+  .card-copy
+    flex: 1
+    max-width: 60ch
+    max-height: 360px
+    overflow: auto
+    padding: 1.25rem
+    margin: 0 auto
+
   @media screen and ( max-width: $tablet )
     flex-direction: column
-    
+
     .card-image
-      height: 200px
-      width: 100%
+      flex: 0 1 auto
+      max-height: 280px
+      max-width: 100%
+  
+  @media screen and ( min-width: $desktop )
+
+    .card-image
+      max-width: 620px
+      max-height: 413px
+    

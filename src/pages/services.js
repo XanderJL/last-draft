@@ -12,7 +12,9 @@ const ServicesPage = ({ data }) => {
     if (/^h\d/.test(style)) {
       return React.createElement(
         style,
-        { className: `title is-montserrat is-uppercase` },
+        {
+          className: `title is-montserrat is-uppercase is-size-4 is-size-5-mobile`,
+        },
         props.children
       )
     }
@@ -28,23 +30,18 @@ const ServicesPage = ({ data }) => {
           {data.services.edges.map(({ node: service }) => (
             <div key={service.id} className="service-card">
               {service.image ? (
-                <Img
-                  sizes={{ ...service.image.asset.fluid, aspectRatio: 1 / 1 }}
-                  className="card-image"
-                />
+                <Img fluid={service.image.asset.fluid} className="card-image" />
               ) : (
                 <Img
                   fixed={data.placeholder.childImageSharp.fixed}
                   className="card-image"
                 />
               )}
-              <div className="service-card-body">
-                <div className="content card-copy">
-                  <PortableText
-                    blocks={service._rawBody}
-                    serializers={{ types: { block: BlockRenderer } }}
-                  />
-                </div>
+              <div className="content card-copy">
+                <PortableText
+                  blocks={service._rawBody}
+                  serializers={{ types: { block: BlockRenderer } }}
+                />
               </div>
             </div>
           ))}
@@ -58,7 +55,7 @@ export const data = graphql`
   query {
     placeholder: file(relativePath: { eq: "about/beers-1.jpg" }) {
       childImageSharp {
-        fixed(width: 500) {
+        fixed(width: 800) {
           ...GatsbyImageSharpFixed
         }
       }
