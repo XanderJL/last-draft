@@ -1,12 +1,13 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
+import PortableText from "@sanity/block-content-to-react"
 import Slider from "react-slick"
 
 export default function Testimonials() {
   const slickSettings = {
     dots: true,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 10000,
     infinite: true,
     speed: 500,
@@ -31,15 +32,68 @@ export default function Testimonials() {
           }
         }
       }
+      testimonials: sanityIndexPage {
+        testimonials {
+          _rawTestimonial
+          logo {
+            asset {
+              id
+              fluid {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+          alt
+          brandName
+          brandRep
+          repTitle
+          brandUrl
+          id
+        }
+      }
     }
   `)
+  const serializers = {
+    types: {
+      block: props => (
+        <p className="has-text-centered has-text-weight-light is-italic is-size-5">
+          {props.children}
+        </p>
+      ),
+    },
+  }
+  const testimonials = data.testimonials.testimonials
 
-  const ceoLogo = data.ceoLogo.childImageSharp.fluid
-  const accelerateLogo = data.accelerateLogo.childImageSharp.fluid
   return (
     <section className="section-testimonials">
       <Slider {...slickSettings} className="quote-carousel">
-        <div className="quote">
+        {testimonials.map(testimonial => (
+          <div key={testimonial.id} className="quote">
+            <PortableText
+              blocks={testimonial._rawTestimonial}
+              serializers={serializers}
+            />
+            <div className="client has-text-centered is-size-5">
+              <p>{testimonial.brandRep}</p>
+              <p>
+                {testimonial.repTitle}, {testimonial.brandName}
+              </p>
+            </div>
+            <a
+              href={testimonial.brandUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <Img
+                className="testimonial-logo"
+                fluid={testimonial.logo.asset.fluid}
+                alt={testimonial.alt}
+                objectFit="contain"
+              />
+            </a>
+          </div>
+        ))}
+        {/* <div className="quote">
           <p className="has-text-centered has-text-weight-light is-italic is-size-5">
             "Working with Last Draft over the past three years has been
             invaluable to CEO Quest. The content strategies they executed
@@ -87,7 +141,7 @@ export default function Testimonials() {
               objectFit="contain"
             />
           </a>
-        </div>
+        </div> */}
       </Slider>
     </section>
   )
