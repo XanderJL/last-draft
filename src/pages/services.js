@@ -26,7 +26,7 @@ const ServicesPage = ({ data }) => {
   return (
     <Layout title="Services">
       <section className="section has-background-white-bis">
-        <div className="container">
+        <div className="container" style={{maxWidth: "1100px"}}>
           {data.services.edges.map(({ node: service }) => (
             <div key={service.id} className="service-card">
               {service.image ? (
