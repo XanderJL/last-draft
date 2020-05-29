@@ -2,6 +2,8 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
+import PortableText from "@sanity/block-content-to-react"
+import imageUrlBuilder from "@sanity/image-url"
 
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
@@ -10,65 +12,139 @@ import InstagramFeed from "../components/InstagramFeed"
 export default function About() {
   const data = useStaticQuery(graphql`
     {
-      headerImage: file(relativePath: { eq: "about/about-header.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 1920) {
-            ...GatsbyImageSharpFluid
+      aboutPage: sanityAboutPage {
+        _rawMetaDescription
+        title
+        _rawHeroCard
+        heroImage {
+          asset {
+            fluid(maxWidth: 1440) {
+              ...GatsbySanityImageFluid
+            }
           }
         }
-      }
-      typeWriterImage: file(relativePath: { eq: "about/type-writer.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 1200) {
-            ...GatsbyImageSharpFluid
+        _rawSectionOne
+        _rawPublication
+        sectionOne {
+          image {
+            asset {
+              fluid(maxWidth: 1200) {
+                ...GatsbySanityImageFluid
+              }
+            }
           }
+          alt
         }
-      }
-      publicationImage: file(relativePath: { eq: "about/the-last-draft.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 1200) {
-            ...GatsbyImageSharpFluid
+        publication {
+          image {
+            asset {
+              fluid(maxWidth: 1200) {
+                ...GatsbySanityImageFluid
+              }
+            }
           }
-        }
-      }
-      beerImage: file(relativePath: { eq: "about/beers-1.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 800) {
-            ...GatsbyImageSharpFluid
-          }
+          alt
         }
       }
     }
   `)
+  const CardRenderer = props => {
+    const { style = "normal" } = props.node
 
-  const headerImage = data.headerImage.childImageSharp.fluid
-  const typeWriterImage = data.typeWriterImage.childImageSharp.fluid
+    if (style === "h1") {
+      return React.createElement(
+        style,
+        {
+          className: `title is-montserrat is-uppercase has-text-black`,
+        },
+        props.children
+      )
+    }
+    if (style === "h2") {
+      return React.createElement(
+        style,
+        {
+          className: `title is-montserrat is-uppercase has-text-black`,
+        },
+        props.children
+      )
+    }
+
+    if (style === "blockquote") {
+      return <blockquote>- {props.children}</blockquote>
+    }
+
+    // Fall back to default handling
+    return PortableText.defaultSerializers.types.block(props)
+  }
+
+  const SectionRenderer = props => {
+    const { style = "normal" } = props.node
+
+    if (/^h\d/.test(style)) {
+      return React.createElement(
+        style,
+        {
+          className: `title is-montserrat is-uppercase has-text-black is-size-4-mobile`,
+        },
+        props.children
+      )
+    }
+
+    if (style === "blockquote") {
+      return <blockquote>- {props.children}</blockquote>
+    }
+
+    // Fall back to default handling
+    return PortableText.defaultSerializers.types.block(props)
+  }
+  const BlockImageRenderer = props => {
+    console.log(props.node)
+    const urlFor = source =>
+      imageUrlBuilder({
+        projectId: process.env.GATSBY_SANITY_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+      }).image(source)
+    return (
+      <a
+        role="button"
+        href="https://medium.com/lastdraft"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={urlFor(props.node.image.asset).maxWidth(400)}
+          alt={props.node.alt}
+        />
+      </a>
+    )
+  }
+
+  const title = data.aboutPage.title
+  const metaDescription = data.aboutPage._rawMetaDescription[0].children[0].text
+  const heroImage = data.aboutPage.heroImage.asset.fluid
+  const heroCard = data.aboutPage._rawHeroCard
+  const sectionOne = data.aboutPage._rawSectionOne.body
+  const sectionOneImg = data.aboutPage.sectionOne.image.asset.fluid
+  const sectionOneAlt = data.aboutPage.sectionOne.alt
+  const publication = data.aboutPage._rawPublication.body
+  const pubImage = data.aboutPage.publication.image.asset.fluid
+  const pubAlt = data.aboutPage.publication.alt
 
   return (
-    <Layout
-      title="About"
-      description="Last Draft is grounded in a firm belief that ethical stories are the catalysts of technological development, economic progress, social evolution, and positive change."
-    >
+    <Layout title={title} description={metaDescription}>
       <BackgroundImage
-        fluid={headerImage}
+        fluid={heroImage}
         className="hero-about is-fullheight-with-navbar"
       >
         <div className="hero-body">
           <div className="card-about">
             <div className="card-content">
               <div className="content">
-                <h1 className="title is-montserrat is-uppercase has-text-black">
-                  A Story Company
-                </h1>
-                <p>
-                  Last Draft is a personal brand management and content writing
-                  company for professionals with personality.
-                </p>
-                <p>
-                  We represent narrative integrity. We restore the element of
-                  human connection between our clients and their publics through
-                  the practice of ethical storytelling.
-                </p>
+                <PortableText
+                  blocks={heroCard}
+                  serializers={{ types: { block: CardRenderer } }}
+                />
               </div>
             </div>
           </div>
@@ -78,28 +154,17 @@ export default function About() {
         <div className="container">
           <div className="copy">
             <div className="content">
-              <h1 className="title is-montserrat is-uppercase has-text-black is-size-4-mobile">
-                What Is Ethical Storytelling?
-              </h1>
-              <p>
-                Stories construct and define the lens through which we see the
-                world. They are the catalysts of technological development,
-                economic progress, social evolution, and positive change.
-              </p>
-              <p>
-                When we say we practice ethical storytelling, we mean the
-                creation and promotion of narratives that are honest, accurate,
-                and grounded in a practice of mutual respect.
-              </p>
-              <p>
-                We are all in relationship with one another. It’s why we are
-                relationship-focused in everything we do.
-              </p>
+              <PortableText
+                blocks={sectionOne}
+                serializers={{ types: { block: SectionRenderer } }}
+              />
             </div>
           </div>
-          <div className="image">
-            <Img className="type-writer" fluid={typeWriterImage} />
-          </div>
+          <Img
+            className="type-writer"
+            fluid={sectionOneImg}
+            alt={sectionOneAlt}
+          />
         </div>
       </section>
       <Brands />
@@ -108,40 +173,15 @@ export default function About() {
           <div className="card-publication">
             <div className="card-content">
               <div className="content">
-                <h1 className="title is-montserrat is-uppercase has-text-black is-size-4-mobile">
-                  Multimedia Publication:
-                </h1>
-                <a
-                  role="button"
-                  href="https://medium.com/lastdraft"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Img
-                    fluid={data.publicationImage.childImageSharp.fluid}
-                    alt="The Last Draft publication"
-                    style={{
-                      flex: 1,
-                      margin: "2rem 0",
-                      maxWidth: "400px",
-                    }}
-                  />
-                </a>
-                <p>
-                  Art and narrative are portals through which we explore new
-                  ways to see in ourselves and each other. Through these
-                  experiences, we become kinder, more connected beings.
-                </p>
-                <p>
-                  The Last Draft is a stage that has been set to take readers
-                  and viewers into artists homes, histories, and imaginations.
-                  It is a virtual space for artists to share their work, discuss
-                  their creative process, and learn from industry experts. We
-                  aim to traverse the intersection of art, technology, and
-                  business, curating a publication that functions both as
-                  information hub and as creative outlet. Stories and content
-                  are produced and shared through a variety of mediums.
-                </p>
+                <PortableText
+                  blocks={publication}
+                  serializers={{
+                    types: {
+                      block: SectionRenderer,
+                      blockImage: BlockImageRenderer,
+                    },
+                  }}
+                />
                 <a
                   role="button"
                   href="https://medium.com/lastdraft"
@@ -152,10 +192,7 @@ export default function About() {
                   &nbsp; stories &rang;
                 </a>
               </div>
-              <Img
-                className="image"
-                fluid={data.beerImage.childImageSharp.fluid}
-              />
+              <Img className="image" fluid={pubImage} alt={pubAlt} />
             </div>
           </div>
         </div>
