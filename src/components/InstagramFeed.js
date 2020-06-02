@@ -4,25 +4,25 @@ import Img from "gatsby-image"
 import InstagramEmbed from "react-instagram-embed"
 
 const InstagramFeed = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allInstaNode {
-        edges {
-          node {
-            id
-            timestamp
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 400, maxHeight: 400) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     allInstaNode {
+  //       edges {
+  //         node {
+  //           id
+  //           timestamp
+  //           localFile {
+  //             childImageSharp {
+  //               fluid(maxWidth: 400, maxHeight: 400) {
+  //                 ...GatsbyImageSharpFluid
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
 
   const [openPost, setOpenPost] = useState(false)
   const [postId, setPostID] = useState("")
