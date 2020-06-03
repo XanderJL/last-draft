@@ -1,7 +1,7 @@
 .service-card
   display: flex
   background-color: #ffffff
-  align-items: center
+  align-items: stretch
   justify-content: space-between
   margin: 3.25rem 0
   box-shadow: $card-shadow
@@ -9,14 +9,14 @@
   .card-image
     flex: 1
     max-width: 400px
-    max-height: 300px
+    max-height: inherit
 
   .card-copy
     flex: 1
     max-width: 60ch
     max-height: auto
     overflow: auto
-    padding: 1.25rem
+    padding: 3rem 1.25rem
     margin: 0 auto
 
   @media screen and ( max-width: $tablet )
@@ -25,11 +25,11 @@
     .card-image
       flex: 0 1 auto
       max-height: 280px
-      max-width: 100%
+      max-width: inherit
   
   @media screen and ( min-width: $desktop )
 
     .card-image
       max-width: 420px
-      max-height: 260px
+      max-height: inherit
     
