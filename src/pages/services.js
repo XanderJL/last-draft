@@ -86,11 +86,12 @@ const ServicesPage = ({ data }) => {
           className="hero is-fullheight is-primary"
           fluid={heroImage}
         >
-          <div class="hero-body">
-            <div class="container">
-              <div class="card-hero">
-                <div class="card-body">
+          <div className="hero-body">
+            <div className="container">
+              <div className="card-hero">
+                <div className="card-body">
                   <PortableText
+                    className="content"
                     blocks={page._rawHeroCard}
                     serializers={{ types: { block: CardRenderer } }}
                   />
@@ -101,14 +102,16 @@ const ServicesPage = ({ data }) => {
         </BackgroundImage>
       ) : (
         <div className="hero is-fullheight is-primary">
-          <div class="hero-body">
-            <div class="container">
-              <div class="card-hero">
-                <div class="card-body">
-                  <PortableText
-                    blocks={page._rawHeroCard}
-                    serializers={{ types: { block: CardRenderer } }}
-                  />
+          <div className="hero-body">
+            <div className="container">
+              <div className="card-hero">
+                <div className="card-body">
+                  <div className="content">
+                    <PortableText
+                      blocks={page._rawHeroCard}
+                      serializers={{ types: { block: CardRenderer } }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
