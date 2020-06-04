@@ -116,9 +116,9 @@ const ServicesPage = ({ data }) => {
           {page.services.map(service => (
             <div key={service.id} className="service-card">
               {service.image ? (
-                <Img fluid={service.image.asset.fluid} className="card-image" />
+                <Img fluid={service.image.asset.fluid} alt={service.imageAlt ? service.imageAlt : "The author hasn't defined the image yet."} className="card-image" />
               ) : (
-                <Img fluid={placeholderImg} className="card-image" />
+                <Img fluid={placeholderImg} alt="Beer kegs" className="card-image" />
               )}
               <div className="content card-copy">
                 <PortableText
@@ -160,6 +160,14 @@ export const data = graphql`
       _rawHeroCard
       services {
         id
+        image {
+          asset {
+            fluid(maxWidth: 800) {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
+        imageAlt
         _rawBody
       }
     }
