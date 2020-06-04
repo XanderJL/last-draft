@@ -76,7 +76,7 @@ const ServicesPage = ({ data }) => {
     <Layout title={page.title}>
       {heroImage ? (
         <BackgroundImage
-          className="hero is-fullheight is-primary"
+          className="hero is-fullheight-with-navbar is-primary"
           fluid={heroImage}
         >
           <div className="hero-body">
@@ -94,7 +94,7 @@ const ServicesPage = ({ data }) => {
           </div>
         </BackgroundImage>
       ) : (
-        <div className="hero is-fullheight is-primary">
+        <div className="hero is-fullheight-with-navbar is-primary">
           <div className="hero-body">
             <div className="container">
               <div className="card-hero">
