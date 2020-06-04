@@ -65,10 +65,10 @@ const ServicesPage = ({ data }) => {
         dataset: process.env.GATSBY_SANITY_DATASET,
       }).image(source)
     return (
-        <img
-          src={urlFor(props.node.image.asset).maxWidth(400)}
-          alt={props.node.alt}
-        /
+      <img
+        src={urlFor(props.node.image.asset).maxWidth(400)}
+        alt={props.node.alt}
+      />
     )
   }
 
