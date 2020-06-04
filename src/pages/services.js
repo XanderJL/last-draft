@@ -65,17 +65,10 @@ const ServicesPage = ({ data }) => {
         dataset: process.env.GATSBY_SANITY_DATASET,
       }).image(source)
     return (
-      <a
-        role="button"
-        href="https://medium.com/lastdraft"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
         <img
           src={urlFor(props.node.image.asset).maxWidth(400)}
           alt={props.node.alt}
-        />
-      </a>
+        /
     )
   }
 
