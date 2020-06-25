@@ -3,6 +3,8 @@ import { graphql, Link } from "gatsby"
 import PortableText from "@sanity/block-content-to-react"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
+import urlBuilder from "@sanity/image-url"
+import Embed from "react-embed"
 
 const post = ({ data }) => {
   const {
@@ -14,9 +16,42 @@ const post = ({ data }) => {
     _rawBody,
   } = data.sanityPost
 
+  const urlFor = src =>
+    urlBuilder({
+      projectId: process.env.GATSBY_SANITY_ID,
+      dataset: process.env.GATSBY_SANITY_DATASET,
+    }).image(src)
+
+  const serializers = {
+    types: {
+      hr: ({ node }) => {
+        if (node.style === "elipses") {
+          return <hr className="elipses-hr" />
+        } else if (node.style === "solid") {
+          return <hr className="solid-hr" />
+        }
+      },
+      blockImage: ({ node }) => {
+        const { image, alt } = node
+        return <img className="image" src={urlFor(image)} alt={alt} />
+      },
+      embed: ({ node }) => {
+        const { url } = node
+        return <Embed url={url} />
+      },
+    },
+  }
+
+  const positionStyles = mainImage.hotspot
+    ? {
+        backgroundPositionX: `${mainImage.hotspot.x * 100}%`,
+        backgroundPositionY: `${mainImage.hotspot.y * 100}%`,
+      }
+    : {}
+
   return (
     <Layout title={title}>
-      <Hero fluid={mainImage.asset.fluid} />
+      <Hero fluid={mainImage.asset.fluid} styles={positionStyles} />
       <div className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
         <section className="section">
           <div className="container has-text-centered">
@@ -29,12 +64,12 @@ const post = ({ data }) => {
             >
               {author.name}
             </Link>
-            <p className="is-montserrat is-uppercase">{publishedAt}</p>
+            <p className="is-montserrat">{publishedAt}</p>
           </div>
         </section>
         <section className="section">
-          <div className="container content">
-            <PortableText blocks={_rawBody} />
+          <div className="container content is-montserrat">
+            <PortableText blocks={_rawBody} serializers={serializers} />
           </div>
         </section>
       </div>
@@ -61,12 +96,18 @@ export const data = graphql`
       }
       tags
       title
-      publishedAt(formatString: "DD/MM/YYYY")
+      publishedAt(formatString: "MMMM Do, YYYY")
       mainImage {
         asset {
           fluid(maxWidth: 1920) {
             ...GatsbySanityImageFluid
           }
+        }
+        hotspot {
+          width
+          height
+          x
+          y
         }
       }
       _rawBody
