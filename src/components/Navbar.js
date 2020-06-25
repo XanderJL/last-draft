@@ -75,6 +75,13 @@ export default function Navbar() {
               >
                 stories
               </a>
+              <Link
+                to="/the-last-draft"
+                className="navbar-item is-montserrat is-uppercase"
+                activeClassName="is-active"
+              >
+                the last draft
+              </Link>
               <a
                 href="/#contact"
                 className="navbar-item is-montserrat is-uppercase"
