@@ -1,10 +1,12 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import PortableText from "@sanity/block-content-to-react"
-import Layout from "../components/Layout"
-import Hero from "../components/Hero"
 import urlBuilder from "@sanity/image-url"
 import Embed from "react-embed"
+import Layout from "../components/Layout"
+import Hero from "../components/Hero"
+import AuthorBio from "../components/AuthorBio"
+import Tags from "../components/Tags"
 
 const post = ({ data }) => {
   const {
@@ -72,6 +74,19 @@ const post = ({ data }) => {
             <PortableText blocks={_rawBody} serializers={serializers} />
           </div>
         </section>
+        {tags.length ? (
+          <section className="section">
+            <div className="container">
+              <Tags tags={tags} />
+            </div>
+          </section>
+        ) : null}
+        <hr className="solid-hr" />
+        <section className="section">
+          <div className="container">
+            <AuthorBio author={author} />
+          </div>
+        </section>
       </div>
     </Layout>
   )
@@ -88,7 +103,7 @@ export const data = graphql`
         _rawBio
         image {
           asset {
-            fixed(width: 150) {
+            fixed(width: 150, height: 150) {
               ...GatsbySanityImageFixed
             }
           }

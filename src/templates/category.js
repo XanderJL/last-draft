@@ -20,25 +20,22 @@ const Category = ({ data, pathContext }) => {
   return (
     <Layout title={pathContext.title}>
       <Hero />
-      {data.posts.edges.map(({ node: post }) => {
-        const { id, title, mainImage, _rawBody, category, slug } = post
-        const image = mainImage.asset.fluid
-        return (
-          <section key={id} className="section">
-            <div className="container">
-              <PostCard title={title} fluid={image}>
-                <p>{toPlainText(_rawBody).slice(0, 255) + "..."}</p>
-                <Link
-                  to={`/the-last-draft/${category.slug.current}/${slug.current}`}
-                  className="button"
-                >
-                  Read More &rsaquo;
-                </Link>
-              </PostCard>
-            </div>
-          </section>
-        )
-      })}
+      <section className="section">
+        <div className="container">
+          <div className="wrapper-post">
+            {data.posts.edges.map(({ node: post }) => {
+              const { id, title, mainImage, _rawBody, category, slug } = post
+              const image = mainImage.asset.fluid
+              const link = `/the-last-draft/${category.slug.current}/${slug.current}`
+              return (
+                <PostCard key={id} title={title} image={image} link={link}>
+                  <p>{toPlainText(_rawBody).slice(0, 159) + "..."}</p>
+                </PostCard>
+              )
+            })}
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }
@@ -61,7 +58,7 @@ export const data = graphql`
           _rawBody
           mainImage {
             asset {
-              fluid(maxWidth: 800) {
+              fluid(maxWidth: 800, maxHeight: 600) {
                 ...GatsbySanityImageFluid
               }
             }
