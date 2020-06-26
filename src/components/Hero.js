@@ -9,13 +9,12 @@ const Hero = ({ children, fluid, styles }) => {
         <div className="container">{children}</div>
       </div>
     </BackgroundImage>
-  ) : (
-    <div className="hero is-primary is-large">
-      <div className="hero-body">
-        <div className="container">{children}</div>
-      </div>
-    </div>
-  )
+  ) : // <div className="hero is-primary is-large">
+  //   <div className="hero-body">
+  //     <div className="container">{children}</div>
+  //   </div>
+  // </div>
+  null
 }
 
 Hero.propTypes = {
