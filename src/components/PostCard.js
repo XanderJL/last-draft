@@ -3,10 +3,9 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
-const PostCard = props => {
-  const { title, image, children, link } = props
+const PostCard = ({ title, image, children, link, cardStyle }) => {
   return (
-    <div className="card">
+    <div className="card" style={cardStyle ? cardStyle : null}>
       <div className="card-image">
         {image ? (
           <Link to={link}>
@@ -31,6 +30,7 @@ PostCard.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.object.isRequired,
   link: PropTypes.string.isRequired,
+  cardStyle: PropTypes.object,
 }
 
 export default PostCard
