@@ -31,6 +31,16 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      authors: allSanityAuthor(filter: { slug: { current: { ne: null } } }) {
+        edges {
+          node {
+            name
+            slug {
+              current
+            }
+          }
+        }
+      }
     }
   `)
 
@@ -40,6 +50,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const posts = res.data.posts.edges
   const categories = res.data.categories.edges
+  const authors = res.data.authors.edges
 
   posts.forEach(edge => {
     const path = edge.node.category
@@ -60,6 +71,16 @@ exports.createPages = async ({ graphql, actions }) => {
       path,
       component: require.resolve("./src/templates/category.js"),
       context: { slug: edge.node.slug.current, title: edge.node.title },
+    })
+  })
+
+  authors.forEach(edge => {
+    const path = `/the-last-draft/authors/${edge.node.slug.current}`
+
+    createPage({
+      path,
+      component: require.resolve("./src/templates/author.js"),
+      context: { slug: edge.node.slug.current, title: edge.node.name },
     })
   })
 }
