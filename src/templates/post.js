@@ -18,6 +18,8 @@ const post = ({ data }) => {
     _rawBody,
   } = data.sanityPost
 
+  const { _rawPostFooter } = data.sanityBlog
+
   const urlFor = src =>
     urlBuilder({
       projectId: process.env.GATSBY_SANITY_ID,
@@ -72,6 +74,7 @@ const post = ({ data }) => {
         <section className="section">
           <div className="container content is-montserrat">
             <PortableText blocks={_rawBody} serializers={serializers} />
+            <PortableText blocks={_rawPostFooter} serializers={serializers} />
           </div>
         </section>
         {tags.length ? (
@@ -92,6 +95,9 @@ const post = ({ data }) => {
 
 export const data = graphql`
   query($slug: String!) {
+    sanityBlog {
+      _rawPostFooter
+    }
     sanityPost(slug: { current: { eq: $slug } }) {
       author {
         slug {
