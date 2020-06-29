@@ -3,20 +3,9 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
-import PortableText from "@sanity/block-content-to-react"
+import toPlainText from "../hooks/toPlainText"
 
 const Category = ({ data, pathContext }) => {
-  function toPlainText(blocks = []) {
-    return blocks
-      .map(block => {
-        if (block._type !== "block" || !block.children) {
-          return ""
-        }
-        return block.children.map(child => child.text).join("")
-      })
-      .join("\n\n")
-  }
-
   return (
     <Layout title={pathContext.title}>
       <Hero />
@@ -28,7 +17,13 @@ const Category = ({ data, pathContext }) => {
               const image = mainImage.asset.fluid
               const link = `/the-last-draft/${category.slug.current}/${slug.current}`
               return (
-                <PostCard key={id} title={title} image={image} link={link}>
+                <PostCard
+                  key={id}
+                  title={title}
+                  image={image}
+                  link={link}
+                  cardStyle={{ maxWidth: "420px" }}
+                >
                   <p>{toPlainText(_rawBody).slice(0, 159) + "..."}</p>
                 </PostCard>
               )
