@@ -5,9 +5,13 @@ import AuthorBio from "../../components/AuthorBio"
 const Authors = ({ data }) => {
   return (
     <Layout title="Authors">
-      <div className="container">
+      <div className="container authors-section" style={{ maxWidth: "70ch" }}>
         {data.authors.edges.map(({ node: author }) => {
-          return <AuthorBio author={author} />
+          return (
+            <section className="section">
+              <AuthorBio author={author} />
+            </section>
+          )
         })}
       </div>
     </Layout>
