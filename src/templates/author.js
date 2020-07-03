@@ -19,6 +19,7 @@ const Author = ({ data, pathContext }) => {
             const {
               id,
               author,
+              _createdAt,
               mainImage,
               title,
               _rawBody,
@@ -42,10 +43,11 @@ const Author = ({ data, pathContext }) => {
                     </Link>
                   </div>
                   <div className="card-header-title">
-                    <h3 className="is-montserrat">
+                    <h3 className="is-montserrat is-size-5">
                       <Link to={authorLink}>{author.name}</Link> in{" "}
                       <Link to={categoryLink}>{category.title} </Link>{" "}
                     </h3>
+                    <h3 className="is-montserrat has-text-grey">{_createdAt}</h3>
                   </div>
                 </div>
                 <div className="card-image">
@@ -60,10 +62,7 @@ const Author = ({ data, pathContext }) => {
                     </h2>
                     <p>{toPlainText(_rawBody).slice(0, 119) + "..."}</p>
                   </div>
-                  <Link
-                    to={postLink}
-                    className="button is-montserrat"
-                  >
+                  <Link to={postLink} className="button is-montserrat">
                     Read &rsaquo;
                   </Link>
                 </div>
