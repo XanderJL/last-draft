@@ -85,9 +85,11 @@ const post = ({ data }) => {
           </section>
         ) : null}
         <hr className="solid-hr" />
-        <div className="container">
-          <AuthorBio author={author} />
-        </div>
+        <section className="section">
+          <div className="container">
+            <AuthorBio author={author} />
+          </div>
+        </section>
       </div>
     </Layout>
   )

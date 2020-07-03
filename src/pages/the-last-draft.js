@@ -63,7 +63,7 @@ const TheLastDraft = ({ data }) => {
                     )
                   })}
               </div>
-              <Link to={link} className="button is-primary has-text-white">
+              <Link to={link} className="button is-size-5">
                 More Articles &rsaquo;
               </Link>
             </div>

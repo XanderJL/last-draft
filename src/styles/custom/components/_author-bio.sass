@@ -1,0 +1,25 @@
+.author-bio
+  display: grid
+  grid-template-columns: 1fr 2fr
+  grid-template-rows: repeat(2, 1fr)
+  
+  .avatar-link
+    margin: 0
+    grid-column: 1
+    grid-row: 1 / span 2
+
+  .content
+    grid-column: 2
+    grid-row: 1 / span 2
+
+  @media screen and ( max-width: $tablet )
+    .avatar-link
+      justify-self: start
+      align-self: start
+      grid-column: 1
+      grid-row: 1
+
+    .content
+      margin-top: 2rem
+      grid-column: 1 / span 2
+      grid-row: 2
