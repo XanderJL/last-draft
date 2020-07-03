@@ -63,7 +63,7 @@ const post = ({ data }) => {
               {title}
             </h1>
             <Link
-              to={"/the-last-draft/" + author.slug.current}
+              to={"/the-last-draft/authors/" + author.slug.current}
               className="is-montserrat is-uppercase"
             >
               {author.name}
