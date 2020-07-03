@@ -5,9 +5,9 @@ import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
 import toPlainText from "../hooks/toPlainText"
 
-const Category = ({ data, pathContext }) => {
+const Category = ({ data, pageContext }) => {
   return (
-    <Layout title={pathContext.title}>
+    <Layout title={pageContext.title}>
       <Hero />
       <section className="section">
         <div className="container">

@@ -5,16 +5,18 @@ import Layout from "../components/Layout"
 import toPlainText from "../hooks/toPlainText"
 import AuthorBio from "../components/AuthorBio"
 
-const Author = ({ data, pathContext }) => {
+const Author = ({ data, pageContext }) => {
   const { author, posts } = data
   return (
-    <Layout title={pathContext.title}>
+    <Layout title={pageContext.title}>
       <div className="container" style={{ maxWidth: "70ch" }}>
         <section className="section">
           <AuthorBio author={author} />
         </section>
         <section className="section author-posts">
-          <h3 className="title is-montserrat is-uppercase">Latest Stories</h3>
+          <h3 className="title is-montserrat is-uppercase is-size-5-mobile">
+            Latest Stories
+          </h3>
           {posts.edges.map(({ node: post }) => {
             const {
               id,
@@ -47,7 +49,9 @@ const Author = ({ data, pathContext }) => {
                       <Link to={authorLink}>{author.name}</Link> in{" "}
                       <Link to={categoryLink}>{category.title} </Link>{" "}
                     </h3>
-                    <h3 className="is-montserrat has-text-grey">{_createdAt}</h3>
+                    <h3 className="is-montserrat has-text-grey">
+                      {_createdAt}
+                    </h3>
                   </div>
                 </div>
                 <div className="card-image">
