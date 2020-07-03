@@ -19,14 +19,13 @@ const AuthorBio = ({ author }) => {
         />
       </Link>
       <div className="content">
-        {/* <h3 className="is-montserrat is-size-6">Written By</h3> */}
         <Link
           to={`/the-last-draft/authors/${slug.current}`}
-          className="is-montserrat is-size-5"
+          className="title is-montserrat is-uppercase is-size-5-mobile"
         >
           {name}
         </Link>
-        <PortableText blocks={_rawBio} />
+        <PortableText className="content" blocks={_rawBio} />
       </div>
     </div>
   )
