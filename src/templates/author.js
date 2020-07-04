@@ -4,6 +4,7 @@ import Img from "gatsby-image"
 import Layout from "../components/Layout"
 import toPlainText from "../hooks/toPlainText"
 import AuthorBio from "../components/AuthorBio"
+import Pagination from "../components/Pagination"
 
 const Author = ({ data, pageContext }) => {
   const { author, posts } = data
@@ -73,6 +74,7 @@ const Author = ({ data, pageContext }) => {
               </div>
             )
           })}
+          <Pagination pageContext={pageContext} />
         </section>
       </div>
     </Layout>

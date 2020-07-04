@@ -1,3 +1,4 @@
+const { paginate } = require("gatsby-awesome-pagination")
 const path = require("path")
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -16,19 +17,20 @@ exports.createPages = async ({ graphql, actions }) => {
                 current
               }
             }
+            author {
+              slug {
+                current
+              }
+            }
           }
         }
       }
-      categories: allSanityCategory(
-        filter: { slug: { current: { ne: null } } }
-      ) {
-        edges {
-          node {
-            slug {
-              current
-            }
-            title
+      sanityBlog {
+        categories {
+          slug {
+            current
           }
+          title
         }
       }
       authors: allSanityAuthor(filter: { slug: { current: { ne: null } } }) {
@@ -49,7 +51,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const posts = res.data.posts.edges
-  const categories = res.data.categories.edges
+  const categories = res.data.sanityBlog.categories
   const authors = res.data.authors.edges
 
   posts.forEach(edge => {
@@ -64,21 +66,35 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  categories.forEach(edge => {
-    const path = `/the-last-draft/${edge.node.slug.current}`
+  categories.forEach(category => {
+    const path = `/the-last-draft/${category.slug.current}`
 
-    createPage({
-      path,
+    const categoryPosts = posts.filter(post => {
+      return post.node.category.slug.current === category.slug.current
+    })
+
+    paginate({
+      createPage,
+      items: categoryPosts,
+      itemsPerPage: 10,
+      pathPrefix: path,
       component: require.resolve("./src/templates/category.js"),
-      context: { slug: edge.node.slug.current, title: edge.node.title },
+      context: { slug: category.slug.current, title: category.title },
     })
   })
 
   authors.forEach(edge => {
     const path = `/the-last-draft/authors/${edge.node.slug.current}`
 
-    createPage({
-      path,
+    const authorPosts = posts.filter(post => {
+      return post.node.author.slug.current === edge.node.slug.current
+    })
+
+    paginate({
+      createPage,
+      items: authorPosts,
+      itemsPerPage: 10,
+      pathPrefix: path,
       component: require.resolve("./src/templates/author.js"),
       context: { slug: edge.node.slug.current, title: edge.node.name },
     })

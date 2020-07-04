@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
 import toPlainText from "../hooks/toPlainText"
+import Pagination from "../components/Pagination"
 
 const Category = ({ data, pageContext }) => {
   return (
@@ -29,6 +30,7 @@ const Category = ({ data, pageContext }) => {
               )
             })}
           </div>
+          <Pagination pageContext={pageContext} />
         </div>
       </section>
     </Layout>
@@ -36,9 +38,11 @@ const Category = ({ data, pageContext }) => {
 }
 
 export const data = graphql`
-  query($slug: String!) {
+  query($slug: String!, $skip: Int!, $limit: Int!) {
     posts: allSanityPost(
       filter: { category: { slug: { current: { eq: $slug } } } }
+      skip: $skip
+      limit: $limit
     ) {
       edges {
         node {

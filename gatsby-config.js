@@ -11,6 +11,7 @@ module.exports = {
     `gatsby-plugin-netlify`,
     `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-awesome-pagination`,
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-sanity`,
