@@ -2,9 +2,6 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 import PostCard from "../components/PostCard"
 import toPlainText from "../hooks/toPlainText"
 
@@ -21,12 +18,26 @@ const TheLastDraft = ({ data }) => {
   return (
     <Layout title={title}>
       <Hero fluid={heroImage.asset.fluid} styles={positionStyles} />
+      <div className="tabs">
+        <div className="container">
+          <ul>
+            {categories.map(category => {
+              const { id, slug, title } = category
+              return (
+                <li key={id}>
+                  <Link to={`/the-last-draft/#${id}`}>{title}</Link>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </div>
       {categories.map(category => {
         const { id, slug, title } = category
         const link = `/the-last-draft/${slug.current}`
 
         return (
-          <section key={id} className="section">
+          <section key={id} id={id} className="section">
             <div className="container">
               <Link to={"/the-last-draft/" + slug.current}>
                 <h2 className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
