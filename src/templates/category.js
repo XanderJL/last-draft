@@ -5,15 +5,29 @@ import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
 import toPlainText from "../hooks/toPlainText"
 import Pagination from "../components/Pagination"
+import useHotspot from "../hooks/useHotspot"
 
 const Category = ({ data, pageContext }) => {
+  const { blog, category, posts } = data
+
   return (
     <Layout title={pageContext.title}>
-      <Hero />
+      <Hero
+        fluid={
+          category.heroImage && category.heroImage.asset
+            ? category.heroImage.asset.fluid
+            : blog.heroImage.asset.fluid
+        }
+        style={useHotspot(
+          category.heroImage
+            ? category.heroImage.hotspot
+            : blog.heroImage.hotspot
+        )}
+      />
       <section className="section">
         <div className="container">
           <div className="wrapper-post">
-            {data.posts.edges.map(({ node: post }) => {
+            {posts.edges.map(({ node: post }) => {
               const { id, title, mainImage, _rawBody, category, slug } = post
               const image = mainImage.asset.fluid
               const link = `/the-last-draft/${category.slug.current}/${slug.current}`
@@ -39,6 +53,32 @@ const Category = ({ data, pageContext }) => {
 
 export const data = graphql`
   query($slug: String!, $skip: Int!, $limit: Int!) {
+    blog: sanityBlog {
+      heroImage {
+        asset {
+          fluid(maxWidth: 1920) {
+            ...GatsbySanityImageFluid
+          }
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+    }
+    category: sanityCategory(slug: { current: { eq: $slug } }) {
+      heroImage {
+        asset {
+          fluid(maxWidth: 1920) {
+            ...GatsbySanityImageFluid
+          }
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+    }
     posts: allSanityPost(
       filter: { category: { slug: { current: { eq: $slug } } } }
       skip: $skip

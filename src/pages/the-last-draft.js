@@ -4,20 +4,18 @@ import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
 import toPlainText from "../hooks/toPlainText"
+import useHotspot from "../hooks/useHotspot"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts } = data
   const { title, categories, heroImage } = blog
-  const positionStyles = heroImage.hotspot
-    ? {
-        backgroundPositionX: `${heroImage.hotspot.x * 100}%`,
-        backgroundPositionY: `${heroImage.hotspot.y * 100}%`,
-      }
-    : {}
 
   return (
     <Layout title={title}>
-      <Hero fluid={heroImage.asset.fluid} styles={positionStyles} />
+      <Hero
+        fluid={heroImage.asset.fluid}
+        styles={useHotspot(heroImage.hotspot)}
+      />
       <div className="tabs">
         <div className="container">
           <ul>
