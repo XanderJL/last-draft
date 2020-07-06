@@ -67,20 +67,12 @@ export default function Navbar() {
               >
                 team
               </Link>
-              <a
-                href="https://medium.com/lastdraft"
-                className="navbar-item is-montserrat is-uppercase"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                stories
-              </a>
               <Link
                 to="/the-last-draft"
                 className="navbar-item is-montserrat is-uppercase"
                 activeClassName="is-active"
               >
-                the last draft
+                stories
               </Link>
               <a
                 href="/#contact"
