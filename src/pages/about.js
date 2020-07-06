@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 import PortableText from "@sanity/block-content-to-react"
@@ -181,15 +181,14 @@ export default function About() {
                     },
                   }}
                 />
-                <a
+                <Link
                   role="button"
-                  href="https://medium.com/lastdraft"
-                  target="_blank"
+                  to="/the-last-draft"
                   rel="noopener noreferrer"
                   className="button is-solid is-montserrat is-uppercase"
                 >
                   &nbsp; stories &rang;
-                </a>
+                </Link>
               </div>
               <Img className="image" fluid={pubImage} alt={pubAlt} />
             </div>
