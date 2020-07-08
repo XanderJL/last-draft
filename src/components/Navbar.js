@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 import Logo from "../images/icons/logo.png"
+import Search from "../components/Search"
+
 export default function Navbar() {
   function burgerMenu() {
     const burger = document.querySelector(".burger")
@@ -82,6 +84,9 @@ export default function Navbar() {
                   contact
                 </div>
               </a>
+              <div className="navbar-item">
+                <Search />
+              </div>
             </div>
           </div>
         </div>

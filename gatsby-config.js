@@ -1,4 +1,37 @@
-require("dotenv").config()
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const algoliaQuery = `{
+  allSanityPost {
+    edges {
+      node {
+        id
+        _rawBody
+        author {
+          name
+        }
+        category {
+          title
+          slug {
+            current
+          }
+        }
+        title
+        slug {
+          current
+        }
+      }
+    }
+  }
+}`
+
+const queries = [
+  {
+    query: algoliaQuery,
+    transformer: ({ data }) => data.allSanityPost.edges.map(({ node }) => node),
+  },
+]
 
 module.exports = {
   siteMetadata: {
@@ -13,6 +46,18 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-awesome-pagination`,
     `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        indexName: process.env.ALGOLIA_INDEX_NAME,
+        queries,
+        chunkSize: 1000,
+        enablePartialUpdates: false,
+        matchFields: ["author", "title", "category"],
+      },
+    },
     {
       resolve: `gatsby-source-sanity`,
       options: {
