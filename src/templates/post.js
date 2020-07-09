@@ -16,6 +16,7 @@ const post = ({ data }) => {
     publishedAt,
     tags,
     mainImage,
+    socialImage,
     _rawBody,
   } = data.sanityPost
 
@@ -53,7 +54,7 @@ const post = ({ data }) => {
         backgroundPositionY: `${mainImage.hotspot.y * 100}%`,
       }
     : {}
-  const image = mainImage ? mainImage.asset.fluid : null
+  const image = socialImage ? socialImage.asset.fixed : null
 
   return (
     <Layout
@@ -135,6 +136,15 @@ export const data = graphql`
           height
           x
           y
+        }
+      }
+      socialImage: mainImage {
+        asset {
+          fixed(width: 1200) {
+            src
+            width
+            height
+          }
         }
       }
       _rawBody
