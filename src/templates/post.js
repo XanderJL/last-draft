@@ -7,6 +7,7 @@ import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import AuthorBio from "../components/AuthorBio"
 import Tags from "../components/Tags"
+import toPlainText from "../hooks/toPlainText"
 
 const post = ({ data }) => {
   const {
@@ -54,7 +55,11 @@ const post = ({ data }) => {
     : {}
 
   return (
-    <Layout title={title}>
+    <Layout
+      title={title}
+      description={toPlainText(author._rawBio).slice(0, 159)}
+      image={mainImage.asset.fluid}
+    >
       <Hero fluid={mainImage.asset.fluid} styles={positionStyles} />
       <div className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
         <section className="section">
