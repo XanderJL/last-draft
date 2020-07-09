@@ -53,12 +53,13 @@ const post = ({ data }) => {
         backgroundPositionY: `${mainImage.hotspot.y * 100}%`,
       }
     : {}
+  const image = mainImage ? mainImage.asset.fluid : null
 
   return (
     <Layout
       title={title}
       description={toPlainText(author._rawBio).slice(0, 159)}
-      image={mainImage.asset.fluid}
+      image={image}
     >
       <Hero fluid={mainImage.asset.fluid} styles={positionStyles} />
       <div className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
