@@ -1,11 +1,6 @@
 import React, { useState } from "react"
 import algoliasearch from "algoliasearch/lite"
-import {
-  InstantSearch,
-  SearchBox,
-  Hits,
-  CurrentRefinements,
-} from "react-instantsearch-dom"
+import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom"
 import SearchPreview from "../components/SearchPreview"
 import "instantsearch.css/themes/reset.css"
 import { FiSearch } from "react-icons/fi"
@@ -17,7 +12,6 @@ const searchClient = algoliasearch(
 
 const Search = () => {
   const [hits, setHits] = useState(false)
-  const [searchBox, setSearchBox] = useState(false)
 
   return (
     <InstantSearch
