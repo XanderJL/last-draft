@@ -114,9 +114,9 @@ SEO.propTypes = {
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
   image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
+    src: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
   }),
 }
 
