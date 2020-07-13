@@ -45,11 +45,12 @@ const queries = [
       }
 
       return data.allSanityPost.edges.map(({ node: post }) => {
-        const { id, slug, title, author, _rawBody } = post
+        const { id, slug, category, title, author, _rawBody } = post
         const body = toPlainText(_rawBody)
         const chunk = {
           id,
           slug,
+          category,
           title,
           author: author.name,
           body,
