@@ -7,7 +7,6 @@ import imageUrlBuilder from "@sanity/image-url"
 
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
-import InstagramFeed from "../components/InstagramFeed"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -195,7 +194,6 @@ export default function About() {
           </div>
         </div>
       </section>
-      <InstagramFeed />
     </Layout>
   )
 }
