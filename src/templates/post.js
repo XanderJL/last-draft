@@ -34,16 +34,27 @@ const post = ({ data }) => {
         if (node.style === "elipses") {
           return <hr className="elipses-hr" />
         } else if (node.style === "solid") {
-          return <hr className="solid-hr" />
+          return <hr className="solid-hr" style={{ margin: "5rem auto" }} />
         }
       },
       blockImage: ({ node }) => {
         const { image, alt } = node
-        return <img className="image" src={urlFor(image)} alt={alt} />
+        return (
+          <img
+            className="image"
+            src={urlFor(image)}
+            alt={alt}
+            style={{ margin: "1.25rem 0" }}
+          />
+        )
       },
       embed: ({ node }) => {
         const { url } = node
-        return <Embed url={url} />
+        return (
+          <div style={{ margin: "1.25rem 0" }}>
+            <Embed url={url} />
+          </div>
+        )
       },
     },
   }
@@ -53,10 +64,9 @@ const post = ({ data }) => {
         backgroundPositionX: `${mainImage.hotspot.x * 100}%`,
         backgroundPositionY: `${mainImage.hotspot.y * 100}%`,
       }
-    : {}
+    : null
 
   const image = socialImage ? socialImage.asset.fixed : null
-  console.log("Social Image Object: " + JSON.stringify(image, null, 2))
 
   return (
     <Layout
