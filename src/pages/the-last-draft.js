@@ -117,7 +117,7 @@ const TheLastDraft = ({ data }) => {
               <div className="wrapper-post" style={{ padding: "2rem 0" }}>
                 {posts.edges
                   .filter(({ node: post }) =>
-                    post.category && post.category.slug.current === slug.current
+                    post.category.slug.current === slug.current
                   )
                   .map(({ node: post }) => {
                     const {

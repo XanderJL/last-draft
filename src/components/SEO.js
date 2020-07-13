@@ -1,10 +1,3 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
@@ -28,6 +21,7 @@ function SEO({ description, lang, meta, title, image: metaImage }) {
 
   const metaDescription = description || site.siteMetadata.description
   const image = metaImage && metaImage.src ? `${metaImage.src}` : null
+  console.log("Image source: " + image)
 
   return (
     <Helmet
@@ -114,9 +108,9 @@ SEO.propTypes = {
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
   image: PropTypes.shape({
-    src: PropTypes.string,
-    height: PropTypes.number,
-    width: PropTypes.number,
+    src: PropTypes.string.isRequired,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
   }),
 }
 

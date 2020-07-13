@@ -70,9 +70,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const path = `/the-last-draft/${category.slug.current}`
 
     const categoryPosts = posts.filter(post => {
-      return post.node.category
-        ? post.node.category.slug.current === category.slug.current
-        : null
+      return post.node.category.slug.current === category.slug.current
     })
 
     paginate({

@@ -54,7 +54,9 @@ const post = ({ data }) => {
         backgroundPositionY: `${mainImage.hotspot.y * 100}%`,
       }
     : {}
+
   const image = socialImage ? socialImage.asset.fixed : null
+  console.log("Social Image Object: " + JSON.stringify(image, null, 2))
 
   return (
     <Layout

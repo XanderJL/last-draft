@@ -55,7 +55,6 @@ module.exports = {
         queries,
         chunkSize: 1000,
         enablePartialUpdates: false,
-        matchFields: ["author", "title", "category"],
       },
     },
     {
