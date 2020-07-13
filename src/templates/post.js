@@ -92,7 +92,7 @@ const post = ({ data }) => {
         </section>
         <section className="section">
           <div className="container content is-montserrat">
-            <PortableText blocks={_rawBody} serializers={serializers} />
+            {/* <PortableText blocks={_rawBody} serializers={serializers} /> */}
             <PortableText blocks={_rawPostFooter} serializers={serializers} />
           </div>
         </section>
