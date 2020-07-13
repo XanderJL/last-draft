@@ -29,7 +29,34 @@ const algoliaQuery = `{
 const queries = [
   {
     query: algoliaQuery,
-    transformer: ({ data }) => data.allSanityPost.edges.map(({ node }) => node),
+    transformer: ({ data }) => {
+      function toPlainText(blocks = []) {
+        return (
+          blocks
+            // loop through each block
+            .map(block => {
+              if (block._type !== "block" || !block.children) {
+                return ""
+              }
+              return block.children.map(child => child.text).join("")
+            })
+            .join("\n\n")
+        )
+      }
+
+      return data.allSanityPost.edges.map(({ node: post }) => {
+        const { id, slug, title, author, _rawBody } = post
+        const body = toPlainText(_rawBody)
+        const chunk = {
+          id,
+          slug,
+          title,
+          author: author.name,
+          body,
+        }
+        return chunk
+      })
+    },
   },
 ]
 
@@ -64,12 +91,6 @@ module.exports = {
         projectId: `khue65vd`,
         dataset: `production`,
         watchMode: false,
-      },
-    },
-    {
-      resolve: `gatsby-source-instagram`,
-      options: {
-        username: `7754513853`,
       },
     },
     {
