@@ -1,6 +1,21 @@
 const { paginate } = require("gatsby-awesome-pagination")
 const path = require("path")
 
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /@firebase/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -99,19 +114,4 @@ exports.createPages = async ({ graphql, actions }) => {
       context: { slug: edge.node.slug.current, title: edge.node.name },
     })
   })
-}
-
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === "build-html") {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /bad-module/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
-  }
 }

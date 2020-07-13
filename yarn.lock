@@ -7459,7 +7459,7 @@ gatsby-cli@^1.1.58:
     yargs "^11.1.0"
     yurnalist "^0.2.1"
 
-gatsby-cli@^2.12.58, gatsby-cli@^2.12.60:
+gatsby-cli@^2.12.60:
   version "2.12.60"
   resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.60.tgz#2e958fa97d778fafa327fce5e6c351f99f7c2cdd"
   integrity sha512-hc1pGn6m4Itc+HwIi4+s/esCInZzZit61guatNKzIJez0BTSDFv2EKtTUMuK5O64H/ofX0xfoHeYukOMA0MeIw==
