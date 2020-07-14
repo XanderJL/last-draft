@@ -40,12 +40,15 @@ const post = ({ data }) => {
       blockImage: ({ node }) => {
         const { image, alt } = node
         return (
-          <img
-            className="image"
-            src={urlFor(image)}
-            alt={alt}
-            style={{ margin: "1.25rem auto" }}
-          />
+          <div style={{ marginBottom: "2rem" }}>
+            <img
+              className="image"
+              src={urlFor(image)}
+              alt={alt}
+              style={{ margin: "1.25rem auto" }}
+            />
+            <span className=" has-text-grey is-italic">{alt}</span>
+          </div>
         )
       },
       embed: ({ node }) => {

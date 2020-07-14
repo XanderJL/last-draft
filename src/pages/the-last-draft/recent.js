@@ -20,7 +20,7 @@ const recent = ({ data, pageContext }) => {
       <BlogTabs />
       <section className="section">
         <div className="container">
-          <h1 className="title is-montserrat has-text-black is-uppercase">
+          <h1 className="title is-size-2-desktop is-size-4-mobile is-montserrat has-text-black is-uppercase">
             recent stories
           </h1>
           <hr />
