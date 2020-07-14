@@ -9,12 +9,17 @@ const PostCard = ({ title, image, children, link, cardStyle }) => {
       <div className="card-image">
         {image ? (
           <Link to={link}>
-            <Img className="post-image" fluid={image} />
+            <Img
+              className="post-image"
+              fluid={image}
+              imgStyle={{ maxWidth: "420px", maxHeight: "315px" }}
+              style={{ maxWidth: "420px", maxHeight: "315px" }}
+            />
           </Link>
         ) : null}
       </div>
       <div className="card-content">
-        <h2 className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
+        <h2 className="title is-size-4 is-montserrat is-uppercase has-text-black">
           {title}
         </h2>
         <div className="content">{children}</div>

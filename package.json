@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Alex Low <alexanderjameslow@gmail.com>",
   "dependencies": {
+    "@loadable/component": "^5.13.1",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/image-url": "^0.140.19",
     "algoliasearch": "^4.3.0",

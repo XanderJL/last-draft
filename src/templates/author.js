@@ -38,11 +38,13 @@ const Author = ({ data, pageContext }) => {
                 <div className="card-header">
                   <div className="card-header-icon">
                     <Link to={authorLink} className="">
-                      <Img
-                        className="avatar"
-                        fixed={author.image.asset.fixed}
-                        imgStyle={{ width: "100%", height: "auto" }}
-                      />
+                      {author.image ? (
+                        <Img
+                          className="avatar"
+                          fixed={author.image.asset.fixed}
+                          imgStyle={{ width: "100%", height: "auto" }}
+                        />
+                      ) : null}
                     </Link>
                   </div>
                   <div className="card-header-title">

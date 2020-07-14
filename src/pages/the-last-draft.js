@@ -3,8 +3,9 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
+import BlogTabs from "../components/BlogTabs"
 import toPlainText from "../hooks/toPlainText"
-import useHotspot from "../hooks/useHotspot"
+import imageHotspot from "../hooks/imageHotspot"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts } = data
@@ -14,39 +15,9 @@ const TheLastDraft = ({ data }) => {
     <Layout title={title}>
       <Hero
         fluid={heroImage.asset.fluid}
-        styles={useHotspot(heroImage.hotspot)}
+        styles={imageHotspot(heroImage.hotspot)}
       />
-      <div className="tabs">
-        <div className="container">
-          <ul>
-            <Link
-              to={`/the-last-draft/#featured`}
-              className="is-montserrat is-uppercase"
-            >
-              featured
-            </Link>
-            <Link
-              to={`/the-last-draft/#recent`}
-              className="is-montserrat is-uppercase"
-            >
-              recent
-            </Link>
-            {categories.map(category => {
-              const { id, slug, title } = category
-              return (
-                <li key={id}>
-                  <Link
-                    to={`/the-last-draft/#${slug.current}`}
-                    className="is-montserrat is-uppercase"
-                  >
-                    {title}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </div>
+      <BlogTabs />
       <section id="featured" className="section">
         <div className="container">
           <h2 className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
@@ -116,8 +87,9 @@ const TheLastDraft = ({ data }) => {
               </Link>
               <div className="wrapper-post" style={{ padding: "2rem 0" }}>
                 {posts.edges
-                  .filter(({ node: post }) =>
-                    post.category.slug.current === slug.current
+                  .filter(
+                    ({ node: post }) =>
+                      post.category.slug.current === slug.current
                   )
                   .map(({ node: post }) => {
                     const {

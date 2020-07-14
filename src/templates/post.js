@@ -44,7 +44,7 @@ const post = ({ data }) => {
             className="image"
             src={urlFor(image)}
             alt={alt}
-            style={{ margin: "1.25rem 0" }}
+            style={{ margin: "1.25rem auto" }}
           />
         )
       },

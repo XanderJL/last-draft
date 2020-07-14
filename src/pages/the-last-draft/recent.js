@@ -1,41 +1,29 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/Layout"
-import Hero from "../components/Hero"
-import PostCard from "../components/PostCard"
-import BlogTabs from "../components/BlogTabs"
-import toPlainText from "../hooks/toPlainText"
-import Pagination from "../components/Pagination"
-import imageHotspot from "../hooks/imageHotspot"
+import Layout from "../../components/Layout"
+import Hero from "../../components/Hero"
+import PostCard from "../../components/PostCard"
+import BlogTabs from "../../components/BlogTabs"
+import Pagination from "../../components/Pagination"
+import toPlainText from "../../hooks/toPlainText"
+import imageHotspot from "../../hooks/imageHotspot"
 
-const Category = ({ data, pageContext }) => {
-  const { blog, category, posts } = data
+const recent = ({ data, pageContext }) => {
+  const { blog, posts } = data
 
   return (
-    <Layout title={pageContext.title}>
+    <Layout title="Recent Stories">
       <Hero
-        fluid={
-          category.heroImage && category.heroImage.asset
-            ? category.heroImage.asset.fluid
-            : blog.heroImage.asset.fluid
-        }
-        style={imageHotspot(
-          category.heroImage
-            ? category.heroImage.hotspot
-            : blog.heroImage.hotspot
-        )}
+        fluid={blog.heroImage.asset.fluid}
+        style={imageHotspot(blog.heroImage.hotspot)}
       />
       <BlogTabs />
       <section className="section">
         <div className="container">
-          {category.title ? (
-            <>
-              <h1 className="title is-montserrat has-text-black is-uppercase">
-                {category.title}
-              </h1>
-              <hr />
-            </>
-          ) : null}
+          <h1 className="title is-montserrat has-text-black is-uppercase">
+            recent stories
+          </h1>
+          <hr />
           <div className="wrapper-post">
             {posts.edges.map(({ node: post }) => {
               const { id, title, mainImage, _rawBody, category, slug } = post
@@ -62,7 +50,7 @@ const Category = ({ data, pageContext }) => {
 }
 
 export const data = graphql`
-  query($slug: String!, $skip: Int!, $limit: Int!) {
+  {
     blog: sanityBlog {
       heroImage {
         asset {
@@ -76,25 +64,7 @@ export const data = graphql`
         }
       }
     }
-    category: sanityCategory(slug: { current: { eq: $slug } }) {
-      title
-      heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...GatsbySanityImageFluid
-          }
-        }
-        hotspot {
-          x
-          y
-        }
-      }
-    }
-    posts: allSanityPost(
-      filter: { category: { slug: { current: { eq: $slug } } } }
-      skip: $skip
-      limit: $limit
-    ) {
+    posts: allSanityPost(limit: 10, sort: { fields: _createdAt, order: DESC }) {
       edges {
         node {
           id
@@ -126,4 +96,4 @@ export const data = graphql`
     }
   }
 `
-export default Category
+export default recent
