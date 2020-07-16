@@ -1,8 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import PortableText from "@sanity/block-content-to-react"
-import urlBuilder from "@sanity/image-url"
-import Embed from "react-embed"
+import Serializers from "../components/serializers/Serializers"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import AuthorBio from "../components/AuthorBio"
@@ -21,46 +20,6 @@ const post = ({ data }) => {
   } = data.sanityPost
 
   const { _rawPostFooter } = data.sanityBlog
-
-  const urlFor = src =>
-    urlBuilder({
-      projectId: process.env.GATSBY_SANITY_ID,
-      dataset: process.env.GATSBY_SANITY_DATASET,
-    }).image(src)
-
-  const serializers = {
-    types: {
-      hr: ({ node }) => {
-        if (node.style === "elipses") {
-          return <hr className="elipses-hr" />
-        } else if (node.style === "solid") {
-          return <hr className="solid-hr" style={{ margin: "5rem auto" }} />
-        }
-      },
-      blockImage: ({ node }) => {
-        const { image, alt } = node
-        return (
-          <div style={{ marginBottom: "2rem" }}>
-            <img
-              className="image"
-              src={urlFor(image)}
-              alt={alt}
-              style={{ margin: "1.25rem auto" }}
-            />
-            <span className=" has-text-grey is-italic">{alt}</span>
-          </div>
-        )
-      },
-      embed: ({ node }) => {
-        const { url } = node
-        return (
-          <div style={{ margin: "1.25rem 0" }}>
-            <Embed url={url} />
-          </div>
-        )
-      },
-    },
-  }
 
   const positionStyles = mainImage.hotspot
     ? {
@@ -95,8 +54,8 @@ const post = ({ data }) => {
         </section>
         <section className="section">
           <div className="container content is-montserrat">
-            <PortableText blocks={_rawBody} serializers={serializers} />
-            <PortableText blocks={_rawPostFooter} serializers={serializers} />
+            <PortableText blocks={_rawBody} serializers={Serializers} />
+            <PortableText blocks={_rawPostFooter} serializers={Serializers} />
           </div>
         </section>
         {tags.length ? (
