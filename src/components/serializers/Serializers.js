@@ -3,6 +3,7 @@ import InstagramEmbed from "react-instagram-embed"
 import { Tweet } from "react-twitter-widgets"
 import ReactPlayer from "react-player"
 import urlBuilder from "@sanity/image-url"
+import PortableText from "@sanity/block-content-to-react"
 
 const Serializers = {
   types: {
@@ -14,7 +15,7 @@ const Serializers = {
       }
     },
     blockImage: ({ node }) => {
-      const { image, alt } = node
+      const { image, alt, caption } = node
       return (
         <div style={embedStyle}>
           <img
@@ -23,7 +24,13 @@ const Serializers = {
             alt={alt}
             style={{ margin: "1rem auto" }}
           />
-          <span className=" has-text-grey is-italic">{alt}</span>
+          <div className="content">
+            {caption ? (
+              <PortableText blocks={caption} />
+            ) : (
+              <span className=" has-text-grey is-italic">{alt}</span>
+            )}
+          </div>
         </div>
       )
     },
