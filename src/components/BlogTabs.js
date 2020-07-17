@@ -18,7 +18,7 @@ const BlogTabs = () => {
   const { blog } = data
   const { categories } = blog
   return (
-    <div className="tabs" style={{margin: "0 1.25rem"}}>
+    <div className="tabs disable-scrollbars" style={{ margin: "0 1.25rem" }}>
       <ul>
         <Link to="/stories" className="is-montserrat is-uppercase">
           all stories
