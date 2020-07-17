@@ -9,7 +9,7 @@ const AuthorBio = ({ author }) => {
   return (
     <div className=" author-bio">
       <Link
-        to={`/the-last-draft/authors/${slug.current}`}
+        to={`/stories/authors/${slug.current}`}
         className="avatar-link"
       >
         {image ? (
@@ -41,7 +41,7 @@ const AuthorBio = ({ author }) => {
       </Link>
       <div className="content">
         <Link
-          to={`/the-last-draft/authors/${slug.current}`}
+          to={`/stories/authors/${slug.current}`}
           className="title is-montserrat is-uppercase is-size-5-mobile"
         >
           {name}

@@ -20,7 +20,7 @@ const BlogTabs = () => {
   return (
     <div className="tabs" style={{margin: "0 1.25rem"}}>
       <ul>
-        <Link to="/the-last-draft" className="is-montserrat is-uppercase">
+        <Link to="/stories" className="is-montserrat is-uppercase">
           all stories
         </Link>
         {categories.map(category => {
@@ -28,7 +28,7 @@ const BlogTabs = () => {
           return (
             <li key={id}>
               <Link
-                to={`/the-last-draft/${slug.current}`}
+                to={`/stories/${slug.current}`}
                 className="is-montserrat is-uppercase"
               >
                 {title}

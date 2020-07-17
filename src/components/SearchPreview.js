@@ -5,7 +5,7 @@ import { Highlight } from "react-instantsearch-dom"
 const SearchPreview = ({ hit }) => {
   return (
     <Link
-      to={`/the-last-draft/${hit.category.slug.current}/${hit.slug.current}`}
+      to={`/stories/${hit.category.slug.current}/${hit.slug.current}`}
       className="search-hit"
     >
       <h2 className="is-montserrat is-uppercase is-size-5">

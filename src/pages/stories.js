@@ -31,7 +31,7 @@ const TheLastDraft = ({ data }) => {
             {featuredPosts.featuredPosts.map(post => {
               const { id, title, mainImage, _rawBody, category, slug } = post
               const image = mainImage.asset.fluid
-              const link = `/the-last-draft/${category.slug.current}/${slug.current}`
+              const link = `/stories/${category.slug.current}/${slug.current}`
               return (
                 <PostCard
                   key={id}
@@ -58,7 +58,7 @@ const TheLastDraft = ({ data }) => {
             {latestPosts.edges.map(({ node: post }) => {
               const { id, title, mainImage, _rawBody, category, slug } = post
               const image = mainImage.asset.fluid
-              const link = `/the-last-draft/${category.slug.current}/${slug.current}`
+              const link = `/stories/${category.slug.current}/${slug.current}`
               return (
                 <PostCard
                   key={id}
@@ -75,11 +75,11 @@ const TheLastDraft = ({ data }) => {
         </section>
         {categories.map(category => {
           const { id, slug, title } = category
-          const link = `/the-last-draft/${slug.current}`
+          const link = `/stories/${slug.current}`
 
           return (
             <section key={id} id={slug.current} className="section-category">
-              <Link to={"/the-last-draft/" + slug.current}>
+              <Link to={"/stories/" + slug.current}>
                 <h2 className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
                   {title}
                 </h2>
@@ -101,7 +101,7 @@ const TheLastDraft = ({ data }) => {
                       slug,
                     } = post
                     const image = mainImage.asset.fluid
-                    const link = `/the-last-draft/${category.slug.current}/${slug.current}`
+                    const link = `/stories/${category.slug.current}/${slug.current}`
                     return (
                       <PostCard
                         key={id}

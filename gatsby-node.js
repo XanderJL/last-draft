@@ -71,8 +71,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
   posts.forEach(edge => {
     const path = edge.node.category
-      ? `/the-last-draft/${edge.node.category.slug.current}/${edge.node.slug.current}`
-      : `/the-last-draft/${edge.node.slug.current}`
+      ? `/stories/${edge.node.category.slug.current}/${edge.node.slug.current}`
+      : `/stories/${edge.node.slug.current}`
 
     createPage({
       path,
@@ -82,7 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   categories.forEach(category => {
-    const path = `/the-last-draft/${category.slug.current}`
+    const path = `/stories/${category.slug.current}`
 
     const categoryPosts = posts.filter(post => {
       return post.node.category.slug.current === category.slug.current
@@ -99,7 +99,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   authors.forEach(edge => {
-    const path = `/the-last-draft/authors/${edge.node.slug.current}`
+    const path = `/stories/authors/${edge.node.slug.current}`
 
     const authorPosts = posts.filter(post => {
       return post.node.author.slug.current === edge.node.slug.current

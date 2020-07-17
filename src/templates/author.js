@@ -29,8 +29,8 @@ const Author = ({ data, pageContext }) => {
               category,
               slug,
             } = post
-            const authorLink = `/the-last-draft/authors/${author.slug.current}`
-            const categoryLink = `/the-last-draft/${category.slug.current}`
+            const authorLink = `/stories/authors/${author.slug.current}`
+            const categoryLink = `/stories/${category.slug.current}`
             const postLink = categoryLink + `/${slug.current}`
 
             return (

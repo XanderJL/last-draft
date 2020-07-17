@@ -70,7 +70,7 @@ export default function Navbar() {
                 team
               </Link>
               <Link
-                to="/the-last-draft"
+                to="/stories"
                 className="navbar-item is-montserrat is-uppercase"
                 activeClassName="is-active"
               >

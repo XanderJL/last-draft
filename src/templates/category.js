@@ -40,7 +40,7 @@ const Category = ({ data, pageContext }) => {
             {posts.edges.map(({ node: post }) => {
               const { id, title, mainImage, _rawBody, category, slug } = post
               const image = mainImage.asset.fluid
-              const link = `/the-last-draft/${category.slug.current}/${slug.current}`
+              const link = `/stories/${category.slug.current}/${slug.current}`
               return (
                 <PostCard
                   key={id}

@@ -182,7 +182,7 @@ export default function About() {
                 />
                 <Link
                   role="button"
-                  to="/the-last-draft"
+                  to="/stories"
                   rel="noopener noreferrer"
                   className="button is-solid is-montserrat is-uppercase"
                 >
