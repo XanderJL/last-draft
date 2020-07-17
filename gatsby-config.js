@@ -82,7 +82,7 @@ module.exports = {
         indexName: process.env.ALGOLIA_INDEX_NAME,
         queries,
         chunkSize: 1000,
-        enablePartialUpdates: false,
+        enablePartialUpdates: true,
         matchFields: ["author", "title", "category"],
       },
     },
