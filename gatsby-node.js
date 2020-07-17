@@ -91,7 +91,7 @@ exports.createPages = async ({ graphql, actions }) => {
     paginate({
       createPage,
       items: categoryPosts,
-      itemsPerPage: 10,
+      itemsPerPage: 9,
       pathPrefix: path,
       component: require.resolve("./src/templates/category.js"),
       context: { slug: category.slug.current, title: category.title },
@@ -108,7 +108,7 @@ exports.createPages = async ({ graphql, actions }) => {
     paginate({
       createPage,
       items: authorPosts,
-      itemsPerPage: 10,
+      itemsPerPage: 9,
       pathPrefix: path,
       component: require.resolve("./src/templates/author.js"),
       context: { slug: edge.node.slug.current, title: edge.node.name },

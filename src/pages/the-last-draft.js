@@ -8,9 +8,10 @@ import toPlainText from "../hooks/toPlainText"
 import imageHotspot from "../hooks/imageHotspot"
 
 const TheLastDraft = ({ data }) => {
-  const { blog, posts, latestPosts } = data
+  const { blog, posts, latestPosts, featuredPosts } = data
   const { title, categories, heroImage } = blog
 
+  console.log(featuredPosts)
   return (
     <Layout title={title}>
       <Hero
@@ -20,14 +21,16 @@ const TheLastDraft = ({ data }) => {
       <BlogTabs />
       <section id="featured" className="section">
         <div className="container">
-          <h2 className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
+          <h2
+            className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
+            style={{ marginBottom: "0" }}
+          >
             Featured
           </h2>
-          <hr />
+          <hr style={{ margin: "0.75rem 0" }} />
           <div className="wrapper-post" style={{ padding: "2rem 0" }}>
-            {posts.edges
-              .filter(({ node: post }) => post.featuredPost)
-              .map(({ node: post }) => {
+            {featuredPosts.featuredPosts
+              .map(post => {
                 const { id, title, mainImage, _rawBody, category, slug } = post
                 const image = mainImage.asset.fluid
                 const link = `/the-last-draft/${category.slug.current}/${slug.current}`
@@ -48,10 +51,13 @@ const TheLastDraft = ({ data }) => {
       </section>
       <section id="recent" className="section">
         <div className="container">
-          <h2 className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
+          <h2
+            className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
+            style={{ marginBottom: "0" }}
+          >
             Recent
           </h2>
-          <hr />
+          <hr style={{ margin: "0.75rem 0" }} />
           <div className="wrapper-post" style={{ padding: "2rem 0" }}>
             {latestPosts.edges.map(({ node: post }) => {
               const { id, title, mainImage, _rawBody, category, slug } = post
@@ -152,15 +158,15 @@ export const data = graphql`
         title
       }
     }
-    posts: allSanityPost {
+    posts: allSanityPost(sort: { fields: _createdAt, order: DESC }) {
       edges {
         node {
           id
+          _createdAt
           slug {
             current
           }
           title
-          featuredPost
           mainImage {
             asset {
               fluid(maxWidth: 800, maxHeight: 600) {
@@ -182,7 +188,7 @@ export const data = graphql`
       }
     }
     latestPosts: allSanityPost(
-      limit: 5
+      limit: 3
       sort: { fields: _createdAt, order: DESC }
     ) {
       edges {
@@ -192,7 +198,6 @@ export const data = graphql`
             current
           }
           title
-          featuredPost
           mainImage {
             asset {
               fluid(maxWidth: 800, maxHeight: 600) {
@@ -209,6 +214,33 @@ export const data = graphql`
             slug {
               current
             }
+          }
+        }
+      }
+    }
+    featuredPosts: sanityBlog {
+      featuredPosts {
+        id
+        title
+        slug {
+          current
+        }
+        category {
+          slug {
+            current
+          }
+          title
+        }
+        _rawBody
+        mainImage {
+          asset {
+            fluid(maxWidth: 800, maxHeight: 600) {
+              ...GatsbySanityImageFluid
+            }
+          }
+          hotspot {
+            x
+            y
           }
         }
       }

@@ -40,7 +40,10 @@ const post = ({ data }) => {
       <div className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
         <section className="section">
           <div className="container has-text-centered">
-            <h1 className="title is-montserrat is-uppercase is-size-2-desktop has-text-black">
+            <h1
+              className="title is-montserrat is-uppercase is-size-2-desktop has-text-black"
+              style={{ marginBottom: "0.75rem" }}
+            >
               {title}
             </h1>
             <Link
@@ -49,10 +52,11 @@ const post = ({ data }) => {
             >
               {author.name}
             </Link>
-            <p className="is-montserrat">{publishedAt}</p>
+            <p className="is-montserrat" style={{ marginBottom: "2.5rem" }}>
+              {publishedAt}
+            </p>
           </div>
-        </section>
-        <section className="section">
+
           <div className="container content is-montserrat">
             <PortableText blocks={_rawBody} serializers={Serializers} />
             <PortableText blocks={_rawPostFooter} serializers={Serializers} />

@@ -24,12 +24,6 @@ const BlogTabs = () => {
           <Link to="/the-last-draft" className="is-montserrat is-uppercase">
             all stories
           </Link>
-          <Link
-            to={`/the-last-draft/recent`}
-            className="is-montserrat is-uppercase"
-          >
-            recent
-          </Link>
           {categories.map(category => {
             const { id, slug, title } = category
             return (
