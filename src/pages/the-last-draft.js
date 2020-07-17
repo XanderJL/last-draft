@@ -17,11 +17,11 @@ const TheLastDraft = ({ data }) => {
         fluid={heroImage.asset.fluid}
         styles={imageHotspot(heroImage.hotspot)}
       />
-      <BlogTabs />
-      <section id="featured" className="section">
-        <div className="container">
+      <div className="container" style={{ maxWidth: "1216px" }}>
+        <BlogTabs />
+        <section id="featured" className="section">
           <h2
-            className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
+            className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
             style={{ marginBottom: "0" }}
           >
             Featured
@@ -45,12 +45,10 @@ const TheLastDraft = ({ data }) => {
               )
             })}
           </div>
-        </div>
-      </section>
-      <section id="recent" className="section">
-        <div className="container">
+        </section>
+        <section id="recent" className="section-category">
           <h2
-            className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
+            className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
             style={{ marginBottom: "0" }}
           >
             Recent
@@ -74,15 +72,13 @@ const TheLastDraft = ({ data }) => {
               )
             })}
           </div>
-        </div>
-      </section>
-      {categories.map(category => {
-        const { id, slug, title } = category
-        const link = `/the-last-draft/${slug.current}`
+        </section>
+        {categories.map(category => {
+          const { id, slug, title } = category
+          const link = `/the-last-draft/${slug.current}`
 
-        return (
-          <section key={id} id={slug.current} className="section">
-            <div className="container">
+          return (
+            <section key={id} id={slug.current} className="section-category">
               <Link to={"/the-last-draft/" + slug.current}>
                 <h2 className="title is-size-2-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black">
                   {title}
@@ -122,10 +118,10 @@ const TheLastDraft = ({ data }) => {
               <Link to={link} className="button is-size-5">
                 More Articles &rsaquo;
               </Link>
-            </div>
-          </section>
-        )
-      })}
+            </section>
+          )
+        })}
+      </div>
     </Layout>
   )
 }
