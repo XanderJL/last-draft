@@ -11,7 +11,6 @@ const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
   const { title, categories, heroImage } = blog
 
-  console.log(featuredPosts)
   return (
     <Layout title={title}>
       <Hero
@@ -29,23 +28,22 @@ const TheLastDraft = ({ data }) => {
           </h2>
           <hr style={{ margin: "0.75rem 0" }} />
           <div className="wrapper-post" style={{ padding: "2rem 0" }}>
-            {featuredPosts.featuredPosts
-              .map(post => {
-                const { id, title, mainImage, _rawBody, category, slug } = post
-                const image = mainImage.asset.fluid
-                const link = `/the-last-draft/${category.slug.current}/${slug.current}`
-                return (
-                  <PostCard
-                    key={id}
-                    title={title}
-                    image={image}
-                    link={link}
-                    cardStyle={{ maxWidth: "420px" }}
-                  >
-                    {toPlainText(_rawBody).slice(0, 159) + "..."}
-                  </PostCard>
-                )
-              })}
+            {featuredPosts.featuredPosts.map(post => {
+              const { id, title, mainImage, _rawBody, category, slug } = post
+              const image = mainImage.asset.fluid
+              const link = `/the-last-draft/${category.slug.current}/${slug.current}`
+              return (
+                <PostCard
+                  key={id}
+                  title={title}
+                  image={image}
+                  link={link}
+                  cardStyle={{ maxWidth: "420px" }}
+                >
+                  {toPlainText(_rawBody).slice(0, 159) + "..."}
+                </PostCard>
+              )
+            })}
           </div>
         </div>
       </section>
