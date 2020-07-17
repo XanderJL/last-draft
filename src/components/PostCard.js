@@ -12,8 +12,14 @@ const PostCard = ({ title, image, children, link, cardStyle }) => {
             <Img
               className="post-image"
               fluid={image}
-              imgStyle={{ maxWidth: "420px", maxHeight: "315px" }}
-              style={{ maxWidth: "420px", maxHeight: "315px" }}
+              imgStyle={{
+                maxWidth: "100%",
+                maxHeight: "260px",
+              }}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "260px",
+              }}
             />
           </Link>
         ) : null}
