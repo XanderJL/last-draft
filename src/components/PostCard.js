@@ -14,18 +14,18 @@ const PostCard = ({ title, image, children, link, cardStyle }) => {
               fluid={image}
               imgStyle={{
                 maxWidth: "100%",
-                maxHeight: "260px",
+                maxHeight: "240px",
               }}
               style={{
                 maxWidth: "100%",
-                maxHeight: "260px",
+                maxHeight: "240px",
               }}
             />
           </Link>
         ) : null}
       </div>
       <div className="card-content">
-        <h2 className="title is-size-4 is-montserrat is-uppercase has-text-black">
+        <h2 className="title is-size-5 is-montserrat is-uppercase has-text-black">
           {title}
         </h2>
         <div className="content">{children}</div>
