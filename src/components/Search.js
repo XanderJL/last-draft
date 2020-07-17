@@ -21,7 +21,6 @@ const Search = () => {
       submit={<FiSearch />}
     >
       <SearchBox
-        className="poop"
         onReset={() => setHits(false)}
         onKeyDown={e => (e.currentTarget.value === "" ? setHits(false) : null)}
         translations={{
