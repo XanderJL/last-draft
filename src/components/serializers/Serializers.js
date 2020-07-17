@@ -11,7 +11,7 @@ const Serializers = {
       if (node.style === "elipses") {
         return <hr className="elipses-hr" />
       } else if (node.style === "solid") {
-        return <hr className="solid-hr" style={{ margin: "5rem auto" }} />
+        return <hr className="solid-hr" style={{ margin: "3rem auto" }} />
       }
     },
     blockImage: ({ node }) => {
