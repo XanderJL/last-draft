@@ -18,27 +18,25 @@ const BlogTabs = () => {
   const { blog } = data
   const { categories } = blog
   return (
-    <div className="tabs">
-      <div className="container">
-        <ul>
-          <Link to="/the-last-draft" className="is-montserrat is-uppercase">
-            all stories
-          </Link>
-          {categories.map(category => {
-            const { id, slug, title } = category
-            return (
-              <li key={id}>
-                <Link
-                  to={`/the-last-draft/${slug.current}`}
-                  className="is-montserrat is-uppercase"
-                >
-                  {title}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+    <div className="tabs" style={{margin: "0 1.25rem"}}>
+      <ul>
+        <Link to="/the-last-draft" className="is-montserrat is-uppercase">
+          all stories
+        </Link>
+        {categories.map(category => {
+          const { id, slug, title } = category
+          return (
+            <li key={id}>
+              <Link
+                to={`/the-last-draft/${slug.current}`}
+                className="is-montserrat is-uppercase"
+              >
+                {title}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
