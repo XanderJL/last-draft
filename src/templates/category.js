@@ -92,6 +92,7 @@ export const data = graphql`
     }
     posts: allSanityPost(
       filter: { category: { slug: { current: { eq: $slug } } } }
+      sort: { fields: publishedAt, order: DESC }
       skip: $skip
       limit: $limit
     ) {
