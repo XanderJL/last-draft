@@ -115,9 +115,9 @@ const TheLastDraft = ({ data }) => {
                     )
                   })}
               </div>
-              <Link to={link} className="button is-size-5">
+              {/* <Link to={link} className="button is-size-5">
                 More Articles &rsaquo;
-              </Link>
+              </Link> */}
             </section>
           )
         })}
@@ -152,11 +152,11 @@ export const data = graphql`
         title
       }
     }
-    posts: allSanityPost(sort: { fields: _createdAt, order: DESC }) {
+    posts: allSanityPost(sort: { fields: publishedAt, order: DESC }) {
       edges {
         node {
           id
-          _createdAt
+          publishedAt
           slug {
             current
           }
@@ -183,7 +183,7 @@ export const data = graphql`
     }
     latestPosts: allSanityPost(
       limit: 3
-      sort: { fields: _createdAt, order: DESC }
+      sort: { fields: publishedAt, order: DESC }
     ) {
       edges {
         node {
