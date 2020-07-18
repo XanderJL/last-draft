@@ -25,9 +25,9 @@ const Category = ({ data, pageContext }) => {
             : blog.heroImage.hotspot
         )}
       />
-      <BlogTabs />
-      <section className="section">
-        <div className="container">
+      <div className="container" style={{ maxWidth: "1216px" }}>
+        <BlogTabs />
+        <section className="section">
           {category.title ? (
             <>
               <h1 className="title is-montserrat has-text-black is-uppercase">
@@ -55,8 +55,8 @@ const Category = ({ data, pageContext }) => {
             })}
           </div>
           <Pagination pageContext={pageContext} />
-        </div>
-      </section>
+        </section>
+      </div>
     </Layout>
   )
 }
