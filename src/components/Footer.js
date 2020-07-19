@@ -31,14 +31,12 @@ function Footer() {
               >
                 Team
               </Link>
-              <a
-                href="https://medium.com/lastdraft"
+              <Link
+                to="/stories"
                 className="navbar-item is-montserrat is-uppercase"
-                target="_blank"
-                rel="noreferrer noopener"
               >
                 Stories
-              </a>
+              </Link>
               <a
                 href="mailto: jacob@lastdraft.ca"
                 className="navbar-item is-montserrat is-uppercase"
