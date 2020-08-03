@@ -41,7 +41,7 @@ const post = ({ data }) => {
         <section className="section">
           <div className="container has-text-centered">
             <h1
-              className="title is-montserrat is-uppercase is-size-2-desktop has-text-black"
+              className="title-no-space is-montserrat is-size-2-desktop has-text-black"
               style={{ marginBottom: "0.75rem" }}
             >
               {title}

@@ -25,9 +25,11 @@ const PostCard = ({ title, image, children, link, cardStyle }) => {
         ) : null}
       </div>
       <div className="card-content">
-        <h2 className="title is-size-5 is-montserrat is-uppercase has-text-black">
-          {title}
-        </h2>
+        <Link to={link}>
+          <h2 className="title-no-space is-size-5 is-montserrat has-text-black mb-2">
+            {title}
+          </h2>
+        </Link>
         <div className="content">{children}</div>
         <Link to={link} className="button">
           Read More &rsaquo;
