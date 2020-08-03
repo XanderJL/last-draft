@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
     "dotenv": "^8.2.0",
+    "framer-motion": "^2.3.0",
     "gatsby": "^2.19.7",
     "gatsby-awesome-pagination": "^0.3.6",
     "gatsby-background-image": "^0.10.2",
