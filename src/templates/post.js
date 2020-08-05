@@ -33,7 +33,7 @@ const post = ({ data }) => {
   return (
     <Layout
       title={title}
-      description={toPlainText(author._rawBio).slice(0, 159)}
+      description={toPlainText(_rawBody).slice(0, 156) + "..."}
       image={image}
     >
       <Hero fluid={mainImage.asset.fluid} styles={positionStyles} />
