@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+
+:root {
+  --brand-primary: #feb94b;
+  --brand-secondary: #95d0c0;
+  --main-navigation-color: var(--brand-primary);
+  --main-navigation-color--inverted: var(--brand-primary--inverted);
+  --font-family-base: "Rubik";
+  --headings-font-family: "Montserrat";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Montserrat", sans-serif;
+}
+
+.elipses-hr {
+  border: none;
+}
+
+.elipses-hr::before {
+  content: "...";
+}
