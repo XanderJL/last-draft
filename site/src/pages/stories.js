@@ -91,6 +91,7 @@ const TheLastDraft = ({ data }) => {
                     ({ node: post }) =>
                       post.category.slug.current === slug.current
                   )
+                  .slice(0, 3)
                   .map(({ node: post }) => {
                     const {
                       id,
@@ -115,9 +116,9 @@ const TheLastDraft = ({ data }) => {
                     )
                   })}
               </div>
-              {/* <Link to={link} className="button is-size-5">
+              <Link to={link} className="button is-size-5">
                 More Articles &rsaquo;
-              </Link> */}
+              </Link>
             </section>
           )
         })}
