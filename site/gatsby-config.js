@@ -69,8 +69,6 @@ module.exports = {
     siteUrl: `https://lastdraft.ca/`,
   },
   plugins: [
-    `gatsby-plugin-netlify`,
-    `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
     `gatsby-awesome-pagination`,
     `gatsby-plugin-sitemap`,
