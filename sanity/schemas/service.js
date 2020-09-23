@@ -1,5 +1,4 @@
 import { MdHeadsetMic } from "react-icons/md";
-import logo from "../static/logo.png";
 
 export default {
   name: "service",
