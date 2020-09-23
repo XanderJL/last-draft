@@ -54,17 +54,14 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build && netlify-lambda build src/functions",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "dev": "gatsby develop",
-    "production": "gatsby build; npm run build:lambda",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "yarn run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "start:lambda": "netlify-lambda serve src/functions",
-    "build:lambda": "netlify-lambda build src/functions"
   },
   "repository": {
     "type": "git",
