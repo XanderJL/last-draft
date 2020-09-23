@@ -25,6 +25,11 @@ export default {
       },
     },
     {
+      name: "featuredPosts",
+      title: "Featured Posts",
+      type: "featuredPosts",
+    },
+    {
       name: "categories",
       title: "Categories",
       type: "array",

@@ -19,6 +19,7 @@ import socials from "./socials";
 import service from "./service";
 import section from "./section";
 import post from "./blog/post";
+import featuredPosts from "./blog/featuredPosts";
 import author from "./blog/author";
 import category from "./blog/category";
 
@@ -41,6 +42,7 @@ export default createSchema({
     socials,
     section,
     post,
+    featuredPosts,
     author,
     category,
   ]),
