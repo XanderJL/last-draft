@@ -88,7 +88,7 @@ module.exports = {
       resolve: `gatsby-source-sanity`,
       options: {
         projectId: `khue65vd`,
-        dataset: `production`,
+        dataset: `development`,
         watchMode: false,
       },
     },
