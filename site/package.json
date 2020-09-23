@@ -33,6 +33,7 @@
     "gatsby-transformer-sharp": "^2.3.13",
     "instantsearch.css": "^7.4.2",
     "netlify-cli": "^2.46.0",
+    "node-fetch": "^2.6.1",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
