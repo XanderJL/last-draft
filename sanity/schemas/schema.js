@@ -6,6 +6,8 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import homePage from "./pages/homePage";
 import aboutPage from "./pages/aboutPage";
 import blog from "./blog/blog";
+import servicesLandingPage from "./pages/servicesLandingPage";
+import offeredServices from "./offeredServices";
 import servicesPage from "./pages/servicesPage";
 import blockContent from "./blockContent";
 import blockImage from "./blockImage";
@@ -33,6 +35,8 @@ export default createSchema({
     homePage,
     aboutPage,
     blog,
+    servicesLandingPage,
+    offeredServices,
     servicesPage,
     employee,
     brands,

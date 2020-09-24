@@ -2,11 +2,17 @@ import S from "@sanity/desk-tool/structure-builder";
 import { AiFillHome, AiFillEdit } from "react-icons/ai";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { RiServiceLine } from "react-icons/ri";
+import { MdBrush } from "react-icons/md";
+import { TiBusinessCard } from "react-icons/ti";
 
 const hiddenDocTypes = (listItem) =>
-  !["aboutPage", "indexPage", "servicesPage", "blog"].includes(
-    listItem.getId()
-  );
+  ![
+    "aboutPage",
+    "indexPage",
+    "servicesLandingPage",
+    "servicesPage",
+    "blog",
+  ].includes(listItem.getId());
 
 export default () =>
   S.list()
@@ -30,9 +36,19 @@ export default () =>
             .schemaType("aboutPage")
             .documentId("aboutPage")
         ),
+      S.divider(),
+      S.listItem()
+        .title("Services Landing Page")
+        .icon(RiServiceLine)
+        .child(
+          S.editor()
+            .id("servicesLandingPage")
+            .schemaType("servicesLandingPage")
+            .documentId("servicesLandingPage")
+        ),
       S.listItem()
         .title("Entrepreneur Services Page")
-        .icon(RiServiceLine)
+        .icon(TiBusinessCard)
         .child(
           S.editor()
             .id("entrepreneurServicesPage")
@@ -41,7 +57,7 @@ export default () =>
         ),
       S.listItem()
         .title("Artist Services Page")
-        .icon(RiServiceLine)
+        .icon(MdBrush)
         .child(
           S.editor()
             .id("artistServicesPage")

@@ -1,6 +1,6 @@
 export default {
-  name: "servicesPage",
-  title: "Services Page",
+  name: "servicesLandingPage",
+  title: "Services Landing Page",
   type: "document",
   fields: [
     {
@@ -17,20 +17,10 @@ export default {
       },
     },
     {
-      name: "heroCard",
-      title: "Hero Card",
-      type: "blockContent",
-    },
-    {
-      name: "services",
-      title: "Services",
+      name: "offeredServices",
+      title: "Offered Services",
       type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "service" }],
-        },
-      ],
+      of: [{ type: "offeredServices" }],
     },
   ],
 };
