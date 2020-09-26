@@ -8,6 +8,7 @@ import imageUrlBuilder from "@sanity/image-url"
 
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
+import SubmitForm from "../components/SubmitForm"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -196,6 +197,9 @@ export default function About() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="section">
+        <SubmitForm />
       </section>
     </Layout>
   )

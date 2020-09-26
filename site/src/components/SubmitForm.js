@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { theme, Box } from "@chakra-ui/core"
+import { theme, Box, Heading } from "@chakra-ui/core"
 import { css, jsx } from "@emotion/core"
 import Modal from "./Modal"
 
@@ -12,6 +12,11 @@ const formStyles = css`
   input,
   textarea {
     border-radius: 0;
+    border-color: ${theme.colors.black};
+  }
+
+  input:hover,
+  textarea:hover {
     border-color: ${theme.colors.black};
   }
 `
@@ -52,6 +57,17 @@ const SubmitForm = () => {
         css={formStyles}
         onSubmit={handleSubmit(onSubmit)}
       >
+        <Heading
+          as="h2"
+          color="black"
+          mb="1.5rem"
+          letterSpacing="0.12em"
+          fontWeight="normal"
+          fontSize="4xl"
+          className="is-montserrat is-uppercase"
+        >
+          Submit Your Story to Us
+        </Heading>
         <input type="hidden" name="form-name" value="submission" />
         <Box d="flex" flexDirection={["column", "column", "row"]}>
           <div
@@ -145,7 +161,9 @@ const SubmitForm = () => {
           </div>
         </div>
         <div className="control">
-          <input type="submit" className="button" />
+          <Box mt="2rem">
+            <input type="submit" className="button" />
+          </Box>
         </div>
       </form>
       {modal && (

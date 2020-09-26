@@ -148,6 +148,8 @@ const ServicesPage = ({ data }) => {
                       as="h2"
                       color="black"
                       mb=".5em"
+                      fontWeight="normal"
+                      letterSpacing=".12em"
                       fontSize={["2xl", "3xl", "4xl"]}
                       className="is-montserrat is-uppercase"
                     >
