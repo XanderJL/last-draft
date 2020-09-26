@@ -17,6 +17,11 @@ export default {
       },
     },
     {
+      name: "heroCard",
+      title: "Hero Card",
+      type: "blockContent",
+    },
+    {
       name: "offeredServices",
       title: "Offered Services",
       type: "array",

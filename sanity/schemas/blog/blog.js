@@ -25,6 +25,11 @@ export default {
       },
     },
     {
+      name: "publication",
+      title: "Publication Copy",
+      type: "section",
+    },
+    {
       name: "featuredPosts",
       title: "Featured Posts",
       type: "featuredPosts",

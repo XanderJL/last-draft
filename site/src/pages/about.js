@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
+import { Box } from "@chakra-ui/core"
 import Img from "gatsby-image/withIEPolyfill"
 import BackgroundImage from "gatsby-background-image"
 import PortableText from "@sanity/block-content-to-react"
@@ -47,6 +48,7 @@ export default function About() {
       }
     }
   `)
+
   const CardRenderer = props => {
     const { style = "normal" } = props.node
 
@@ -180,14 +182,15 @@ export default function About() {
                     },
                   }}
                 />
-                <Link
-                  role="button"
-                  to="/stories"
-                  rel="noopener noreferrer"
-                  className="button is-solid is-montserrat is-uppercase"
-                >
-                  &nbsp; stories &rang;
-                </Link>
+                <Box mt="2rem">
+                  <Link
+                    role="button"
+                    to="/stories"
+                    className="button is-solid is-montserrat is-uppercase"
+                  >
+                    stories &rang;
+                  </Link>
+                </Box>
               </div>
               <Img className="image" fluid={pubImage} alt={pubAlt} />
             </div>

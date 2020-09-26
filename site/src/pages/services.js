@@ -1,15 +1,16 @@
+/** @jsx jsx */
 import React from "react"
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
+import { Link, graphql } from "gatsby"
+import { Box, Grid, Heading, Text, List, ListItem } from "@chakra-ui/core"
+import { css, jsx } from "@emotion/core"
 import BackgroundImage from "gatsby-background-image"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import PortableText from "@sanity/block-content-to-react"
 
 const ServicesPage = ({ data }) => {
-  const { page, placeholder } = data
-  const heroImage = page.heroImage.asset.fluid
-  const placeholderImg = placeholder.childImageSharp.fluid
+  const { services, placeholder, _rawHeroCard } = data
+  const heroImage = services.heroImage.asset.fluid
 
   const CardRenderer = props => {
     const { style = "normal" } = props.node
@@ -73,7 +74,7 @@ const ServicesPage = ({ data }) => {
   }
 
   return (
-    <Layout title={page.title}>
+    <Layout title={services.title}>
       {heroImage ? (
         <BackgroundImage
           className="hero is-fullheight-with-navbar is-primary"
@@ -85,7 +86,7 @@ const ServicesPage = ({ data }) => {
                 <div className="card-body">
                   <PortableText
                     className="content"
-                    blocks={page._rawHeroCard}
+                    blocks={services._rawHeroCard}
                     serializers={{ types: { block: CardRenderer } }}
                   />
                 </div>
@@ -101,7 +102,7 @@ const ServicesPage = ({ data }) => {
                 <div className="card-body">
                   <div className="content">
                     <PortableText
-                      blocks={page._rawHeroCard}
+                      blocks={services._rawHeroCard}
                       serializers={{ types: { block: CardRenderer } }}
                     />
                   </div>
@@ -111,28 +112,65 @@ const ServicesPage = ({ data }) => {
           </div>
         </div>
       )}
-      <section className="section has-background-white-bis">
+      <section
+        css={css`
+          padding: 5rem 1.25rem 10rem 1.25rem;
+        `}
+        className="section has-background-white-bis"
+      >
         <div className="container" style={{ maxWidth: "1100px" }}>
-          {page.services.map(service => (
-            <div key={service.id} className="service-card">
-              {service.image ? (
-                <Img fluid={service.image.asset.fluid} alt={service.imageAlt ? service.imageAlt : "The author hasn't defined the image yet."} className="card-image" />
-              ) : (
-                <Img fluid={placeholderImg} alt="Beer kegs" className="card-image" />
-              )}
-              <div className="content card-copy">
-                <PortableText
-                  blocks={service._rawBody}
-                  serializers={{
-                    types: {
-                      block: BlockRenderer,
-                      blockImage: BlockImageRenderer,
-                    },
-                  }}
-                />
-              </div>
-            </div>
-          ))}
+          <Grid
+            gridTemplateColumns={[
+              "minmax(0, 1fr)",
+              "minmax(0, 1fr)",
+              "repeat(2, 1fr)",
+            ]}
+            gap="32px"
+          >
+            {services.offeredServices.map((service, i) => {
+              const { title, description, bulletPoints, slug } = service
+              return (
+                <Box
+                  key={i}
+                  d="flex"
+                  flexDir="column"
+                  justifyContent="space-between"
+                  p={[
+                    "3rem 1.25rem",
+                    "3rem 1.25rem",
+                    "3rem 1.25rem",
+                    "3.5rem 3rem 5rem 3rem",
+                  ]}
+                  className="card"
+                >
+                  <Box>
+                    <Heading
+                      as="h2"
+                      color="black"
+                      mb=".5em"
+                      fontSize={["2xl", "3xl", "4xl"]}
+                      className="is-montserrat is-uppercase"
+                    >
+                      {title}
+                    </Heading>
+                    <Text m="1.5rem 0">{description}</Text>
+                    <List styleType="disc">
+                      {bulletPoints.map((point, i) => (
+                        <ListItem key={i}>{point}</ListItem>
+                      ))}
+                    </List>
+                  </Box>
+                  <Box mt="1.5rem">
+                    <Link to={`/services/${slug.current}`}>
+                      <Box as="button" className="button">
+                        Read More
+                      </Box>
+                    </Link>
+                  </Box>
+                </Box>
+              )
+            })}
+          </Grid>
         </div>
       </section>
     </Layout>
@@ -141,34 +179,23 @@ const ServicesPage = ({ data }) => {
 
 export const data = graphql`
   query {
-    placeholder: file(relativePath: { eq: "kegs.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 800) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    page: sanityServicesPage {
+    services: sanityServicesLandingPage {
       title
       heroImage {
         asset {
-          fluid(maxWidth: 1920) {
+          fluid {
             ...GatsbySanityImageFluid
           }
         }
       }
       _rawHeroCard
-      services {
-        id
-        image {
-          asset {
-            fluid(maxWidth: 800) {
-              ...GatsbySanityImageFluid
-            }
-          }
+      offeredServices {
+        title
+        slug {
+          current
         }
-        imageAlt
-        _rawBody
+        description
+        bulletPoints
       }
     }
   }

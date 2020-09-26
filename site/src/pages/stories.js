@@ -1,15 +1,96 @@
+/** @jsx jsx */
 import React from "react"
 import { graphql, Link } from "gatsby"
+import Img from "gatsby-image"
+import { Box } from "@chakra-ui/core"
+import { css, jsx } from "@emotion/core"
+import PortableText from "@sanity/block-content-to-react"
+import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
 import BlogTabs from "../components/BlogTabs"
 import toPlainText from "../hooks/toPlainText"
 import imageHotspot from "../hooks/imageHotspot"
+import SubmitForm from "../components/SubmitForm"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
-  const { title, categories, heroImage } = blog
+  const { title, categories, heroImage, _rawPublication, publication } = blog
+  const pubBody = _rawPublication.body
+  const pubImg = publication && publication.image.asset.fluid
+  const pubAlt = publication && publication.image.alt
+
+  const CardRenderer = props => {
+    const { style = "normal" } = props.node
+
+    if (style === "h1") {
+      return React.createElement(
+        style,
+        {
+          className: `title is-montserrat is-uppercase has-text-black`,
+        },
+        props.children
+      )
+    }
+    if (style === "h2") {
+      return React.createElement(
+        style,
+        {
+          className: `title is-montserrat is-uppercase has-text-black`,
+        },
+        props.children
+      )
+    }
+
+    if (style === "blockquote") {
+      return <blockquote>- {props.children}</blockquote>
+    }
+
+    // Fall back to default handling
+    return PortableText.defaultSerializers.types.block(props)
+  }
+
+  const SectionRenderer = props => {
+    const { style = "normal" } = props.node
+
+    if (/^h\d/.test(style)) {
+      return React.createElement(
+        style,
+        {
+          className: `title is-montserrat is-uppercase has-text-black is-size-4-mobile`,
+        },
+        props.children
+      )
+    }
+
+    if (style === "blockquote") {
+      return <blockquote>- {props.children}</blockquote>
+    }
+
+    // Fall back to default handling
+    return PortableText.defaultSerializers.types.block(props)
+  }
+  const BlockImageRenderer = props => {
+    const urlFor = source =>
+      imageUrlBuilder({
+        projectId: process.env.GATSBY_SANITY_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+      }).image(source)
+    return (
+      <a
+        role="button"
+        href="https://medium.com/lastdraft"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={urlFor(props.node.image.asset).maxWidth(400)}
+          alt={props.node.alt}
+        />
+      </a>
+    )
+  }
 
   return (
     <Layout title={title}>
@@ -19,6 +100,25 @@ const TheLastDraft = ({ data }) => {
       />
       <div className="container" style={{ maxWidth: "1216px" }}>
         <BlogTabs />
+        <Box
+          css={css`
+            padding: 1.5rem 0 3rem 0;
+
+            p {
+              margin-bottom: 1rem;
+            }
+          `}
+        >
+          <PortableText
+            blocks={pubBody}
+            serializers={{
+              types: {
+                block: SectionRenderer,
+                blockImage: BlockImageRenderer,
+              },
+            }}
+          />
+        </Box>
         <section id="featured" className="section">
           <h2
             className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
@@ -122,6 +222,9 @@ const TheLastDraft = ({ data }) => {
             </section>
           )
         })}
+        <section className="section">
+          <SubmitForm />
+        </section>
       </div>
     </Layout>
   )
@@ -145,6 +248,7 @@ export const data = graphql`
           y
         }
       }
+      _rawPublication
       categories {
         id
         slug {
