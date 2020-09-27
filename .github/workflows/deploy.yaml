@@ -41,6 +41,7 @@ jobs:
             cache-cache-
       - name: Install packages
         run: yarn
+          if:steps.yarn-cache.outputs.cache-hit != 'true'
         # if: |
         #   steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
         #   steps.cache-node-modules.outputs.cache-hit != 'true'
