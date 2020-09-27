@@ -17,14 +17,14 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node_modules
-        id: cache-node-modules
+      - name: Cache Yarn
+        id: yarn-cache
         uses: actions/cache@v2
         with:
-          path: "**/node_modules/"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-modules-
+            ${{ runner.os }}-yarn-
       - name: Cache Gatsby public
         uses: actions/cache@v2
         with:
