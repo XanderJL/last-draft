@@ -14,20 +14,20 @@ const Modal = props => {
         role="button"
         tabIndex={-1}
         className={clickState}
-        onKeyDown={() => setClicked(!clicked)}
+        onKeyDown={e => e.key === "Escape" && setClicked(!clicked)}
       >
         <div
           role="button"
           tabIndex={-1}
           className="modal-background"
           onClick={() => setClicked(!clicked)}
-          onKeyDown={() => setClicked(!clicked)}
+          onKeyDown={e => e.key === "Escape" && setClicked(!clicked)}
         ></div>
         <div className="modal-content">
           <div className="card" style={modalStyle}>
             <div className="card-content">
               <h1 className="title is-montserrat">{props.header}</h1>
-              <p>{props.body}</p>
+              <p>{props.body ? props.body : props.children}</p>
             </div>
           </div>
         </div>

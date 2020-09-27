@@ -3,75 +3,19 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import BackgroundImage from "gatsby-background-image"
 import imageUrlBuilder from "@sanity/image-url"
-import Layout from "../../components/Layout"
 import PortableText from "@sanity/block-content-to-react"
+import Layout from "../../components/Layout"
+import Serializers, {
+  CardRenderer,
+  BlockRenderer,
+  BlockImageRenderer,
+} from "../../components/serializers/Serializers"
+import ConvertKitModal from "../../components/ConvertKitModal"
 
 const ForArtists = ({ data }) => {
   const { page, placeholder } = data
   const heroImage = page.heroImage.asset.fluid
   const placeholderImg = placeholder.childImageSharp.fluid
-
-  const CardRenderer = props => {
-    const { style = "normal" } = props.node
-
-    if (style === "h1") {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase has-text-black`,
-        },
-        props.children
-      )
-    }
-    if (style === "h2") {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase has-text-black`,
-        },
-        props.children
-      )
-    }
-
-    if (style === "blockquote") {
-      return <blockquote>- {props.children}</blockquote>
-    }
-
-    // Fall back to default handling
-    return PortableText.defaultSerializers.types.block(props)
-  }
-
-  const BlockRenderer = props => {
-    const { style = "normal" } = props.node
-
-    if (/^h\d/.test(style)) {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase is-size-4 is-size-5-mobile`,
-        },
-        props.children
-      )
-    }
-
-    // Fall back to default handling
-    return PortableText.defaultSerializers.types.block(props)
-  }
-
-  const BlockImageRenderer = props => {
-    const urlFor = source =>
-      imageUrlBuilder({
-        projectId: process.env.GATSBY_SANITY_ID,
-        dataset: process.env.GATSBY_SANITY_DATASET,
-      }).image(source)
-    return (
-      <img
-        src={urlFor(props.node.image.asset).maxWidth(400)}
-        alt={props.node.alt}
-      />
-    )
-  }
-
   return (
     <Layout title={page.title}>
       {heroImage ? (
@@ -86,7 +30,9 @@ const ForArtists = ({ data }) => {
                   <PortableText
                     className="content"
                     blocks={page._rawHeroCard}
-                    serializers={{ types: { block: CardRenderer } }}
+                    serializers={{
+                      types: { block: CardRenderer },
+                    }}
                   />
                 </div>
               </div>
@@ -102,7 +48,9 @@ const ForArtists = ({ data }) => {
                   <div className="content">
                     <PortableText
                       blocks={page._rawHeroCard}
-                      serializers={{ types: { block: CardRenderer } }}
+                      serializers={{
+                        types: { block: CardRenderer },
+                      }}
                     />
                   </div>
                 </div>
@@ -137,6 +85,7 @@ const ForArtists = ({ data }) => {
                   blocks={service._rawBody}
                   serializers={{
                     types: {
+                      hr: Serializers.types.hr,
                       block: BlockRenderer,
                       blockImage: BlockImageRenderer,
                     },
@@ -147,6 +96,7 @@ const ForArtists = ({ data }) => {
           ))}
         </div>
       </section>
+      <ConvertKitModal />
     </Layout>
   )
 }

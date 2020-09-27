@@ -35,10 +35,9 @@ const SubmitForm = () => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "submission", data }),
+      body: encode({ "form-name": "submission", ...data }),
     })
       .then(() => {
-        alert("Success!")
         setModal(!modal)
         reset()
       })
