@@ -40,11 +40,8 @@ jobs:
           restore-keys: |
             cache-cache-
       - name: Install packages
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        # if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-        # if: |
-        #   steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
-        #   steps.cache-node-modules.outputs.cache-hit != 'true'
       - name: Run build
         env:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
