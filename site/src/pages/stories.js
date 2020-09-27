@@ -101,25 +101,27 @@ const TheLastDraft = ({ data }) => {
       />
       <div className="container" style={{ maxWidth: "1216px" }}>
         <BlogTabs />
-        <Box
-          css={css`
-            padding: 1.5rem 0 3rem 0;
+        <section className="section">
+          <Box
+            css={css`
+              padding: 1.5rem 0 3rem 0;
 
-            p {
-              margin-bottom: 1rem;
-            }
-          `}
-        >
-          <PortableText
-            blocks={pubBody}
-            serializers={{
-              types: {
-                block: SectionRenderer,
-                blockImage: BlockImageRenderer,
-              },
-            }}
-          />
-        </Box>
+              p {
+                margin-bottom: 1rem;
+              }
+            `}
+          >
+            <PortableText
+              blocks={pubBody}
+              serializers={{
+                types: {
+                  block: SectionRenderer,
+                  blockImage: BlockImageRenderer,
+                },
+              }}
+            />
+          </Box>
+        </section>
         <section id="featured" className="section">
           <h2
             className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"

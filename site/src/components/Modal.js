@@ -26,7 +26,9 @@ const Modal = props => {
         <div className="modal-content">
           <div className="card" style={modalStyle}>
             <div className="card-content">
-              <h1 className="title is-montserrat">{props.header}</h1>
+              {props.header ? (
+                <h1 className="title is-montserrat">{props.header}</h1>
+              ) : null}
               <p>{props.body ? props.body : props.children}</p>
             </div>
           </div>
