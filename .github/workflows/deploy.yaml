@@ -21,10 +21,10 @@ jobs:
         id: cache-node-modules
         uses: actions/cache@v2
         with:
-          path: node_modules/
-          key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          path: "**/node_modules/"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
+            ${{ runner.os }}-modules-
       - name: Cache Gatsby public
         uses: actions/cache@v2
         with:
@@ -41,9 +41,9 @@ jobs:
             cache-cache-
       - name: Install packages
         run: yarn
-        if: |
-          steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
-          steps.cache-node-modules.outputs.cache-hit != 'true'
+        # if: |
+        #   steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
+        #   steps.cache-node-modules.outputs.cache-hit != 'true'
       - name: Run build
         env:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
