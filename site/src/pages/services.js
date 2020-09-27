@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Img from "gatsby-image"
 import { Box, Grid, Heading, Text, List, ListItem } from "@chakra-ui/core"
 import { css, jsx } from "@emotion/core"
 import BackgroundImage from "gatsby-background-image"
@@ -128,46 +129,64 @@ const ServicesPage = ({ data }) => {
             gap="32px"
           >
             {services.offeredServices.map((service, i) => {
-              const { title, description, bulletPoints, slug } = service
+              const {
+                title,
+                description,
+                bulletPoints,
+                slug,
+                image,
+                alt,
+              } = service
               return (
                 <Box
                   key={i}
                   d="flex"
                   flexDir="column"
                   justifyContent="space-between"
-                  p={[
-                    "3rem 1.25rem",
-                    "3rem 1.25rem",
-                    "3rem 1.25rem",
-                    "3.5rem 3rem 5rem 3rem",
-                  ]}
                   className="card"
                 >
-                  <Box>
-                    <Heading
-                      as="h2"
-                      color="black"
-                      mb=".5em"
-                      fontWeight="normal"
-                      letterSpacing=".12em"
-                      fontSize={["2xl", "3xl", "4xl"]}
-                      className="is-montserrat is-uppercase"
-                    >
-                      {title}
-                    </Heading>
-                    <Text m="1.5rem 0">{description}</Text>
-                    <List styleType="disc">
-                      {bulletPoints.map((point, i) => (
-                        <ListItem key={i}>{point}</ListItem>
-                      ))}
-                    </List>
-                  </Box>
-                  <Box mt="1.5rem">
-                    <Link to={`/services/${slug.current}`}>
-                      <Box as="button" className="button">
-                        Read More
-                      </Box>
-                    </Link>
+                  {image && image.asset ? (
+                    <Img fluid={image.asset.fluid} alt={alt && alt} />
+                  ) : null}
+                  <Box
+                    key={i}
+                    d="flex"
+                    flexDir="column"
+                    justifyContent="space-between"
+                    p={[
+                      "3rem 1.25rem",
+                      "3rem 1.25rem",
+                      "3rem 1.25rem",
+                      "3.5rem 3rem 5rem 3rem",
+                    ]}
+                    className="card"
+                  >
+                    <Box>
+                      <Heading
+                        as="h2"
+                        color="black"
+                        mb=".5em"
+                        fontWeight="normal"
+                        letterSpacing=".12em"
+                        fontSize={["2xl", "3xl", "4xl"]}
+                        className="is-montserrat is-uppercase"
+                      >
+                        {title}
+                      </Heading>
+                      <Text m="1.5rem 0">{description}</Text>
+                      <List styleType="disc">
+                        {bulletPoints.map((point, i) => (
+                          <ListItem key={i}>{point}</ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                    <Box mt="1.5rem">
+                      <Link to={`/services/${slug.current}`}>
+                        <Box as="button" className="button">
+                          Learn More
+                        </Box>
+                      </Link>
+                    </Box>
                   </Box>
                 </Box>
               )
@@ -196,6 +215,18 @@ export const data = graphql`
         slug {
           current
         }
+        image {
+          hotspot {
+            x
+            y
+          }
+          asset {
+            fluid(maxWidth: 800, maxHeight: 600) {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
+        alt
         description
         bulletPoints
       }
