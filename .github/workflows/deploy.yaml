@@ -40,8 +40,8 @@ jobs:
           restore-keys: |
             cache-cache-
       - name: Install packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn
-          if:steps.yarn-cache.outputs.cache-hit != 'true'
         # if: |
         #   steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
         #   steps.cache-node-modules.outputs.cache-hit != 'true'
