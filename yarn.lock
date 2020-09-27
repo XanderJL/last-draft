@@ -5740,14 +5740,6 @@ convert-source-map@^1.5.0, convert-source-map@^1.7.0:
   dependencies:
     safe-buffer "~5.1.1"
 
-convertkit-react@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/convertkit-react/-/convertkit-react-1.4.2.tgz#969ce2bfba2c6aace17d4617d9450be94f5b70c3"
-  integrity sha512-HeOox9JB4CxI058IYXZxw9dFQodwhbKl/ifg9W+LFznBgxnwDnmgTzegbvhUuigYfw3DIfGD1PtRon0VY1ZuiQ==
-  dependencies:
-    prop-types "^15.7.2"
-    react "^16.13.1"
-
 cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
@@ -15687,6 +15679,11 @@ react-remove-scroll@^2.3.0:
     tslib "^1.0.0"
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
+
+react-script-tag@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-script-tag/-/react-script-tag-1.1.2.tgz#be0fa3a22dfae8165d083f6bc1ff6f9799b20d44"
+  integrity sha512-4oR9ntvGfX4igiP77vK310ru5Oa77xO7CeYB3Xi9lu0qsikpGpK1Kq1WMFocvy8U4fQFq8ovtrZS/8adfCziFw==
 
 react-side-effect@^1.1.0:
   version "1.2.0"
