@@ -9,7 +9,7 @@ import Serializers, {
   CardRenderer,
   BlockRenderer,
   BlockImageRenderer,
-} from "../../components/serializers/Serializers"
+} from "../../components/Serializers"
 import ConvertKitModal from "../../components/ConvertKitModal"
 
 const ForArtists = ({ data }) => {

@@ -9,6 +9,9 @@ import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
 import SubmitForm from "../components/SubmitForm"
+import Hero from "../components/Hero"
+import imageHotspot from "../hooks/imageHotspot"
+import InstagramFeed from "../components/InstagramFeed"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -22,6 +25,10 @@ export default function About() {
             fluid(maxWidth: 1440) {
               ...GatsbySanityImageFluid
             }
+          }
+          hotspot {
+            x
+            y
           }
         }
         _rawSectionOne
@@ -107,9 +114,9 @@ export default function About() {
         dataset: process.env.GATSBY_SANITY_DATASET,
       }).image(source)
     return (
-      <a
+      <Link
         role="button"
-        href="https://medium.com/lastdraft"
+        to="/stories"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -117,13 +124,14 @@ export default function About() {
           src={urlFor(props.node.image.asset).maxWidth(400)}
           alt={props.node.alt}
         />
-      </a>
+      </Link>
     )
   }
 
   const title = data.aboutPage.title
   const metaDescription = data.aboutPage._rawMetaDescription[0].children[0].text
   const heroImage = data.aboutPage.heroImage.asset.fluid
+  const heroHotspot = data.aboutPage.heroImage.hotspot
   const heroCard = data.aboutPage._rawHeroCard
   const sectionOne = data.aboutPage._rawSectionOne.body
   const sectionOneImg = data.aboutPage.sectionOne.image.asset.fluid
@@ -134,23 +142,22 @@ export default function About() {
 
   return (
     <Layout title={title} description={metaDescription}>
-      <BackgroundImage
+      <Hero
         fluid={heroImage}
-        className="hero-about is-fullheight-with-navbar"
+        styles={imageHotspot(heroHotspot)}
+        size="fullheight-with-navbar"
       >
-        <div className="hero-body">
-          <div className="card-about">
-            <div className="card-content">
-              <div className="content">
-                <PortableText
-                  blocks={heroCard}
-                  serializers={{ types: { block: CardRenderer } }}
-                />
-              </div>
+        <div className="card-about">
+          <div className="card-content">
+            <div className="content">
+              <PortableText
+                blocks={heroCard}
+                serializers={{ types: { block: CardRenderer } }}
+              />
             </div>
           </div>
         </div>
-      </BackgroundImage>
+      </Hero>
       <section className="section-storytelling">
         <div className="container">
           <div className="copy">
@@ -200,6 +207,9 @@ export default function About() {
       </section>
       <section className="section">
         <SubmitForm />
+      </section>
+      <section className="section">
+        <InstagramFeed />
       </section>
     </Layout>
   )

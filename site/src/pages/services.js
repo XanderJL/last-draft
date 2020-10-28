@@ -1,17 +1,18 @@
-/** @jsx jsx */
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { Box, Grid, Heading, Text, List, ListItem } from "@chakra-ui/core"
-import { css, jsx } from "@emotion/core"
 import BackgroundImage from "gatsby-background-image"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import PortableText from "@sanity/block-content-to-react"
+import Hero from "../components/Hero"
+import imageHotspot from "../hooks/imageHotspot"
 
 const ServicesPage = ({ data }) => {
   const { services, placeholder, _rawHeroCard } = data
   const heroImage = services.heroImage.asset.fluid
+  const heroHotpsot = services.heroImage.hotspot
 
   const CardRenderer = props => {
     const { style = "normal" } = props.node
@@ -77,24 +78,21 @@ const ServicesPage = ({ data }) => {
   return (
     <Layout title={services.title}>
       {heroImage ? (
-        <BackgroundImage
-          className="hero is-fullheight-with-navbar is-primary"
+        <Hero
           fluid={heroImage}
+          styles={imageHotspot(heroHotpsot)}
+          size="fullheight-with-navbar"
         >
-          <div className="hero-body">
-            <div className="container">
-              <div className="card-hero">
-                <div className="card-body">
-                  <PortableText
-                    className="content"
-                    blocks={services._rawHeroCard}
-                    serializers={{ types: { block: CardRenderer } }}
-                  />
-                </div>
-              </div>
+          <div className="card-hero">
+            <div className="card-body">
+              <PortableText
+                className="content"
+                blocks={services._rawHeroCard}
+                serializers={{ types: { block: CardRenderer } }}
+              />
             </div>
           </div>
-        </BackgroundImage>
+        </Hero>
       ) : (
         <div className="hero is-fullheight-with-navbar is-primary">
           <div className="hero-body">
@@ -113,19 +111,17 @@ const ServicesPage = ({ data }) => {
           </div>
         </div>
       )}
-      <section
-        css={css`
-          padding: 5rem 1.25rem 10rem 1.25rem;
-        `}
+      <Box
+        as="section"
+        p="5rem 1.25rem"
         className="section has-background-white-bis"
       >
         <div className="container" style={{ maxWidth: "1100px" }}>
           <Grid
-            gridTemplateColumns={[
-              "minmax(0, 1fr)",
-              "minmax(0, 1fr)",
-              "repeat(2, 1fr)",
-            ]}
+            gridTemplateColumns={{
+              base: "minmax(0, 1fr)",
+              md: "repeat(2, 1fr)",
+            }}
             gap="32px"
           >
             {services.offeredServices.map((service, i) => {
@@ -146,41 +142,39 @@ const ServicesPage = ({ data }) => {
                   className="card"
                 >
                   {image && image.asset ? (
-                    <Img fluid={image.asset.fluid} alt={alt && alt} />
+                    <Link to={`/services/${slug.current}`}>
+                      <Img fluid={image.asset.fluid} alt={alt && alt} />
+                    </Link>
                   ) : null}
                   <Box
+                    flex={1}
                     key={i}
                     d="flex"
                     flexDir="column"
                     justifyContent="space-between"
-                    p={[
-                      "3rem 1.25rem",
-                      "3rem 1.25rem",
-                      "3rem 1.25rem",
-                      "3.5rem 3rem 5rem 3rem",
-                    ]}
+                    p={{ base: "2rem 1.25rem", lg: "2rem 2rem 3rem 2rem" }}
                     className="card"
                   >
-                    <Box>
+                    <Box flex={1}>
                       <Heading
                         as="h2"
                         color="black"
                         mb=".5em"
                         fontWeight="normal"
                         letterSpacing=".12em"
-                        fontSize={["2xl", "3xl", "4xl"]}
+                        fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
                         className="is-montserrat is-uppercase"
                       >
                         {title}
                       </Heading>
                       <Text m="1.5rem 0">{description}</Text>
-                      <List styleType="disc">
+                      <List stylePosition="inside" styleType="disc">
                         {bulletPoints.map((point, i) => (
                           <ListItem key={i}>{point}</ListItem>
                         ))}
                       </List>
                     </Box>
-                    <Box mt="1.5rem">
+                    <Box mt="2rem">
                       <Link to={`/services/${slug.current}`}>
                         <Box as="button" className="button">
                           Learn More
@@ -193,7 +187,7 @@ const ServicesPage = ({ data }) => {
             })}
           </Grid>
         </div>
-      </section>
+      </Box>
     </Layout>
   )
 }
@@ -208,6 +202,10 @@ export const data = graphql`
             ...GatsbySanityImageFluid
           }
         }
+        hotspot {
+          x
+          y
+        }
       }
       _rawHeroCard
       offeredServices {
@@ -221,7 +219,7 @@ export const data = graphql`
             y
           }
           asset {
-            fluid(maxWidth: 800, maxHeight: 600) {
+            fluid(maxWidth: 800, maxHeight: 450) {
               ...GatsbySanityImageFluid
             }
           }

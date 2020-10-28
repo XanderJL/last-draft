@@ -10,7 +10,7 @@ const Serializers = {
   types: {
     hr: ({ node }) => {
       if (node.style === "elipses") {
-        return <hr className="elipses-hr" />
+        return <hr className="elipses-hr" style={{ margin: "3rem auto" }} />
       } else if (node.style === "solid") {
         return <hr className="solid-hr" style={{ margin: "3rem auto" }} />
       }

@@ -93,6 +93,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: process.env.INSTAGRAM_USERNAME_ID,
+        // access_token: process.env.INSTAGRAM_ACCESS_TOKEN,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -105,6 +112,12 @@ module.exports = {
       options: {
         useMoxJpeg: true,
         defaultQuality: 75,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-chakra-ui`,
+      options: {
+        isUsingColorMode: false,
       },
     },
     {

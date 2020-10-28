@@ -1,13 +1,14 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image/withIEPolyfill"
-import BackgroundImage from "gatsby-background-image"
 import PortableText from "@sanity/block-content-to-react"
+import { Box } from "@chakra-ui/core"
 
 import Layout from "../components/Layout"
 import NewsLetter from "../components/NewsLetter"
 import Testimonials from "../components/TestimonialCarousel"
 import ContactForm from "../components/Contact"
+import Hero from "../components/Hero"
+import imageHotspot from "../hooks/imageHotspot"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -16,14 +17,7 @@ const IndexPage = () => {
         relativePath: { eq: "index/newsletter-header.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 1920) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      glassesImage: file(relativePath: { eq: "index/glasses-1.jpg" }) {
-        childImageSharp {
-          fluid {
+          fluid(maxWidth: 3840, quality: 90) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -33,9 +27,13 @@ const IndexPage = () => {
         _rawHeroCard
         heroImage {
           asset {
-            fluid {
+            fluid(maxWidth: 3840) {
               ...GatsbySanityImageFluid
             }
+          }
+          hotspot {
+            x
+            y
           }
         }
         cardsTitle
@@ -44,6 +42,7 @@ const IndexPage = () => {
     }
   `)
   const headerImage = data.homePage.heroImage.asset.fluid
+  const headerHotspot = data.homePage.heroImage.hotspot
   const newsLetterImage = data.newsLetterImage.childImageSharp.fluid
   const heroCard = data.homePage._rawHeroCard
   const metaDescription = data.homePage._rawMetaDescription[0].children[0].text
@@ -56,7 +55,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase title is-size-1 has-text-white is-spaced is-size-4-mobile`,
+          className: `is-montserrat is-uppercase title is-size-1 has-text-black is-spaced is-size-3-mobile`,
         },
         props.children
       )
@@ -65,7 +64,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase subtitle is-size-3 has-text-white is-spaced is-size-5-mobile`,
+          className: `is-montserrat is-uppercase subtitle is-size-3 has-text-black is-spaced is-size-5-mobile`,
         },
         props.children
       )
@@ -87,29 +86,26 @@ const IndexPage = () => {
 
   return (
     <Layout title="Home" description={metaDescription}>
-      <BackgroundImage
-        className="hero-landing is-fullheight-with-navbar"
+      <Hero
+        size="fullheight-with-navbar"
         fluid={headerImage}
-        style={{
-          objectPosition: "60% 40%",
-          backgroundAttachment: "fixed",
-        }}
+        styles={imageHotspot(headerHotspot)}
+        // styles={{ backgroundAttachment: "fixed" }}
       >
-        <Img
-          fluid={headerImage}
-          className="is-hidden-desktop"
-          objectFit="contain"
-          alt="Image of beer"
-        />
-        <div className="hero-body">
-          <div className="container is-widescreen">
-            <PortableText
-              blocks={heroCard}
-              serializers={{ types: { block: BlockRenderer } }}
-            />
-          </div>
-        </div>
-      </BackgroundImage>
+        <Box
+          maxW="max-content"
+          m="0 auto"
+          p={{ base: "3rem 1.5rem", md: "5rem 5rem 7rem 5rem" }}
+          bg="white"
+          color="black"
+          textAlign="center"
+        >
+          <PortableText
+            blocks={heroCard}
+            serializers={{ types: { block: BlockRenderer } }}
+          />
+        </Box>
+      </Hero>
       <section className="section-ethical-storytelling">
         <div className="container is-widescreen">
           <div className="copy">

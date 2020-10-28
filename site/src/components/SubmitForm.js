@@ -6,7 +6,7 @@ import { css, jsx } from "@emotion/core"
 import Modal from "./Modal"
 
 const formStyles = css`
-  max-width: 900px;
+  max-width: 750px;
   margin: 0 auto;
 
   input,
@@ -59,7 +59,7 @@ const SubmitForm = () => {
         <Heading
           as="h2"
           color="black"
-          mb="1.5rem"
+          mb="1.25rem"
           letterSpacing="0.12em"
           fontWeight="normal"
           fontSize="4xl"
@@ -161,7 +161,7 @@ const SubmitForm = () => {
         </div>
         <div className="control">
           <Box mt="2rem">
-            <input type="submit" className="button" />
+            <input type="submit" className="button is-uppercase" />
           </Box>
         </div>
       </form>

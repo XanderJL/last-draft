@@ -4,20 +4,18 @@ import BackgroundImage from "gatsby-background-image"
 import Layout from "../components/Layout"
 import EmployeesCard from "../components/EmployeesCard"
 import EmployeeSection from "../components/EmployeeSection"
+import Hero from "../components/Hero"
+import imageHotspot from "../hooks/imageHotspot"
 
 const Team = ({ data }) => {
   return (
     <Layout title="Team">
-      <BackgroundImage
+      <Hero
         fluid={data.headerImage.childImageSharp.fluid}
-        className="hero-about is-fullheight-with-navbar"
+        size="fullheight-with-navbar"
       >
-        <div className="hero-body">
-          <div className="container">
-            <EmployeesCard />
-          </div>
-        </div>
-      </BackgroundImage>
+        <EmployeesCard />
+      </Hero>
       <div className="section-wrapper">
         {data.employees.edges.map(({ node: employee }) => (
           <EmployeeSection

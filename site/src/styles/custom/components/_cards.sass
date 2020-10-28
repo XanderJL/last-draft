@@ -8,8 +8,25 @@
       .card-content
         padding: $card-content-padding
 
+  &-about
+    @extend .card
+    margin: 0 auto
+    box-shadow: $card-shadow
+    width: fit-content
+
+    .card-content
+      max-width: 50ch
+      padding: $card-padding
+
+      @media screen and (max-width: $tablet)
+        padding: $card-padding-mobile
+
+        .title
+          margin-bottom: $title-margin
+
   &-employees
     flex: 1
+    margin: 0 auto
     justify-self: center
     max-width: $desktop
     .card-content

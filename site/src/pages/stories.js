@@ -98,14 +98,19 @@ const TheLastDraft = ({ data }) => {
       <Hero
         fluid={heroImage.asset.fluid}
         styles={imageHotspot(heroImage.hotspot)}
+        size="large"
       />
       <div className="container" style={{ maxWidth: "1216px" }}>
         <BlogTabs />
-        <section className="section">
+        <Box as="section" p="2rem 1.25rem 1.25rem 0">
           <Box
             css={css`
-              padding: 1.5rem 0 3rem 0;
+              max-width: 70ch;
+              margin: 0 auto;
 
+              img {
+                margin-bottom: 1rem;
+              }
               p {
                 margin-bottom: 1rem;
               }
@@ -121,7 +126,7 @@ const TheLastDraft = ({ data }) => {
               }}
             />
           </Box>
-        </section>
+        </Box>
         <section id="featured" className="section">
           <h2
             className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"

@@ -1,7 +1,8 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import PortableText from "@sanity/block-content-to-react"
-import Serializers from "../components/serializers/Serializers"
+import Serializers from "../components/Serializers"
+import { Box, Text, Heading } from "@chakra-ui/core"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import AuthorBio from "../components/AuthorBio"
@@ -40,40 +41,39 @@ const post = ({ data }) => {
       <div className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
         <section className="section">
           <div className="container has-text-centered">
-            <h1
+            <Heading
+              as="h1"
+              fontWeight={400}
               className="title is-montserrat is-uppercase is-size-2-desktop has-text-black"
               style={{ marginBottom: "0.75rem" }}
             >
               {title}
-            </h1>
+            </Heading>
             <Link
               to={"/stories/authors/" + author.slug.current}
               className="is-montserrat is-uppercase"
             >
               {author.name}
             </Link>
-            <p className="is-montserrat" style={{ marginBottom: "2.5rem" }}>
+            <Text mb="2.5rem" className="is-montserrat">
               {publishedAt}
-            </p>
+            </Text>
           </div>
-
           <div className="container content is-montserrat">
             <PortableText blocks={_rawBody} serializers={Serializers} />
-            <PortableText blocks={_rawPostFooter} serializers={Serializers} />
           </div>
         </section>
-        {tags.length ? (
-          <section className="section">
+        <hr className="solid-hr" />
+        <section className="section">
+          <div className="container content is-montserrat">
+            <AuthorBio author={author} />
+            <PortableText blocks={_rawPostFooter} serializers={Serializers} />
+          </div>
+          {tags.length ? (
             <div className="container">
               <Tags tags={tags} />
             </div>
-          </section>
-        ) : null}
-        <hr className="solid-hr" />
-        <section className="section">
-          <div className="container">
-            <AuthorBio author={author} />
-          </div>
+          ) : null}
         </section>
       </div>
     </Layout>
