@@ -6,7 +6,7 @@ import { css, jsx } from "@emotion/core"
 import Modal from "./Modal"
 
 const formStyles = css`
-  max-width: 750px;
+  max-width: ${theme.sizes["4xl"]};
   margin: 0 auto;
 
   input,

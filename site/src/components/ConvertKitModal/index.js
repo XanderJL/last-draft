@@ -9,7 +9,7 @@ const ConvertKitModal = () => {
   const [isOpen, setOpen] = useState(true)
   return (
     <BoxMotion
-      display={isOpen ? "flex" : "none"}
+      display={{ base: "none", md: isOpen ? "flex" : "none" }}
       flexDirection="column"
       zIndex={10000}
       minW={{ base: "max-content", md: "600px" }}

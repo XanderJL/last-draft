@@ -228,11 +228,11 @@ export default function About() {
         <SubmitForm />
       </Box>
       <Box as="section" className="section">
-        <Box maxW="750px" m="0 auto">
+        <Box maxW="4xl" m="0 auto">
           <Link href="https://www.instagram.com/lastdraftinc" isExternal>
             <Heading
               as="h2"
-              mb="1rem"
+              mb="1.5rem"
               fontWeight={400}
               letterSpacing="0.12em"
               color="black"
