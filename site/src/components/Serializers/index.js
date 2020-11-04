@@ -26,7 +26,7 @@ const Serializers = {
             style={{ margin: "1rem auto" }}
           />
           <div className="content has-text-grey is-italic">
-            {caption ? <PortableText blocks={caption} /> : <span>{alt}</span>}
+            {caption && <span>{caption}</span>}
           </div>
         </div>
       )

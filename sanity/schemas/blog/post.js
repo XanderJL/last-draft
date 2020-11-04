@@ -40,6 +40,17 @@ export default {
       },
     },
     {
+      name: "mainAlt",
+      title: "Main Image Alt Text",
+      type: "string",
+    },
+    {
+      name: "mainCaption",
+      title: "Main Image Caption",
+      type: "text",
+      rows: 4,
+    },
+    {
       name: "category",
       title: "Category",
       type: "reference",
@@ -58,6 +69,12 @@ export default {
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
+    },
+    {
+      name: "previewCopy",
+      title: "Preview Copy",
+      type: "text",
+      rows: 10,
     },
     {
       name: "body",

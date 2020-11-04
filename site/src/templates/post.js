@@ -16,6 +16,7 @@ const post = ({ data }) => {
     publishedAt,
     tags,
     mainImage,
+    mainCaption,
     socialImage,
     _rawBody,
   } = data.sanityPost
@@ -37,10 +38,23 @@ const post = ({ data }) => {
       description={toPlainText(_rawBody).slice(0, 156) + "..."}
       image={image}
     >
-      <Hero fluid={mainImage.asset.fluid} styles={positionStyles} />
-      <div className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
-        <section className="section">
-          <div className="container has-text-centered">
+      <Hero
+        fluid={mainImage.asset.fluid}
+        styles={positionStyles}
+        size="large"
+      />
+      <Box className="blog-post" style={{ maxWidth: "75ch", margin: "0 auto" }}>
+        {mainCaption && (
+          <Box
+            p="1.25rem"
+            fontSize="xl"
+            className="content has-text-grey is-italic"
+          >
+            <Text className="is-montserrat">{mainCaption}</Text>
+          </Box>
+        )}
+        <Box as="section" className="section">
+          <Box className="container has-text-centered">
             <Heading
               as="h1"
               fontWeight={400}
@@ -58,24 +72,24 @@ const post = ({ data }) => {
             <Text mb="2.5rem" className="is-montserrat">
               {publishedAt}
             </Text>
-          </div>
-          <div className="container content is-montserrat">
+          </Box>
+          <Box className="container content is-montserrat">
             <PortableText blocks={_rawBody} serializers={Serializers} />
-          </div>
-        </section>
+          </Box>
+        </Box>
         <hr className="solid-hr" />
-        <section className="section">
-          <div className="container content is-montserrat">
+        <Box as="section" className="section">
+          <Box className="container content is-montserrat">
             <AuthorBio author={author} />
             <PortableText blocks={_rawPostFooter} serializers={Serializers} />
-          </div>
+          </Box>
           {tags.length ? (
-            <div className="container">
+            <Box className="container">
               <Tags tags={tags} />
-            </div>
+            </Box>
           ) : null}
-        </section>
-      </div>
+        </Box>
+      </Box>
     </Layout>
   )
 }
@@ -116,6 +130,8 @@ export const data = graphql`
           y
         }
       }
+      mainAlt
+      mainCaption
       socialImage: mainImage {
         asset {
           fixed(width: 1200) {

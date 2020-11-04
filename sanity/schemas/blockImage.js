@@ -21,8 +21,8 @@ export default {
     {
       name: "caption",
       title: "Caption",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "text",
+      rows: 4,
     },
   ],
 };

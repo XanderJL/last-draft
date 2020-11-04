@@ -110,7 +110,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
-        useMoxJpeg: true,
         defaultQuality: 75,
       },
     },

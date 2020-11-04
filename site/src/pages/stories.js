@@ -79,17 +79,10 @@ const TheLastDraft = ({ data }) => {
         dataset: process.env.GATSBY_SANITY_DATASET,
       }).image(source)
     return (
-      <a
-        role="button"
-        href="https://medium.com/lastdraft"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src={urlFor(props.node.image.asset).maxWidth(400)}
-          alt={props.node.alt}
-        />
-      </a>
+      <img
+        src={urlFor(props.node.image.asset).maxWidth(400)}
+        alt={props.node.alt}
+      />
     )
   }
 
@@ -102,14 +95,12 @@ const TheLastDraft = ({ data }) => {
       />
       <div className="container" style={{ maxWidth: "1216px" }}>
         <BlogTabs />
-        <Box as="section" p="2rem 1.25rem 1.25rem 0">
+        <Box as="section" p={{base: "1.25rem", md: "2rem 1.25rem 3rem 1.25rem"}}>
           <Box
             css={css`
-              max-width: 70ch;
-              margin: 0 auto;
-
               img {
                 margin-bottom: 1rem;
+                max-height: 128px;
               }
               p {
                 margin-bottom: 1rem;
@@ -127,33 +118,6 @@ const TheLastDraft = ({ data }) => {
             />
           </Box>
         </Box>
-        <section id="featured" className="section">
-          <h2
-            className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
-            style={{ marginBottom: "0" }}
-          >
-            Featured
-          </h2>
-          <hr style={{ margin: "0.75rem 0" }} />
-          <div className="wrapper-post" style={{ padding: "2rem 0" }}>
-            {featuredPosts.featuredPosts.map(post => {
-              const { id, title, mainImage, _rawBody, category, slug } = post
-              const image = mainImage.asset.fluid
-              const link = `/stories/${category.slug.current}/${slug.current}`
-              return (
-                <PostCard
-                  key={id}
-                  title={title}
-                  image={image}
-                  link={link}
-                  cardStyle={{ maxWidth: "420px" }}
-                >
-                  {toPlainText(_rawBody).slice(0, 159) + "..."}
-                </PostCard>
-              )
-            })}
-          </div>
-        </section>
         <section id="recent" className="section-category">
           <h2
             className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
@@ -164,7 +128,15 @@ const TheLastDraft = ({ data }) => {
           <hr style={{ margin: "0.75rem 0" }} />
           <div className="wrapper-post" style={{ padding: "2rem 0" }}>
             {latestPosts.edges.map(({ node: post }) => {
-              const { id, title, mainImage, _rawBody, category, slug } = post
+              const {
+                id,
+                title,
+                mainImage,
+                _rawBody,
+                previewCopy,
+                category,
+                slug,
+              } = post
               const image = mainImage.asset.fluid
               const link = `/stories/${category.slug.current}/${slug.current}`
               return (
@@ -175,7 +147,46 @@ const TheLastDraft = ({ data }) => {
                   link={link}
                   cardStyle={{ maxWidth: "420px" }}
                 >
-                  {toPlainText(_rawBody).slice(0, 159) + "..."}
+                  {previewCopy
+                    ? previewCopy
+                    : toPlainText(_rawBody).slice(0, 159) + "..."}
+                </PostCard>
+              )
+            })}
+          </div>
+        </section>
+        <section id="featured" className="section">
+          <h2
+            className="title is-size-3-desktop is-size-4-mobile is-montserrat is-uppercase has-text-black"
+            style={{ marginBottom: "0" }}
+          >
+            Featured
+          </h2>
+          <hr style={{ margin: "0.75rem 0" }} />
+          <div className="wrapper-post" style={{ padding: "2rem 0" }}>
+            {featuredPosts.featuredPosts.map(post => {
+              const {
+                id,
+                title,
+                mainImage,
+                _rawBody,
+                previewCopy,
+                category,
+                slug,
+              } = post
+              const image = mainImage.asset.fluid
+              const link = `/stories/${category.slug.current}/${slug.current}`
+              return (
+                <PostCard
+                  key={id}
+                  title={title}
+                  image={image}
+                  link={link}
+                  cardStyle={{ maxWidth: "420px" }}
+                >
+                  {previewCopy
+                    ? previewCopy
+                    : toPlainText(_rawBody).slice(0, 159) + "..."}
                 </PostCard>
               )
             })}
@@ -206,6 +217,7 @@ const TheLastDraft = ({ data }) => {
                       title,
                       mainImage,
                       _rawBody,
+                      previewCopy,
                       category,
                       slug,
                     } = post
@@ -219,7 +231,9 @@ const TheLastDraft = ({ data }) => {
                         link={link}
                         cardStyle={{ maxWidth: "420px" }}
                       >
-                        {toPlainText(_rawBody).slice(0, 159) + "..."}
+                        {previewCopy
+                          ? previewCopy
+                          : toPlainText(_rawBody).slice(0, 159) + "..."}
                       </PostCard>
                     )
                   })}
@@ -286,6 +300,7 @@ export const data = graphql`
               y
             }
           }
+          previewCopy
           _rawBody
           category {
             slug {

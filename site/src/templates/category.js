@@ -38,7 +38,15 @@ const Category = ({ data, pageContext }) => {
           ) : null}
           <div className="wrapper-post">
             {posts.edges.map(({ node: post }) => {
-              const { id, title, mainImage, _rawBody, category, slug } = post
+              const {
+                id,
+                title,
+                mainImage,
+                _rawBody,
+                previewCopy,
+                category,
+                slug,
+              } = post
               const image = mainImage.asset.fluid
               const link = `/stories/${category.slug.current}/${slug.current}`
               return (
@@ -49,7 +57,11 @@ const Category = ({ data, pageContext }) => {
                   link={link}
                   cardStyle={{ maxWidth: "420px" }}
                 >
-                  <p>{toPlainText(_rawBody).slice(0, 159) + "..."}</p>
+                  <p>
+                    {previewCopy
+                      ? previewCopy
+                      : toPlainText(_rawBody).slice(0, 159) + "..."}
+                  </p>
                 </PostCard>
               )
             })}
@@ -106,6 +118,7 @@ export const data = graphql`
             }
             title
           }
+          previewCopy
           _rawBody
           mainImage {
             asset {

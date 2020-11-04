@@ -1,7 +1,8 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 import PortableText from "@sanity/block-content-to-react"
-import { Box } from "@chakra-ui/core"
+import { Box, image } from "@chakra-ui/core"
 
 import Layout from "../components/Layout"
 import NewsLetter from "../components/NewsLetter"
@@ -55,7 +56,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase title is-size-1 has-text-black is-spaced is-size-3-mobile`,
+          className: `is-montserrat is-uppercase title is-size-1 has-text-white is-spaced is-size-3-mobile`,
         },
         props.children
       )
@@ -64,7 +65,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase subtitle is-size-3 has-text-black is-spaced is-size-5-mobile`,
+          className: `is-montserrat is-uppercase subtitle is-size-3 has-text-white is-spaced is-size-5-mobile`,
         },
         props.children
       )
@@ -86,26 +87,33 @@ const IndexPage = () => {
 
   return (
     <Layout title="Home" description={metaDescription}>
-      <Hero
-        size="fullheight-with-navbar"
-        fluid={headerImage}
-        styles={imageHotspot(headerHotspot)}
-        // styles={{ backgroundAttachment: "fixed" }}
-      >
-        <Box
-          maxW="max-content"
-          m="0 auto"
-          p={{ base: "3rem 1.5rem", md: "5rem 5rem 7rem 5rem" }}
-          bg="white"
-          color="black"
-          textAlign="center"
+      <Box d={{ base: "none", md: "block" }}>
+        <Hero
+          size="fullheight-with-navbar"
+          fluid={headerImage}
+          styles={imageHotspot(headerHotspot)}
         >
+          <Box
+            maxW="max-content"
+            // p={{ base: "3rem 1.5rem", md: "5rem 5rem 7rem 5rem" }}
+            className="has-text-white"
+          >
+            <PortableText
+              blocks={heroCard}
+              serializers={{ types: { block: BlockRenderer } }}
+            />
+          </Box>
+        </Hero>
+      </Box>
+      <Box d={{ base: "flex", md: "none" }} flexDir="column">
+        <Img fluid={headerImage} style={{ flex: 1 }} />
+        <Box p="3rem 1.25rem" bg="black">
           <PortableText
             blocks={heroCard}
             serializers={{ types: { block: BlockRenderer } }}
           />
         </Box>
-      </Hero>
+      </Box>
       <section className="section-ethical-storytelling">
         <div className="container is-widescreen">
           <div className="copy">
