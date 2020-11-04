@@ -9137,13 +9137,6 @@ gatsby-source-filesystem@^2.1.46:
     valid-url "^1.0.9"
     xstate "^4.13.0"
 
-gatsby-source-instagram@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-instagram/-/gatsby-source-instagram-0.9.0.tgz#a0778d9b9262c535a1788dcb522040a29305718f"
-  integrity sha512-g/TdvMkowzcoIGyHc5lygE2U+QYw+8d9829r2+/vu9mye+xtHXfGCEgCfGOvhDDHiCwTfodGN67RDMu+oSUOTw==
-  dependencies:
-    axios "^0.19.0"
-
 gatsby-source-sanity@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/gatsby-source-sanity/-/gatsby-source-sanity-5.0.6.tgz#d1d7285774d29677258e2d22723f2c50a810a403"

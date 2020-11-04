@@ -93,13 +93,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-instagram`,
-      options: {
-        username: process.env.INSTAGRAM_USERNAME_ID,
-        // access_token: process.env.INSTAGRAM_ACCESS_TOKEN,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
