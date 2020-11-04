@@ -1,5 +1,30 @@
 import { extendTheme } from "@chakra-ui/core"
 
-const theme = extendTheme({})
+const theme = extendTheme({
+  components: {
+    Link: {
+      baseStyle: {
+        textDecor: "none",
+        _hover: {
+          textDecor: "none",
+        },
+      },
+    },
+  },
+  colors: {
+    cyan: {
+      "50": "#e0f4ef",
+      "100": "#b3e4d6",
+      "200": "#82d4bc",
+      "300": "#4ec2a1",
+      "400": "#21b48e",
+      "500": "#03a57c",
+      "600": "#009770",
+      "700": "#008661",
+      "800": "#007653",
+      "900": "#005938",
+    },
+  },
+})
 
 export default theme

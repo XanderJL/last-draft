@@ -69,15 +69,7 @@ const SubmitForm = () => {
         </Heading>
         <input type="hidden" name="form-name" value="submission" />
         <Box d="flex" flexDirection={["column", "column", "row"]}>
-          <div
-            css={css`
-              flex: 1;
-              @media (min-width: ${theme.breakpoints[1]}) {
-                margin-right: 12px;
-              }
-            `}
-            className="field"
-          >
+          <Box mr={{ base: 0, md: "12px" }} flex={1} className="field">
             <label className="label is-montserrat is-uppercase">
               First Name <span className="has-text-danger">*</span>
             </label>
@@ -94,14 +86,8 @@ const SubmitForm = () => {
                 </span>
               )}
             </div>
-          </div>
-          <div
-            css={css`
-              flex: 1;
-              margin-bottom: 12px;
-            `}
-            className="field"
-          >
+          </Box>
+          <Box mb="12px" flex={1} className="field">
             <label className="label is-montserrat is-uppercase">
               Last Name
             </label>
@@ -113,7 +99,7 @@ const SubmitForm = () => {
                 className="input"
               />
             </div>
-          </div>
+          </Box>
         </Box>
         <div className="field">
           <label className="label is-montserrat is-uppercase">

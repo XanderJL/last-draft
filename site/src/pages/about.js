@@ -1,17 +1,16 @@
+/** @jsx jsx */
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import { Box } from "@chakra-ui/core"
+import { Link as GatsbyLink, useStaticQuery, graphql } from "gatsby"
+import { Box, Link, Grid, Heading } from "@chakra-ui/core"
+import { css, jsx } from "@emotion/core"
 import Img from "gatsby-image/withIEPolyfill"
-import BackgroundImage from "gatsby-background-image"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
-
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
 import SubmitForm from "../components/SubmitForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
-import InstagramFeed from "../components/InstagramFeed"
 
 export default function About() {
   const data = useStaticQuery(graphql`
@@ -49,6 +48,22 @@ export default function About() {
               fluid(maxWidth: 1200) {
                 ...GatsbySanityImageFluid
               }
+            }
+          }
+          alt
+        }
+        grid {
+          title
+          url
+          image {
+            asset {
+              fluid(maxWidth: 400) {
+                ...GatsbySanityImageFluid
+              }
+            }
+            hotspot {
+              x
+              y
             }
           }
           alt
@@ -115,6 +130,7 @@ export default function About() {
       }).image(source)
     return (
       <Link
+        as={GatsbyLink}
         role="button"
         to="/stories"
         target="_blank"
@@ -139,6 +155,7 @@ export default function About() {
   const publication = data.aboutPage._rawPublication.body
   const pubImage = data.aboutPage.publication.image.asset.fluid
   const pubAlt = data.aboutPage.publication.alt
+  const instaGrid = data.aboutPage.grid
 
   return (
     <Layout title={title} description={metaDescription}>
@@ -176,11 +193,11 @@ export default function About() {
         </div>
       </section>
       <Brands />
-      <section className="section-publication">
-        <div className="container">
-          <div className="card-publication">
-            <div className="card-content">
-              <div className="content">
+      <Box as="section" className="section-publication">
+        <Box className="container">
+          <Box className="card-publication">
+            <Box className="card-content">
+              <Box className="content">
                 <PortableText
                   blocks={publication}
                   serializers={{
@@ -192,25 +209,68 @@ export default function About() {
                 />
                 <Box mt="2rem">
                   <Link
+                    as={GatsbyLink}
                     role="button"
                     to="/stories"
+                    color="white"
                     className="button is-solid is-montserrat is-uppercase"
                   >
                     stories &rang;
                   </Link>
                 </Box>
-              </div>
+              </Box>
               <Img className="image" fluid={pubImage} alt={pubAlt} />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="section">
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box as="section" className="section">
         <SubmitForm />
-      </section>
-      <section className="section">
-        <InstagramFeed />
-      </section>
+      </Box>
+      <Box as="section" className="section">
+        <Box maxW="750px" m="0 auto">
+          <Link href="https://www.instagram.com/lastdraftinc" isExternal>
+            <Heading
+              as="h2"
+              mb="1rem"
+              fontWeight={400}
+              letterSpacing="0.12em"
+              color="black"
+              _hover={{ color: "cyan.300" }}
+            >
+              @THELASTDRAFT
+            </Heading>
+          </Link>
+          <Grid
+            gridTemplateColumns={{
+              base: "minmax(0, 1fr)",
+              md: "repeat(3, minmax(120px, 1fr))",
+            }}
+            gridAutoRows="1fr"
+            gap="1rem"
+          >
+            {instaGrid.map((post, i) => {
+              const { url, image, alt } = post
+              return (
+                <Link key={i} href={url} bg="white" isExternal>
+                  <Img
+                    css={css`
+                      width: 100%;
+                      height: 100%;
+                      &:hover {
+                        opacity: 0.75;
+                      }
+                    `}
+                    fluid={image.asset.fluid}
+                    alt={alt}
+                    className="card"
+                  />
+                </Link>
+              )
+            })}
+          </Grid>
+        </Box>
+      </Box>
     </Layout>
   )
 }

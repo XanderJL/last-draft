@@ -93,11 +93,7 @@ const IndexPage = () => {
           fluid={headerImage}
           styles={imageHotspot(headerHotspot)}
         >
-          <Box
-            maxW="max-content"
-            // p={{ base: "3rem 1.5rem", md: "5rem 5rem 7rem 5rem" }}
-            className="has-text-white"
-          >
+          <Box maxW="max-content" textShadow="2px 2px rgba(0,0,0,0.25)" className="has-text-white">
             <PortableText
               blocks={heroCard}
               serializers={{ types: { block: BlockRenderer } }}

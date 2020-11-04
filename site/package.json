@@ -6,6 +6,7 @@
   "author": "Alex Low <alexanderjameslow@gmail.com>",
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.8",
+    "@emotion/core": "^10.1.1",
     "@loadable/component": "^5.13.1",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/image-url": "^0.140.19",

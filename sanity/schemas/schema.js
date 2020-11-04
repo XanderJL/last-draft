@@ -24,6 +24,7 @@ import post from "./blog/post";
 import featuredPosts from "./blog/featuredPosts";
 import author from "./blog/author";
 import category from "./blog/category";
+import instagramPost from "./instagramPost";
 
 export default createSchema({
   name: "default",
@@ -49,5 +50,6 @@ export default createSchema({
     featuredPosts,
     author,
     category,
+    instagramPost,
   ]),
 });

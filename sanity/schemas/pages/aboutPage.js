@@ -46,6 +46,12 @@ export default {
       title: "Publication Section",
       type: "section",
     },
+    {
+      name: "grid",
+      title: "Instagram Grid",
+      type: "array",
+      of: [{ type: "instagramPost" }],
+    },
   ],
   preview: {
     select: {
