@@ -155,7 +155,12 @@ const ServicesPage = ({ data }) => {
                     p={{ base: "2rem 1.25rem", lg: "2rem 2rem 3rem 2rem" }}
                     className="card"
                   >
-                    <Box flex={1}>
+                    <Box
+                      flex={1}
+                      d="flex"
+                      flexDir="column"
+                      justifyContent="space-between"
+                    >
                       <Heading
                         as="h2"
                         color="black"
