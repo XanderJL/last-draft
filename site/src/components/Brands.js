@@ -4,19 +4,17 @@ import Img from "gatsby-image/withIEPolyfill"
 
 const Brands = () => {
   const data = useStaticQuery(graphql`
-    query {
-      brands: allSanityBrands(sort: { fields: brandName }) {
-        edges {
-          node {
-            id
-            alt
-            brandName
-            brandUrl
-            logo {
-              asset {
-                fixed(width: 175) {
-                  ...GatsbySanityImageFixed
-                }
+    {
+      sanityAboutPage {
+        brands {
+          alt
+          brandName
+          brandUrl
+          id
+          logo {
+            asset {
+              fixed(width: 175) {
+                ...GatsbySanityImageFixed
               }
             }
           }
@@ -32,7 +30,7 @@ const Brands = () => {
           clients + partners
         </h1>
         <div className="logos">
-          {data.brands.edges.map(({ node: brand }) => (
+          {data.sanityAboutPage.brands.map(brand => (
             <a
               key={brand.id}
               className="logo"
