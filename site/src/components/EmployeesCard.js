@@ -1,72 +1,104 @@
 import React from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
-import Avatar from "../components/Avatar"
+import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
+import Img from "gatsby-image"
+import { Image, Flex, Box, Text, Heading, Link } from "@chakra-ui/core"
 
 const EmployeesCard = () => {
-  const data = useStaticQuery(query)
-
-  return (
-    <div className="card-employees">
-      <div className="card-content">
-        <h1 className="title is-size-3-tablet is-montserrat is-uppercase has-text-black has-text-centered">
-          Meet the Team
-        </h1>
-        <h2
-          className="subtitle is-size-3-tablet has-text-black has-text-centered"
-          style={{ marginTop: "1rem" }}
-        >
-          writers / producers / artists / curators
-        </h2>
-        <div className="team">
-          {data.employees.edges.map(({ node: employee }) => (
-            <Link
-              className="avatar-link"
-              to={"/team#" + employee.slug.current}
-              key={employee.id}
-            >
-              <Avatar fluid={employee.headshot.asset.fluid} />
-              <h2
-                className="subtitle has-text-black has-text-centered"
-                style={{ marginTop: "1rem" }}
-              >
-                <span>{employee.firstName}</span>
-                <br className="employee-name-break" />{" "}
-                <span>{employee.lastName}</span>
-              </h2>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export const query = graphql`
-  query {
-    employees: allSanityEmployee(sort: { fields: startDate }) {
-      edges {
-        node {
+  const data = useStaticQuery(graphql`
+    {
+      sanityTeamPage {
+        heading
+        subheading
+        team {
+          id
+          firstName
+          lastName
           _rawBio
           _rawQuote
           headshot {
             asset {
-              fluid(maxWidth: 400) {
-                ...GatsbySanityImageFluid
+              fixed(width: 400) {
+                ...GatsbySanityImageFixed
               }
             }
           }
-          id
+          jobTitle
           slug {
             current
           }
-          jobTitle
-          firstName
-          lastName
-          startDate
         }
       }
     }
-  }
-`
+  `)
+
+  const teamPage = data.sanityTeamPage
+
+  return (
+    <Flex
+      direction="column"
+      justify="center"
+      align="center"
+      maxW="4xl"
+      p={{ base: "3rem 1.25rem", md: "4rem 2rem" }}
+      m="0 auto"
+      className="card"
+    >
+      <Heading
+        as="h1"
+        size="xl"
+        fontWeight={400}
+        textAlign="center"
+        textTransform="uppercase"
+        letterSpacing="0.10em"
+        color="black"
+      >
+        {teamPage.heading}
+      </Heading>
+      <Heading
+        as="h2"
+        size="lg"
+        m="0.75rem 0 3rem 0"
+        fontWeight={400}
+        textAlign="center"
+        color="black"
+      >
+        {teamPage.subheading}
+      </Heading>
+      <Flex align="center" justify="center" flexWrap="wrap">
+        {teamPage.team.map(employee => (
+          <Link
+            as={GatsbyLink}
+            display="flex"
+            flexDir="column"
+            justifyContent="center"
+            alignItems="center"
+            p="1rem"
+            to={"/team#" + employee.slug.current}
+            key={employee.id}
+          >
+            <Image
+              src={employee.headshot.asset.fixed.src}
+              boxSize="150px"
+              fit="cover"
+              align="50% 50%"
+              borderRadius="full"
+              _hover={{ opacity: 0.75 }}
+            />
+            <Heading
+              as="h2"
+              size="md"
+              fontWeight={400}
+              className="has-text-black has-text-centered"
+              style={{ marginTop: "1rem" }}
+            >
+              <Text>{employee.firstName}</Text>
+              <Text>{employee.lastName}</Text>
+            </Heading>
+          </Link>
+        ))}
+      </Flex>
+    </Flex>
+  )
+}
 
 export default EmployeesCard

@@ -9,6 +9,7 @@ import blog from "./blog/blog";
 import servicesLandingPage from "./pages/servicesLandingPage";
 import offeredServices from "./offeredServices";
 import servicesPage from "./pages/servicesPage";
+import teamPage from "./pages/teamPage";
 import blockContent from "./blockContent";
 import blockImage from "./blockImage";
 import embed from "./embed";
@@ -39,6 +40,7 @@ export default createSchema({
     servicesLandingPage,
     offeredServices,
     servicesPage,
+    teamPage,
     employee,
     brands,
     service,

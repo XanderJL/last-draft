@@ -1,5 +1,5 @@
 import S from "@sanity/desk-tool/structure-builder";
-import { AiFillHome, AiFillEdit } from "react-icons/ai";
+import { AiFillHome, AiFillEdit, AiOutlineTeam } from "react-icons/ai";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { RiServiceLine } from "react-icons/ri";
 import { MdBrush } from "react-icons/md";
@@ -7,8 +7,9 @@ import { TiBusinessCard } from "react-icons/ti";
 
 const hiddenDocTypes = (listItem) =>
   ![
-    "aboutPage",
     "indexPage",
+    "aboutPage",
+    "teamPage",
     "servicesLandingPage",
     "servicesPage",
     "blog",
@@ -35,6 +36,15 @@ export default () =>
             .id("sboutPage")
             .schemaType("aboutPage")
             .documentId("aboutPage")
+        ),
+      S.listItem()
+        .title("Team Page")
+        .icon(AiOutlineTeam)
+        .child(
+          S.editor()
+            .id("teamPage")
+            .schemaType("teamPage")
+            .documentId("teamPage")
         ),
       S.divider(),
       S.listItem()
