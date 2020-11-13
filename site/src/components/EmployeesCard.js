@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
-import Img from "gatsby-image"
-import { Image, Flex, Box, Text, Heading, Link } from "@chakra-ui/core"
+import { Image, Flex, Text, Heading, Link } from "@chakra-ui/core"
 
 const EmployeesCard = () => {
   const data = useStaticQuery(graphql`

@@ -1,13 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
-import BackgroundImage from "gatsby-background-image"
 import Layout from "../components/Layout"
 import EmployeesCard from "../components/EmployeesCard"
 import EmployeeSection from "../components/EmployeeSection"
 import Hero from "../components/Hero"
-import imageHotspot from "../hooks/imageHotspot"
 
 const Team = ({ data }) => {
+  console.log(data)
   return (
     <Layout title="Team">
       <Hero
@@ -17,7 +16,7 @@ const Team = ({ data }) => {
         <EmployeesCard />
       </Hero>
       <div className="section-wrapper">
-        {data.employees.edges.map(({ node: employee }) => (
+        {data.employees.team.map(employee => (
           <EmployeeSection
             key={employee.id}
             slug={employee.slug.current}
@@ -43,32 +42,31 @@ export const data = graphql`
         }
       }
     }
-    employees: allSanityEmployee(sort: { fields: startDate }) {
-      edges {
-        node {
-          _rawBio
-          _rawQuote
-          headshot {
-            asset {
-              fluid {
-                ...GatsbySanityImageFluid
-              }
+    employees: sanityTeamPage {
+      heading
+      subheading
+      team {
+        id
+        firstName
+        lastName
+        _rawBio
+        _rawQuote
+        headshot {
+          asset {
+            fluid(maxWidth: 400) {
+              ...GatsbySanityImageFluid
             }
           }
-          id
-          slug {
-            current
-          }
-          jobTitle
-          firstName
-          lastName
-          startDate
-          socials {
-            facebook
-            instagram
-            linkedin
-            twitter
-          }
+        }
+        jobTitle
+        slug {
+          current
+        }
+        socials {
+          facebook
+          instagram
+          linkedin
+          twitter
         }
       }
     }
