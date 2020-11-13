@@ -38,8 +38,8 @@ const EmployeesCard = () => {
       direction="column"
       justify="center"
       align="center"
-      maxW="4xl"
-      p={{ base: "3rem 1.25rem", md: "4rem 2rem" }}
+      maxW="xl"
+      p="3rem 1.25rem"
       m="0 auto"
       className="card"
     >
@@ -78,7 +78,7 @@ const EmployeesCard = () => {
           >
             <Image
               src={employee.headshot.asset.fixed.src}
-              boxSize="150px"
+              boxSize="130px"
               fit="cover"
               align="50% 50%"
               borderRadius="full"
@@ -86,7 +86,7 @@ const EmployeesCard = () => {
             />
             <Heading
               as="h2"
-              size="md"
+              size="sm"
               fontWeight={400}
               className="has-text-black has-text-centered"
               style={{ marginTop: "1rem" }}
