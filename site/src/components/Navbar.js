@@ -64,14 +64,14 @@ export default function Navbar() {
                   services
                 </Link>
                 <div className="navbar-dropdown">
-                  <Link to="/services/for-artists" className="navbar-item">
-                    Artists
-                  </Link>
                   <Link
                     to="/services/for-entrepreneurs"
                     className="navbar-item"
                   >
                     Entrepreneurs
+                  </Link>
+                  <Link to="/services/for-artists" className="navbar-item">
+                    Artists
                   </Link>
                 </div>
               </div>
