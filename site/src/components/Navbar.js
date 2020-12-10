@@ -65,10 +65,10 @@ export default function Navbar() {
                 </Link>
                 <div className="navbar-dropdown">
                   <Link
-                    to="/services/for-entrepreneurs"
+                    to="/services/for-businesses"
                     className="navbar-item"
                   >
-                    Entrepreneurs
+                    Businesses
                   </Link>
                   <Link to="/services/for-artists" className="navbar-item">
                     Artists
