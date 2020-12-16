@@ -62,6 +62,10 @@ function SEO({ description, lang, meta, title, image: metaImage }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: "p:domain_verify",
+          content: "3ee651e9b0aa81d3df952fa339106faf",
+        },
       ]
         .concat(
           metaImage
