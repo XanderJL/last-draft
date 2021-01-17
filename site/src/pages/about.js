@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import React from "react"
 import { Link as GatsbyLink, useStaticQuery, graphql } from "gatsby"
-import { Box, Link, Grid, Heading } from "@chakra-ui/core"
-import { css, jsx } from "@emotion/core"
+import { Box, Link, Grid, Heading } from "@chakra-ui/react"
+import { css, jsx } from "@emotion/react"
 import Img from "gatsby-image/withIEPolyfill"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"

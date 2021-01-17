@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
-import { Box, Grid, Heading, Text, List, ListItem } from "@chakra-ui/core"
+import { Box, Grid, Heading, Text, List, ListItem } from "@chakra-ui/react"
 import BackgroundImage from "gatsby-background-image"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"

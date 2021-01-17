@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, CloseButton } from "@chakra-ui/core"
+import { Box, CloseButton } from "@chakra-ui/react"
 import { motion } from "framer-motion"
 import Markup from "./dangerZone"
 

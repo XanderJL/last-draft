@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
-import { Image, Flex, Text, Heading, Link } from "@chakra-ui/core"
+import { Image, Flex, Text, Heading, Link } from "@chakra-ui/react"
 
 const EmployeesCard = () => {
   const data = useStaticQuery(graphql`
@@ -50,6 +50,7 @@ const EmployeesCard = () => {
         textTransform="uppercase"
         letterSpacing="0.10em"
         color="black"
+        // className="is-montserrat is-uppercase is-spaced title"
       >
         {teamPage.heading}
       </Heading>

@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import BackgroundImage from "gatsby-background-image"
-import imageUrlBuilder from "@sanity/image-url"
 import PortableText from "@sanity/block-content-to-react"
 import Layout from "../../components/Layout"
 import Serializers, {

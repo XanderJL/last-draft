@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
-import { Box } from "@chakra-ui/core"
-import { css, jsx } from "@emotion/core"
+import { Box } from "@chakra-ui/react"
+import { css, jsx } from "@emotion/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
@@ -95,7 +94,10 @@ const TheLastDraft = ({ data }) => {
       />
       <div className="container" style={{ maxWidth: "1216px" }}>
         <BlogTabs />
-        <Box as="section" p={{base: "1.25rem", md: "2rem 1.25rem 3rem 1.25rem"}}>
+        <Box
+          as="section"
+          p={{ base: "1.25rem", md: "2rem 1.25rem 3rem 1.25rem" }}
+        >
           <Box
             css={css`
               img {

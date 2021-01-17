@@ -2,7 +2,7 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import PortableText from "@sanity/block-content-to-react"
-import { Box, image } from "@chakra-ui/core"
+import { Box, image } from "@chakra-ui/react"
 
 import Layout from "../components/Layout"
 import NewsLetter from "../components/NewsLetter"
@@ -56,7 +56,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase title is-size-1 has-text-white is-spaced is-size-3-mobile`,
+          className: `is-montserrat is-uppercase title is-size-2 has-text-white is-spaced is-size-4-mobile mb-1`,
         },
         props.children
       )
@@ -65,7 +65,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase subtitle is-size-3 has-text-white is-spaced is-size-5-mobile`,
+          className: `is-montserrat is-uppercase subtitle is-size-4 has-text-white is-spaced is-size-5-mobile`,
         },
         props.children
       )
@@ -93,7 +93,11 @@ const IndexPage = () => {
           fluid={headerImage}
           styles={imageHotspot(headerHotspot)}
         >
-          <Box maxW="max-content" textShadow="2px 2px rgba(0,0,0,0.25)" className="has-text-white">
+          <Box
+            maxW="max-content"
+            textShadow="2px 2px rgba(0,0,0,0.25)"
+            className="has-text-white"
+          >
             <PortableText
               blocks={heroCard}
               serializers={{ types: { block: BlockRenderer } }}
@@ -110,6 +114,8 @@ const IndexPage = () => {
           />
         </Box>
       </Box>
+      <Testimonials />
+      <NewsLetter image={newsLetterImage} />
       <section className="section-ethical-storytelling">
         <div className="container is-widescreen">
           <div className="copy">
@@ -129,8 +135,6 @@ const IndexPage = () => {
           </div>
         </div>
       </section>
-      <NewsLetter image={newsLetterImage} />
-      <Testimonials />
       <ContactForm inverted={true} />
     </Layout>
   )

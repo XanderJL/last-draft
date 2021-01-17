@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { theme, Box, Heading } from "@chakra-ui/core"
-import { css, jsx } from "@emotion/core"
+import { theme, Box, Heading } from "@chakra-ui/react"
+import { css, jsx } from "@emotion/react"
 import Modal from "./Modal"
 
 const formStyles = css`

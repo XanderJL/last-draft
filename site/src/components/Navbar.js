@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
 import Logo from "../images/icons/logo.png"
-import Search from "../components/Search"
 
 export default function Navbar() {
   function burgerMenu() {
@@ -55,7 +54,14 @@ export default function Navbar() {
               >
                 about
               </Link>
-              <div className="navbar-item has-dropdown is-hoverable is-montserrat is-uppercase">
+              <Link
+                to="/services/for-business"
+                className="navbar-item is-montserrat is-uppercase"
+                activeClassName="is-active"
+              >
+                services
+              </Link>
+              {/* <div className="navbar-item has-dropdown is-hoverable is-montserrat is-uppercase">
                 <Link
                   to="/services"
                   className="navbar-item"
@@ -64,17 +70,14 @@ export default function Navbar() {
                   services
                 </Link>
                 <div className="navbar-dropdown">
-                  <Link
-                    to="/services/for-business"
-                    className="navbar-item"
-                  >
+                  <Link to="/services/for-business" className="navbar-item">
                     Business
                   </Link>
                   <Link to="/services/for-artists" className="navbar-item">
                     Artists
                   </Link>
                 </div>
-              </div>
+              </div> */}
               <Link
                 to="/team"
                 className="navbar-item is-montserrat is-uppercase"
@@ -82,13 +85,13 @@ export default function Navbar() {
               >
                 team
               </Link>
-              <Link
+              {/* <Link
                 to="/stories"
                 className="navbar-item is-montserrat is-uppercase"
                 activeClassName="is-active"
               >
                 stories
-              </Link>
+              </Link> */}
               <a
                 href="/#contact"
                 className="navbar-item is-montserrat is-uppercase"
@@ -97,9 +100,9 @@ export default function Navbar() {
                   contact
                 </div>
               </a>
-              <div className="navbar-item">
+              {/* <div className="navbar-item">
                 <Search />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

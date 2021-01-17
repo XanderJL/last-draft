@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
+import { Link } from "@chakra-ui/react"
 
 const Brands = () => {
   const data = useStaticQuery(graphql`
@@ -13,7 +14,7 @@ const Brands = () => {
           id
           logo {
             asset {
-              fixed(width: 175) {
+              fixed(width: 250) {
                 ...GatsbySanityImageFixed
               }
             }
@@ -31,12 +32,14 @@ const Brands = () => {
         </h1>
         <div className="logos">
           {data.sanityAboutPage.brands.map(brand => (
-            <a
+            <Link
               key={brand.id}
-              className="logo"
               href={brand.brandUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              isExternal
+              display="flex"
+              flex={1}
+              justifyContent="center"
+              alignItems="center"
             >
               <Img
                 fixed={brand.logo.asset.fixed}
@@ -44,7 +47,7 @@ const Brands = () => {
                 objectFit="contain"
                 objectPosition="center"
               />
-            </a>
+            </Link>
           ))}
         </div>
       </div>

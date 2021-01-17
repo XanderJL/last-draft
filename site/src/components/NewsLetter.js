@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import axios from "axios"
-import { Heading, Box, FormControl, Input } from "@chakra-ui/core"
+import { Heading, Box, FormControl, Input } from "@chakra-ui/react"
 
 import Modal from "./Modal"
 import Hero from "./Hero"
