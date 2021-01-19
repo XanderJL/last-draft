@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
-import { Link } from "@chakra-ui/react"
+import { Grid, Link } from "@chakra-ui/react"
 
 const Brands = () => {
   const data = useStaticQuery(graphql`
@@ -30,7 +30,10 @@ const Brands = () => {
         <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
           clients + partners
         </h1>
-        <div className="logos">
+        <Grid
+          templateColumns={{ base: "minmax(0, 1fr)", md: "repeat(3, 1fr)" }}
+          gap="1rem"
+        >
           {data.sanityAboutPage.brands.map(brand => (
             <Link
               key={brand.id}
@@ -49,7 +52,7 @@ const Brands = () => {
               />
             </Link>
           ))}
-        </div>
+        </Grid>
       </div>
     </section>
   )
