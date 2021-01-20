@@ -24,8 +24,10 @@ const IndexPage = () => {
         }
       }
       homePage: sanityIndexPage {
-        _rawMetaDescription
+        metaDescription
         _rawHeroCard
+        contactHeading
+        _rawContactBody
         heroImage {
           asset {
             fluid(maxWidth: 3840) {
@@ -45,10 +47,8 @@ const IndexPage = () => {
   const headerImage = data.homePage.heroImage.asset.fluid
   const headerHotspot = data.homePage.heroImage.hotspot
   const newsLetterImage = data.newsLetterImage.childImageSharp.fluid
-  const heroCard = data.homePage._rawHeroCard
-  const metaDescription = data.homePage._rawMetaDescription[0].children[0].text
-  const cardsTitle = data.homePage.cardsTitle
-  const cards = data.homePage._rawCards
+  const metaDescription = data.homePage.metaDescription
+  const { _rawHeroCard, _rawCards, cardsTitle, contactHeading, _rawContactBody } = data.homePage
   const BlockRenderer = props => {
     const { style = "normal" } = props.node
 
@@ -99,7 +99,7 @@ const IndexPage = () => {
             className="has-text-white"
           >
             <PortableText
-              blocks={heroCard}
+              blocks={_rawHeroCard}
               serializers={{ types: { block: BlockRenderer } }}
             />
           </Box>
@@ -109,13 +109,11 @@ const IndexPage = () => {
         <Img fluid={headerImage} style={{ flex: 1 }} />
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
-            blocks={heroCard}
+            blocks={_rawHeroCard}
             serializers={{ types: { block: BlockRenderer } }}
           />
         </Box>
       </Box>
-      <Testimonials />
-      <NewsLetter image={newsLetterImage} />
       <section className="section-ethical-storytelling">
         <div className="container is-widescreen">
           <div className="copy">
@@ -124,7 +122,7 @@ const IndexPage = () => {
             </h1>
           </div>
           <div className="grid-wrapper">
-            {cards.map(card => (
+            {_rawCards.map(card => (
               <div key={card._key} className="card-wrap">
                 <Link to="/about">
                   <h2 className="is-size-3 is-size-4-mobile">{card.title}</h2>
@@ -135,7 +133,13 @@ const IndexPage = () => {
           </div>
         </div>
       </section>
-      <ContactForm inverted={true} />
+      <NewsLetter image={newsLetterImage} />
+      <Testimonials />
+      <Box bg="black">
+        <div className="section">
+          <ContactForm title={contactHeading} body={_rawContactBody} />
+        </div>
+      </Box>
     </Layout>
   )
 }

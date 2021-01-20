@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import PortableText from "@sanity/block-content-to-react"
 import Slider from "react-slick"
+import { Link } from "@chakra-ui/react"
 
 export default function Testimonials() {
   const slickSettings = {
@@ -16,34 +17,9 @@ export default function Testimonials() {
   }
   const data = useStaticQuery(graphql`
     {
-      ceoLogo: file(relativePath: { eq: "index/ceo-quest-logo.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      accelerateLogo: file(
-        relativePath: { eq: "index/accelerate-innovation-logo.png" }
-      ) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
       testimonials: sanityIndexPage {
         testimonials {
           _rawTestimonial
-          logo {
-            asset {
-              id
-              fluid {
-                ...GatsbySanityImageFluid
-              }
-            }
-          }
-          alt
           brandName
           brandRep
           repTitle
@@ -73,24 +49,14 @@ export default function Testimonials() {
               blocks={testimonial._rawTestimonial}
               serializers={serializers}
             />
-            <div className="client has-text-centered is-size-5">
-              <p>{testimonial.brandRep}</p>
-              <p>
-                {testimonial.repTitle}, {testimonial.brandName}
-              </p>
-            </div>
-            <a
-              href={testimonial.brandUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <Img
-                className="testimonial-logo"
-                fluid={testimonial.logo.asset.fluid}
-                alt={testimonial.alt}
-                objectFit="contain"
-              />
-            </a>
+            <Link href={testimonial.brandUrl} isExternal>
+              <div className="client has-text-centered is-size-5">
+                <p>{testimonial.brandRep}</p>
+                <p>
+                  {testimonial.repTitle}, {testimonial.brandName}
+                </p>
+              </div>
+            </Link>
           </div>
         ))}
       </Slider>

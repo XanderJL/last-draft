@@ -224,7 +224,7 @@ export default function About() {
           </Box>
         </Box>
       </Box>
-      <Box as="section" className="section">
+      {/* <Box as="section" className="section">
         <SubmitForm />
       </Box>
       <Box as="section" className="section">
@@ -270,7 +270,7 @@ export default function About() {
             })}
           </Grid>
         </Box>
-      </Box>
+      </Box> */}
     </Layout>
   )
 }

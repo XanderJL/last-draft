@@ -14,7 +14,7 @@ export default {
       name: "metaDescription",
       description:
         "This isn't visible on the webpage, but is important for SEO! Keep in mind Google only shows the first 155-160 characters. Short and sweet is best.",
-      type: "metaDescription",
+      type: "text",
     },
     {
       name: "heroCard",
@@ -45,6 +45,16 @@ export default {
       title: "Testimonials Section",
       type: "array",
       of: [{ type: "reference", to: [{ type: "brands" }] }],
+    },
+    {
+      name: "contactHeading",
+      title: "Contact Section Heading",
+      type: "string",
+    },
+    {
+      name: "contactBody",
+      title: "Contact Section Body",
+      type: "blockContent",
     },
   ],
   preview: {

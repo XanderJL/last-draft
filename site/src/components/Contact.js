@@ -1,8 +1,27 @@
 import React from "react"
-import Modal from "./Modal"
-import Linkedin from "../images/icons/linkedin.svg"
-import Instagram from "../images/icons/instagram.svg"
-import Twitter from "../images/icons/twitter.svg"
+import { useForm } from "react-hook-form"
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  Heading,
+  Icon,
+  Input,
+  Link,
+  Stack,
+  Flex,
+  Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react"
+import PortableText from "@sanity/block-content-to-react"
+import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa"
+import { Serializers } from "./Serializers"
 
 const encode = data => {
   return Object.keys(data)
@@ -10,203 +29,141 @@ const encode = data => {
     .join("&")
 }
 
-const initState = {
-  name: "",
-  email: "",
-  message: "",
-  formErrors: {
-    name: "",
-    email: "",
-    message: "",
-  },
-  setModal: false,
-}
+const re = /\S+@\S+\.S+/
 
-const errorStyle = {
-  backgroundColor: "#FFC3C3",
-  color: "#FF0000",
-  border: "1px solid #FF0000",
-  margin: "15px 0",
-  padding: "5px 10px",
-}
+const ContactForm = ({ title, body }) => {
+  const { register, handleSubmit, errors, reset } = useForm()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
-const invertedStyle = {
-  backgroundColor: "#000000",
-  color: "#FFFFFF",
-}
-
-export default class ContactForm extends React.Component {
-  state = initState
-
-  validateForm = () => {
-    let name = ""
-    let email = ""
-    let message = ""
-
-    if (!this.state.name) {
-      name = "Name cannot be left blank."
-    }
-    if (!this.state.email.includes("@")) {
-      email = "Please enter a valid email address."
-    }
-
-    if (!this.state.message) {
-      message = "Message cannot be blank."
-    }
-
-    if (name || email || message) {
-      this.setState({
-        formErrors: { name, email, message },
-      })
-      return false
-    }
-
-    return true
-  }
-
-  handleChange = e => {
-    const target = e.target
-    const value = target.value
-    const name = target.name
-
-    this.setState({
-      [name]: value,
+  const onSubmit = values => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...values }),
     })
-  }
-
-  handleModal = () => {
-    this.setState({ setModal: !this.state.setModal })
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    const isValid = this.validateForm()
-
-    if (isValid) {
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...this.state }),
+      .then(() => {
+        onOpen()
+        reset()
       })
-        .then(() => {
-          this.setState({ setModal: !this.state.setModal })
-        })
-        .catch(error => alert(error))
-      this.setState(initState)
-    }
+      .catch(error => alert(error))
   }
 
-  render() {
-    const { name, email, message } = this.state
+  const validateName = value => (!value ? "Please enter your name" : true)
+  const validateEmail = value =>
+    !value || value.match(re) ? "Please enter a valid email address" : true
+  const validateMessage = value =>
+    !value
+      ? "Please enter your name"
+      : value.length <= 2
+      ? "Please write a message longer than two characters"
+      : true
 
-    return (
-      <>
-        <section
-          id="contact"
-          className="section-contact"
-          style={this.props.inverted ? invertedStyle : null}
-        >
-          <h1
-            className={
-              "title is-montserrat is-uppercase form-title has-text-centered" +
-              (this.props.inverted ? " has-text-white" : " has-text-black")
-            }
-          >
-            connect with us
-          </h1>
-          <div className="icons">
-            <a href="https://www.linkedin.com/company/last-draft/">
-              <img
-                src={Linkedin}
-                alt="LinkedIn Icon"
-                style={this.props.inverted ? { filter: "invert(1)" } : null}
-              />
-            </a>
-            <a href="https://instagram.com/lastdraftinc">
-              <img
-                src={Instagram}
-                alt="Instagram Icon"
-                style={this.props.inverted ? { filter: "invert(1)" } : null}
-              />
-            </a>
-            <a href="https://twitter.com/LastDraftInc">
-              <img
-                src={Twitter}
-                alt="Twitter Icon"
-                style={this.props.inverted ? { filter: "invert(1)" } : null}
-              />
-            </a>
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="hidden" name="form-name" value="contact" />
-            <div className="field">
-              <input
-                type="text"
-                className="input"
-                name="name"
-                placeholder="Name"
-                value={name}
-                onChange={this.handleChange}
-              />
-              {this.state.formErrors.name ? (
-                <p style={errorStyle}>{this.state.formErrors.name}</p>
-              ) : null}
-            </div>
-            <div className="field">
-              <input
-                type="text"
-                className="input"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={this.handleChange}
-              />
-            </div>
-            {this.state.formErrors.email ? (
-              <p style={errorStyle}>{this.state.formErrors.email}</p>
-            ) : null}
-            <div className="field">
-              <textarea
-                id=""
-                cols="30"
-                rows="10"
-                className="textarea"
-                name="message"
-                placeholder="Message"
-                value={message}
-                onChange={this.handleChange}
-              />
-            </div>
-            {this.state.formErrors.message ? (
-              <p style={errorStyle}>{this.state.formErrors.message}</p>
-            ) : null}
-            <div className="field">
-              <button
-                type="submit"
-                className="button is-montserrat is-uppercase"
-                style={
-                  this.props.inverted
-                    ? {
-                        color: "#000000",
-                        backgroundColor: "#FFFFFF",
-                        fontWeight: "700",
-                      }
-                    : null
-                }
-              >
-                submit
-              </button>
-            </div>
-          </form>
-          {this.state.setModal ? (
-            <Modal
-              header="Success!"
-              body="Your email has been forwarded."
-              action={this.handleModal}
+  return (
+    <Stack maxW="55ch" m="0 auto" p="3rem 0" spacing={2}>
+      <Heading
+        as="h1"
+        textTransform="uppercase"
+        textAlign="center"
+        color="white"
+      >
+        {title}
+      </Heading>
+      <Stack
+        direction="row"
+        spacing={3}
+        alignContent="center"
+        justifyContent="center"
+        color="white"
+        mb="0.5rem"
+      >
+        <Link href="https://www.linkedin.com/company/last-draft/" isExternal>
+          <Icon as={FaLinkedin} boxSize={10} />
+        </Link>
+        <Link href="https://instagram.com/lastdraftinc" isExternal>
+          <Icon as={FaInstagram} boxSize={10} />
+        </Link>
+        <Link href="https://twitter.com/LastDraftInc" isExternal>
+          <Icon as={FaTwitter} boxSize={10} />
+        </Link>
+      </Stack>
+      <Flex color="white" mb="0.5rem">
+        <PortableText blocks={body} serializers={Serializers} />
+      </Flex>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={4}>
+          <FormControl isInvalid={errors.name}>
+            <Input
+              name="name"
+              placeholder="name"
+              ref={register({ validate: validateName })}
+              backgroundColor="white"
+              borderRadius={0}
+              borderColor="transparent"
+            ></Input>
+            <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors.email}>
+            <Input
+              name="email"
+              placeholder="jane.doe@gmail.com"
+              ref={register({ validate: validateEmail })}
+              backgroundColor="white"
+              borderRadius={0}
+              borderColor="transparent"
+            ></Input>
+            <FormErrorMessage>
+              {errors.email && errors.email.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors.message}>
+            <Textarea
+              name="message"
+              placeholder="Hello!"
+              ref={register({ validate: validateMessage })}
+              backgroundColor="white"
+              rows={8}
+              borderRadius={0}
+              borderColor="transparent"
             />
-          ) : null}
-        </section>
-      </>
-    )
-  }
+            <FormErrorMessage>
+              {errors.message && errors.message.message}
+            </FormErrorMessage>
+          </FormControl>
+          <Button
+            flex="1 1 auto"
+            w="max-content"
+            type="submit"
+            bgColor="white"
+            color="black"
+            _hover={{
+              bg: "black",
+              color: "white",
+              border: "2px solid white",
+            }}
+            fontFamily="heading"
+            textTransform="uppercase"
+            borderRadius={0}
+            border="2px solid transparent"
+          >
+            Submit
+          </Button>
+        </Stack>
+      </form>
+      {isOpen && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay>
+            <ModalContent p="2rem 0" borderRadius={0}>
+              <ModalHeader>Thank You For Reaching Out!</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>We will get in touch as soon as we can.</ModalBody>
+            </ModalContent>
+          </ModalOverlay>
+        </Modal>
+      )}
+    </Stack>
+  )
 }
+
+export default ContactForm
