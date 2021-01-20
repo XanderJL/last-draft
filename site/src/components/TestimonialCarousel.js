@@ -1,13 +1,12 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image/withIEPolyfill"
 import PortableText from "@sanity/block-content-to-react"
 import Slider from "react-slick"
-import { Link } from "@chakra-ui/react"
+import { Box, Link, Text } from "@chakra-ui/react"
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials }) {
   const slickSettings = {
     dots: true,
+    arrows: false,
     autoplay: true,
     autoplaySpeed: 10000,
     infinite: true,
@@ -15,51 +14,50 @@ export default function Testimonials() {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
-  const data = useStaticQuery(graphql`
-    {
-      testimonials: sanityIndexPage {
-        testimonials {
-          _rawTestimonial
-          brandName
-          brandRep
-          repTitle
-          brandUrl
-          id
-        }
-      }
-    }
-  `)
   const serializers = {
     types: {
       block: props => (
-        <p className="has-text-centered has-text-weight-light is-italic is-size-5">
+        <Text
+          as="p"
+          textAlign="center"
+          fontWeight="light"
+          fontStyle="italic"
+          fontSize="lg"
+          color="white"
+        >
           {props.children}
-        </p>
+        </Text>
       ),
     },
   }
-  const testimonials = data.testimonials.testimonials
 
   return (
-    <section className="section-testimonials">
-      <Slider {...slickSettings} className="quote-carousel">
-        {testimonials.map(testimonial => (
-          <div key={testimonial.id} className="quote">
-            <PortableText
-              blocks={testimonial._rawTestimonial}
-              serializers={serializers}
-            />
-            <Link href={testimonial.brandUrl} isExternal>
-              <div className="client has-text-centered is-size-5">
-                <p>{testimonial.brandRep}</p>
-                <p>
-                  {testimonial.repTitle}, {testimonial.brandName}
-                </p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </Slider>
-    </section>
+    <Slider {...slickSettings}>
+      {testimonials.map(testimonial => {
+        const {
+          id,
+          _rawTestimonial,
+          brandUrl,
+          brandRep,
+          repTitle,
+          brandName,
+        } = testimonial
+        return (
+          <Box key={id}>
+            <PortableText blocks={_rawTestimonial} serializers={serializers} />
+            <Box mt="1.25rem" fontSize="lg" fontWeight={600}>
+              <Link href={brandUrl} isExternal>
+                <Text color="white" textAlign="center">
+                  {brandRep}
+                  <Text>
+                    {repTitle}, {brandName}
+                  </Text>
+                </Text>
+              </Link>
+            </Box>
+          </Box>
+        )
+      })}
+    </Slider>
   )
 }

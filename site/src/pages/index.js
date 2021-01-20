@@ -2,10 +2,9 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import PortableText from "@sanity/block-content-to-react"
-import { Box, image } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 
 import Layout from "../components/Layout"
-import NewsLetter from "../components/NewsLetter"
 import Testimonials from "../components/TestimonialCarousel"
 import ContactForm from "../components/Contact"
 import Hero from "../components/Hero"
@@ -41,14 +40,28 @@ const IndexPage = () => {
         }
         cardsTitle
         _rawCards
+        testimonials {
+          _rawTestimonial
+          brandName
+          brandRep
+          repTitle
+          brandUrl
+          id
+        }
       }
     }
   `)
-  const headerImage = data.homePage.heroImage.asset.fluid
-  const headerHotspot = data.homePage.heroImage.hotspot
+  const headerImage = data.homePage.heroImage
   const newsLetterImage = data.newsLetterImage.childImageSharp.fluid
   const metaDescription = data.homePage.metaDescription
-  const { _rawHeroCard, _rawCards, cardsTitle, contactHeading, _rawContactBody } = data.homePage
+  const {
+    _rawHeroCard,
+    _rawCards,
+    cardsTitle,
+    contactHeading,
+    _rawContactBody,
+    testimonials,
+  } = data.homePage
   const BlockRenderer = props => {
     const { style = "normal" } = props.node
 
@@ -90,8 +103,8 @@ const IndexPage = () => {
       <Box d={{ base: "none", md: "block" }}>
         <Hero
           size="fullheight-with-navbar"
-          fluid={headerImage}
-          styles={imageHotspot(headerHotspot)}
+          fluid={headerImage.asset.fluid}
+          styles={imageHotspot(headerImage.hotspot)}
         >
           <Box
             maxW="max-content"
@@ -133,13 +146,19 @@ const IndexPage = () => {
           </div>
         </div>
       </section>
-      <NewsLetter image={newsLetterImage} />
-      <Testimonials />
-      <Box bg="black">
-        <div className="section">
-          <ContactForm title={contactHeading} body={_rawContactBody} />
-        </div>
-      </Box>
+      <Hero fluid={newsLetterImage} size="fullheight">
+        <Box
+          maxW={{ base: "70ch", md: "85ch" }}
+          p={{ base: "3rem 1.25rem", md: "5rem 3rem" }}
+          m="0 auto"
+          bg="black"
+        >
+          <Testimonials testimonials={testimonials} />
+        </Box>
+      </Hero>
+      <div className="section">
+        <ContactForm title={contactHeading} body={_rawContactBody} />
+      </div>
     </Layout>
   )
 }

@@ -64,7 +64,7 @@ const ContactForm = ({ title, body }) => {
         as="h1"
         textTransform="uppercase"
         textAlign="center"
-        color="white"
+        color="black"
       >
         {title}
       </Heading>
@@ -73,7 +73,7 @@ const ContactForm = ({ title, body }) => {
         spacing={3}
         alignContent="center"
         justifyContent="center"
-        color="white"
+        color="black"
         mb="0.5rem"
       >
         <Link href="https://www.linkedin.com/company/last-draft/" isExternal>
@@ -86,19 +86,27 @@ const ContactForm = ({ title, body }) => {
           <Icon as={FaTwitter} boxSize={10} />
         </Link>
       </Stack>
-      <Flex color="white" mb="0.5rem">
-        <PortableText blocks={body} serializers={Serializers} />
-      </Flex>
+      {body && (
+        <Flex color="white" mb="0.5rem">
+          <PortableText blocks={body} serializers={Serializers} />
+        </Flex>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
           <FormControl isInvalid={errors.name}>
             <Input
               name="name"
               placeholder="name"
+              _placeholder={{
+                color: "gray.600",
+              }}
               ref={register({ validate: validateName })}
               backgroundColor="white"
               borderRadius={0}
-              borderColor="transparent"
+              borderColor="black"
+              _hover={{
+                borderColor: "gray.400",
+              }}
             ></Input>
             <FormErrorMessage>
               {errors.name && errors.name.message}
@@ -108,10 +116,16 @@ const ContactForm = ({ title, body }) => {
             <Input
               name="email"
               placeholder="jane.doe@gmail.com"
+              _placeholder={{
+                color: "gray.600",
+              }}
               ref={register({ validate: validateEmail })}
               backgroundColor="white"
               borderRadius={0}
-              borderColor="transparent"
+              borderColor="black"
+              _hover={{
+                borderColor: "gray.400",
+              }}
             ></Input>
             <FormErrorMessage>
               {errors.email && errors.email.message}
@@ -121,11 +135,17 @@ const ContactForm = ({ title, body }) => {
             <Textarea
               name="message"
               placeholder="Hello!"
+              _placeholder={{
+                color: "gray.600",
+              }}
               ref={register({ validate: validateMessage })}
               backgroundColor="white"
               rows={8}
               borderRadius={0}
-              borderColor="transparent"
+              _hover={{
+                borderColor: "gray.400",
+              }}
+              borderColor="black"
             />
             <FormErrorMessage>
               {errors.message && errors.message.message}
@@ -138,14 +158,14 @@ const ContactForm = ({ title, body }) => {
             bgColor="white"
             color="black"
             _hover={{
-              bg: "black",
+              bg: "cyan.300",
               color: "white",
-              border: "2px solid white",
+              border: "1px solid black",
             }}
             fontFamily="heading"
             textTransform="uppercase"
             borderRadius={0}
-            border="2px solid transparent"
+            border="1px solid black"
           >
             Submit
           </Button>
