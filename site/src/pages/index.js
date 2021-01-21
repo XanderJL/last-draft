@@ -119,7 +119,7 @@ const IndexPage = () => {
         </Hero>
       </Box>
       <Box d={{ base: "flex", md: "none" }} flexDir="column">
-        <Img fluid={headerImage} style={{ flex: 1 }} />
+        <Img fluid={headerImage.asset.fluid} style={{ flex: 1 }} />
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
             blocks={_rawHeroCard}
