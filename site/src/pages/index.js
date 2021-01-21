@@ -151,7 +151,7 @@ const IndexPage = () => {
           maxW={{ base: "70ch", md: "85ch" }}
           p={{ base: "3rem 1.25rem", md: "5rem 3rem" }}
           m="0 auto"
-          bg="black"
+          bg="rgba(0,0,0,0.80)"
         >
           <Testimonials testimonials={testimonials} />
         </Box>
