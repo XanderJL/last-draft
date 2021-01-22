@@ -20,6 +20,12 @@ export default {
       },
     },
     {
+      name: "parentCategory",
+      title: "Parent Category",
+      type: "reference",
+      to: [{ type: "category" }],
+    },
+    {
       name: "heroImage",
       title: "Hero Image",
       description:
