@@ -42,6 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
       sanityBlog {
         categories {
+          isParent
           slug {
             current
           }
@@ -90,37 +91,31 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   categories.forEach(category => {
-    const { slug, title, parentCategory } = category
+    const { slug, title, parentCategory, isParent } = category
 
-    if (parentCategory) {
-      const path = `/stories/${parentCategory.slug.current}`
-      const categoryPosts = posts.filter(
-        ({ node }) => node.category.slug.current === slug.current
-      )
-
-      paginate({
-        createPage,
-        items: categoryPosts,
-        itemsPerPage: 3,
-        pathPrefix: path,
-        component: require.resolve("./src/templates/parentCategory.js"),
-        context: { slug: parentCategory.slug.current, title: parentCategory.title },
-      })
-    }
-
-    const path = `/stories/${slug.current}`
+    const path = parentCategory
+      ? `/stories/${parentCategory.slug.current}/${slug.current}`
+      : `/stories/${slug.current}`
     const categoryPosts = posts.filter(
       ({ node }) => node.category.slug.current === slug.current
     )
-
-    paginate({
-      createPage,
-      items: categoryPosts,
-      itemsPerPage: 9,
-      pathPrefix: path,
-      component: require.resolve("./src/templates/category.js"),
-      context: { slug: slug.current, title },
-    })
+    isParent
+      ? paginate({
+          createPage,
+          items: categoryPosts,
+          itemsPerPage: 9,
+          pathPrefix: path,
+          component: require.resolve("./src/templates/parentCategory.js"),
+          context: { slug: slug.current, title },
+        })
+      : paginate({
+          createPage,
+          items: categoryPosts,
+          itemsPerPage: 9,
+          pathPrefix: path,
+          component: require.resolve("./src/templates/category.js"),
+          context: { slug: slug.current, title },
+        })
   })
 
   authors.forEach(edge => {

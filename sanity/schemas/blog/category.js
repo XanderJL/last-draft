@@ -20,6 +20,11 @@ export default {
       },
     },
     {
+      name: "isParent",
+      title: "Is Parent Category",
+      type: "boolean",
+    },
+    {
       name: "parentCategory",
       title: "Parent Category",
       type: "reference",

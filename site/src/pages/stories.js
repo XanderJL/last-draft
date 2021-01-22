@@ -18,38 +18,6 @@ const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
   const { title, categories, heroImage, _rawPublication, publication } = blog
   const pubBody = _rawPublication.body
-  const pubImg = publication && publication.image.asset.fluid
-  const pubAlt = publication && publication.image.alt
-
-  const CardRenderer = props => {
-    const { style = "normal" } = props.node
-
-    if (style === "h1") {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase has-text-black`,
-        },
-        props.children
-      )
-    }
-    if (style === "h2") {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase has-text-black`,
-        },
-        props.children
-      )
-    }
-
-    if (style === "blockquote") {
-      return <blockquote>- {props.children}</blockquote>
-    }
-
-    // Fall back to default handling
-    return PortableText.defaultSerializers.types.block(props)
-  }
 
   const SectionRenderer = props => {
     const { style = "normal" } = props.node

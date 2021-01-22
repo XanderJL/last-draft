@@ -15,8 +15,7 @@ const BlogTabs = () => {
       }
     }
   `)
-  const { blog } = data
-  const { categories } = blog
+  const { categories } = data.blog
   return (
     <div className="tabs disable-scrollbars" style={{ margin: "0 1.25rem" }}>
       <ul>
