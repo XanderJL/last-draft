@@ -108,7 +108,9 @@ const TheLastDraft = ({ data }) => {
                 slug,
               } = post
               const image = mainImage.asset.fluid
-              const link = `/stories/${category.slug.current}/${slug.current}`
+              const link = category.parentCategory
+                ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
+                : `/stories/${category.slug.current}/${slug.current}`
               return (
                 <PostCard
                   key={id}
@@ -145,7 +147,9 @@ const TheLastDraft = ({ data }) => {
                 slug,
               } = post
               const image = mainImage.asset.fluid
-              const link = `/stories/${category.slug.current}/${slug.current}`
+              const link = category.parentCategory
+                ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
+                : `/stories/${category.slug.current}/${slug.current}`
               return (
                 <PostCard
                   key={id}
@@ -276,6 +280,11 @@ export const data = graphql`
             slug {
               current
             }
+            parentCategory {
+              slug {
+                current
+              }
+            }
           }
         }
       }
@@ -306,6 +315,11 @@ export const data = graphql`
           category {
             slug {
               current
+            }
+            parentCategory {
+              slug {
+                current
+              }
             }
           }
         }

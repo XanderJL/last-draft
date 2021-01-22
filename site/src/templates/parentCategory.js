@@ -58,7 +58,7 @@ const ParentCategory = ({ data, pageContext }) => {
                       slug,
                     } = node
                     const image = mainImage.asset.fluid
-                    const link = `/stories/${category.slug.current}/${slug.current}`
+                    const link = `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                     return (
                       <PostCard
                         key={id}

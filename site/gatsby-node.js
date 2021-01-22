@@ -31,6 +31,11 @@ exports.createPages = async ({ graphql, actions }) => {
               slug {
                 current
               }
+              parentCategory {
+                slug {
+                  current
+                }
+              }
             }
             author {
               slug {
@@ -40,18 +45,19 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      sanityBlog {
-        categories {
-          isParent
-          slug {
-            current
-          }
-          title
-          parentCategory {
+      allSanityCategory {
+        edges {
+          node {
+            isParent
+            title
             slug {
               current
             }
-            title
+            parentCategory {
+              slug {
+                current
+              }
+            }
           }
         }
       }
@@ -73,15 +79,15 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const posts = res.data.posts.edges
-  const categories = res.data.sanityBlog.categories
+  const categories = res.data.allSanityCategory.edges
   const authors = res.data.authors.edges
 
   posts.forEach(({ node }) => {
     const { category, slug } = node
 
-    const path = category
-      ? `/stories/${category.slug.current}/${slug.current}`
-      : `/stories/${slug.current}`
+    const path = category.parentCategory
+      ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
+      : `/stories/${category.slug.current}/${slug.current}`
 
     createPage({
       path,
@@ -90,8 +96,8 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  categories.forEach(category => {
-    const { slug, title, parentCategory, isParent } = category
+  categories.forEach(({ node }) => {
+    const { slug, title, parentCategory, isParent } = node
 
     const path = parentCategory
       ? `/stories/${parentCategory.slug.current}/${slug.current}`
@@ -99,23 +105,16 @@ exports.createPages = async ({ graphql, actions }) => {
     const categoryPosts = posts.filter(
       ({ node }) => node.category.slug.current === slug.current
     )
-    isParent
-      ? paginate({
-          createPage,
-          items: categoryPosts,
-          itemsPerPage: 9,
-          pathPrefix: path,
-          component: require.resolve("./src/templates/parentCategory.js"),
-          context: { slug: slug.current, title },
-        })
-      : paginate({
-          createPage,
-          items: categoryPosts,
-          itemsPerPage: 9,
-          pathPrefix: path,
-          component: require.resolve("./src/templates/category.js"),
-          context: { slug: slug.current, title },
-        })
+    paginate({
+      createPage,
+      items: categoryPosts,
+      itemsPerPage: 9,
+      pathPrefix: path,
+      component: require.resolve(
+        `./src/templates/${isParent ? "parentCategory.js" : "category.js"}`
+      ),
+      context: { slug: slug.current, title },
+    })
   })
 
   authors.forEach(edge => {
