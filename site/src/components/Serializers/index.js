@@ -1,10 +1,12 @@
 import React from "react"
+import { Box } from "@chakra-ui/react"
 import InstagramEmbed from "react-instagram-embed"
 import { Tweet } from "react-twitter-widgets"
 import ReactPlayer from "react-player"
 import urlBuilder from "@sanity/image-url"
 import imageUrlBuilder from "@sanity/image-url"
 import PortableText from "@sanity/block-content-to-react"
+import Iframe from "react-iframe"
 
 const Serializers = {
   types: {
@@ -65,6 +67,19 @@ const Serializers = {
       }
 
       return <span>Missing url</span>
+    },
+    podBeanEmbed: ({ node }) => {
+      const { url, title } = node
+      return (
+        <Iframe
+          url={url}
+          title={title}
+          width="100%"
+          height="400"
+          scrolling="no"
+          style="border:none;"
+        />
+      )
     },
   },
 }

@@ -26,7 +26,7 @@ import featuredPosts from "./blog/featuredPosts";
 import author from "./blog/author";
 import category from "./blog/category";
 import instagramPost from "./instagramPost";
-import iframe from "./iframe";
+import podBeanEmbed from "./podBeanEmbed";
 
 export default createSchema({
   name: "default",
@@ -50,7 +50,7 @@ export default createSchema({
     socials,
     section,
     post,
-    iframe,
+    podBeanEmbed,
     featuredPosts,
     author,
     category,

@@ -79,6 +79,9 @@ export default {
       type: "embed",
     },
     {
+      type: "podBeanEmbed",
+    },
+    {
       type: "hr",
     },
   ],
