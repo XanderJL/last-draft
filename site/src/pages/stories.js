@@ -12,7 +12,7 @@ import BlogTabs from "../components/BlogTabs"
 import toPlainText from "../hooks/toPlainText"
 import imageHotspot from "../hooks/imageHotspot"
 import SubmitForm from "../components/SubmitForm"
-import ConvertKitModal from "../components/ConvertKitModal"
+import SubmitModal from "../components/SubmitModal"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
@@ -222,7 +222,7 @@ const TheLastDraft = ({ data }) => {
           <SubmitForm />
         </section>
       </div>
-      <ConvertKitModal />
+      <SubmitModal />
     </Layout>
   )
 }

@@ -9,7 +9,7 @@ import Serializers, {
   BlockRenderer,
   BlockImageRenderer,
 } from "../../components/Serializers"
-import ConvertKitModal from "../../components/ConvertKitModal"
+import SubmitModal from "../../components/SubmitModal"
 
 const ForArtists = ({ data }) => {
   const { page, placeholder } = data
@@ -95,7 +95,7 @@ const ForArtists = ({ data }) => {
           ))}
         </div>
       </section>
-      <ConvertKitModal />
+      <SubmitModal />
     </Layout>
   )
 }

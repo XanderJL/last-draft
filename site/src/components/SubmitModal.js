@@ -1,33 +1,24 @@
 import React, { useState } from "react"
 import {
+  Box,
+  Button,
+  CloseButton,
   FormControl,
   FormLabel,
-  FormErrorMessage,
+  Heading,
+  Icon,
   Input,
   Textarea,
-  Stack,
-  Heading,
-  Link,
-  Icon,
-  Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  ModalHeader,
-  useDisclosure,
   useTheme,
-  Button,
 } from "@chakra-ui/react"
 import { AiOutlineUpload } from "react-icons/ai"
-import PortableText from "@sanity/block-content-to-react"
-import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa"
-import { Serializers } from "./Serializers"
+import { motion } from "framer-motion"
 
-const ContactForm = ({ title, body }) => {
+const BoxMotion = motion.custom(Box)
+
+const ConvertKitModal = () => {
+  const [isOpen, setOpen] = useState(true)
   const [fileName, setFileName] = useState("Select a File")
-  const { isOpen, onClose } = useDisclosure()
   const theme = useTheme()
 
   const controlStyles = {
@@ -50,46 +41,49 @@ const ContactForm = ({ title, body }) => {
   }
 
   return (
-    <Stack maxW="55ch" m="0 auto" p="3rem 0" spacing={2}>
-      <Heading
-        as="h1"
-        textTransform="uppercase"
-        textAlign="center"
-        color="black"
+    <BoxMotion
+      display={isOpen ? "flex" : "none"}
+      flexDirection="column"
+      zIndex={10000}
+      minW={{ base: "100%", md: "600px" }}
+      maxH="80%"
+      p="1.25rem"
+      position="fixed"
+      right={{ base: 0, md: "1rem" }}
+      bottom={0}
+      bg="white"
+      initial={{
+        y: 60,
+        opacity: 0,
+      }}
+      animate={{
+        y: 0,
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      className="card"
+    >
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        pb="0.5rem"
       >
-        {title}
-      </Heading>
-      <Stack
-        direction="row"
-        spacing={3}
-        alignContent="center"
-        justifyContent="center"
-        color="black"
-        mb="0.5rem"
-      >
-        <Link href="https://www.linkedin.com/company/last-draft/" isExternal>
-          <Icon as={FaLinkedin} boxSize={10} />
-        </Link>
-        <Link href="https://instagram.com/lastdraftinc" isExternal>
-          <Icon as={FaInstagram} boxSize={10} />
-        </Link>
-        <Link href="https://twitter.com/LastDraftInc" isExternal>
-          <Icon as={FaTwitter} boxSize={10} />
-        </Link>
-      </Stack>
-      {body && (
-        <Flex color="white" mb="0.5rem">
-          <PortableText blocks={body} serializers={Serializers} />
-        </Flex>
-      )}
+        <Heading fontSize="2xl" textTransform="uppercase">
+          Hello
+        </Heading>
+        <CloseButton size="lg" onClick={() => setOpen(!isOpen)} />
+      </Box>
       <form
         method="POST"
         name="fa-form-1"
-        action="https://webhook.frontapp.com/forms/ab612390d351b6438537/iOWP2L_et0vxLdhkj1sK5sm8yEKW4Ue520RIW2dlMKkZjLA7TIpTSLN9hD2pGU3Wtbd7rR2utQCAPFYUI29tTwNONsmUG3TLcjQM6VRgLVSrK0x9FZ1V4HGR2XIU"
+        action="https://webhook.frontapp.com/forms/ab612390d351b6438537/NvExwlfSwyETNInZkrd4kLGiLao2a8ahzc_JcbtEz5V1Rj3u7YMijxXJFQCVF_Egi6hlPJVSLrrOTkYZU8RS_qIkgrxwVzxT8bTvRWMzC5BorDm5Mrug60hi013e"
         encType="multipart/form-data"
         acceptCharset="utf-8"
       >
-        <FormControl {...controlStyles} isRequired>
+        <FormControl isRequired {...controlStyles}>
           <FormLabel htmlFor="name" {...labelStyles}>
             Name
           </FormLabel>
@@ -100,7 +94,7 @@ const ContactForm = ({ title, body }) => {
             {...inputStyles}
           />
         </FormControl>
-        <FormControl {...controlStyles} isRequired>
+        <FormControl isRequired {...controlStyles}>
           <FormLabel htmlFor="email" {...labelStyles}>
             Email
           </FormLabel>
@@ -111,16 +105,11 @@ const ContactForm = ({ title, body }) => {
             {...inputStyles}
           />
         </FormControl>
-        <FormControl {...controlStyles} isRequired>
+        <FormControl isRequired {...controlStyles}>
           <FormLabel htmlFor="body" {...labelStyles}>
             Message
           </FormLabel>
-          <Textarea
-            name="body"
-            placeholder="Hello"
-            rows={10}
-            {...inputStyles}
-          />
+          <Textarea name="body" rows={6} placeholder="Hello" {...inputStyles} />
         </FormControl>
         <FormControl {...controlStyles}>
           <FormLabel
@@ -169,19 +158,8 @@ const ContactForm = ({ title, body }) => {
           </Button>
         </FormControl>
       </form>
-      {isOpen && (
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay>
-            <ModalContent p="2rem 0" borderRadius={0}>
-              <ModalHeader>Thank You For Reaching Out!</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>We will get in touch as soon as we can.</ModalBody>
-            </ModalContent>
-          </ModalOverlay>
-        </Modal>
-      )}
-    </Stack>
+    </BoxMotion>
   )
 }
 
-export default ContactForm
+export default ConvertKitModal
