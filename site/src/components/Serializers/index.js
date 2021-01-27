@@ -71,14 +71,16 @@ const Serializers = {
     podBeanEmbed: ({ node }) => {
       const { url, title } = node
       return (
-        <Iframe
-          url={url}
-          title={title}
-          width="100%"
-          height="400"
-          scrolling="no"
-          style="border:none;"
-        />
+        <Box pb="1rem">
+          <Iframe
+            url={url}
+            title={title}
+            width="100%"
+            height="400"
+            scrolling="no"
+            style="border:none;"
+          />
+        </Box>
       )
     },
   },
