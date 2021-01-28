@@ -78,7 +78,7 @@ const ContactForm = ({ title, body }) => {
         </Link>
       </Stack>
       {body && (
-        <Flex color="white" mb="0.5rem">
+        <Flex color="black" mb="0.5rem" textAlign="center">
           <PortableText blocks={body} serializers={Serializers} />
         </Flex>
       )}

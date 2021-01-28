@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react"
 
 import Layout from "../components/Layout"
 import Testimonials from "../components/TestimonialCarousel"
-import ContactForm from "../components/Contact"
+import ContactForm from "../components/ContactForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
 
@@ -156,7 +156,7 @@ const IndexPage = () => {
           <Testimonials testimonials={testimonials} />
         </Box>
       </Hero>
-      <div className="section">
+      <div id="contact" className="section">
         <ContactForm title={contactHeading} body={_rawContactBody} />
       </div>
     </Layout>
