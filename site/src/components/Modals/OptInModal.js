@@ -92,6 +92,7 @@ const OptInModal = () => {
           right={{ base: 0, md: "1rem" }}
           bottom={{ base: 0, md: "1rem" }}
           bg="white"
+          overflowY="scroll"
           variant={boxVariant}
           initial="hidden"
           animate="visible"
