@@ -9,7 +9,7 @@ import Serializers, {
   BlockRenderer,
   BlockImageRenderer,
 } from "../../components/Serializers"
-import SubmitModal from "../../components/SubmitModal"
+import OptInModal from "../../components/Modals/OptInModal"
 
 const ForArtists = ({ data }) => {
   const { page, placeholder } = data
@@ -95,7 +95,7 @@ const ForArtists = ({ data }) => {
           ))}
         </div>
       </section>
-      <SubmitModal />
+      <OptInModal />
     </Layout>
   )
 }

@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
   Input,
   Textarea,
   Stack,
@@ -23,7 +22,7 @@ import {
 import { AiOutlineUpload } from "react-icons/ai"
 import PortableText from "@sanity/block-content-to-react"
 import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa"
-import { Serializers } from "./Serializers"
+import { Serializers } from "../Serializers"
 
 const ContactForm = ({ title, body }) => {
   const [fileName, setFileName] = useState("Select a File")

@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react"
 
 import Layout from "../components/Layout"
 import Testimonials from "../components/TestimonialCarousel"
-import ContactForm from "../components/ContactForm"
+import ContactForm from "../components/Forms/ContactForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
 

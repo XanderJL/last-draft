@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Box } from "@chakra-ui/react"
+import { Box, Text } from "@chakra-ui/react"
 import { css, jsx } from "@emotion/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
@@ -11,8 +11,8 @@ import PostCard from "../components/PostCard"
 import BlogTabs from "../components/BlogTabs"
 import toPlainText from "../hooks/toPlainText"
 import imageHotspot from "../hooks/imageHotspot"
-import SubmitForm from "../components/SubmitForm"
-import SubmitModal from "../components/SubmitModal"
+import SubmitForm from "../components/Forms/SubmitForm"
+import OptInModal from "../components/Modals/OptInModal"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
@@ -167,7 +167,7 @@ const TheLastDraft = ({ data }) => {
           </div>
         </section>
         {categories.map(category => {
-          const { id, slug, title } = category
+          const { id, slug, title, description } = category
           const link = `/stories/${slug.current}`
 
           return (
@@ -178,6 +178,7 @@ const TheLastDraft = ({ data }) => {
                 </h2>
                 <hr />
               </Link>
+              {description && <Text maxW="75ch">{description}</Text>}
               <div className="wrapper-post" style={{ padding: "2rem 0" }}>
                 {posts.edges
                   .filter(
@@ -222,7 +223,7 @@ const TheLastDraft = ({ data }) => {
           <SubmitForm />
         </section>
       </div>
-      <SubmitModal />
+      <OptInModal />
     </Layout>
   )
 }
@@ -252,6 +253,7 @@ export const data = graphql`
           current
         }
         title
+        description
       }
     }
     posts: allSanityPost(sort: { fields: publishedAt, order: DESC }) {

@@ -8,7 +8,7 @@ import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
-import SubmitForm from "../components/SubmitForm"
+import SubmitForm from "../components/Forms/SubmitForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
 
