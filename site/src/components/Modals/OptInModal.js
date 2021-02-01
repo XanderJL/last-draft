@@ -168,7 +168,15 @@ const OptInModal = () => {
                   </FormLabel>
                   <Input type="email" name="email" {...inputStyles} />
                 </FormControl>
-                <Textarea display="none" name="body" />
+                <Box display="none">
+                  <div>
+                    <textarea name="body"></textarea>
+                  </div>
+                  <div>
+                    <input type="file" name="attachment" />
+                  </div>
+                  <div id="html_element"></div>
+                </Box>
                 <FormControl {...controlStyles}>
                   <Button
                     type="submit"
