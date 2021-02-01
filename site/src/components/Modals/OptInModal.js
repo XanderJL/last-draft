@@ -9,6 +9,7 @@ import {
   Heading,
   Input,
   Text,
+  Textarea,
 } from "@chakra-ui/react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
@@ -92,14 +93,19 @@ const OptInModal = () => {
           right={{ base: 0, md: "1rem" }}
           bottom={{ base: 0, md: "1rem" }}
           bg="white"
-          overflowY="scroll"
+          overflowY={{ base: "scroll", md: "hidden" }}
           variant={boxVariant}
           initial="hidden"
           animate="visible"
           exit="hidden"
         >
           <Flex direction={{ base: "column", md: "row" }} minH="700px">
-            <Box display={{ base: "none", md: "block" }} w="50%" minW="280px">
+            <Box
+              display={{ base: "none", md: "block" }}
+              w="50%"
+              minW="280px"
+              overflow="hidden"
+            >
               <Img
                 fixed={data.desktop.childImageSharp.fixed}
                 style={{ width: "100%", height: "100%" }}
@@ -162,6 +168,7 @@ const OptInModal = () => {
                   </FormLabel>
                   <Input type="email" name="email" {...inputStyles} />
                 </FormControl>
+                <Textarea display="none" name="body" />
                 <FormControl {...controlStyles}>
                   <Button
                     type="submit"
