@@ -12,6 +12,7 @@ import {
   useTheme,
 } from "@chakra-ui/react"
 import { AiOutlineUpload } from "react-icons/ai"
+import ReCAPTCHA from "react-google-recaptcha"
 
 const SubmitForm = () => {
   const [fileName, setFileName] = useState("Select a File")
@@ -119,6 +120,9 @@ const SubmitForm = () => {
                 setFileName(fileNameAndSize)
               }}
             />
+          </FormControl>
+          <FormControl {...controlStyles}>
+            <ReCAPTCHA sitekey={process.env.GATSBY_GOOGLE_RECAPTCHA} />
           </FormControl>
           <FormControl {...controlStyles}>
             <Button

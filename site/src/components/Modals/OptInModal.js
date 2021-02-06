@@ -14,6 +14,7 @@ import {
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { motion, AnimatePresence } from "framer-motion"
+import ReCAPTCHA from "react-google-recaptcha"
 
 const BoxMotion = motion.custom(Box)
 
@@ -160,13 +161,23 @@ const OptInModal = () => {
                   <FormLabel htmlFor="name" {...labelStyles}>
                     Name
                   </FormLabel>
-                  <Input type="text" name="name" placeholder="Jane Doe" {...inputStyles} />
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="Jane Doe"
+                    {...inputStyles}
+                  />
                 </FormControl>
                 <FormControl {...controlStyles}>
                   <FormLabel htmlFor="email" {...labelStyles}>
                     Email
                   </FormLabel>
-                  <Input type="email" name="email" placeholder="j.doe@email.com" {...inputStyles} />
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="j.doe@email.com"
+                    {...inputStyles}
+                  />
                 </FormControl>
                 <Box display="none">
                   <div>
@@ -177,6 +188,9 @@ const OptInModal = () => {
                   </div>
                   <div id="html_element"></div>
                 </Box>
+                <FormControl {...controlStyles}>
+                  <ReCAPTCHA sitekey={process.env.GATSBY_GOOGLE_RECAPTCHA} />
+                </FormControl>
                 <FormControl {...controlStyles}>
                   <Button
                     type="submit"

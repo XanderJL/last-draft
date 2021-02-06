@@ -61,6 +61,7 @@ jobs:
           ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
           GATSBY_SANITY_ID: ${{ secrets.GATSBY_SANITY_ID }}
           GATSBY_SANITY_DATASET: ${{ secrets.GATSBY_SANITY_DATASET }}
+          GATSBY_GOOGLE_RECAPTCHA: ${{ secrets.GATSBY_GOOGLE_RECAPTCHA }}
 
         run: yarn workspace site build
 
