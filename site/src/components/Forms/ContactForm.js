@@ -78,9 +78,9 @@ const ContactForm = ({ title, body }) => {
         <Link href="https://www.linkedin.com/company/last-draft/" isExternal>
           <Icon as={FaLinkedin} boxSize={10} />
         </Link>
-        <Link href="https://instagram.com/lastdraftinc" isExternal>
+        {/* <Link href="https://instagram.com/lastdraftinc" isExternal>
           <Icon as={FaInstagram} boxSize={10} />
-        </Link>
+        </Link> */}
         <Link href="https://twitter.com/LastDraftInc" isExternal>
           <Icon as={FaTwitter} boxSize={10} />
         </Link>

@@ -40,6 +40,15 @@ const IndexPage = () => {
         }
         cardsTitle
         _rawCards
+        cards {
+          _key
+          title
+          service {
+            slug {
+              current
+            }
+          }
+        }
         testimonials {
           _rawTestimonial
           brandName
@@ -56,12 +65,19 @@ const IndexPage = () => {
   const metaDescription = data.homePage.metaDescription
   const {
     _rawHeroCard,
+    cards,
     _rawCards,
     cardsTitle,
     contactHeading,
     _rawContactBody,
     testimonials,
   } = data.homePage
+
+  cards.map(card => {
+    const raw = _rawCards.filter(rawCard => rawCard._key === card._key)
+    card._rawBody = raw[0].body
+  })
+
   const BlockRenderer = props => {
     const { style = "normal" } = props.node
 
@@ -135,14 +151,17 @@ const IndexPage = () => {
             </h1>
           </div>
           <div className="grid-wrapper">
-            {_rawCards.map(card => (
-              <div key={card._key} className="card-wrap">
-                <Link to="/about">
-                  <h2 className="is-size-3 is-size-4-mobile">{card.title}</h2>
-                </Link>
-                <PortableText blocks={card.body} serializers={serializers} />
-              </div>
-            ))}
+            {cards.map(card => {
+              const { _key, title, _rawBody, service } = card
+              return (
+                <div key={_key} className="card-wrap">
+                  <Link to={`/services/for-business/#${service.slug.current}`}>
+                    <h2 className="is-size-3 is-size-4-mobile">{title}</h2>
+                  </Link>
+                  <PortableText blocks={_rawBody} serializers={serializers} />
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>

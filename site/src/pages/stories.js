@@ -112,13 +112,7 @@ const TheLastDraft = ({ data }) => {
                 ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                 : `/stories/${category.slug.current}/${slug.current}`
               return (
-                <PostCard
-                  key={id}
-                  title={title}
-                  image={image}
-                  link={link}
-                  cardStyle={{ maxWidth: "420px" }}
-                >
+                <PostCard key={id} title={title} image={image} link={link}>
                   {previewCopy
                     ? previewCopy
                     : toPlainText(_rawBody).slice(0, 159) + "..."}

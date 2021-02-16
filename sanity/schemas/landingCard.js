@@ -9,6 +9,12 @@ export default {
       type: "string",
     },
     {
+      name: "service",
+      title: "Related Service",
+      type: "reference",
+      to: { type: "service" },
+    },
+    {
       name: "body",
       title: "Body",
       type: "blockContent",

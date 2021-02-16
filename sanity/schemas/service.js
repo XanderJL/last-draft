@@ -7,6 +7,11 @@ export default {
   icon: MdHeadsetMic,
   fields: [
     {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+    },
+    {
       name: "image",
       title: "Image",
       type: "image",

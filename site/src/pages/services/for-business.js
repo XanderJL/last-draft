@@ -113,38 +113,41 @@ const ForEntrepreneurs = ({ data }) => {
       )}
       <section className="section has-background-white-bis">
         <div className="container" style={{ maxWidth: "1100px" }}>
-          {page.services.map(service => (
-            <div key={service.id} className="service-card">
-              {service.image ? (
-                <Img
-                  fluid={service.image.asset.fluid}
-                  alt={
-                    service.imageAlt
-                      ? service.imageAlt
-                      : "The author hasn't defined the image yet."
-                  }
-                  className="card-image"
-                />
-              ) : (
-                <Img
-                  fluid={placeholderImg}
-                  alt="Beer kegs"
-                  className="card-image"
-                />
-              )}
-              <div className="content card-copy">
-                <PortableText
-                  blocks={service._rawBody}
-                  serializers={{
-                    types: {
-                      block: BlockRenderer,
-                      blockImage: BlockImageRenderer,
-                    },
-                  }}
-                />
+          {page.services.map(service => {
+            const { id, image, imageAlt, slug, _rawBody } = service
+            return (
+              <div id={slug.current} key={id} className="service-card">
+                {image ? (
+                  <Img
+                    fluid={image.asset.fluid}
+                    alt={
+                      imageAlt
+                        ? imageAlt
+                        : "The author hasn't defined the image yet."
+                    }
+                    className="card-image"
+                  />
+                ) : (
+                  <Img
+                    fluid={placeholderImg}
+                    alt="Beer kegs"
+                    className="card-image"
+                  />
+                )}
+                <div className="content card-copy">
+                  <PortableText
+                    blocks={_rawBody}
+                    serializers={{
+                      types: {
+                        block: BlockRenderer,
+                        blockImage: BlockImageRenderer,
+                      },
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
     </Layout>
@@ -174,6 +177,9 @@ export const data = graphql`
       _rawHeroCard
       services {
         id
+        slug {
+          current
+        }
         image {
           asset {
             fluid(maxWidth: 800) {
