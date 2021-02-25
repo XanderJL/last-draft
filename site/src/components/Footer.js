@@ -47,7 +47,7 @@ function Footer() {
               </a>
             </div>
             <span className="copyright">
-              &copy; Copyright 2020 by Lastdraft Inc.
+              &copy; Copyright {new Date().getFullYear()} by Last Draft Inc.
             </span>
           </div>
         </div>
