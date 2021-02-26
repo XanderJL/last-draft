@@ -94,7 +94,7 @@ const IndexPage = () => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase subtitle is-size-4 has-text-white is-spaced is-size-5-mobile`,
+          className: `is-montserrat is-uppercase subtitle is-size-5 has-text-white is-spaced is-size-6-mobile`,
         },
         props.children
       )
