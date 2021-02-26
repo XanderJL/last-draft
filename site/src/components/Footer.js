@@ -1,7 +1,8 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link as GatsbyLink } from "gatsby"
+import { Image, Link, Text } from "@chakra-ui/react"
 
-import Logo from "../images/last-draft-logo.png"
+import Logo from "../images/icons/logo.png"
 
 function Footer() {
   return (
@@ -9,8 +10,9 @@ function Footer() {
       <footer className="footer">
         <div className="container">
           <div className="footer-wrapper">
-            <Link to="/" className="logo">
-              <img src={Logo} alt="Last Draft logo" />
+            <Link as={GatsbyLink} display="flex" alignItems="center" to="/" pb="1rem">
+              <Image boxSize={12} src={Logo} alt="Last Draft logo" />{" "}
+              <Text pl="1rem" fontFamily="heading" fontWeight={600} fontSize="xl" textTransform="uppercase">Last Draft Inc.</Text>
             </Link>
             <div className="links">
               <Link
