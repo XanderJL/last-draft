@@ -12,7 +12,7 @@ function Footer() {
           <div className="footer-wrapper">
             <Link as={GatsbyLink} display="flex" alignItems="center" to="/" pb="1rem">
               <Image boxSize={12} src={Logo} alt="Last Draft logo" />{" "}
-              <Text pl="1rem" fontFamily="heading" fontWeight={600} fontSize="xl" textTransform="uppercase">Last Draft Inc.</Text>
+              <Text pl="1rem" fontFamily="heading" fontWeight={600} fontSize="xl" textTransform="uppercase">Last Draft</Text>
             </Link>
             <div className="links">
               <Link
@@ -49,7 +49,7 @@ function Footer() {
               </a>
             </div>
             <span className="copyright">
-              &copy; Copyright {new Date().getFullYear()} by Last Draft Inc.
+              &copy; Copyright {new Date().getFullYear()} by Last Draft
             </span>
           </div>
         </div>

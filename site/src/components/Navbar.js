@@ -19,7 +19,7 @@ export default function Navbar() {
             <Link to="/" className="navbar-logo navbar-item">
               <img id="logo" src={Logo} alt="Last Draft Logo" />
               <span className="is-montserrat is-uppercase has-text-black">
-                last draft inc.
+                last draft
               </span>
             </Link>
             <div
