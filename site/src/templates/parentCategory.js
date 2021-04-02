@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql, Link as GatsbyLink } from "gatsby"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
@@ -99,7 +99,7 @@ export const data = graphql`
       heroImage {
         asset {
           fluid(maxWidth: 1920) {
-            ...GatsbySanityImageFluid
+            ...SanityImageAsset
           }
         }
         hotspot {
@@ -134,7 +134,7 @@ export const data = graphql`
           heroImage {
             asset {
               fluid(maxWidth: 1920) {
-                ...GatsbySanityImageFluid
+                ...SanityImageAsset
               }
             }
             hotspot {
@@ -171,7 +171,7 @@ export const data = graphql`
           mainImage {
             asset {
               fluid(maxWidth: 800, maxHeight: 600) {
-                ...GatsbySanityImageFluid
+                ...SanityImageAsset
               }
             }
             hotspot {

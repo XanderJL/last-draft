@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import BackgroundImage from "gatsby-background-image"
@@ -116,7 +116,7 @@ export const data = graphql`
       heroImage {
         asset {
           fluid(maxWidth: 1920) {
-            ...GatsbySanityImageFluid
+            ...SanityImageAsset
           }
         }
       }
@@ -126,7 +126,7 @@ export const data = graphql`
         image {
           asset {
             fluid(maxWidth: 800) {
-              ...GatsbySanityImageFluid
+              ...SanityImageAsset
             }
           }
         }

@@ -1,18 +1,17 @@
-/** @jsx jsx */
-import React from "react"
+import * as React from "react"
 import { Link as GatsbyLink, useStaticQuery, graphql } from "gatsby"
-import { Box, Link, Grid, Heading } from "@chakra-ui/react"
-import { css, jsx } from "@emotion/react"
-import Img from "gatsby-image/withIEPolyfill"
+import { Box, Link } from "@chakra-ui/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import Brands from "../components/Brands"
-import SubmitForm from "../components/Forms/SubmitForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
+import SanityImage from "../components/SanityImage"
+import sanityConfig from "../lib/sanityConfig"
+import { getGatsbyImageData } from "gatsby-source-sanity"
 
-export default function About() {
+const About = () => {
   const data = useStaticQuery(graphql`
     {
       aboutPage: sanityAboutPage {
@@ -20,11 +19,7 @@ export default function About() {
         title
         _rawHeroCard
         heroImage {
-          asset {
-            fluid(maxWidth: 1440) {
-              ...GatsbySanityImageFluid
-            }
-          }
+          asset
           hotspot {
             x
             y
@@ -34,37 +29,14 @@ export default function About() {
         _rawPublication
         sectionOne {
           image {
-            asset {
-              fluid(maxWidth: 1200) {
-                ...GatsbySanityImageFluid
-              }
+            asset
             }
           }
           alt
         }
         publication {
           image {
-            asset {
-              fluid(maxWidth: 1200) {
-                ...GatsbySanityImageFluid
-              }
-            }
-          }
-          alt
-        }
-        grid {
-          title
-          url
-          image {
-            asset {
-              fluid(maxWidth: 400) {
-                ...GatsbySanityImageFluid
-              }
-            }
-            hotspot {
-              x
-              y
-            }
+            asset 
           }
           alt
         }
@@ -72,7 +44,7 @@ export default function About() {
     }
   `)
 
-  const CardRenderer = props => {
+  const CardRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (style === "h1") {
@@ -102,7 +74,7 @@ export default function About() {
     return PortableText.defaultSerializers.types.block(props)
   }
 
-  const SectionRenderer = props => {
+  const SectionRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (/^h\d/.test(style)) {
@@ -122,8 +94,8 @@ export default function About() {
     // Fall back to default handling
     return PortableText.defaultSerializers.types.block(props)
   }
-  const BlockImageRenderer = props => {
-    const urlFor = source =>
+  const BlockImageRenderer = (props) => {
+    const urlFor = (source) =>
       imageUrlBuilder({
         projectId: process.env.GATSBY_SANITY_ID,
         dataset: process.env.GATSBY_SANITY_DATASET,
@@ -146,16 +118,19 @@ export default function About() {
 
   const title = data.aboutPage.title
   const metaDescription = data.aboutPage._rawMetaDescription[0].children[0].text
-  const heroImage = data.aboutPage.heroImage.asset.fluid
+  const heroImage = getGatsbyImageData(
+    data.aboutPage.heroImage.asset,
+    { maxWidth: 1440 },
+    sanityConfig
+  )
   const heroHotspot = data.aboutPage.heroImage.hotspot
   const heroCard = data.aboutPage._rawHeroCard
   const sectionOne = data.aboutPage._rawSectionOne.body
-  const sectionOneImg = data.aboutPage.sectionOne.image.asset.fluid
+  const sectionOneImg = data.aboutPage.sectionOne.image.asset
   const sectionOneAlt = data.aboutPage.sectionOne.alt
   const publication = data.aboutPage._rawPublication.body
-  const pubImage = data.aboutPage.publication.image.asset.fluid
+  const pubImage = data.aboutPage.publication.image.asset
   const pubAlt = data.aboutPage.publication.alt
-  const instaGrid = data.aboutPage.grid
 
   return (
     <Layout title={title} description={metaDescription}>
@@ -185,10 +160,11 @@ export default function About() {
               />
             </div>
           </div>
-          <Img
-            className="type-writer"
-            fluid={sectionOneImg}
+          <SanityImage
+            image={sectionOneImg}
+            options={{ maxWidth: 1440 }}
             alt={sectionOneAlt}
+            className="type-writer"
           />
         </div>
       </section>
@@ -219,58 +195,18 @@ export default function About() {
                   </Link>
                 </Box>
               </Box>
-              <Img className="image" fluid={pubImage} alt={pubAlt} />
+              <SanityImage
+                options={{ maxWidth: 1200 }}
+                image={pubImage}
+                alt={pubAlt}
+                className="image"
+              />
             </Box>
           </Box>
         </Box>
       </Box>
-      {/* <Box as="section" className="section">
-        <SubmitForm />
-      </Box>
-      <Box as="section" className="section">
-        <Box maxW="4xl" m="0 auto">
-          <Link href="https://www.instagram.com/lastdraftinc" isExternal>
-            <Heading
-              as="h2"
-              mb="1.5rem"
-              fontWeight={400}
-              letterSpacing="0.12em"
-              color="black"
-              _hover={{ color: "cyan.300" }}
-            >
-              @THELASTDRAFT
-            </Heading>
-          </Link>
-          <Grid
-            gridTemplateColumns={{
-              base: "minmax(0, 1fr)",
-              md: "repeat(3, minmax(120px, 1fr))",
-            }}
-            gridAutoRows="1fr"
-            gap="1rem"
-          >
-            {instaGrid.map((post, i) => {
-              const { url, image, alt } = post
-              return (
-                <Link key={i} href={url} bg="white" isExternal>
-                  <Img
-                    css={css`
-                      width: 100%;
-                      height: 100%;
-                      &:hover {
-                        opacity: 0.75;
-                      }
-                    `}
-                    fluid={image.asset.fluid}
-                    alt={alt}
-                    className="card"
-                  />
-                </Link>
-              )
-            })}
-          </Grid>
-        </Box>
-      </Box> */}
     </Layout>
   )
 }
+
+export default About

@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import Headshot from "../components/Headshot"
 import BioCard from "../components/BioCard"
 

@@ -9,6 +9,11 @@ export default {
       type: "string",
     },
     {
+      name: "icon",
+      title: "Icon",
+      type: "image",
+    },
+    {
       name: "service",
       title: "Related Service",
       type: "reference",

@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import BackgroundImage from "gatsby-background-image"
@@ -6,12 +6,12 @@ import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../../components/Layout"
 import PortableText from "@sanity/block-content-to-react"
 
-const ForEntrepreneurs = ({ data }) => {
+const ForBusiness = ({ data }) => {
   const { page, placeholder } = data
   const heroImage = page.heroImage.asset.fluid
   const placeholderImg = placeholder.childImageSharp.fluid
 
-  const CardRenderer = props => {
+  const CardRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (style === "h1") {
@@ -41,7 +41,7 @@ const ForEntrepreneurs = ({ data }) => {
     return PortableText.defaultSerializers.types.block(props)
   }
 
-  const BlockRenderer = props => {
+  const BlockRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (/^h\d/.test(style)) {
@@ -58,8 +58,8 @@ const ForEntrepreneurs = ({ data }) => {
     return PortableText.defaultSerializers.types.block(props)
   }
 
-  const BlockImageRenderer = props => {
-    const urlFor = source =>
+  const BlockImageRenderer = (props) => {
+    const urlFor = (source) =>
       imageUrlBuilder({
         projectId: process.env.GATSBY_SANITY_ID,
         dataset: process.env.GATSBY_SANITY_DATASET,
@@ -113,7 +113,7 @@ const ForEntrepreneurs = ({ data }) => {
       )}
       <section className="section has-background-white-bis">
         <div className="container" style={{ maxWidth: "1100px" }}>
-          {page.services.map(service => {
+          {page.services.map((service) => {
             const { id, image, imageAlt, slug, _rawBody } = service
             return (
               <div id={slug.current} key={id} className="service-card">
@@ -164,13 +164,13 @@ export const data = graphql`
       }
     }
     page: sanityServicesPage(
-      id: { eq: "3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }
+      id: { eq: "-3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }
     ) {
       title
       heroImage {
         asset {
           fluid(maxWidth: 1920) {
-            ...GatsbySanityImageFluid
+            ...SanityImageAsset
           }
         }
       }
@@ -183,7 +183,7 @@ export const data = graphql`
         image {
           asset {
             fluid(maxWidth: 800) {
-              ...GatsbySanityImageFluid
+              ...SanityImageAsset
             }
           }
         }
@@ -193,4 +193,4 @@ export const data = graphql`
     }
   }
 `
-export default ForEntrepreneurs
+export default ForBusiness

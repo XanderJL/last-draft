@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../components/Layout"
 import AuthorBio from "../../components/AuthorBio"
@@ -33,7 +33,7 @@ export const data = graphql`
           image {
             asset {
               fixed(width: 150, height: 150) {
-                ...GatsbySanityImageFixed
+                ...SanityImageAsset
               }
             }
           }

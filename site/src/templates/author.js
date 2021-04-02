@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/Layout"
@@ -94,7 +94,7 @@ export const data = graphql`
       image {
         asset {
           fixed(width: 150, height: 150) {
-            ...GatsbySanityImageFixed
+            ...SanityImageAsset
           }
         }
       }
@@ -114,7 +114,7 @@ export const data = graphql`
           mainImage {
             asset {
               fluid(maxWidth: 1600, maxHeight: 900) {
-                ...GatsbySanityImageFluid
+                ...SanityImageAsset
               }
             }
             hotspot {
@@ -134,7 +134,7 @@ export const data = graphql`
             image {
               asset {
                 fixed(width: 50, height: 50) {
-                  ...GatsbySanityImageFixed
+                  ...SanityImageAsset
                 }
               }
             }

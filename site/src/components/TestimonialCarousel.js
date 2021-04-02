@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import PortableText from "@sanity/block-content-to-react"
 import Slider from "react-slick"
 import { Box, Link, Text } from "@chakra-ui/react"

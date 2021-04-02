@@ -1,6 +1,9 @@
-import React from "react"
+import * as React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
-import { Image, Flex, Text, Heading, Link } from "@chakra-ui/react"
+import { Flex, Text, Heading, Link, Box } from "@chakra-ui/react"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import sanityConfig from "../lib/sanityConfig"
 
 const EmployeesCard = () => {
   const data = useStaticQuery(graphql`
@@ -15,11 +18,7 @@ const EmployeesCard = () => {
           _rawBio
           _rawQuote
           headshot {
-            asset {
-              fixed(width: 400) {
-                ...GatsbySanityImageFixed
-              }
-            }
+            asset
           }
           jobTitle
           slug {
@@ -50,7 +49,6 @@ const EmployeesCard = () => {
         textTransform="uppercase"
         letterSpacing="0.10em"
         color="black"
-        // className="is-montserrat is-uppercase is-spaced title"
       >
         {teamPage.heading}
       </Heading>
@@ -65,37 +63,45 @@ const EmployeesCard = () => {
         {teamPage.subheading}
       </Heading>
       <Flex align="center" justify="center" flexWrap="wrap">
-        {teamPage.team.map(employee => (
-          <Link
-            as={GatsbyLink}
-            display="flex"
-            flexDir="column"
-            justifyContent="center"
-            alignItems="center"
-            p="1rem"
-            to={"/team#" + employee.slug.current}
-            key={employee.id}
-          >
-            <Image
-              src={employee.headshot.asset.fixed.src}
-              boxSize="130px"
-              fit="cover"
-              align="50% 50%"
-              borderRadius="full"
-              _hover={{ opacity: 0.75 }}
-            />
-            <Heading
-              as="h2"
-              size="sm"
-              fontWeight={400}
-              className="has-text-black has-text-centered"
-              style={{ marginTop: "1rem" }}
+        {teamPage.team.map((employee) => {
+          const imageData = getGatsbyImageData(
+            employee.headshot.asset,
+            { maxWidth: 400 },
+            sanityConfig
+          )
+          return (
+            <Link
+              as={GatsbyLink}
+              display="flex"
+              flexDir="column"
+              justifyContent="center"
+              alignItems="center"
+              p="1rem"
+              to={"/team#" + employee.slug.current}
+              key={employee.id}
             >
-              <Text>{employee.firstName}</Text>
-              <Text>{employee.lastName}</Text>
-            </Heading>
-          </Link>
-        ))}
+              <Box
+                boxSize="130px"
+                fit="cover"
+                align="50% 50%"
+                borderRadius="full"
+                _hover={{ opacity: 0.75 }}
+              >
+                <GatsbyImage image={imageData} />
+              </Box>
+              <Heading
+                as="h2"
+                size="sm"
+                fontWeight={400}
+                className="has-text-black has-text-centered"
+                style={{ marginTop: "1rem" }}
+              >
+                <Text>{employee.firstName}</Text>
+                <Text>{employee.lastName}</Text>
+              </Heading>
+            </Link>
+          )
+        })}
       </Flex>
     </Flex>
   )

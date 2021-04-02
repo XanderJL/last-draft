@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Box } from "@chakra-ui/react"
 import InstagramEmbed from "react-instagram-embed"
 import { Tweet } from "react-twitter-widgets"

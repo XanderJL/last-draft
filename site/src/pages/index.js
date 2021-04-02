@@ -1,14 +1,22 @@
-import React from "react"
+import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
 import PortableText from "@sanity/block-content-to-react"
-import { Box } from "@chakra-ui/react"
-
+import {
+  Box,
+  Container,
+  Grid,
+  GridItem,
+  Heading,
+  VStack,
+} from "@chakra-ui/react"
+import SanityImage from "../components/SanityImage"
 import Layout from "../components/Layout"
 import Testimonials from "../components/TestimonialCarousel"
 import ContactForm from "../components/Forms/ContactForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import { getImage } from "gatsby-plugin-image"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -17,9 +25,11 @@ const IndexPage = () => {
         relativePath: { eq: "index/newsletter-header.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 3840, quality: 90) {
-            ...GatsbyImageSharpFluid
-          }
+          gatsbyImageData(
+            maxWidth: 3840
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+          )
         }
       }
       homePage: sanityIndexPage {
@@ -28,11 +38,7 @@ const IndexPage = () => {
         contactHeading
         _rawContactBody
         heroImage {
-          asset {
-            fluid(maxWidth: 3840) {
-              ...GatsbySanityImageFluid
-            }
-          }
+          asset
           hotspot {
             x
             y
@@ -60,8 +66,8 @@ const IndexPage = () => {
       }
     }
   `)
-  const headerImage = data.homePage.heroImage
-  const newsLetterImage = data.newsLetterImage.childImageSharp.fluid
+  const headerImage = getGatsbyImageData(data.homePage.heroImage.asset)
+  const newsLetterImage = getImage(data.newsLetterImage.childImageSharp)
   const metaDescription = data.homePage.metaDescription
   const {
     _rawHeroCard,
@@ -73,12 +79,12 @@ const IndexPage = () => {
     testimonials,
   } = data.homePage
 
-  cards.map(card => {
-    const raw = _rawCards.filter(rawCard => rawCard._key === card._key)
+  cards.map((card) => {
+    const raw = _rawCards.filter((rawCard) => rawCard._key === card._key)
     card._rawBody = raw[0].body
   })
 
-  const BlockRenderer = props => {
+  const BlockRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (style === "h1") {
@@ -109,8 +115,8 @@ const IndexPage = () => {
   }
   const serializers = {
     types: {
-      landingCard: props => <span>{props.children}</span>,
-      block: props => <p className="has-text-centered">{props.children}</p>,
+      landingCard: (props) => <span>{props.children}</span>,
+      block: (props) => <p className="has-text-centered">{props.children}</p>,
     },
   }
 
@@ -119,7 +125,7 @@ const IndexPage = () => {
       <Box d={{ base: "none", md: "block" }}>
         <Hero
           size="fullheight-with-navbar"
-          fluid={headerImage.asset.fluid}
+          image={headerImage}
           styles={imageHotspot(headerImage.hotspot)}
         >
           <Box
@@ -135,7 +141,7 @@ const IndexPage = () => {
         </Hero>
       </Box>
       <Box d={{ base: "flex", md: "none" }} flexDir="column">
-        <Img fluid={headerImage.asset.fluid} style={{ flex: 1 }} />
+        <SanityImage image={headerImage} style={{ flex: 1 }} />
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
             blocks={_rawHeroCard}
@@ -143,29 +149,41 @@ const IndexPage = () => {
           />
         </Box>
       </Box>
-      <section className="section-ethical-storytelling">
-        <div className="container is-widescreen">
-          <div className="copy">
-            <h1 className="title-heading has-text-centered is-montserrat is-size-4-mobile">
+      <Box as="section" p={{ base: "3rem 1.25rem" }}>
+        <Container maxW="container.xl">
+          <VStack spacing={4}>
+            <Heading textAlign="center" textTransform="uppercase">
               {cardsTitle}
-            </h1>
-          </div>
-          <div className="grid-wrapper">
-            {cards.map(card => {
-              const { _key, title, _rawBody, service } = card
-              return (
-                <div key={_key} className="card-wrap">
-                  <Link to={`/services/for-business/#${service.slug.current}`}>
-                    <h2 className="is-size-3 is-size-4-mobile">{title}</h2>
-                  </Link>
-                  <PortableText blocks={_rawBody} serializers={serializers} />
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-      <Hero fluid={newsLetterImage} size="fullheight">
+            </Heading>
+            <Grid
+              templateColumns={{ base: "minmax(0, 1fr)", md: "repeat(3, 1fr)" }}
+              gap={12}
+            >
+              {cards.map((card) => {
+                const { _key, title, _rawBody, service } = card
+                return (
+                  <GridItem key={_key}>
+                    <Link
+                      to={`/services/for-business/#${service.slug.current}`}
+                    >
+                      <Heading
+                        as="h2"
+                        size="md"
+                        textAlign="center"
+                        textTransform="uppercase"
+                      >
+                        {title}
+                      </Heading>
+                    </Link>
+                    <PortableText blocks={_rawBody} serializers={serializers} />
+                  </GridItem>
+                )
+              })}
+            </Grid>
+          </VStack>
+        </Container>
+      </Box>
+      <Hero image={newsLetterImage} size="fullheight">
         <Box
           maxW={{ base: "70ch", md: "85ch" }}
           p={{ base: "3rem 1.25rem", md: "5rem 3rem" }}

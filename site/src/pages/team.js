@@ -1,22 +1,22 @@
-import React from "react"
+import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import EmployeesCard from "../components/EmployeesCard"
 import EmployeeSection from "../components/EmployeeSection"
 import Hero from "../components/Hero"
+import { getImage } from "gatsby-plugin-image"
 
 const Team = ({ data }) => {
-  console.log(data)
   return (
     <Layout title="Team">
       <Hero
-        fluid={data.headerImage.childImageSharp.fluid}
+        image={getImage(data.headerImage.childImageSharp)}
         size="fullheight-with-navbar"
       >
         <EmployeesCard />
       </Hero>
       <div className="section-wrapper">
-        {data.employees.team.map(employee => (
+        {data.employees.team.map((employee) => (
           <EmployeeSection
             key={employee.id}
             slug={employee.slug.current}
@@ -37,9 +37,11 @@ export const data = graphql`
   query {
     headerImage: file(relativePath: { eq: "about/about-header.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1920) {
-          ...GatsbyImageSharpFluid
-        }
+        gatsbyImageData(
+          maxWidth: 1920
+          placeholder: BLURRED
+          format: [AUTO, WEBP, AVIF]
+        )
       }
     }
     employees: sanityTeamPage {
@@ -54,7 +56,7 @@ export const data = graphql`
         headshot {
           asset {
             fluid(maxWidth: 400) {
-              ...GatsbySanityImageFluid
+              ...SanityImageAsset
             }
           }
         }

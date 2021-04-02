@@ -1,10 +1,9 @@
 /** @jsx jsx */
-import React from "react"
+import * as React from "react"
 import { graphql, Link } from "gatsby"
 import { Box, Text } from "@chakra-ui/react"
 import { css, jsx } from "@emotion/react"
 import PortableText from "@sanity/block-content-to-react"
-import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
 import PostCard from "../components/PostCard"
@@ -13,13 +12,16 @@ import toPlainText from "../hooks/toPlainText"
 import imageHotspot from "../hooks/imageHotspot"
 import SubmitForm from "../components/Forms/SubmitForm"
 import OptInModal from "../components/Modals/OptInModal"
+import SanityImage from "../components/SanityImage"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import sanityConfig from "../lib/sanityConfig"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
   const { title, categories, heroImage, _rawPublication, publication } = blog
   const pubBody = _rawPublication.body
 
-  const SectionRenderer = props => {
+  const SectionRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (/^h\d/.test(style)) {
@@ -39,15 +41,11 @@ const TheLastDraft = ({ data }) => {
     // Fall back to default handling
     return PortableText.defaultSerializers.types.block(props)
   }
-  const BlockImageRenderer = props => {
-    const urlFor = source =>
-      imageUrlBuilder({
-        projectId: process.env.GATSBY_SANITY_ID,
-        dataset: process.env.GATSBY_SANITY_DATASET,
-      }).image(source)
+  const BlockImageRenderer = (props) => {
     return (
-      <img
-        src={urlFor(props.node.image.asset).maxWidth(400)}
+      <SanityImage
+        image={getGatsbyImageData(props.node.image.asset)}
+        options={{ maxWidth: 800, maxHeight: 600 }}
         alt={props.node.alt}
       />
     )
@@ -56,7 +54,11 @@ const TheLastDraft = ({ data }) => {
   return (
     <Layout title={title}>
       <Hero
-        fluid={heroImage.asset.fluid}
+        image={
+          (getGatsbyImageData(heroImage.asset),
+          { maxWidth: 1440 },
+          sanityConfig)
+        }
         styles={imageHotspot(heroImage.hotspot)}
         size="large"
       />
@@ -107,7 +109,11 @@ const TheLastDraft = ({ data }) => {
                 category,
                 slug,
               } = post
-              const image = mainImage.asset.fluid
+              const image = getGatsbyImageData(
+                mainImage.asset,
+                { maxWidth: 800, maxHeight: 600 },
+                sanityConfig
+              )
               const link = category.parentCategory
                 ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                 : `/stories/${category.slug.current}/${slug.current}`
@@ -130,7 +136,7 @@ const TheLastDraft = ({ data }) => {
           </h2>
           <hr style={{ margin: "0.75rem 0" }} />
           <div className="wrapper-post" style={{ padding: "2rem 0" }}>
-            {featuredPosts.featuredPosts.map(post => {
+            {featuredPosts.featuredPosts.map((post) => {
               const {
                 id,
                 title,
@@ -140,7 +146,11 @@ const TheLastDraft = ({ data }) => {
                 category,
                 slug,
               } = post
-              const image = mainImage.asset.fluid
+              const image = getGatsbyImageData(
+                mainImage.asset,
+                { maxWidth: 800, maxHeight: 600 },
+                sanityConfig
+              )
               const link = category.parentCategory
                 ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                 : `/stories/${category.slug.current}/${slug.current}`
@@ -160,7 +170,7 @@ const TheLastDraft = ({ data }) => {
             })}
           </div>
         </section>
-        {categories.map(category => {
+        {categories.map((category) => {
           const { id, slug, title, description } = category
           const link = `/stories/${slug.current}`
 
@@ -190,7 +200,11 @@ const TheLastDraft = ({ data }) => {
                       category,
                       slug,
                     } = post
-                    const image = mainImage.asset.fluid
+                    const image = getGatsbyImageData(
+                      mainImage.asset,
+                      { maxWidth: 800, maxHeight: 600 },
+                      sanityConfig
+                    )
                     const link = `/stories/${category.slug.current}/${slug.current}`
                     return (
                       <PostCard
@@ -230,11 +244,7 @@ export const data = graphql`
         current
       }
       heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...GatsbySanityImageFluid
-          }
-        }
+        asset
         hotspot {
           x
           y
@@ -260,11 +270,7 @@ export const data = graphql`
           }
           title
           mainImage {
-            asset {
-              fluid(maxWidth: 800, maxHeight: 600) {
-                ...GatsbySanityImageFluid
-              }
-            }
+            asset
             hotspot {
               x
               y
@@ -297,11 +303,7 @@ export const data = graphql`
           }
           title
           mainImage {
-            asset {
-              fluid(maxWidth: 800, maxHeight: 600) {
-                ...GatsbySanityImageFluid
-              }
-            }
+            asset
             hotspot {
               x
               y
@@ -336,11 +338,7 @@ export const data = graphql`
         }
         _rawBody
         mainImage {
-          asset {
-            fluid(maxWidth: 800, maxHeight: 600) {
-              ...GatsbySanityImageFluid
-            }
-          }
+          asset
           hotspot {
             x
             y

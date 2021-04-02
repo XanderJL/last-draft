@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql, Link } from "gatsby"
 import PortableText from "@sanity/block-content-to-react"
 import Serializers from "../components/Serializers"
@@ -109,7 +109,7 @@ export const data = graphql`
         image {
           asset {
             fixed(width: 150, height: 150) {
-              ...GatsbySanityImageFixed
+              ...SanityImageAsset
             }
           }
         }
@@ -120,7 +120,7 @@ export const data = graphql`
       mainImage {
         asset {
           fluid(maxWidth: 1920) {
-            ...GatsbySanityImageFluid
+            ...SanityImageAsset
           }
         }
         hotspot {

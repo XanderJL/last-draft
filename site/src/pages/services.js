@@ -1,20 +1,25 @@
-import React from "react"
+import * as React from "react"
 import { Link, graphql } from "gatsby"
-import Img from "gatsby-image"
 import { Box, Grid, Heading, Text, List, ListItem } from "@chakra-ui/react"
-import BackgroundImage from "gatsby-background-image"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
 import PortableText from "@sanity/block-content-to-react"
 import Hero from "../components/Hero"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import SanityImage from "../components/SanityImage"
 import imageHotspot from "../hooks/imageHotspot"
+import sanityConfig from "../lib/sanityConfig"
 
 const ServicesPage = ({ data }) => {
   const { services, placeholder, _rawHeroCard } = data
-  const heroImage = services.heroImage.asset.fluid
+  const heroImage = getGatsbyImageData(
+    services.heroImage.asset,
+    { maxWidth: 1440 },
+    sanityConfig
+  )
   const heroHotpsot = services.heroImage.hotspot
 
-  const CardRenderer = props => {
+  const CardRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (style === "h1") {
@@ -44,7 +49,7 @@ const ServicesPage = ({ data }) => {
     return PortableText.defaultSerializers.types.block(props)
   }
 
-  const BlockRenderer = props => {
+  const BlockRenderer = (props) => {
     const { style = "normal" } = props.node
 
     if (/^h\d/.test(style)) {
@@ -61,15 +66,19 @@ const ServicesPage = ({ data }) => {
     return PortableText.defaultSerializers.types.block(props)
   }
 
-  const BlockImageRenderer = props => {
-    const urlFor = source =>
+  const BlockImageRenderer = (props) => {
+    const urlFor = (source) =>
       imageUrlBuilder({
         projectId: process.env.GATSBY_SANITY_ID,
         dataset: process.env.GATSBY_SANITY_DATASET,
       }).image(source)
     return (
-      <img
-        src={urlFor(props.node.image.asset).maxWidth(400)}
+      <SanityImage
+        image={
+          (getGatsbyImageData(props.node.image.asset),
+          { maxWidth: 800, maxHeight: 450 },
+          sanityConfig)
+        }
         alt={props.node.alt}
       />
     )
@@ -143,7 +152,7 @@ const ServicesPage = ({ data }) => {
                 >
                   {image && image.asset ? (
                     <Link to={`/services/${slug.current}`}>
-                      <Img fluid={image.asset.fluid} alt={alt && alt} />
+                      <SanityImage image={image.asset} alt={alt && alt} />
                     </Link>
                   ) : null}
                   <Box
@@ -202,11 +211,7 @@ export const data = graphql`
     services: sanityServicesLandingPage {
       title
       heroImage {
-        asset {
-          fluid {
-            ...GatsbySanityImageFluid
-          }
-        }
+        asset
         hotspot {
           x
           y
@@ -223,11 +228,7 @@ export const data = graphql`
             x
             y
           }
-          asset {
-            fluid(maxWidth: 800, maxHeight: 450) {
-              ...GatsbySanityImageFluid
-            }
-          }
+          asset
         }
         alt
         description
