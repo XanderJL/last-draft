@@ -7,17 +7,22 @@ import BlogTabs from "../components/BlogTabs"
 import toPlainText from "../hooks/toPlainText"
 import Pagination from "../components/Pagination"
 import imageHotspot from "../hooks/imageHotspot"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import sanityConfig from "../lib/sanityConfig"
 
 const Category = ({ data, pageContext }) => {
   const { blog, category, posts } = data
 
+  const heroImageData = (image) =>
+    getGatsbyImageData(image, { maxWidth: 1920 }, sanityConfig)
+
   return (
     <Layout title={pageContext.title}>
       <Hero
-        fluid={
+        image={
           category.heroImage && category.heroImage.asset
-            ? category.heroImage.asset.fluid
-            : blog.heroImage.asset.fluid
+            ? heroImageData(category.heroImage.asset)
+            : heroImageData(blog.heroImage.asset)
         }
         style={imageHotspot(
           category.heroImage
@@ -47,7 +52,7 @@ const Category = ({ data, pageContext }) => {
                 category,
                 slug,
               } = post
-              const image = mainImage.asset.fluid
+              const image = mainImage.asset
               const link = `/stories/${category.slug.current}/${slug.current}`
               return (
                 <PostCard
@@ -77,11 +82,7 @@ export const data = graphql`
   query($slug: String!, $skip: Int!, $limit: Int!) {
     blog: sanityBlog {
       heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...SanityImageAsset
-          }
-        }
+        asset
         hotspot {
           x
           y
@@ -91,11 +92,7 @@ export const data = graphql`
     category: sanityCategory(slug: { current: { eq: $slug } }) {
       title
       heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...SanityImageAsset
-          }
-        }
+        asset
         hotspot {
           x
           y
@@ -121,11 +118,7 @@ export const data = graphql`
           previewCopy
           _rawBody
           mainImage {
-            asset {
-              fluid(maxWidth: 800, maxHeight: 600) {
-                ...SanityImageAsset
-              }
-            }
+            asset
             hotspot {
               x
               y

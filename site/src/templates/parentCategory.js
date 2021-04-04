@@ -7,17 +7,22 @@ import BlogTabs from "../components/BlogTabs"
 import toPlainText from "../hooks/toPlainText"
 import imageHotspot from "../hooks/imageHotspot"
 import { Box, Grid, Heading, Link, Text } from "@chakra-ui/react"
+import sanityConfig from "../lib/sanityConfig"
+import { getGatsbyImageData } from "gatsby-source-sanity"
 
 const ParentCategory = ({ data, pageContext }) => {
   const { blog, category, childCategories, posts } = data
+
+  const heroImageData = (image) =>
+    getGatsbyImageData(image, { maxWidth: 1920 }, sanityConfig)
 
   return (
     <Layout title={pageContext.title}>
       <Hero
         fluid={
           category.heroImage && category.heroImage.asset
-            ? category.heroImage.asset.fluid
-            : blog.heroImage.asset.fluid
+            ? category.heroImage.asset
+            : blog.heroImage.asset
         }
         style={imageHotspot(
           category.heroImage
@@ -57,7 +62,7 @@ const ParentCategory = ({ data, pageContext }) => {
                       category,
                       slug,
                     } = node
-                    const image = mainImage.asset.fluid
+                    const image = mainImage.asset
                     const link = `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                     return (
                       <PostCard
@@ -97,11 +102,7 @@ export const data = graphql`
   query($slug: String!) {
     blog: sanityBlog {
       heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...SanityImageAsset
-          }
-        }
+        asset
         hotspot {
           x
           y
@@ -111,11 +112,7 @@ export const data = graphql`
     category: sanityCategory(slug: { current: { eq: $slug } }) {
       title
       heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            src
-          }
-        }
+        asset
         hotspot {
           x
           y
@@ -132,11 +129,7 @@ export const data = graphql`
             current
           }
           heroImage {
-            asset {
-              fluid(maxWidth: 1920) {
-                ...SanityImageAsset
-              }
-            }
+            asset
             hotspot {
               x
               y
@@ -169,11 +162,7 @@ export const data = graphql`
           previewCopy
           _rawBody
           mainImage {
-            asset {
-              fluid(maxWidth: 800, maxHeight: 600) {
-                ...SanityImageAsset
-              }
-            }
+            asset
             hotspot {
               x
               y

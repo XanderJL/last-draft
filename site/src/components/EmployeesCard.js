@@ -1,9 +1,7 @@
 import * as React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { Flex, Text, Heading, Link, Box } from "@chakra-ui/react"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { getGatsbyImageData } from "gatsby-source-sanity"
-import sanityConfig from "../lib/sanityConfig"
+import SanityImage from "./SanityImage"
 
 const EmployeesCard = () => {
   const data = useStaticQuery(graphql`
@@ -64,11 +62,7 @@ const EmployeesCard = () => {
       </Heading>
       <Flex align="center" justify="center" flexWrap="wrap">
         {teamPage.team.map((employee) => {
-          const imageData = getGatsbyImageData(
-            employee.headshot.asset,
-            { maxWidth: 400 },
-            sanityConfig
-          )
+          const { id, slug, headshot, firstName, lastName } = employee
           return (
             <Link
               as={GatsbyLink}
@@ -77,8 +71,8 @@ const EmployeesCard = () => {
               justifyContent="center"
               alignItems="center"
               p="1rem"
-              to={"/team#" + employee.slug.current}
-              key={employee.id}
+              to={"/team#" + slug.current}
+              key={id}
             >
               <Box
                 boxSize="130px"
@@ -87,7 +81,10 @@ const EmployeesCard = () => {
                 borderRadius="full"
                 _hover={{ opacity: 0.75 }}
               >
-                <GatsbyImage image={imageData} />
+                <SanityImage
+                  image={headshot.asset}
+                  options={{ maxWidth: 400 }}
+                />
               </Box>
               <Heading
                 as="h2"
@@ -96,8 +93,8 @@ const EmployeesCard = () => {
                 className="has-text-black has-text-centered"
                 style={{ marginTop: "1rem" }}
               >
-                <Text>{employee.firstName}</Text>
-                <Text>{employee.lastName}</Text>
+                <Text>{firstName}</Text>
+                <Text>{lastName}</Text>
               </Heading>
             </Link>
           )

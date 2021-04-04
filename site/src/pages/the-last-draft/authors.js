@@ -31,11 +31,7 @@ export const data = graphql`
           name
           _rawBio
           image {
-            asset {
-              fixed(width: 150, height: 150) {
-                ...SanityImageAsset
-              }
-            }
+            asset
           }
         }
       }

@@ -1,21 +1,17 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import Img from "gatsby-image"
 import HeadshotCard from "./HeadshotCard"
+import SanityImage from "./SanityImage"
 
-const Headshot = props => {
+const Headshot = ({ image, quote, name, jobTitle }) => {
   return (
     <>
-      <Img
+      <SanityImage
         className="header-image"
-        fluid={props.image}
-        style={{ maxWidth: "1200px", maxHeight: "1200px" }}
+        image={image}
+        options={{ maxWidth: 1200, maxHeight: 1200 }}
       />
-      <HeadshotCard
-        quote={props.quote}
-        name={props.name}
-        jobTitle={props.jobTitle}
-      />
+      <HeadshotCard quote={quote} name={name} jobTitle={jobTitle} />
     </>
   )
 }

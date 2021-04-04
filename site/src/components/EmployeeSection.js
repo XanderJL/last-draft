@@ -2,18 +2,26 @@ import * as React from "react"
 import Headshot from "../components/Headshot"
 import BioCard from "../components/BioCard"
 
-const EmployeeSection = props => {
+const EmployeeSection = ({
+  slug,
+  image,
+  quote,
+  name,
+  jobTitle,
+  socials,
+  bio,
+}) => {
   return (
-    <section id={props.slug} className="section-employee">
+    <section id={slug} className="section-employee">
       <div className="container">
         <Headshot
-          image={props.image}
-          quote={props.quote}
-          name={props.name}
-          jobTitle={props.jobTitle}
-          socials={props.socials}
+          image={image}
+          quote={quote}
+          name={name}
+          jobTitle={jobTitle}
+          socials={socials}
         />
-        <BioCard bio={props.bio} socials={props.socials} />
+        <BioCard bio={bio} socials={socials} />
       </div>
     </section>
   )

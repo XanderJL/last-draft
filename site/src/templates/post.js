@@ -8,6 +8,8 @@ import Hero from "../components/Hero"
 import AuthorBio from "../components/AuthorBio"
 import Tags from "../components/Tags"
 import toPlainText from "../hooks/toPlainText"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import sanityConfig from "../lib/sanityConfig"
 
 const post = ({ data }) => {
   const {
@@ -39,7 +41,11 @@ const post = ({ data }) => {
       image={image}
     >
       <Hero
-        fluid={mainImage.asset.fluid}
+        fluid={getGatsbyImageData(
+          mainImage.asset,
+          { maxWidth: 1920 },
+          sanityConfig
+        )}
         styles={positionStyles}
         size="large"
       />
@@ -107,22 +113,14 @@ export const data = graphql`
         name
         _rawBio
         image {
-          asset {
-            fixed(width: 150, height: 150) {
-              ...SanityImageAsset
-            }
-          }
+          asset
         }
       }
       tags
       title
       publishedAt(formatString: "MMMM Do, YYYY")
       mainImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...SanityImageAsset
-          }
-        }
+        asset
         hotspot {
           width
           height

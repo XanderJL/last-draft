@@ -1,10 +1,10 @@
 import * as React from "react"
 import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
 import Layout from "../components/Layout"
 import toPlainText from "../hooks/toPlainText"
 import AuthorBio from "../components/AuthorBio"
 import Pagination from "../components/Pagination"
+import SanityImage from "../components/SanityImage"
 
 const Author = ({ data, pageContext }) => {
   const { author, posts } = data
@@ -39,9 +39,10 @@ const Author = ({ data, pageContext }) => {
                   <div className="card-header-icon">
                     <Link to={authorLink} className="">
                       {author.image ? (
-                        <Img
+                        <SanityImage
                           className="avatar"
-                          fixed={author.image.asset.fixed}
+                          image={author.image.asset}
+                          options={{ width: 50, height: 50 }}
                           imgStyle={{ width: "100%", height: "auto" }}
                         />
                       ) : null}
@@ -59,7 +60,11 @@ const Author = ({ data, pageContext }) => {
                 </div>
                 <div className="card-image">
                   <Link to={postLink}>
-                    <Img className="image" fluid={mainImage.asset.fluid} />
+                    <SanityImage
+                      className="image"
+                      image={mainImage.asset}
+                      options={{ maxWidth: 1600, maxHeight: 900 }}
+                    />
                   </Link>
                 </div>
                 <div className="card-content">
@@ -92,11 +97,7 @@ export const data = graphql`
         current
       }
       image {
-        asset {
-          fixed(width: 150, height: 150) {
-            ...SanityImageAsset
-          }
-        }
+        asset
       }
     }
     posts: allSanityPost(
@@ -112,11 +113,7 @@ export const data = graphql`
             current
           }
           mainImage {
-            asset {
-              fluid(maxWidth: 1600, maxHeight: 900) {
-                ...SanityImageAsset
-              }
-            }
+            asset
             hotspot {
               _key
               _type
@@ -132,11 +129,7 @@ export const data = graphql`
               current
             }
             image {
-              asset {
-                fixed(width: 50, height: 50) {
-                  ...SanityImageAsset
-                }
-              }
+              asset
             }
           }
           category {

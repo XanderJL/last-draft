@@ -1,8 +1,8 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link as GatsbyLink } from "gatsby"
-import Img from "gatsby-image"
 import { Box, Link } from "@chakra-ui/react"
+import SanityImage from "./SanityImage"
 
 const PostCard = ({ title, image, children, link }) => {
   return (
@@ -16,9 +16,10 @@ const PostCard = ({ title, image, children, link }) => {
       <Box className="card-image">
         {image ? (
           <Link as={GatsbyLink} to={link}>
-            <Img
+            <SanityImage
               className="post-image"
-              fluid={image}
+              image={image}
+              options={{ maxWidth: 800, maxHeight: 600 }}
               imgStyle={{
                 maxWidth: "100%",
                 maxHeight: "240px",

@@ -16,18 +16,31 @@ const Team = ({ data }) => {
         <EmployeesCard />
       </Hero>
       <div className="section-wrapper">
-        {data.employees.team.map((employee) => (
-          <EmployeeSection
-            key={employee.id}
-            slug={employee.slug.current}
-            image={employee.headshot.asset.fluid}
-            quote={employee._rawQuote}
-            name={employee.firstName + " " + employee.lastName}
-            jobTitle={employee.jobTitle}
-            bio={employee._rawBio}
-            socials={employee.socials}
-          />
-        ))}
+        {data.employees.team.map((employee) => {
+          const {
+            id,
+            slug,
+            headshot,
+            _rawQuote,
+            firstName,
+            lastName,
+            jobTitle,
+            _rawBio,
+            socials,
+          } = employee
+          return (
+            <EmployeeSection
+              key={id}
+              slug={slug.current}
+              image={headshot.asset}
+              quote={_rawQuote}
+              name={firstName + " " + lastName}
+              jobTitle={jobTitle}
+              bio={_rawBio}
+              socials={socials}
+            />
+          )
+        })}
       </div>
     </Layout>
   )
@@ -54,11 +67,7 @@ export const data = graphql`
         _rawBio
         _rawQuote
         headshot {
-          asset {
-            fluid(maxWidth: 400) {
-              ...SanityImageAsset
-            }
-          }
+          asset
         }
         jobTitle
         slug {

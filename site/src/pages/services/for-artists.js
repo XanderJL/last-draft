@@ -1,7 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
-import BackgroundImage from "gatsby-background-image"
+import { BgImage } from "gbimage-bridge"
 import PortableText from "@sanity/block-content-to-react"
 import Layout from "../../components/Layout"
 import Serializers, {
@@ -10,17 +9,25 @@ import Serializers, {
   BlockImageRenderer,
 } from "../../components/Serializers"
 import OptInModal from "../../components/Modals/OptInModal"
+import { getGatsbyImageData } from "gatsby-source-sanity"
+import sanityConfig from "../../lib/sanityConfig"
+import { StaticImage } from "gatsby-plugin-image"
+import SanityImage from "../../components/SanityImage"
 
 const ForArtists = ({ data }) => {
   const { page, placeholder } = data
-  const heroImage = page.heroImage.asset.fluid
-  const placeholderImg = placeholder.childImageSharp.fluid
+  const heroImage = getGatsbyImageData(
+    page.heroImage.asset,
+    { maxWidth: 1920 },
+    sanityConfig
+  )
+
   return (
     <Layout title={page.title}>
       {heroImage ? (
-        <BackgroundImage
+        <BgImage
           className="hero is-fullheight-with-navbar is-primary"
-          fluid={heroImage}
+          image={heroImage}
         >
           <div className="hero-body">
             <div className="container">
@@ -37,7 +44,7 @@ const ForArtists = ({ data }) => {
               </div>
             </div>
           </div>
-        </BackgroundImage>
+        </BgImage>
       ) : (
         <div className="hero is-fullheight-with-navbar is-primary">
           <div className="hero-body">
@@ -60,11 +67,12 @@ const ForArtists = ({ data }) => {
       )}
       <section className="section has-background-white-bis">
         <div className="container" style={{ maxWidth: "1100px" }}>
-          {page.services.map(service => (
+          {page.services.map((service) => (
             <div key={service.id} className="service-card">
               {service.image ? (
-                <Img
-                  fluid={service.image.asset.fluid}
+                <SanityImage
+                  image={service.image.asset}
+                  options={{ maxWidth: 800 }}
                   alt={
                     service.imageAlt
                       ? service.imageAlt
@@ -73,8 +81,9 @@ const ForArtists = ({ data }) => {
                   className="card-image"
                 />
               ) : (
-                <Img
-                  fluid={placeholderImg}
+                <StaticImage
+                  src="../../images/kegs.jpg"
+                  width={800}
                   alt="Beer kegs"
                   className="card-image"
                 />
@@ -102,33 +111,18 @@ const ForArtists = ({ data }) => {
 
 export const data = graphql`
   query {
-    placeholder: file(relativePath: { eq: "kegs.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 800) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
     page: sanityServicesPage(
       id: { eq: "9c0b5a47-c57c-53e2-bafa-38e8069feb58" }
     ) {
       title
       heroImage {
-        asset {
-          fluid(maxWidth: 1920) {
-            ...SanityImageAsset
-          }
-        }
+        asset
       }
       _rawHeroCard
       services {
         id
         image {
-          asset {
-            fluid(maxWidth: 800) {
-              ...SanityImageAsset
-            }
-          }
+          asset
         }
         imageAlt
         _rawBody
