@@ -11,7 +11,7 @@ import imageHotspot from "../hooks/imageHotspot"
 import sanityConfig from "../lib/sanityConfig"
 
 const ServicesPage = ({ data }) => {
-  const { services, placeholder, heroCardRaw } = data
+  const { services, placeholder, _rawHeroCard } = data
   const heroImage = getGatsbyImageData(
     services.heroImage.asset,
     { maxWidth: 1440 },
@@ -96,7 +96,7 @@ const ServicesPage = ({ data }) => {
             <div className="card-body">
               <PortableText
                 className="content"
-                blocks={services.heroCardRaw}
+                blocks={services._rawHeroCard}
                 serializers={{ types: { block: CardRenderer } }}
               />
             </div>
@@ -110,7 +110,7 @@ const ServicesPage = ({ data }) => {
                 <div className="card-body">
                   <div className="content">
                     <PortableText
-                      blocks={services.heroCardRaw}
+                      blocks={services._rawHeroCard}
                       serializers={{ types: { block: CardRenderer } }}
                     />
                   </div>
@@ -219,7 +219,7 @@ export const data = graphql`
           y
         }
       }
-      heroCardRaw
+      _rawHeroCard
       offeredServices {
         title
         slug {

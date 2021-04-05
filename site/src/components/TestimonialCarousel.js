@@ -36,7 +36,7 @@ export default function Testimonials({ testimonials }) {
       {testimonials.map((testimonial) => {
         const {
           id,
-          testimonialRaw,
+          _rawTestimonial,
           brandUrl,
           brandRep,
           repTitle,
@@ -44,7 +44,7 @@ export default function Testimonials({ testimonials }) {
         } = testimonial
         return (
           <Box key={id}>
-            <PortableText blocks={testimonialRaw} serializers={serializers} />
+            <PortableText blocks={_rawTestimonial} serializers={serializers} />
             <Box mt="1.25rem" fontSize="lg" fontWeight={600}>
               <Link href={brandUrl} isExternal>
                 <Text color="white" textAlign="center">

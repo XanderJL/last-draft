@@ -25,7 +25,7 @@ const Author = ({ data, pageContext }) => {
               _createdAt,
               mainImage,
               title,
-              bodyRaw,
+              _rawBody,
               category,
               slug,
             } = post
@@ -72,7 +72,7 @@ const Author = ({ data, pageContext }) => {
                     <h2 className="title is-montserrat is-uppercase is-size-4-mobile">
                       {title}
                     </h2>
-                    <p>{toPlainText(bodyRaw).slice(0, 119) + "..."}</p>
+                    <p>{toPlainText(_rawBody).slice(0, 119) + "..."}</p>
                   </div>
                   <Link to={postLink} className="button is-montserrat">
                     Read &rsaquo;
@@ -92,7 +92,7 @@ export const data = graphql`
   query($slug: String!) {
     author: sanityAuthor(slug: { current: { eq: $slug } }) {
       name
-      bioRaw
+      _rawBio
       slug {
         current
       }
@@ -110,7 +110,7 @@ export const data = graphql`
           id
           _createdAt(formatString: "MMMM Do, YYYY")
           title
-          bodyRaw
+          _rawBody
           slug {
             current
           }

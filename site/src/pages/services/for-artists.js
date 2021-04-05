@@ -35,7 +35,7 @@ const ForArtists = ({ data }) => {
                 <div className="card-body">
                   <PortableText
                     className="content"
-                    blocks={page.heroCardRaw}
+                    blocks={page._rawHeroCard}
                     serializers={{
                       types: { block: CardRenderer },
                     }}
@@ -53,7 +53,7 @@ const ForArtists = ({ data }) => {
                 <div className="card-body">
                   <div className="content">
                     <PortableText
-                      blocks={page.heroCardRaw}
+                      blocks={page._rawHeroCard}
                       serializers={{
                         types: { block: CardRenderer },
                       }}
@@ -90,7 +90,7 @@ const ForArtists = ({ data }) => {
               )}
               <div className="content card-copy">
                 <PortableText
-                  blocks={service.bodyRaw}
+                  blocks={service._rawBody}
                   serializers={{
                     types: {
                       hr: Serializers.types.hr,
@@ -120,7 +120,7 @@ export const data = graphql`
           url
         }
       }
-      heroCardRaw
+      _rawHeroCard
       services {
         id
         image {
@@ -129,7 +129,7 @@ export const data = graphql`
           }
         }
         imageAlt
-        bodyRaw
+        _rawBody
       }
     }
   }

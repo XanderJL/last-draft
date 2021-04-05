@@ -15,7 +15,8 @@ const Brands = () => {
           brandUrl
           id
           logo {
-            asset 
+            asset {
+              url
             }
           }
         }

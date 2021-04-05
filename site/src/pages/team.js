@@ -21,11 +21,11 @@ const Team = ({ data }) => {
             id,
             slug,
             headshot,
-            quoteRaw,
+            _rawQuote,
             firstName,
             lastName,
             jobTitle,
-            bioRaw,
+            _rawBio,
             socials,
           } = employee
           return (
@@ -33,10 +33,10 @@ const Team = ({ data }) => {
               key={id}
               slug={slug.current}
               image={headshot.asset}
-              quote={quoteRaw}
+              quote={_rawQuote}
               name={firstName + " " + lastName}
               jobTitle={jobTitle}
-              bio={bioRaw}
+              bio={_rawBio}
               socials={socials}
             />
           )
@@ -64,8 +64,8 @@ export const data = graphql`
         id
         firstName
         lastName
-        bioRaw
-        quoteRaw
+        _rawBio
+        _rawQuote
         headshot {
           asset {
             url

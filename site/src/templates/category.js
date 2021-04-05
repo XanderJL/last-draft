@@ -47,7 +47,7 @@ const Category = ({ data, pageContext }) => {
                 id,
                 title,
                 mainImage,
-                bodyRaw,
+                _rawBody,
                 previewCopy,
                 category,
                 slug,
@@ -65,7 +65,7 @@ const Category = ({ data, pageContext }) => {
                   <p>
                     {previewCopy
                       ? previewCopy
-                      : toPlainText(bodyRaw).slice(0, 159) + "..."}
+                      : toPlainText(_rawBody).slice(0, 159) + "..."}
                   </p>
                 </PostCard>
               )
@@ -120,7 +120,7 @@ export const data = graphql`
             title
           }
           previewCopy
-          bodyRaw
+          _rawBody
           mainImage {
             asset {
               url

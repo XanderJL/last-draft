@@ -20,10 +20,10 @@ const post = ({ data }) => {
     mainImage,
     mainCaption,
     socialImage,
-    bodyRaw,
+    _rawBody,
   } = data.sanityPost
 
-  const { postFooterRaw } = data.sanityBlog
+  const { _rawPostFooter } = data.sanityBlog
 
   const positionStyles = mainImage.hotspot
     ? {
@@ -37,8 +37,8 @@ const post = ({ data }) => {
   return (
     <Layout
       title={title}
-      description={toPlainText(bodyRaw).slice(0, 156) + "..."}
-      image={image}
+      description={toPlainText(_rawBody).slice(0, 156) + "..."}
+      image={getGatsbyImageData(image, { maxWidth: 1200 }, sanityConfig)}
     >
       <Hero
         fluid={getGatsbyImageData(
@@ -80,14 +80,14 @@ const post = ({ data }) => {
             </Text>
           </Box>
           <Box className="container content is-montserrat">
-            <PortableText blocks={bodyRaw} serializers={Serializers} />
+            <PortableText blocks={_rawBody} serializers={Serializers} />
           </Box>
         </Box>
         <hr className="solid-hr" />
         <Box as="section" className="section">
           <Box className="container content is-montserrat">
             <AuthorBio author={author} />
-            <PortableText blocks={postFooterRaw} serializers={Serializers} />
+            <PortableText blocks={_rawPostFooter} serializers={Serializers} />
           </Box>
           {tags.length ? (
             <Box className="container">
@@ -103,7 +103,7 @@ const post = ({ data }) => {
 export const data = graphql`
   query($slug: String!) {
     sanityBlog {
-      postFooterRaw
+      _rawPostFooter
     }
     sanityPost(slug: { current: { eq: $slug } }) {
       author {
@@ -111,7 +111,7 @@ export const data = graphql`
           current
         }
         name
-        bioRaw
+        _rawBio
         image {
           asset {
             url
@@ -136,14 +136,10 @@ export const data = graphql`
       mainCaption
       socialImage: mainImage {
         asset {
-          fixed(width: 1200) {
-            src
-            width
-            height
-          }
+          url
         }
       }
-      bodyRaw
+      _rawBody
     }
   }
 `

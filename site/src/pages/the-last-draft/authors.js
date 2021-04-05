@@ -29,7 +29,7 @@ export const data = graphql`
             current
           }
           name
-          bioRaw
+          _rawBio
           image {
             asset {
               url

@@ -34,9 +34,9 @@ const IndexPage = () => {
       }
       homePage: sanityIndexPage {
         metaDescription
-        heroCardRaw
+        _rawHeroCard
         contactHeading
-        contactBodyRaw
+        _rawContactBody
         heroImage {
           asset {
             url
@@ -47,7 +47,7 @@ const IndexPage = () => {
           }
         }
         cardsTitle
-        cardsRaw
+        _rawCards
         cards {
           _key
           title
@@ -58,7 +58,7 @@ const IndexPage = () => {
           }
         }
         testimonials {
-          testimonialRaw
+          _rawTestimonial
           brandName
           brandRep
           repTitle
@@ -72,18 +72,19 @@ const IndexPage = () => {
   const newsLetterImage = getImage(data.newsLetterImage.childImageSharp)
   const metaDescription = data.homePage.metaDescription
   const {
-    heroCardRaw,
+    _rawHeroCard,
     cards,
-    cardsRaw,
+    _rawCards,
     cardsTitle,
     contactHeading,
-    contactBodyRaw,
+    _rawContactBody,
     testimonials,
   } = data.homePage
+  console.log(headerImage)
 
   cards.map((card) => {
-    const raw = cardsRaw.filter((rawCard) => rawCard._key === card._key)
-    card.bodyRaw = raw[0].body
+    const raw = _rawCards.filter((rawCard) => rawCard._key === card._key)
+    card._rawBody = raw[0].body
   })
 
   const BlockRenderer = (props) => {
@@ -136,7 +137,7 @@ const IndexPage = () => {
             className="has-text-white"
           >
             <PortableText
-              blocks={heroCardRaw}
+              blocks={_rawHeroCard}
               serializers={{ types: { block: BlockRenderer } }}
             />
           </Box>
@@ -146,7 +147,7 @@ const IndexPage = () => {
         <SanityImage image={headerImage} style={{ flex: 1 }} />
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
-            blocks={heroCardRaw}
+            blocks={_rawHeroCard}
             serializers={{ types: { block: BlockRenderer } }}
           />
         </Box>
@@ -162,7 +163,7 @@ const IndexPage = () => {
               gap={12}
             >
               {cards.map((card) => {
-                const { _key, title, bodyRaw, service } = card
+                const { _key, title, _rawBody, service } = card
                 return (
                   <GridItem key={_key}>
                     <Link
@@ -177,7 +178,7 @@ const IndexPage = () => {
                         {title}
                       </Heading>
                     </Link>
-                    <PortableText blocks={bodyRaw} serializers={serializers} />
+                    <PortableText blocks={_rawBody} serializers={serializers} />
                   </GridItem>
                 )
               })}
@@ -196,7 +197,7 @@ const IndexPage = () => {
         </Box>
       </Hero>
       <div id="contact" className="section">
-        <ContactForm title={contactHeading} body={contactBodyRaw} />
+        <ContactForm title={contactHeading} body={_rawContactBody} />
       </div>
     </Layout>
   )

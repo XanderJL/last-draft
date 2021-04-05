@@ -7,7 +7,7 @@ const algoliaQuery = `{
     edges {
       node {
         id
-        bodyRaw
+        _rawBody
         author {
           name
         }
@@ -45,8 +45,8 @@ const queries = [
       }
 
       return data.allSanityPost.edges.map(({ node: post }) => {
-        const { id, slug, category, title, author, bodyRaw } = post
-        const body = toPlainText(bodyRaw)
+        const { id, slug, category, title, author, _rawBody } = post
+        const body = toPlainText(_rawBody)
         const chunk = {
           id,
           slug,

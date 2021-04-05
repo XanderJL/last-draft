@@ -91,7 +91,7 @@ const ForBusiness = ({ data }) => {
                 <div className="card-body">
                   <PortableText
                     className="content"
-                    blocks={page.heroCardRaw}
+                    blocks={page._rawHeroCard}
                     serializers={{ types: { block: CardRenderer } }}
                   />
                 </div>
@@ -107,7 +107,7 @@ const ForBusiness = ({ data }) => {
                 <div className="card-body">
                   <div className="content">
                     <PortableText
-                      blocks={page.heroCardRaw}
+                      blocks={page._rawHeroCard}
                       serializers={{ types: { block: CardRenderer } }}
                     />
                   </div>
@@ -120,7 +120,7 @@ const ForBusiness = ({ data }) => {
       <section className="section has-background-white-bis">
         <div className="container" style={{ maxWidth: "1100px" }}>
           {page.services.map((service) => {
-            const { id, image, imageAlt, slug, bodyRaw } = service
+            const { id, image, imageAlt, slug, _rawBody } = service
             return (
               <div id={slug.current} key={id} className="service-card">
                 {image ? (
@@ -145,7 +145,7 @@ const ForBusiness = ({ data }) => {
                 )}
                 <div className="content card-copy">
                   <PortableText
-                    blocks={bodyRaw}
+                    blocks={_rawBody}
                     serializers={{
                       types: {
                         block: BlockRenderer,
@@ -165,14 +165,16 @@ const ForBusiness = ({ data }) => {
 
 export const data = graphql`
   query {
-    page: sanityServicesPage(id: { eq: "-3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }) {
+    page: sanityServicesPage(
+      id: { eq: "-3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }
+    ) {
       title
       heroImage {
         asset {
           url
         }
       }
-      heroCardRaw
+      _rawHeroCard
       services {
         id
         slug {
@@ -184,7 +186,7 @@ export const data = graphql`
           }
         }
         imageAlt
-        bodyRaw
+        _rawBody
       }
     }
   }

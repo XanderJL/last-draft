@@ -57,7 +57,7 @@ const ParentCategory = ({ data, pageContext }) => {
                       id,
                       title,
                       mainImage,
-                      bodyRaw,
+                      _rawBody,
                       previewCopy,
                       category,
                       slug,
@@ -75,7 +75,7 @@ const ParentCategory = ({ data, pageContext }) => {
                         <Text>
                           {previewCopy
                             ? previewCopy
-                            : toPlainText(bodyRaw).slice(0, 159) + "..."}
+                            : toPlainText(_rawBody).slice(0, 159) + "..."}
                         </Text>
                       </PostCard>
                     )
@@ -166,7 +166,7 @@ export const data = graphql`
             }
           }
           previewCopy
-          bodyRaw
+          _rawBody
           mainImage {
             asset {
               url

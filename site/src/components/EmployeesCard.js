@@ -13,8 +13,8 @@ const EmployeesCard = () => {
           id
           firstName
           lastName
-          bioRaw
-          quoteRaw
+          _rawBio
+          _rawQuote
           headshot {
             asset {
               url
