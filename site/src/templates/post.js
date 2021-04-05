@@ -20,10 +20,10 @@ const post = ({ data }) => {
     mainImage,
     mainCaption,
     socialImage,
-    _rawBody,
+    bodyRaw,
   } = data.sanityPost
 
-  const { _rawPostFooter } = data.sanityBlog
+  const { postFooterRaw } = data.sanityBlog
 
   const positionStyles = mainImage.hotspot
     ? {
@@ -37,7 +37,7 @@ const post = ({ data }) => {
   return (
     <Layout
       title={title}
-      description={toPlainText(_rawBody).slice(0, 156) + "..."}
+      description={toPlainText(bodyRaw).slice(0, 156) + "..."}
       image={image}
     >
       <Hero
@@ -80,14 +80,14 @@ const post = ({ data }) => {
             </Text>
           </Box>
           <Box className="container content is-montserrat">
-            <PortableText blocks={_rawBody} serializers={Serializers} />
+            <PortableText blocks={bodyRaw} serializers={Serializers} />
           </Box>
         </Box>
         <hr className="solid-hr" />
         <Box as="section" className="section">
           <Box className="container content is-montserrat">
             <AuthorBio author={author} />
-            <PortableText blocks={_rawPostFooter} serializers={Serializers} />
+            <PortableText blocks={postFooterRaw} serializers={Serializers} />
           </Box>
           {tags.length ? (
             <Box className="container">
@@ -103,7 +103,7 @@ const post = ({ data }) => {
 export const data = graphql`
   query($slug: String!) {
     sanityBlog {
-      _rawPostFooter
+      postFooterRaw
     }
     sanityPost(slug: { current: { eq: $slug } }) {
       author {
@@ -111,16 +111,20 @@ export const data = graphql`
           current
         }
         name
-        _rawBio
+        bioRaw
         image {
-          asset
+          asset {
+            url
+          }
         }
       }
       tags
       title
       publishedAt(formatString: "MMMM Do, YYYY")
       mainImage {
-        asset
+        asset {
+          url
+        }
         hotspot {
           width
           height
@@ -139,7 +143,7 @@ export const data = graphql`
           }
         }
       }
-      _rawBody
+      bodyRaw
     }
   }
 `

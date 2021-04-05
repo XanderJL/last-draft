@@ -1,1 +1,1 @@
-import "./src/styles/styles.sass"
+import * as browser from "./gatsby-browser"

@@ -18,8 +18,8 @@ import sanityConfig from "../lib/sanityConfig"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
-  const { title, categories, heroImage, _rawPublication, publication } = blog
-  const pubBody = _rawPublication.body
+  const { title, categories, heroImage, publicationRaw, publication } = blog
+  const pubBody = publicationRaw.body
 
   const SectionRenderer = (props) => {
     const { style = "normal" } = props.node
@@ -104,7 +104,7 @@ const TheLastDraft = ({ data }) => {
                 id,
                 title,
                 mainImage,
-                _rawBody,
+                bodyRaw,
                 previewCopy,
                 category,
                 slug,
@@ -121,7 +121,7 @@ const TheLastDraft = ({ data }) => {
                 <PostCard key={id} title={title} image={image} link={link}>
                   {previewCopy
                     ? previewCopy
-                    : toPlainText(_rawBody).slice(0, 159) + "..."}
+                    : toPlainText(bodyRaw).slice(0, 159) + "..."}
                 </PostCard>
               )
             })}
@@ -141,7 +141,7 @@ const TheLastDraft = ({ data }) => {
                 id,
                 title,
                 mainImage,
-                _rawBody,
+                bodyRaw,
                 previewCopy,
                 category,
                 slug,
@@ -164,7 +164,7 @@ const TheLastDraft = ({ data }) => {
                 >
                   {previewCopy
                     ? previewCopy
-                    : toPlainText(_rawBody).slice(0, 159) + "..."}
+                    : toPlainText(bodyRaw).slice(0, 159) + "..."}
                 </PostCard>
               )
             })}
@@ -195,7 +195,7 @@ const TheLastDraft = ({ data }) => {
                       id,
                       title,
                       mainImage,
-                      _rawBody,
+                      bodyRaw,
                       previewCopy,
                       category,
                       slug,
@@ -216,7 +216,7 @@ const TheLastDraft = ({ data }) => {
                       >
                         {previewCopy
                           ? previewCopy
-                          : toPlainText(_rawBody).slice(0, 159) + "..."}
+                          : toPlainText(bodyRaw).slice(0, 159) + "..."}
                       </PostCard>
                     )
                   })}
@@ -244,13 +244,15 @@ export const data = graphql`
         current
       }
       heroImage {
-        asset
+        asset {
+          url
+        }
         hotspot {
           x
           y
         }
       }
-      _rawPublication
+      publicationRaw
       categories {
         id
         slug {
@@ -270,14 +272,16 @@ export const data = graphql`
           }
           title
           mainImage {
-            asset
+            asset {
+              url
+            }
             hotspot {
               x
               y
             }
           }
           previewCopy
-          _rawBody
+          bodyRaw
           category {
             slug {
               current
@@ -303,13 +307,15 @@ export const data = graphql`
           }
           title
           mainImage {
-            asset
+            asset {
+              url
+            }
             hotspot {
               x
               y
             }
           }
-          _rawBody
+          bodyRaw
           category {
             slug {
               current
@@ -336,9 +342,11 @@ export const data = graphql`
           }
           title
         }
-        _rawBody
+        bodyRaw
         mainImage {
-          asset
+          asset {
+            url
+          }
           hotspot {
             x
             y

@@ -29,9 +29,11 @@ export const data = graphql`
             current
           }
           name
-          _rawBio
+          bioRaw
           image {
-            asset
+            asset {
+              url
+            }
           }
         }
       }

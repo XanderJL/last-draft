@@ -16,7 +16,7 @@ export default function Testimonials({ testimonials }) {
   }
   const serializers = {
     types: {
-      block: props => (
+      block: (props) => (
         <Text
           as="p"
           textAlign="center"
@@ -33,10 +33,10 @@ export default function Testimonials({ testimonials }) {
 
   return (
     <Slider {...slickSettings}>
-      {testimonials.map(testimonial => {
+      {testimonials.map((testimonial) => {
         const {
           id,
-          _rawTestimonial,
+          testimonialRaw,
           brandUrl,
           brandRep,
           repTitle,
@@ -44,7 +44,7 @@ export default function Testimonials({ testimonials }) {
         } = testimonial
         return (
           <Box key={id}>
-            <PortableText blocks={_rawTestimonial} serializers={serializers} />
+            <PortableText blocks={testimonialRaw} serializers={serializers} />
             <Box mt="1.25rem" fontSize="lg" fontWeight={600}>
               <Link href={brandUrl} isExternal>
                 <Text color="white" textAlign="center">

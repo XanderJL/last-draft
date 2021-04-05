@@ -15,28 +15,34 @@ const About = () => {
   const data = useStaticQuery(graphql`
     {
       aboutPage: sanityAboutPage {
-        _rawMetaDescription
+        metaDescriptionRaw
         title
-        _rawHeroCard
+        heroCardRaw
         heroImage {
-          asset
+          asset {
+            url
+          }
           hotspot {
             x
             y
           }
         }
-        _rawSectionOne
-        _rawPublication
+        sectionOneRaw
+        publicationRaw
         sectionOne {
           image {
-            asset
+            asset {
+              url
+            }
             }
           }
           alt
         }
         publication {
           image {
-            asset 
+            asset {
+              url
+            }
           }
           alt
         }
@@ -117,18 +123,18 @@ const About = () => {
   }
 
   const title = data.aboutPage.title
-  const metaDescription = data.aboutPage._rawMetaDescription[0].children[0].text
+  const metaDescription = data.aboutPage.metaDescriptionRaw[0].children[0].text
   const heroImage = getGatsbyImageData(
     data.aboutPage.heroImage.asset,
     { maxWidth: 1440 },
     sanityConfig
   )
   const heroHotspot = data.aboutPage.heroImage.hotspot
-  const heroCard = data.aboutPage._rawHeroCard
-  const sectionOne = data.aboutPage._rawSectionOne.body
+  const heroCard = data.aboutPage.heroCardRaw
+  const sectionOne = data.aboutPage.sectionOneRaw.body
   const sectionOneImg = data.aboutPage.sectionOne.image.asset
   const sectionOneAlt = data.aboutPage.sectionOne.alt
-  const publication = data.aboutPage._rawPublication.body
+  const publication = data.aboutPage.publicationRaw.body
   const pubImage = data.aboutPage.publication.image.asset
   const pubAlt = data.aboutPage.publication.alt
 

@@ -1,7 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { BgImage } from "gbimage-bridge"
-import BgImage from "gatsby-background-image"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../../components/Layout"
 import PortableText from "@sanity/block-content-to-react"
@@ -92,7 +91,7 @@ const ForBusiness = ({ data }) => {
                 <div className="card-body">
                   <PortableText
                     className="content"
-                    blocks={page._rawHeroCard}
+                    blocks={page.heroCardRaw}
                     serializers={{ types: { block: CardRenderer } }}
                   />
                 </div>
@@ -108,7 +107,7 @@ const ForBusiness = ({ data }) => {
                 <div className="card-body">
                   <div className="content">
                     <PortableText
-                      blocks={page._rawHeroCard}
+                      blocks={page.heroCardRaw}
                       serializers={{ types: { block: CardRenderer } }}
                     />
                   </div>
@@ -121,7 +120,7 @@ const ForBusiness = ({ data }) => {
       <section className="section has-background-white-bis">
         <div className="container" style={{ maxWidth: "1100px" }}>
           {page.services.map((service) => {
-            const { id, image, imageAlt, slug, _rawBody } = service
+            const { id, image, imageAlt, slug, bodyRaw } = service
             return (
               <div id={slug.current} key={id} className="service-card">
                 {image ? (
@@ -146,7 +145,7 @@ const ForBusiness = ({ data }) => {
                 )}
                 <div className="content card-copy">
                   <PortableText
-                    blocks={_rawBody}
+                    blocks={bodyRaw}
                     serializers={{
                       types: {
                         block: BlockRenderer,
@@ -166,24 +165,26 @@ const ForBusiness = ({ data }) => {
 
 export const data = graphql`
   query {
-    page: sanityServicesPage(
-      id: { eq: "-3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }
-    ) {
+    page: sanityServicesPage(id: { eq: "-3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }) {
       title
       heroImage {
-        asset
+        asset {
+          url
+        }
       }
-      _rawHeroCard
+      heroCardRaw
       services {
         id
         slug {
           current
         }
         image {
-          asset
+          asset {
+            url
+          }
         }
         imageAlt
-        _rawBody
+        bodyRaw
       }
     }
   }

@@ -117,10 +117,10 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  authors.forEach(edge => {
+  authors.forEach((edge) => {
     const path = `/stories/authors/${edge.node.slug.current}`
 
-    const authorPosts = posts.filter(post => {
+    const authorPosts = posts.filter((post) => {
       return post.node.author.slug.current === edge.node.slug.current
     })
 

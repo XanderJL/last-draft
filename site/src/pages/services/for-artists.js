@@ -15,7 +15,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import SanityImage from "../../components/SanityImage"
 
 const ForArtists = ({ data }) => {
-  const { page, placeholder } = data
+  const { page } = data
   const heroImage = getGatsbyImageData(
     page.heroImage.asset,
     { maxWidth: 1920 },
@@ -35,7 +35,7 @@ const ForArtists = ({ data }) => {
                 <div className="card-body">
                   <PortableText
                     className="content"
-                    blocks={page._rawHeroCard}
+                    blocks={page.heroCardRaw}
                     serializers={{
                       types: { block: CardRenderer },
                     }}
@@ -53,7 +53,7 @@ const ForArtists = ({ data }) => {
                 <div className="card-body">
                   <div className="content">
                     <PortableText
-                      blocks={page._rawHeroCard}
+                      blocks={page.heroCardRaw}
                       serializers={{
                         types: { block: CardRenderer },
                       }}
@@ -90,7 +90,7 @@ const ForArtists = ({ data }) => {
               )}
               <div className="content card-copy">
                 <PortableText
-                  blocks={service._rawBody}
+                  blocks={service.bodyRaw}
                   serializers={{
                     types: {
                       hr: Serializers.types.hr,
@@ -116,16 +116,20 @@ export const data = graphql`
     ) {
       title
       heroImage {
-        asset
+        asset {
+          url
+        }
       }
-      _rawHeroCard
+      heroCardRaw
       services {
         id
         image {
-          asset
+          asset {
+            url
+          }
         }
         imageAlt
-        _rawBody
+        bodyRaw
       }
     }
   }

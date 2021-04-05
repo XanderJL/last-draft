@@ -7,7 +7,7 @@ const algoliaQuery = `{
     edges {
       node {
         id
-        _rawBody
+        bodyRaw
         author {
           name
         }
@@ -34,19 +34,19 @@ const queries = [
         return (
           blocks
             // loop through each block
-            .map(block => {
+            .map((block) => {
               if (block._type !== "block" || !block.children) {
                 return ""
               }
-              return block.children.map(child => child.text).join("")
+              return block.children.map((child) => child.text).join("")
             })
             .join("\n\n")
         )
       }
 
       return data.allSanityPost.edges.map(({ node: post }) => {
-        const { id, slug, category, title, author, _rawBody } = post
-        const body = toPlainText(_rawBody)
+        const { id, slug, category, title, author, bodyRaw } = post
+        const body = toPlainText(bodyRaw)
         const chunk = {
           id,
           slug,

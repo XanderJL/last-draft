@@ -13,10 +13,12 @@ const EmployeesCard = () => {
           id
           firstName
           lastName
-          _rawBio
-          _rawQuote
+          bioRaw
+          quoteRaw
           headshot {
-            asset
+            asset {
+              url
+            }
           }
           jobTitle
           slug {

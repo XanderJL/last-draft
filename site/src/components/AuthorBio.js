@@ -1,12 +1,11 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import Img from "gatsby-image"
 import PortableText from "@sanity/block-content-to-react"
 import SanityImage from "./SanityImage"
 
 const AuthorBio = ({ author }) => {
-  const { slug, name, image, _rawBio } = author
+  const { slug, name, image, bioRaw } = author
   return (
     <div className=" author-bio">
       <Link to={`/stories/authors/${slug.current}`} className="avatar-link">
@@ -45,7 +44,7 @@ const AuthorBio = ({ author }) => {
         >
           {name}
         </Link>
-        <PortableText className="content" blocks={_rawBio} />
+        <PortableText className="content" blocks={bioRaw} />
       </div>
     </div>
   )

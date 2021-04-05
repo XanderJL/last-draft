@@ -26,7 +26,7 @@ const IndexPage = () => {
       ) {
         childImageSharp {
           gatsbyImageData(
-            maxWidth: 3840
+            width: 3840
             placeholder: BLURRED
             formats: [AUTO, WEBP, AVIF]
           )
@@ -34,18 +34,20 @@ const IndexPage = () => {
       }
       homePage: sanityIndexPage {
         metaDescription
-        _rawHeroCard
+        heroCardRaw
         contactHeading
-        _rawContactBody
+        contactBodyRaw
         heroImage {
-          asset
+          asset {
+            url
+          }
           hotspot {
             x
             y
           }
         }
         cardsTitle
-        _rawCards
+        cardsRaw
         cards {
           _key
           title
@@ -56,7 +58,7 @@ const IndexPage = () => {
           }
         }
         testimonials {
-          _rawTestimonial
+          testimonialRaw
           brandName
           brandRep
           repTitle
@@ -70,18 +72,18 @@ const IndexPage = () => {
   const newsLetterImage = getImage(data.newsLetterImage.childImageSharp)
   const metaDescription = data.homePage.metaDescription
   const {
-    _rawHeroCard,
+    heroCardRaw,
     cards,
-    _rawCards,
+    cardsRaw,
     cardsTitle,
     contactHeading,
-    _rawContactBody,
+    contactBodyRaw,
     testimonials,
   } = data.homePage
 
   cards.map((card) => {
-    const raw = _rawCards.filter((rawCard) => rawCard._key === card._key)
-    card._rawBody = raw[0].body
+    const raw = cardsRaw.filter((rawCard) => rawCard._key === card._key)
+    card.bodyRaw = raw[0].body
   })
 
   const BlockRenderer = (props) => {
@@ -134,7 +136,7 @@ const IndexPage = () => {
             className="has-text-white"
           >
             <PortableText
-              blocks={_rawHeroCard}
+              blocks={heroCardRaw}
               serializers={{ types: { block: BlockRenderer } }}
             />
           </Box>
@@ -144,7 +146,7 @@ const IndexPage = () => {
         <SanityImage image={headerImage} style={{ flex: 1 }} />
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
-            blocks={_rawHeroCard}
+            blocks={heroCardRaw}
             serializers={{ types: { block: BlockRenderer } }}
           />
         </Box>
@@ -160,7 +162,7 @@ const IndexPage = () => {
               gap={12}
             >
               {cards.map((card) => {
-                const { _key, title, _rawBody, service } = card
+                const { _key, title, bodyRaw, service } = card
                 return (
                   <GridItem key={_key}>
                     <Link
@@ -175,7 +177,7 @@ const IndexPage = () => {
                         {title}
                       </Heading>
                     </Link>
-                    <PortableText blocks={_rawBody} serializers={serializers} />
+                    <PortableText blocks={bodyRaw} serializers={serializers} />
                   </GridItem>
                 )
               })}
@@ -194,7 +196,7 @@ const IndexPage = () => {
         </Box>
       </Hero>
       <div id="contact" className="section">
-        <ContactForm title={contactHeading} body={_rawContactBody} />
+        <ContactForm title={contactHeading} body={contactBodyRaw} />
       </div>
     </Layout>
   )

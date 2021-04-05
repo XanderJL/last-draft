@@ -47,7 +47,7 @@ const Category = ({ data, pageContext }) => {
                 id,
                 title,
                 mainImage,
-                _rawBody,
+                bodyRaw,
                 previewCopy,
                 category,
                 slug,
@@ -65,7 +65,7 @@ const Category = ({ data, pageContext }) => {
                   <p>
                     {previewCopy
                       ? previewCopy
-                      : toPlainText(_rawBody).slice(0, 159) + "..."}
+                      : toPlainText(bodyRaw).slice(0, 159) + "..."}
                   </p>
                 </PostCard>
               )
@@ -82,7 +82,9 @@ export const data = graphql`
   query($slug: String!, $skip: Int!, $limit: Int!) {
     blog: sanityBlog {
       heroImage {
-        asset
+        asset {
+          url
+        }
         hotspot {
           x
           y
@@ -92,7 +94,9 @@ export const data = graphql`
     category: sanityCategory(slug: { current: { eq: $slug } }) {
       title
       heroImage {
-        asset
+        asset {
+          url
+        }
         hotspot {
           x
           y
@@ -116,9 +120,11 @@ export const data = graphql`
             title
           }
           previewCopy
-          _rawBody
+          bodyRaw
           mainImage {
-            asset
+            asset {
+              url
+            }
             hotspot {
               x
               y

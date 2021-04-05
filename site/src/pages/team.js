@@ -21,11 +21,11 @@ const Team = ({ data }) => {
             id,
             slug,
             headshot,
-            _rawQuote,
+            quoteRaw,
             firstName,
             lastName,
             jobTitle,
-            _rawBio,
+            bioRaw,
             socials,
           } = employee
           return (
@@ -33,10 +33,10 @@ const Team = ({ data }) => {
               key={id}
               slug={slug.current}
               image={headshot.asset}
-              quote={_rawQuote}
+              quote={quoteRaw}
               name={firstName + " " + lastName}
               jobTitle={jobTitle}
-              bio={_rawBio}
+              bio={bioRaw}
               socials={socials}
             />
           )
@@ -51,9 +51,9 @@ export const data = graphql`
     headerImage: file(relativePath: { eq: "about/about-header.jpg" }) {
       childImageSharp {
         gatsbyImageData(
-          maxWidth: 1920
+          width: 1920
           placeholder: BLURRED
-          format: [AUTO, WEBP, AVIF]
+          formats: [AUTO, WEBP, AVIF]
         )
       }
     }
@@ -64,10 +64,12 @@ export const data = graphql`
         id
         firstName
         lastName
-        _rawBio
-        _rawQuote
+        bioRaw
+        quoteRaw
         headshot {
-          asset
+          asset {
+            url
+          }
         }
         jobTitle
         slug {
