@@ -71,7 +71,6 @@ const IndexPage = () => {
     }
   `)
   const headerImage = data.homePage.heroImage
-  console.log(headerImage.asset)
   const newsLetterImage = getImage(data.newsLetterImage.childImageSharp)
   const metaDescription = data.homePage.metaDescription
   const {
