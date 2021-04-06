@@ -16,6 +16,7 @@ const Brands = () => {
           id
           logo {
             asset {
+              _id
               url
             }
           }

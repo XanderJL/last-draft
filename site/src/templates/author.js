@@ -98,6 +98,7 @@ export const data = graphql`
       }
       image {
         asset {
+          _id
           url
         }
       }
@@ -116,6 +117,7 @@ export const data = graphql`
           }
           mainImage {
             asset {
+              _id
               url
             }
             hotspot {
@@ -134,6 +136,7 @@ export const data = graphql`
             }
             image {
               asset {
+                _id
                 url
               }
             }

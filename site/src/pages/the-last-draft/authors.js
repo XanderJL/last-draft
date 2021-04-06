@@ -32,6 +32,7 @@ export const data = graphql`
           _rawBio
           image {
             asset {
+              _id
               url
             }
           }

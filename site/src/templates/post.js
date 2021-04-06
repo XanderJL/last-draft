@@ -114,6 +114,7 @@ export const data = graphql`
         _rawBio
         image {
           asset {
+            _id
             url
           }
         }
@@ -123,6 +124,7 @@ export const data = graphql`
       publishedAt(formatString: "MMMM Do, YYYY")
       mainImage {
         asset {
+          _id
           url
         }
         hotspot {
@@ -136,6 +138,7 @@ export const data = graphql`
       mainCaption
       socialImage: mainImage {
         asset {
+          _id
           url
         }
       }

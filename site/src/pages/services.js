@@ -212,6 +212,7 @@ export const data = graphql`
       title
       heroImage {
         asset {
+          _id
           url
         }
         hotspot {
@@ -231,6 +232,7 @@ export const data = graphql`
             y
           }
           asset {
+            _id
             url
           }
         }

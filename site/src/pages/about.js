@@ -20,6 +20,7 @@ const About = () => {
         _rawHeroCard
         heroImage {
           asset {
+            _id
             url
           }
           hotspot {
@@ -32,6 +33,7 @@ const About = () => {
         sectionOne {
           image {
             asset {
+              _id
               url
             }
           }
@@ -39,6 +41,7 @@ const About = () => {
         publication {
           image {
             asset {
+              _id
               url
             }
           }

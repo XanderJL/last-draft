@@ -68,6 +68,7 @@ export const data = graphql`
         _rawQuote
         headshot {
           asset {
+            _id
             url
           }
         }

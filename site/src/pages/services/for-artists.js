@@ -117,6 +117,7 @@ export const data = graphql`
       title
       heroImage {
         asset {
+          _id
           url
         }
       }
@@ -125,6 +126,7 @@ export const data = graphql`
         id
         image {
           asset {
+            _id
             url
           }
         }

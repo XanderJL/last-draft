@@ -17,6 +17,7 @@ const EmployeesCard = () => {
           _rawQuote
           headshot {
             asset {
+              _id
               url
             }
           }

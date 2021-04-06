@@ -17,6 +17,7 @@ import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
 import { getGatsbyImageData } from "gatsby-source-sanity"
 import { getImage } from "gatsby-plugin-image"
+import sanityConfig from "../lib/sanityConfig"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -39,6 +40,7 @@ const IndexPage = () => {
         _rawContactBody
         heroImage {
           asset {
+            _id
             url
           }
           hotspot {
@@ -68,7 +70,8 @@ const IndexPage = () => {
       }
     }
   `)
-  const headerImage = getGatsbyImageData(data.homePage.heroImage.asset)
+  const headerImage = data.homePage.heroImage
+  console.log(headerImage.asset)
   const newsLetterImage = getImage(data.newsLetterImage.childImageSharp)
   const metaDescription = data.homePage.metaDescription
   const {
@@ -80,7 +83,6 @@ const IndexPage = () => {
     _rawContactBody,
     testimonials,
   } = data.homePage
-  console.log(headerImage)
 
   cards.map((card) => {
     const raw = _rawCards.filter((rawCard) => rawCard._key === card._key)
@@ -128,7 +130,10 @@ const IndexPage = () => {
       <Box d={{ base: "none", md: "block" }}>
         <Hero
           size="fullheight-with-navbar"
-          image={headerImage}
+          image={
+            getGatsbyImageData(headerImage, { maxwidth: 1920 }, sanityConfig)
+              .asset
+          }
           styles={imageHotspot(headerImage.hotspot)}
         >
           <Box
