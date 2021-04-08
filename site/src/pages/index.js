@@ -129,10 +129,11 @@ const IndexPage = () => {
       <Box d={{ base: "none", md: "block" }}>
         <Hero
           size="fullheight-with-navbar"
-          image={
-            getGatsbyImageData(headerImage, { maxwidth: 1920 }, sanityConfig)
-              .asset
-          }
+          image={getGatsbyImageData(
+            headerImage.asset,
+            { maxwidth: 1920 },
+            sanityConfig
+          )}
           styles={imageHotspot(headerImage.hotspot)}
         >
           <Box
@@ -148,13 +149,11 @@ const IndexPage = () => {
         </Hero>
       </Box>
       <Box d={{ base: "flex", md: "none" }} flexDir="column">
-        <GatsbyImage
-          image={
-            getGatsbyImageData(headerImage, { maxwidth: 1920 }, sanityConfig)
-              .asset
-          }
+        {/* <SanityImage
+          image={headerImage.asset}
+          options={{ maxWidth: 1920 }}
           style={{ flex: 1 }}
-        />
+        /> */}
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
             blocks={_rawHeroCard}
