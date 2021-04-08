@@ -1,9 +1,7 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import { getGatsbyImageData } from "gatsby-source-sanity"
-import sanityConfig from "../lib/sanityConfig"
-import { GatsbyImage } from "gatsby-plugin-image"
 import { Grid, Link } from "@chakra-ui/react"
+import SanityImage from "./SanityImage"
 
 const Brands = () => {
   const data = useStaticQuery(graphql`
@@ -36,25 +34,21 @@ const Brands = () => {
           gap="1rem"
         >
           {data.sanityAboutPage.brands.map((brand) => {
-            const { logo, alt } = brand
-            const imageData = getGatsbyImageData(
-              logo.asset,
-              { maxWidth: 250 },
-              sanityConfig
-            )
+            const { id, brandUrl, logo, alt } = brand
             return (
               <Link
-                key={brand.id}
-                href={brand.brandUrl}
+                key={id}
+                href={brandUrl}
                 isExternal
                 display="flex"
                 flex={1}
                 justifyContent="center"
                 alignItems="center"
               >
-                <GatsbyImage
-                  image={imageData}
-                  alt={alt}
+                <SanityImage
+                  image={logo.asset}
+                  alt={alt || ""}
+                  options={{ maxWidth: 250 }}
                   objectFit="contain"
                   objectPosition="center"
                 />

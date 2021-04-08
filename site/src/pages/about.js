@@ -125,12 +125,7 @@ const About = () => {
 
   const title = data.aboutPage.title
   const metaDescription = data.aboutPage._rawMetaDescription[0].children[0].text
-  const heroImage = getGatsbyImageData(
-    data.aboutPage.heroImage.asset,
-    { maxWidth: 1440 },
-    sanityConfig
-  )
-  const heroHotspot = data.aboutPage.heroImage.hotspot
+  const heroImage = data.aboutPage.heroImage
   const heroCard = data.aboutPage._rawHeroCard
   const sectionOne = data.aboutPage._rawSectionOne.body
   const sectionOneImg = data.aboutPage.sectionOne.image.asset
@@ -142,8 +137,12 @@ const About = () => {
   return (
     <Layout title={title} description={metaDescription}>
       <Hero
-        fluid={heroImage}
-        styles={imageHotspot(heroHotspot)}
+        image={getGatsbyImageData(
+          heroImage.asset,
+          { maxWidth: 1440 },
+          sanityConfig
+        )}
+        styles={imageHotspot(heroImage.hotspot)}
         size="fullheight-with-navbar"
       >
         <div className="card-about">
@@ -170,7 +169,7 @@ const About = () => {
           <SanityImage
             image={sectionOneImg}
             options={{ maxWidth: 1440 }}
-            alt={sectionOneAlt}
+            alt={sectionOneAlt || ""}
             className="type-writer"
           />
         </div>
@@ -203,8 +202,8 @@ const About = () => {
                 </Box>
               </Box>
               <SanityImage
-                options={{ maxWidth: 1200 }}
                 image={pubImage}
+                options={{ maxWidth: 1200 }}
                 alt={pubAlt}
                 className="image"
               />

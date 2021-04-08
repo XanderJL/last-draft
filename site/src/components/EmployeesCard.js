@@ -82,11 +82,12 @@ const EmployeesCard = () => {
                 fit="cover"
                 align="50% 50%"
                 borderRadius="full"
+                overflow="hidden"
                 _hover={{ opacity: 0.75 }}
               >
                 <SanityImage
                   image={headshot.asset}
-                  options={{ maxWidth: 400 }}
+                  options={{ width: 400, height: 400 }}
                 />
               </Box>
               <Heading
