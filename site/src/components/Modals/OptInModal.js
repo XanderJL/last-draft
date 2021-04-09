@@ -11,12 +11,11 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react"
-import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import { StaticImage } from "gatsby-plugin-image"
 import { motion, AnimatePresence } from "framer-motion"
 import ReCAPTCHA from "react-google-recaptcha"
 
-const BoxMotion = motion.custom(Box)
+const BoxMotion = motion(Box)
 
 const boxVariant = {
   hidden: {
@@ -36,27 +35,6 @@ const boxVariant = {
 }
 
 const OptInModal = () => {
-  const data = useStaticQuery(graphql`
-    {
-      desktop: file(
-        relativePath: { eq: "forms/opt-in-cover-photo-compressed.png" }
-      ) {
-        childImageSharp {
-          fixed(width: 800) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-      mobile: file(relativePath: { eq: "forms/mobile-type-writer.jpg" }) {
-        childImageSharp {
-          fixed(width: 600) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-    }
-  `)
-
   const [isOpen, setOpen] = useState(true)
 
   const controlStyles = {
@@ -107,8 +85,12 @@ const OptInModal = () => {
               minW="280px"
               overflow="hidden"
             >
-              <Img
-                fixed={data.desktop.childImageSharp.fixed}
+              <StaticImage
+                src="../../images/forms/opt-in-cover-photo-compressed.png"
+                alt="opt-in photo"
+                layout="fixed"
+                width={800}
+                placeholder="blurred"
                 style={{ width: "100%", height: "100%" }}
               />
             </Box>
@@ -127,8 +109,12 @@ const OptInModal = () => {
                 size="lg"
                 onClick={() => setOpen(!isOpen)}
               />
-              <Img
-                fixed={data.mobile.childImageSharp.fixed}
+              <StaticImage
+                src="../../images/forms/mobile-type-writer.jpg"
+                alt="type writer"
+                layout="fixed"
+                width={600}
+                placeholder="blurred"
                 style={{ width: "100%", height: "100%" }}
               />
             </Box>

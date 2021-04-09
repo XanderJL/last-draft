@@ -165,9 +165,7 @@ const ForBusiness = ({ data }) => {
 
 export const data = graphql`
   query {
-    page: sanityServicesPage(
-      id: { eq: "-3fd30ba7-a37f-5aa7-9743-c066a9ed57a0" }
-    ) {
+    page: sanityServicesPage(_id: { eq: "entrepreneurServicesPage" }) {
       title
       heroImage {
         asset {

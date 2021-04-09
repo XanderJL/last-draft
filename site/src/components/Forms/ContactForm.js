@@ -22,7 +22,7 @@ import {
 import { AiOutlineUpload } from "react-icons/ai"
 import PortableText from "@sanity/block-content-to-react"
 import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa"
-import { Serializers } from "../Serializers"
+import Serializers from "../Serializers"
 import ReCAPTCHA from "react-google-recaptcha"
 
 const ContactForm = ({ title, body }) => {
@@ -153,7 +153,7 @@ const ContactForm = ({ title, body }) => {
             overflow="hidden"
             position="absolute"
             zIndex="-1"
-            onChange={e => {
+            onChange={(e) => {
               const [file] = e.target.files
               const { name: fileName, size } = file
               const fileSize = (size / 1000).toFixed(2)

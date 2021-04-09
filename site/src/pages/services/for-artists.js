@@ -111,9 +111,7 @@ const ForArtists = ({ data }) => {
 
 export const data = graphql`
   query {
-    page: sanityServicesPage(
-      id: { eq: "9c0b5a47-c57c-53e2-bafa-38e8069feb58" }
-    ) {
+    page: sanityServicesPage(_id: { eq: "artistServicesPage" }) {
       title
       heroImage {
         asset {

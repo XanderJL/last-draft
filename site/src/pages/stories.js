@@ -18,7 +18,7 @@ import sanityConfig from "../lib/sanityConfig"
 
 const TheLastDraft = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
-  const { title, categories, heroImage, _rawPublication, publication } = blog
+  const { title, categories, heroImage, _rawPublication } = blog
   const pubBody = _rawPublication.body
 
   const SectionRenderer = (props) => {
@@ -43,22 +43,34 @@ const TheLastDraft = ({ data }) => {
   }
   const BlockImageRenderer = (props) => {
     return (
-      <SanityImage
-        image={getGatsbyImageData(props.node.image.asset)}
-        options={{ maxWidth: 800, maxHeight: 600 }}
-        alt={props.node.alt}
-      />
+      <Box maxW="264px" maxH="auto">
+        <SanityImage
+          image={props.node.image.asset}
+          options={{ maxWidth: 800, maxHeight: 600 }}
+          layout="fixed"
+          style={{
+            maxWidth: "inherit",
+            maxHeight: "inherit",
+          }}
+          imgStyle={{
+            maxWidth: "inherit",
+            maxHeight: "inherit",
+          }}
+          objectFit="contain"
+          alt={props.node.alt}
+        />
+      </Box>
     )
   }
 
   return (
     <Layout title={title}>
       <Hero
-        image={
-          (getGatsbyImageData(heroImage.asset),
+        image={getGatsbyImageData(
+          heroImage.asset,
           { maxWidth: 1440 },
-          sanityConfig)
-        }
+          sanityConfig
+        )}
         styles={imageHotspot(heroImage.hotspot)}
         size="large"
       />
@@ -109,11 +121,7 @@ const TheLastDraft = ({ data }) => {
                 category,
                 slug,
               } = post
-              const image = getGatsbyImageData(
-                mainImage.asset,
-                { maxWidth: 800, maxHeight: 600 },
-                sanityConfig
-              )
+              const image = mainImage.asset
               const link = category.parentCategory
                 ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                 : `/stories/${category.slug.current}/${slug.current}`
@@ -146,11 +154,7 @@ const TheLastDraft = ({ data }) => {
                 category,
                 slug,
               } = post
-              const image = getGatsbyImageData(
-                mainImage.asset,
-                { maxWidth: 800, maxHeight: 600 },
-                sanityConfig
-              )
+              const image = mainImage.asset
               const link = category.parentCategory
                 ? `/stories/${category.parentCategory.slug.current}/${category.slug.current}/${slug.current}`
                 : `/stories/${category.slug.current}/${slug.current}`
@@ -200,11 +204,7 @@ const TheLastDraft = ({ data }) => {
                       category,
                       slug,
                     } = post
-                    const image = getGatsbyImageData(
-                      mainImage.asset,
-                      { maxWidth: 800, maxHeight: 600 },
-                      sanityConfig
-                    )
+                    const image = mainImage.asset
                     const link = `/stories/${category.slug.current}/${slug.current}`
                     return (
                       <PostCard

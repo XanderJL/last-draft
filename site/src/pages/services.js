@@ -12,12 +12,6 @@ import sanityConfig from "../lib/sanityConfig"
 
 const ServicesPage = ({ data }) => {
   const { services, placeholder, _rawHeroCard } = data
-  const heroImage = getGatsbyImageData(
-    services.heroImage.asset,
-    { maxWidth: 1440 },
-    sanityConfig
-  )
-  const heroHotpsot = services.heroImage.hotspot
 
   const CardRenderer = (props) => {
     const { style = "normal" } = props.node
@@ -74,11 +68,8 @@ const ServicesPage = ({ data }) => {
       }).image(source)
     return (
       <SanityImage
-        image={
-          (getGatsbyImageData(props.node.image.asset),
-          { maxWidth: 800, maxHeight: 450 },
-          sanityConfig)
-        }
+        image={props.node.image.asset}
+        options={{ maxWidth: 800, maxHeight: 450 }}
         alt={props.node.alt}
       />
     )
@@ -86,10 +77,14 @@ const ServicesPage = ({ data }) => {
 
   return (
     <Layout title={services.title}>
-      {heroImage ? (
+      {services && services.heroImage ? (
         <Hero
-          fluid={heroImage}
-          styles={imageHotspot(heroHotpsot)}
+          image={getGatsbyImageData(
+            services.heroImage.asset,
+            { maxWidth: 1440 },
+            sanityConfig
+          )}
+          styles={imageHotspot(services.heroImage.hotspot)}
           size="fullheight-with-navbar"
         >
           <div className="card-hero">
@@ -152,7 +147,13 @@ const ServicesPage = ({ data }) => {
                 >
                   {image && image.asset ? (
                     <Link to={`/services/${slug.current}`}>
-                      <SanityImage image={image.asset} alt={alt && alt} />
+                      <SanityImage
+                        image={image.asset}
+                        options={{ maxWidth: 800, maxHeight: 600 }}
+                        layout="fluid"
+                        objectFit="cover"
+                        alt={alt || "The author hasn't defined the image yet."}
+                      />
                     </Link>
                   ) : null}
                   <Box

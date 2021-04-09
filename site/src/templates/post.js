@@ -41,7 +41,7 @@ const post = ({ data }) => {
       image={getGatsbyImageData(image, { maxWidth: 1200 }, sanityConfig)}
     >
       <Hero
-        fluid={getGatsbyImageData(
+        image={getGatsbyImageData(
           mainImage.asset,
           { maxWidth: 1920 },
           sanityConfig
