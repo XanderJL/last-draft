@@ -4,9 +4,11 @@ import PortableText from "@sanity/block-content-to-react"
 import {
   Box,
   Container,
+  Flex,
   Grid,
   GridItem,
   Heading,
+  Icon,
   VStack,
 } from "@chakra-ui/react"
 import SanityImage from "../components/SanityImage"
@@ -16,7 +18,7 @@ import ContactForm from "../components/Forms/ContactForm"
 import Hero from "../components/Hero"
 import imageHotspot from "../hooks/imageHotspot"
 import { getGatsbyImageData } from "gatsby-source-sanity"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { getImage } from "gatsby-plugin-image"
 import sanityConfig from "../lib/sanityConfig"
 
 const IndexPage = () => {
@@ -53,6 +55,12 @@ const IndexPage = () => {
         cards {
           _key
           title
+          icon {
+            asset {
+              _id
+              url
+            }
+          }
           service {
             slug {
               current
@@ -149,11 +157,11 @@ const IndexPage = () => {
         </Hero>
       </Box>
       <Box d={{ base: "flex", md: "none" }} flexDir="column">
-        {/* <SanityImage
+        <SanityImage
           image={headerImage.asset}
           options={{ maxWidth: 1920 }}
           style={{ flex: 1 }}
-        /> */}
+        />
         <Box p="3rem 1.25rem" bg="black">
           <PortableText
             blocks={_rawHeroCard}
@@ -172,20 +180,29 @@ const IndexPage = () => {
               gap={12}
             >
               {cards.map((card) => {
-                const { _key, title, _rawBody, service } = card
+                const { _key, title, _rawBody, service, icon } = card
                 return (
                   <GridItem key={_key}>
                     <Link
                       to={`/services/for-business/#${service.slug.current}`}
                     >
-                      <Heading
-                        as="h2"
-                        size="md"
-                        textAlign="center"
-                        textTransform="uppercase"
+                      <Flex
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
                       >
-                        {title}
-                      </Heading>
+                        <Icon boxSize={150} viewBox="0 0 80 80" m={4}>
+                          <image href={icon.asset.url} height="80" width="80" />
+                        </Icon>
+                        <Heading
+                          as="h2"
+                          size="md"
+                          textAlign="center"
+                          textTransform="uppercase"
+                        >
+                          {title}
+                        </Heading>
+                      </Flex>
                     </Link>
                     <PortableText blocks={_rawBody} serializers={serializers} />
                   </GridItem>
