@@ -1,2 +1,2 @@
 [build]
-functions = "site/src/functions"
+functions = "site/functions"
