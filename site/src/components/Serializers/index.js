@@ -91,13 +91,13 @@ const embedStyle = {
 }
 
 // URL builder for images
-const urlFor = src =>
+const urlFor = (src) =>
   urlBuilder({
     projectId: process.env.GATSBY_SANITY_ID,
     dataset: process.env.GATSBY_SANITY_DATASET,
   }).image(src)
 
-const rx = str => {
+const rx = (str) => {
   const regex = new RegExp(
     `^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?${str}`,
     "ig"
@@ -105,7 +105,7 @@ const rx = str => {
   return regex
 }
 
-export const CardRenderer = props => {
+export const CardRenderer = (props) => {
   const { style = "normal" } = props.node
 
   if (style === "h1") {
@@ -134,8 +134,8 @@ export const CardRenderer = props => {
   // Fall back to default handling
   return PortableText.defaultSerializers.types.block(props)
 }
-export const BlockImageRenderer = props => {
-  const urlFor = source =>
+export const BlockImageRenderer = (props) => {
+  const urlFor = (source) =>
     imageUrlBuilder({
       projectId: process.env.GATSBY_SANITY_ID,
       dataset: process.env.GATSBY_SANITY_DATASET,
@@ -148,7 +148,7 @@ export const BlockImageRenderer = props => {
   )
 }
 
-export const BlockRenderer = props => {
+export const BlockRenderer = (props) => {
   const { style = "normal" } = props.node
 
   if (/^h\d/.test(style)) {
