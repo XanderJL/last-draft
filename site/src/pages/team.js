@@ -1,90 +1,80 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { Box, Container, Grid, Heading, Link, Text } from "@chakra-ui/react"
+import { graphql, Link as GatsbyLink } from "gatsby"
+import SanityImage from "../components/SanityImage"
 import Layout from "../components/Layout"
-import EmployeesCard from "../components/EmployeesCard"
-import EmployeeSection from "../components/EmployeeSection"
-import Hero from "../components/Hero"
-import { getImage } from "gatsby-plugin-image"
 
 const Team = ({ data }) => {
+  const { team } = data.sanityTeamPage
+
   return (
     <Layout title="Team">
-      <Hero
-        image={getImage(data.headerImage.childImageSharp)}
-        size="fullheight-with-navbar"
+      <Container
+        p={{ base: "3rem 1.25rem", md: "5rem 1.25rem" }}
+        maxW="container.xl"
       >
-        <EmployeesCard />
-      </Hero>
-      <div className="section-wrapper">
-        {data.employees.team.map((employee) => {
-          const {
-            id,
-            slug,
-            headshot,
-            _rawQuote,
-            firstName,
-            lastName,
-            jobTitle,
-            _rawBio,
-            socials,
-          } = employee
-          return (
-            <EmployeeSection
-              key={id}
-              slug={slug.current}
-              image={headshot.asset}
-              quote={_rawQuote}
-              name={firstName + " " + lastName}
-              jobTitle={jobTitle}
-              bio={_rawBio}
-              socials={socials}
-            />
-          )
-        })}
-      </div>
+        <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={4}>
+          {team.map((member) => {
+            const { id, firstName, lastName, jobTitle, slug, headshot } = member
+            return (
+              <Link
+                as={GatsbyLink}
+                key={id}
+                role="group"
+                to={`/team/${slug.current}`}
+                justifySelf="center"
+              >
+                <Box
+                  mb="0.25rem"
+                  maxW={300}
+                  maxH={300}
+                  _groupHover={{ opacity: 0.8 }}
+                >
+                  <SanityImage
+                    image={headshot.asset.id}
+                    options={{ maxWidth: 300 }}
+                    alt={(firstName, " ", lastName)}
+                  />
+                </Box>
+                <Heading as="h2" size="md" textTransform="uppercase">
+                  {firstName} {lastName}
+                </Heading>
+                <Text
+                  color="gray.600"
+                  fontFamily="heading"
+                  textTransform="uppercase"
+                >
+                  {jobTitle}
+                </Text>
+              </Link>
+            )
+          })}
+        </Grid>
+      </Container>
     </Layout>
   )
 }
 
+export default Team
+
 export const data = graphql`
-  query {
-    headerImage: file(relativePath: { eq: "about/about-header.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(
-          width: 1920
-          placeholder: BLURRED
-          formats: [AUTO, WEBP, AVIF]
-        )
-      }
-    }
-    employees: sanityTeamPage {
-      heading
-      subheading
+  {
+    sanityTeamPage {
       team {
         id
         firstName
         lastName
-        _rawBio
-        _rawQuote
-        headshot {
-          asset {
-            _id
-            url
-          }
-        }
         jobTitle
         slug {
           current
         }
-        socials {
-          facebook
-          instagram
-          linkedin
-          twitter
+        headshot {
+          asset {
+            url
+            id
+          }
         }
       }
     }
   }
 `
-
-export default Team

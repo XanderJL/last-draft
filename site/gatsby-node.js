@@ -61,6 +61,13 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      teamMembers: sanityTeamPage {
+        team {
+          slug {
+            current
+          }
+        }
+      }
       authors: allSanityAuthor(filter: { slug: { current: { ne: null } } }) {
         edges {
           node {
@@ -81,6 +88,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const posts = res.data.posts.edges
   const categories = res.data.allSanityCategory.edges
   const authors = res.data.authors.edges
+  const teamMembers = res.data.teamMembers.team
 
   posts.forEach(({ node }) => {
     const { category, slug } = node
@@ -131,6 +139,16 @@ exports.createPages = async ({ graphql, actions }) => {
       pathPrefix: path,
       component: require.resolve("./src/templates/author.js"),
       context: { slug: edge.node.slug.current, title: edge.node.name },
+    })
+  })
+
+  teamMembers.forEach((member) => {
+    const path = `/team/${member.slug.current}`
+
+    createPage({
+      path,
+      component: require.resolve("./src/templates/member.js"),
+      context: { slug: member.slug.current },
     })
   })
 }

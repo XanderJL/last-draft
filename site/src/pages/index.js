@@ -169,7 +169,7 @@ const IndexPage = () => {
           />
         </Box>
       </Box>
-      <Box as="section" p={{ base: "3rem 1.25rem" }}>
+      <Box as="section" p={{ base: "3rem 1.25rem", md: "7rem 1.25rem" }}>
         <Container maxW="container.xl">
           <VStack spacing={4}>
             <Heading textAlign="center" textTransform="uppercase">
@@ -191,7 +191,7 @@ const IndexPage = () => {
                         justifyContent="center"
                         alignItems="center"
                       >
-                        <Icon boxSize={150} viewBox="0 0 80 80" m={4}>
+                        <Icon boxSize={150} viewBox="0 0 80 80" m={8}>
                           <image href={icon.asset.url} height="80" width="80" />
                         </Icon>
                         <Heading

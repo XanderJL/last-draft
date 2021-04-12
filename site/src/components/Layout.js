@@ -11,7 +11,14 @@ const Layout = ({ children, title, description, image }) => {
     <Box className="site">
       <SEO title={title} description={description} image={image} />
       <Navbar />
-      <main className="site-content">{children}</main>
+      <Box
+        as="main"
+        display="flex"
+        flexDirection="column"
+        className="site-content"
+      >
+        {children}
+      </Box>
       <Footer />
     </Box>
   )

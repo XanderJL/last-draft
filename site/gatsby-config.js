@@ -2,65 +2,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const algoliaQuery = `{
-  allSanityPost {
-    edges {
-      node {
-        id
-        _rawBody
-        author {
-          name
-        }
-        category {
-          title
-          slug {
-            current
-          }
-        }
-        title
-        slug {
-          current
-        }
-      }
-    }
-  }
-}`
-
-const queries = [
-  {
-    query: algoliaQuery,
-    transformer: ({ data }) => {
-      function toPlainText(blocks = []) {
-        return (
-          blocks
-            // loop through each block
-            .map((block) => {
-              if (block._type !== "block" || !block.children) {
-                return ""
-              }
-              return block.children.map((child) => child.text).join("")
-            })
-            .join("\n\n")
-        )
-      }
-
-      return data.allSanityPost.edges.map(({ node: post }) => {
-        const { id, slug, category, title, author, _rawBody } = post
-        const body = toPlainText(_rawBody)
-        const chunk = {
-          id,
-          slug,
-          category,
-          title,
-          author: author.name,
-          body,
-        }
-        return chunk
-      })
-    },
-  },
-]
-
 module.exports = {
   siteMetadata: {
     title: `Last Draft`,
@@ -73,18 +14,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-awesome-pagination`,
     `gatsby-plugin-sitemap`,
-    {
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_API_KEY,
-        indexName: process.env.ALGOLIA_INDEX_NAME,
-        queries,
-        chunkSize: 1000,
-        enablePartialUpdates: true,
-        matchFields: ["author", "title", "category"],
-      },
-    },
     {
       resolve: `gatsby-source-sanity`,
       options: {
