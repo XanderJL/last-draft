@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import PortableText from "@sanity/block-content-to-react"
 import {
   Box,
@@ -21,63 +21,7 @@ import { getGatsbyImageData } from "gatsby-source-sanity"
 import { getImage } from "gatsby-plugin-image"
 import sanityConfig from "../lib/sanityConfig"
 
-const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    {
-      newsLetterImage: file(
-        relativePath: { eq: "index/newsletter-header.jpg" }
-      ) {
-        childImageSharp {
-          gatsbyImageData(
-            width: 3840
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
-        }
-      }
-      homePage: sanityIndexPage {
-        metaDescription
-        _rawHeroCard
-        contactHeading
-        _rawContactBody
-        heroImage {
-          asset {
-            _id
-            url
-          }
-          hotspot {
-            x
-            y
-          }
-        }
-        cardsTitle
-        _rawCards
-        cards {
-          _key
-          title
-          icon {
-            asset {
-              _id
-              url
-            }
-          }
-          service {
-            slug {
-              current
-            }
-          }
-        }
-        testimonials {
-          _rawTestimonial
-          brandName
-          brandRep
-          repTitle
-          brandUrl
-          id
-        }
-      }
-    }
-  `)
+const IndexPage = ({ data }) => {
   const headerImage = data.homePage.heroImage
   const newsLetterImage = getImage(data.newsLetterImage.childImageSharp)
   const metaDescription = data.homePage.metaDescription
@@ -146,6 +90,8 @@ const IndexPage = () => {
         >
           <Box
             maxW="max-content"
+            p="1.25rem 2rem"
+            bg="blackAlpha.700"
             textShadow="2px 2px rgba(0,0,0,0.25)"
             className="has-text-white"
           >
@@ -228,5 +174,60 @@ const IndexPage = () => {
     </Layout>
   )
 }
+
+export const data = graphql`
+  {
+    newsLetterImage: file(relativePath: { eq: "index/newsletter-header.jpg" }) {
+      childImageSharp {
+        gatsbyImageData(
+          width: 3840
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+    }
+    homePage: sanityIndexPage {
+      metaDescription
+      _rawHeroCard
+      contactHeading
+      _rawContactBody
+      heroImage {
+        asset {
+          _id
+          url
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      cardsTitle
+      _rawCards
+      cards {
+        _key
+        title
+        icon {
+          asset {
+            _id
+            url
+          }
+        }
+        service {
+          slug {
+            current
+          }
+        }
+      }
+      testimonials {
+        _rawTestimonial
+        brandName
+        brandRep
+        repTitle
+        brandUrl
+        id
+      }
+    }
+  }
+`
 
 export default IndexPage

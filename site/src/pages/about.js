@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link as GatsbyLink, useStaticQuery, graphql } from "gatsby"
+import { Link as GatsbyLink, graphql } from "gatsby"
 import { Box, Link } from "@chakra-ui/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
@@ -11,46 +11,7 @@ import SanityImage from "../components/SanityImage"
 import sanityConfig from "../lib/sanityConfig"
 import { getGatsbyImageData } from "gatsby-source-sanity"
 
-const About = () => {
-  const data = useStaticQuery(graphql`
-    {
-      aboutPage: sanityAboutPage {
-        _rawMetaDescription
-        title
-        _rawHeroCard
-        heroImage {
-          asset {
-            _id
-            url
-          }
-          hotspot {
-            x
-            y
-          }
-        }
-        _rawSectionOne
-        _rawPublication
-        sectionOne {
-          image {
-            asset {
-              _id
-              url
-            }
-          }
-        }
-        publication {
-          image {
-            asset {
-              _id
-              url
-            }
-          }
-          alt
-        }
-      }
-    }
-  `)
-
+const About = ({ data }) => {
   const CardRenderer = (props) => {
     const { style = "normal" } = props.node
 
@@ -214,5 +175,44 @@ const About = () => {
     </Layout>
   )
 }
+
+export const data = graphql`
+  {
+    aboutPage: sanityAboutPage {
+      _rawMetaDescription
+      title
+      _rawHeroCard
+      heroImage {
+        asset {
+          _id
+          url
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      _rawSectionOne
+      _rawPublication
+      sectionOne {
+        image {
+          asset {
+            _id
+            url
+          }
+        }
+      }
+      publication {
+        image {
+          asset {
+            _id
+            url
+          }
+        }
+        alt
+      }
+    }
+  }
+`
 
 export default About

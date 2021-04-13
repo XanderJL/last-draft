@@ -14,6 +14,14 @@ export default {
       type: "string",
     },
     {
+      name: "heroImage",
+      title: "Hero Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: "team",
       title: "Team",
       type: "array",
