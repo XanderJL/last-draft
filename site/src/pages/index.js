@@ -44,21 +44,22 @@ const IndexPage = ({ data }) => {
     const { style = "normal" } = props.node
 
     if (style === "h1") {
-      return React.createElement(
-        style,
-        {
-          className: `is-montserrat is-uppercase title is-size-1 has-text-white is-spaced is-size-4-mobile mb-1`,
-        },
-        props.children
+      return (
+        <Heading size="2xl" letterSpacing="0.4rem" pb="0.25rem">
+          {props.children}
+        </Heading>
       )
     }
     if (style === "h2") {
-      return React.createElement(
-        style,
-        {
-          className: `is-montserrat is-uppercase subtitle is-size-4 has-text-white is-spaced is-size-6-mobile`,
-        },
-        props.children
+      return (
+        <Heading
+          as="h2"
+          fontSize={{ base: "18px", md: "24px" }}
+          fontWeight={400}
+          letterSpacing="0.1rem"
+        >
+          {props.children}
+        </Heading>
       )
     }
 
@@ -118,7 +119,7 @@ const IndexPage = ({ data }) => {
           options={{ maxWidth: 1920 }}
           style={{ flex: 1 }}
         />
-        <Box p="3rem 1.25rem" bg="black">
+        <Box p="3rem 1.25rem" bg="black" color="white">
           <PortableText
             blocks={_rawHeroCard}
             serializers={{ types: { block: BlockRenderer } }}

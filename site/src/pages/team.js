@@ -36,10 +36,21 @@ const Team = ({ data }) => {
           textShadow="2px 2px rgba(0,0,0,0.25)"
           className="has-text-white"
         >
-          <Heading as="h1" textTransform="uppercase" size="2xl" pb="0.5rem">
+          <Heading
+            as="h1"
+            textTransform="uppercase"
+            size="2xl"
+            letterSpacing="0.4rem"
+            pb="0.25rem"
+          >
             {heading}
           </Heading>
-          <Heading as="h2" size="md">
+          <Heading
+            as="h2"
+            fontSize={{ base: "18px", md: "24px" }}
+            fontWeight={400}
+            letterSpacing="0.1rem"
+          >
             {subheading}
           </Heading>
         </Box>
