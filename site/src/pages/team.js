@@ -24,22 +24,31 @@ const Team = ({ data }) => {
       >
         <Box
           maxW="max-content"
-          p="1.25rem 2rem"
-          bg="blackAlpha.700"
+          p="4rem 5.5rem"
+          bg="blackAlpha.800"
+          position={{ base: "absolute", "2xl": "relative" }}
+          top={{ base: "calc(50vh - 32px)", "2xl": 0 }}
+          transform={{
+            base: "translateY(-50%)",
+            "2xl": "translateX(-25%)",
+          }}
+          left={0}
           textShadow="2px 2px rgba(0,0,0,0.25)"
           className="has-text-white"
         >
-          <Heading as="h1" textTransform="uppercase" size="2xl">
+          <Heading as="h1" textTransform="uppercase" size="2xl" pb="0.5rem">
             {heading}
           </Heading>
-          <Heading as="h2" size="lg">{subheading}</Heading>
+          <Heading as="h2" size="md">
+            {subheading}
+          </Heading>
         </Box>
       </Hero>
       <Container
         p={{ base: "3rem 1.25rem", md: "7rem 1.25rem" }}
         maxW="container.xl"
       >
-        <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={4}>
+        <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={8}>
           {team.map((member) => {
             const { id, firstName, lastName, jobTitle, slug, headshot } = member
             return (

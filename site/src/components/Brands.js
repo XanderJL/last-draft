@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import { Grid, Link } from "@chakra-ui/react"
+import { Container, Grid, Link } from "@chakra-ui/react"
 import SanityImage from "./SanityImage"
 
 const Brands = () => {
@@ -25,12 +25,15 @@ const Brands = () => {
 
   return (
     <section className="section-brands">
-      <div className="container">
+      <Container maxW="container.xl">
         <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
           clients + partners
         </h1>
         <Grid
-          templateColumns={{ base: "minmax(0, 1fr)", md: "repeat(3, 1fr)" }}
+          templateColumns={{
+            base: "minmax(0, 1fr)",
+            md: "repeat(auto-fit, minmax(300px, 1fr))",
+          }}
           gap="1rem"
         >
           {data.sanityAboutPage.brands.map((brand) => {
@@ -44,11 +47,14 @@ const Brands = () => {
                 flex={1}
                 justifyContent="center"
                 alignItems="center"
+                maxW={300}
+                alignSelf="center"
+                justifySelf="center"
               >
                 <SanityImage
                   image={logo.asset}
                   alt={alt || ""}
-                  options={{ maxWidth: 250 }}
+                  options={{ maxWidth: 400 }}
                   objectFit="contain"
                   objectPosition="center"
                 />
@@ -56,7 +62,7 @@ const Brands = () => {
             )
           })}
         </Grid>
-      </div>
+      </Container>
     </section>
   )
 }

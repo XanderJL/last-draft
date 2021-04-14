@@ -136,7 +136,7 @@ const About = ({ data }) => {
         </div>
       </section>
       <Brands />
-      <Box as="section" className="section-publication">
+      {/* <Box as="section" className="section-publication">
         <Box className="container">
           <Box className="card-publication">
             <Box className="card-content">
@@ -171,7 +171,7 @@ const About = ({ data }) => {
             </Box>
           </Box>
         </Box>
-      </Box>
+      </Box> */}
     </Layout>
   )
 }

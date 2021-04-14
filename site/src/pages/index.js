@@ -47,7 +47,7 @@ const IndexPage = ({ data }) => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase title is-size-2 has-text-white is-spaced is-size-4-mobile mb-1`,
+          className: `is-montserrat is-uppercase title is-size-1 has-text-white is-spaced is-size-4-mobile mb-1`,
         },
         props.children
       )
@@ -56,7 +56,7 @@ const IndexPage = ({ data }) => {
       return React.createElement(
         style,
         {
-          className: `is-montserrat is-uppercase subtitle is-size-5 has-text-white is-spaced is-size-6-mobile`,
+          className: `is-montserrat is-uppercase subtitle is-size-4 has-text-white is-spaced is-size-6-mobile`,
         },
         props.children
       )
@@ -86,12 +86,22 @@ const IndexPage = ({ data }) => {
             { maxwidth: 1920 },
             sanityConfig
           )}
-          styles={imageHotspot(headerImage.hotspot)}
+          styles={{
+            ...imageHotspot(headerImage.hotspot),
+            position: "relative",
+          }}
         >
           <Box
             maxW="max-content"
-            p="1.25rem 2rem"
-            bg="blackAlpha.700"
+            p="4rem 5.5rem"
+            bg="blackAlpha.800"
+            position={{ base: "absolute", "2xl": "relative" }}
+            top={{ base: "calc(50vh - 32px)", "2xl": 0 }}
+            transform={{
+              base: "translateY(-50%)",
+              "2xl": "translateX(-25%)",
+            }}
+            left={0}
             textShadow="2px 2px rgba(0,0,0,0.25)"
             className="has-text-white"
           >
@@ -137,12 +147,13 @@ const IndexPage = ({ data }) => {
                         justifyContent="center"
                         alignItems="center"
                       >
-                        <Icon boxSize={150} viewBox="0 0 80 80" m={8}>
+                        <Icon boxSize={125} viewBox="0 0 80 80" m={10}>
                           <image href={icon.asset.url} height="80" width="80" />
                         </Icon>
                         <Heading
                           as="h2"
                           size="md"
+                          pb={2}
                           textAlign="center"
                           textTransform="uppercase"
                         >
