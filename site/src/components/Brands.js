@@ -25,17 +25,16 @@ const Brands = () => {
 
   return (
     <section className="section-brands">
-      <Container maxW="container.xl">
+      <Container maxW="container.lg">
         <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
           clients + partners
         </h1>
         <Grid
           templateColumns={{
             base: "minmax(0, 1fr)",
-            md: "repeat(auto-fit, minmax(300px, 1fr))",
+            md: "repeat(auto-fit, minmax(250px, 1fr))",
           }}
-          columnGap={10}
-          rowGap={2}
+          gap={2}
         >
           {data.sanityAboutPage.brands.map((brand) => {
             const { id, brandUrl, logo, alt } = brand
@@ -48,7 +47,7 @@ const Brands = () => {
                 flex={1}
                 justifyContent="center"
                 alignItems="center"
-                maxW={400}
+                maxW={250}
                 alignSelf="center"
                 justifySelf="center"
               >
