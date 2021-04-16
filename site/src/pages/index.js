@@ -45,7 +45,11 @@ const IndexPage = ({ data }) => {
 
     if (style === "h1") {
       return (
-        <Heading size="2xl" letterSpacing="0.4rem" pb="0.25rem">
+        <Heading
+          fontSize={{ base: "28px", md: "36px", lg: "48px" }}
+          letterSpacing="0.4rem"
+          pb="0.25rem"
+        >
           {props.children}
         </Heading>
       )
@@ -54,7 +58,7 @@ const IndexPage = ({ data }) => {
       return (
         <Heading
           as="h2"
-          fontSize={{ base: "18px", md: "24px" }}
+          fontSize={{ base: "14px", md: "18px", lg: "24px" }}
           fontWeight={400}
           letterSpacing="0.1rem"
         >
@@ -94,7 +98,7 @@ const IndexPage = ({ data }) => {
         >
           <Box
             maxW="max-content"
-            p="4rem 5.5rem"
+            p={{ base: "3rem 4rem", lg: "4rem 5.5rem" }}
             bg="blackAlpha.800"
             position={{ base: "absolute", "2xl": "relative" }}
             top={{ base: "calc(50vh - 32px)", "2xl": 0 }}

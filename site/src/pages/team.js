@@ -13,29 +13,57 @@ const Team = ({ data }) => {
 
   return (
     <Layout title="Team">
-      <Hero
-        size="fullheight-with-navbar"
-        image={getGatsbyImageData(
-          heroImage.asset.id,
-          { maxWidth: 1440 },
-          sanityConfig
-        )}
-        styles={imageHotspot(heroImage.hotspot)}
-      >
-        <Box
-          maxW="max-content"
-          p="4rem 5.5rem"
-          bg="blackAlpha.800"
-          position={{ base: "absolute", "2xl": "relative" }}
-          top={{ base: "calc(50vh - 32px)", "2xl": 0 }}
-          transform={{
-            base: "translateY(-50%)",
-            "2xl": "translateX(-25%)",
-          }}
-          left={0}
-          textShadow="2px 2px rgba(0,0,0,0.25)"
-          className="has-text-white"
+      <Box d={{ base: "none", md: "block" }}>
+        <Hero
+          size="fullheight-with-navbar"
+          image={getGatsbyImageData(
+            heroImage.asset.id,
+            { maxWidth: 1440 },
+            sanityConfig
+          )}
+          styles={imageHotspot(heroImage.hotspot)}
         >
+          <Box
+            maxW="max-content"
+            p={{ base: "3rem 4rem", lg: "4rem 5.5rem" }}
+            bg="blackAlpha.800"
+            position={{ base: "absolute", "2xl": "relative" }}
+            top={{ base: "calc(50vh - 32px)", "2xl": 0 }}
+            transform={{
+              base: "translateY(-50%)",
+              "2xl": "translateX(-25%)",
+            }}
+            left={0}
+            textShadow="2px 2px rgba(0,0,0,0.25)"
+            className="has-text-white"
+          >
+            <Heading
+              as="h1"
+              textTransform="uppercase"
+              fontSize={{ base: "28px", md: "36px", lg: "48px" }}
+              letterSpacing="0.4rem"
+              pb="0.25rem"
+            >
+              {heading}
+            </Heading>
+            <Heading
+              as="h2"
+              fontSize={{ base: "14px", md: "18px", lg: "24px" }}
+              fontWeight={400}
+              letterSpacing="0.1rem"
+            >
+              {subheading}
+            </Heading>
+          </Box>
+        </Hero>
+      </Box>
+      <Box d={{ base: "flex", md: "none" }} flexDir="column">
+        <SanityImage
+          image={heroImage.asset.id}
+          options={{ maxWidth: 800 }}
+          style={{ flex: 1 }}
+        />
+        <Box p="3rem 1.25rem" bg="black" color="white">
           <Heading
             as="h1"
             textTransform="uppercase"
@@ -54,7 +82,7 @@ const Team = ({ data }) => {
             {subheading}
           </Heading>
         </Box>
-      </Hero>
+      </Box>
       <Container
         p={{ base: "3rem 1.25rem", md: "7rem 1.25rem" }}
         maxW="container.xl"

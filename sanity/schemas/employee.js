@@ -63,6 +63,16 @@ export default {
       type: "blockContent",
     },
     {
+      name: "projects",
+      title: "Projects",
+      type: "blockContent",
+    },
+    {
+      name: "education",
+      title: "Education",
+      type: "blockContent",
+    },
+    {
       name: "socials",
       title: "Social Media",
       type: "socials",
