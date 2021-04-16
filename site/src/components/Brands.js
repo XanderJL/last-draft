@@ -34,7 +34,8 @@ const Brands = () => {
             base: "minmax(0, 1fr)",
             md: "repeat(auto-fit, minmax(300px, 1fr))",
           }}
-          gap="1rem"
+          columnGap={10}
+          rowGap={2}
         >
           {data.sanityAboutPage.brands.map((brand) => {
             const { id, brandUrl, logo, alt } = brand
@@ -47,7 +48,7 @@ const Brands = () => {
                 flex={1}
                 justifyContent="center"
                 alignItems="center"
-                maxW={300}
+                maxW={400}
                 alignSelf="center"
                 justifySelf="center"
               >
