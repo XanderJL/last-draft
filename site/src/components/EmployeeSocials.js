@@ -7,33 +7,22 @@ import {
   FaTwitterSquare,
 } from "react-icons/fa"
 
-const EmployeeSocials = ({ socials }) => {
+const EmployeeSocials = ({ socials, ...rest }) => {
   return (
-    <HStack align="center">
+    <HStack align="center" {...rest}>
       {socials.linkedin && (
         <Link href={socials.linkedin}>
-          <Icon
-            color="gray.500"
-            boxSize={6}
-            as={FaLinkedin}
-            _hover={{ color: "cyan.400" }}
-          />
+          <Icon boxSize={6} as={FaLinkedin} _hover={{ color: "cyan.400" }} />
         </Link>
       )}
       {socials.instagram && (
         <Link href={socials.instagram}>
-          <Icon
-            color="gray.500"
-            boxSize={6}
-            as={FaInstagram}
-            _hover={{ color: "cyan.400" }}
-          />
+          <Icon boxSize={6} as={FaInstagram} _hover={{ color: "cyan.400" }} />
         </Link>
       )}
       {socials.facebook && (
         <Link href={socials.facebook}>
           <Icon
-            color="gray.500"
             boxSize={6}
             as={FaFacebookSquare}
             _hover={{ color: "cyan.400" }}
@@ -43,7 +32,6 @@ const EmployeeSocials = ({ socials }) => {
       {socials.twitter && (
         <Link href={socials.twitter}>
           <Icon
-            color="gray.500"
             boxSize={6}
             as={FaTwitterSquare}
             _hover={{ color: "cyan.400" }}

@@ -8,11 +8,6 @@ import {
   GridItem,
   Heading,
   VStack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
   List,
   ListItem,
   HStack,
@@ -51,97 +46,88 @@ const Member = ({ data }) => {
         maxW="container.xl"
         flex={1}
       >
-        <Tabs
-          display="flex"
-          flexDirection="column"
-          size="lg"
-          isFitted
-          colorScheme="cyan"
+        <Grid
+          flex={1}
+          minH={{ base: "80vh", lg: "70vh" }}
+          templateColumns={{ base: "minmax(0, 1fr)", md: "repeat(2, 1fr)" }}
+          gap={{ base: 8, md: 16 }}
         >
-          <Grid
-            flex={1}
-            minH={{ base: "80vh", lg: "70vh" }}
-            templateColumns={{ base: "minmax(0, 1fr)", md: "repeat(2, 1fr)" }}
-            gap={{ base: 8, md: 16 }}
+          <GridItem
+            display="flex"
+            flexDir="column"
+            justifyContent="space-between"
+            colStart={{ base: 1 }}
+            rowStart={{ base: 2, md: 1 }}
+            pt={{ md: "3rem" }}
           >
-            <GridItem
-              display="flex"
-              flexDir="column"
-              justifyContent="space-between"
-              colStart={{ base: 1 }}
-              rowStart={{ base: 2, md: 1 }}
-              pt={{ md: "3rem" }}
-            >
-              <VStack flex={1} maxW="70ch" align="flex-start" spacing={4}>
-                <Box>
-                  <Heading textTransform="uppercase">
-                    {firstName} {lastName}
+            <VStack flex={1} maxW="70ch" align="flex-start" spacing={4}>
+              <Box>
+                <Heading textTransform="uppercase">
+                  {firstName} {lastName}
+                </Heading>
+                <HStack align="center">
+                  <Heading
+                    as="h2"
+                    size="md"
+                    textTransform="uppercase"
+                    color="gray.700"
+                    lineHeight={1}
+                  >
+                    {jobTitle}
                   </Heading>
-                  <HStack align="center">
-                    <Heading
-                      as="h2"
-                      size="md"
-                      textTransform="uppercase"
-                      color="gray.600"
-                      lineHeight={1}
-                    >
-                      {jobTitle}
-                    </Heading>
-                    {socials && <EmployeeSocials socials={socials} />}
-                  </HStack>
-                </Box>
-                <Box
-                  color="gray.400"
-                  py="1.25rem"
-                  fontSize="lg"
-                  fontStyle="italic"
-                >
-                  <PortableText blocks={_rawQuote} serializers={Serializers} />
-                </Box>
-                <PortableText blocks={_rawBio} serializers={Serializers} />
-              </VStack>
-              <Box flex={1} w="100%">
-                <TabList pt="2rem">
-                  {_rawProjects && <Tab>Areas of Expertise</Tab>}
-                  {_rawEducation && <Tab>Education</Tab>}
-                </TabList>
-                <TabPanels flex={1}>
-                  {_rawProjects && (
-                    <TabPanel>
-                      <PortableText
-                        blocks={_rawProjects}
-                        serializers={customSerializers}
-                      />
-                    </TabPanel>
+                  {socials && (
+                    <EmployeeSocials socials={socials} color="gray.600" />
                   )}
-                  {_rawEducation && (
-                    <TabPanel>
-                      <PortableText
-                        blocks={_rawEducation}
-                        serializers={customSerializers}
-                      />
-                    </TabPanel>
-                  )}
-                </TabPanels>
+                </HStack>
               </Box>
-            </GridItem>
-            <GridItem
-              colStart={{ base: 1, md: 2 }}
-              rowStart={{ base: 1, md: 1 }}
-            >
-              <SanityImage
-                image={headshot.asset.id}
-                options={{ maxWidth: 1200 }}
-                alt={`Headshot of  `}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                imgStyle={headshot.hotspot && imageHotspot(headshot.hotspot)}
-              />
-            </GridItem>
-          </Grid>
-        </Tabs>
+              <Box
+                color="gray.600"
+                py="1.25rem"
+                fontSize="lg"
+                fontStyle="italic"
+              >
+                <PortableText blocks={_rawQuote} serializers={Serializers} />
+              </Box>
+              <PortableText blocks={_rawBio} serializers={Serializers} />
+            </VStack>
+            <VStack flex={1} w="100%" align="flex-start" pt="2rem" spacing={12}>
+              {_rawProjects && (
+                <VStack align="flex-start">
+                  <Heading as="h2" size="md" textTransform="uppercase">
+                    Areas of Expertise
+                  </Heading>
+                  <PortableText
+                    blocks={_rawProjects}
+                    serializers={customSerializers}
+                  />
+                </VStack>
+              )}
+              {_rawEducation && (
+                <VStack align="flex-start">
+                  <Heading as="h2" size="md" textTransform="uppercase">
+                    Education
+                  </Heading>
+                  <PortableText
+                    blocks={_rawEducation}
+                    serializers={customSerializers}
+                  />
+                </VStack>
+              )}
+            </VStack>
+          </GridItem>
+          <GridItem colStart={{ base: 1, md: 2 }} rowStart={{ base: 1, md: 1 }}>
+            <SanityImage
+              image={headshot.asset.id}
+              options={{ maxWidth: 1200 }}
+              alt={`Headshot of  `}
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              imgStyle={headshot.hotspot && imageHotspot(headshot.hotspot)}
+            />
+          </GridItem>
+        </Grid>
       </Container>
     </Layout>
   )
