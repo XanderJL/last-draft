@@ -105,7 +105,7 @@ const IndexPage = ({ data }) => {
               zIndex: -1,
               content: "''",
               position: "absolute",
-              w: "calc(50vw)",
+              w: "100vw",
               h: "100%",
               p:"6rem",
               top: "50%",

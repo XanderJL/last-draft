@@ -21,7 +21,7 @@ const Team = ({ data }) => {
             { maxWidth: 1440 },
             sanityConfig
           )}
-          styles={imageHotspot(heroImage.hotspot)}
+          styles={{ ...imageHotspot(heroImage.hotspot), position: "relative" }}
         >
           <Box
             maxW="max-content"
@@ -32,7 +32,7 @@ const Team = ({ data }) => {
               zIndex: -1,
               content: "''",
               position: "absolute",
-              w: "calc(50vw)",
+              w: "100vw",
               h: "100%",
               p: "6rem",
               top: "50%",
