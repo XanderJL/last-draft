@@ -98,17 +98,21 @@ const IndexPage = ({ data }) => {
         >
           <Box
             maxW="max-content"
-            p={{ base: "3rem 4rem", lg: "4rem 5.5rem" }}
-            bg="blackAlpha.800"
-            position={{ base: "absolute", "2xl": "relative" }}
-            top={{ base: "calc(50vh - 32px)", "2xl": 0 }}
-            transform={{
-              base: "translateY(-50%)",
-              "2xl": "translateX(-25%)",
-            }}
-            left={0}
             textShadow="2px 2px rgba(0,0,0,0.25)"
-            className="has-text-white"
+            color="white"
+            position="relative"
+            _after={{
+              zIndex: -1,
+              content: "''",
+              position: "absolute",
+              w: "calc(50vw)",
+              h: "100%",
+              p:"6rem",
+              top: "50%",
+              right: "0",
+              transform: "translate(5%, -50%)",
+              bg: "blackAlpha.800",
+            }}
           >
             <PortableText
               blocks={_rawHeroCard}

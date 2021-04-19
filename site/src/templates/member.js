@@ -13,11 +13,16 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  List,
+  ListItem,
+  HStack,
 } from "@chakra-ui/react"
+
 import Layout from "../components/Layout"
 import SanityImage from "../components/SanityImage"
 import Serializers from "../components/Serializers"
 import imageHotspot from "../hooks/imageHotspot"
+import EmployeeSocials from "../components/EmployeeSocials"
 
 const Member = ({ data }) => {
   const {
@@ -27,8 +32,16 @@ const Member = ({ data }) => {
     jobTitle,
     _rawQuote,
     _rawBio,
+    _rawEducation,
+    _rawProjects,
     socials,
   } = data.sanityEmployee
+
+  const customSerializers = {
+    ...Serializers,
+    list: (props) => <List listStyleType="circle">{props.children}</List>,
+    listItem: (props) => <ListItem>{props.children}</ListItem>,
+  }
 
   return (
     <Layout>
@@ -54,6 +67,7 @@ const Member = ({ data }) => {
             <GridItem
               display="flex"
               flexDir="column"
+              justifyContent="space-between"
               colStart={{ base: 1 }}
               rowStart={{ base: 2, md: 1 }}
               pt={{ md: "3rem" }}
@@ -63,14 +77,18 @@ const Member = ({ data }) => {
                   <Heading textTransform="uppercase">
                     {firstName} {lastName}
                   </Heading>
-                  <Heading
-                    as="h2"
-                    size="md"
-                    textTransform="uppercase"
-                    color="gray.600"
-                  >
-                    {jobTitle}
-                  </Heading>
+                  <HStack align="center">
+                    <Heading
+                      as="h2"
+                      size="md"
+                      textTransform="uppercase"
+                      color="gray.600"
+                      lineHeight={1}
+                    >
+                      {jobTitle}
+                    </Heading>
+                    {socials && <EmployeeSocials socials={socials} />}
+                  </HStack>
                 </Box>
                 <Box
                   color="gray.400"
@@ -82,10 +100,30 @@ const Member = ({ data }) => {
                 </Box>
                 <PortableText blocks={_rawBio} serializers={Serializers} />
               </VStack>
-              <TabList pt="2rem">
-                <Tab>Projects</Tab>
-                <Tab>Education</Tab>
-              </TabList>
+              <Box flex={1} w="100%">
+                <TabList pt="2rem">
+                  {_rawProjects && <Tab>Areas of Expertise</Tab>}
+                  {_rawEducation && <Tab>Education</Tab>}
+                </TabList>
+                <TabPanels flex={1}>
+                  {_rawProjects && (
+                    <TabPanel>
+                      <PortableText
+                        blocks={_rawProjects}
+                        serializers={customSerializers}
+                      />
+                    </TabPanel>
+                  )}
+                  {_rawEducation && (
+                    <TabPanel>
+                      <PortableText
+                        blocks={_rawEducation}
+                        serializers={customSerializers}
+                      />
+                    </TabPanel>
+                  )}
+                </TabPanels>
+              </Box>
             </GridItem>
             <GridItem
               colStart={{ base: 1, md: 2 }}
@@ -103,10 +141,6 @@ const Member = ({ data }) => {
               />
             </GridItem>
           </Grid>
-          <TabPanels flex={1}>
-            <TabPanel></TabPanel>
-            <TabPanel></TabPanel>
-          </TabPanels>
         </Tabs>
       </Container>
     </Layout>
@@ -131,6 +165,8 @@ export const data = graphql`
       jobTitle
       _rawQuote
       _rawBio
+      _rawEducation
+      _rawProjects
       socials {
         facebook
         instagram
