@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Box, Container, Grid, Heading, Link, Text } from "@chakra-ui/react"
 import { graphql, Link as GatsbyLink } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
 import SanityImage from "../components/SanityImage"
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
@@ -107,11 +108,23 @@ const Team = ({ data }) => {
                   maxW={300}
                   maxH={300}
                   _groupHover={{ opacity: 0.8 }}
+                  overflow="hidden"
                 >
-                  <SanityImage
-                    image={headshot.asset.id}
-                    options={{ maxWidth: 300 }}
+                  <GatsbyImage
+                    image={headshot.asset.gatsbyImageData}
                     alt={(firstName, " ", lastName)}
+                    // style={{
+                    //   maxWidth: "inherit",
+                    //   maxHeight: "inherit",
+                    //   minWidth: 0,
+                    //   minHeight: 0,
+                    // }}
+                    // imgStyle={{
+                    //   maxWidth: "inherit",
+                    //   maxHeight: "inherit",
+                    //   minWidth: 0,
+                    //   minHeight: 0,
+                    // }}
                   />
                 </Box>
                 <Heading as="h2" size="md" textTransform="uppercase">
@@ -162,6 +175,7 @@ export const data = graphql`
           asset {
             url
             id
+            gatsbyImageData(width: 300, height: 300, placeholder: BLURRED)
           }
         }
       }
