@@ -1,0 +1,42 @@
+.section
+    &-contact
+        @extend .section
+        margin: 2em auto
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        padding: $section-padding-medium
+        
+        form
+            
+            width: 400px
+
+            .input,
+            .textarea
+                border-color: black
+                border-radius: 0
+
+                &::placeholder
+                    color: $text
+
+        .icons
+            display: flex
+            margin-bottom: 1.25em
+            justify-content: flex-end
+            align-items: flex-end
+
+            a
+                margin: 0 0.5rem
+                &:hover
+                    transform: scale(1.05)
+
+                img
+                    width: 32px
+                    
+
+
+        @media screen and (max-width: $tablet)
+
+            form
+                width: 100%

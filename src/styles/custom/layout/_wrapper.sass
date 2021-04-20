@@ -1,0 +1,7 @@
+.wrapper
+  display: grid
+  grid-gap: $gap
+
+  &-post
+    @extend .wrapper
+    grid-template-columns: repeat(auto-fill, minmax(325px, 1fr))
