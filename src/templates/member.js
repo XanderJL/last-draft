@@ -18,6 +18,7 @@ import SanityImage from "../components/SanityImage"
 import Serializers from "../components/Serializers"
 import imageHotspot from "../hooks/imageHotspot"
 import EmployeeSocials from "../components/EmployeeSocials"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const Member = ({ data }) => {
   const {
@@ -31,6 +32,7 @@ const Member = ({ data }) => {
     _rawProjects,
     socials,
   } = data.sanityEmployee
+  console.log(headshot.asset.gatsbyImageData)
 
   const customSerializers = {
     ...Serializers,
@@ -120,15 +122,14 @@ const Member = ({ data }) => {
             </VStack>
           </GridItem>
           <GridItem colStart={{ base: 1, md: 2 }} rowStart={{ base: 1, md: 1 }}>
-            <SanityImage
-              image={headshot.asset.id}
-              options={{ maxWidth: 1200 }}
-              alt={`Headshot of  `}
+            <GatsbyImage
+              image={headshot.asset.gatsbyImageData}
+              alt={`Headshot of  ${firstName} ${lastName}`}
               style={{
                 width: "100%",
                 height: "100%",
               }}
-              imgStyle={headshot.hotspot && imageHotspot(headshot.hotspot)}
+              // imgStyle={headshot.hotspot && imageHotspot(headshot.hotspot)}
             />
           </GridItem>
         </Grid>
@@ -146,6 +147,12 @@ export const data = graphql`
         asset {
           url
           id
+          gatsbyImageData(
+            placeholder: BLURRED
+            fit: CROP
+            layout: FULL_WIDTH
+            aspectRatio: 1
+          )
         }
         hotspot {
           x
