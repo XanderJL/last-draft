@@ -1,4 +1,4 @@
-import { BsInfoCircleFill } from "react-icons/bs";
+import { BsInfoCircleFill } from "react-icons/bs"
 
 export default {
   name: "aboutPage",
@@ -36,6 +36,12 @@ export default {
       type: "section",
     },
     {
+      name: "posts",
+      title: "Posts",
+      type: "array",
+      of: [{ type: "reference", to: { type: "post" } }],
+    },
+    {
       name: "brands",
       title: "Brands Section",
       type: "array",
@@ -58,4 +64,4 @@ export default {
       title: "title",
     },
   },
-};
+}

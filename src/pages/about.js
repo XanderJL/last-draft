@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link as GatsbyLink, graphql } from "gatsby"
-import { Box, Link } from "@chakra-ui/react"
+import { Container, Grid, Link } from "@chakra-ui/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
@@ -10,6 +10,8 @@ import imageHotspot from "../hooks/imageHotspot"
 import SanityImage from "../components/SanityImage"
 import sanityConfig from "../lib/sanityConfig"
 import { getGatsbyImageData } from "gatsby-source-sanity"
+import PostCard from "../components/PostCard"
+import toPlainText from "../hooks/toPlainText"
 
 const About = ({ data }) => {
   const CardRenderer = (props) => {
@@ -84,10 +86,8 @@ const About = ({ data }) => {
     )
   }
 
-  const title = data.aboutPage.title
+  const { title, posts, heroImage, _rawHeroCard } = data.aboutPage
   const metaDescription = data.aboutPage._rawMetaDescription[0].children[0].text
-  const heroImage = data.aboutPage.heroImage
-  const heroCard = data.aboutPage._rawHeroCard
   const sectionOne = data.aboutPage._rawSectionOne.body
   const sectionOneImg = data.aboutPage.sectionOne.image.asset
   const sectionOneAlt = data.aboutPage.sectionOne.alt
@@ -110,7 +110,7 @@ const About = ({ data }) => {
           <div className="card-content">
             <div className="content">
               <PortableText
-                blocks={heroCard}
+                blocks={_rawHeroCard}
                 serializers={{ types: { block: CardRenderer } }}
               />
             </div>
@@ -135,6 +135,43 @@ const About = ({ data }) => {
           />
         </div>
       </section>
+      {posts.length > 0 && (
+        <section className="section">
+          <Container className="container">
+            <Grid
+              templateColumns={{
+                base: "minmax(0, 1fr)",
+                md: "repeat(auto-fill, minmax(325px, 1fr))",
+              }}
+              gap={8}
+            >
+              {posts.map((post) => {
+                const {
+                  id,
+                  slug,
+                  category,
+                  title,
+                  previewCopy,
+                  _rawBody,
+                  mainImage,
+                } = post
+                return (
+                  <PostCard
+                    key={id}
+                    title={title}
+                    image={mainImage.asset}
+                    link={`/stories/${category.slug.current}/${slug.current}`}
+                  >
+                    {previewCopy
+                      ? previewCopy
+                      : toPlainText(_rawBody).slice(0, 159) + "..."}
+                  </PostCard>
+                )
+              })}
+            </Grid>
+          </Container>
+        </section>
+      )}
       <Brands />
       {/* <Box as="section" className="section-publication">
         <Box className="container">
@@ -201,6 +238,27 @@ export const data = graphql`
             url
           }
         }
+      }
+      posts {
+        id
+        slug {
+          current
+        }
+        category {
+          slug {
+            current
+          }
+        }
+        title
+        _rawBody
+        previewCopy
+        mainImage {
+          asset {
+            _id
+            url
+          }
+        }
+        mainAlt
       }
       publication {
         image {

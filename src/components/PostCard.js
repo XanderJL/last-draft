@@ -21,11 +21,12 @@ const PostCard = ({ title, image, children, link }) => {
               image={image}
               options={{ maxWidth: 800, maxHeight: 600 }}
               imgStyle={{
-                maxWidth: "100%",
+                objectFit: "cover",
+                width: "100%",
                 maxHeight: "240px",
               }}
               style={{
-                maxWidth: "100%",
+                width: "100%",
                 maxHeight: "240px",
               }}
             />
