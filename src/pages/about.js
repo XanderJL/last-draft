@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link as GatsbyLink, graphql } from "gatsby"
-import { Container, Grid, Link } from "@chakra-ui/react"
+import { Box, Container, Grid, Link } from "@chakra-ui/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"

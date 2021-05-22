@@ -46,7 +46,7 @@ const IndexPage = ({ data }) => {
     if (style === "h1") {
       return (
         <Heading
-          fontSize={{ base: "28px", md: "36px", lg: "48px" }}
+          fontSize={{ base: "28px", md: "48px" }}
           letterSpacing="0.4rem"
           pb="0.25rem"
         >
@@ -58,7 +58,7 @@ const IndexPage = ({ data }) => {
       return (
         <Heading
           as="h2"
-          fontSize={{ base: "14px", md: "18px", lg: "24px" }}
+          fontSize={{ base: "14px", md: "24px" }}
           fontWeight={400}
           letterSpacing="0.1rem"
         >
@@ -96,24 +96,7 @@ const IndexPage = ({ data }) => {
             position: "relative",
           }}
         >
-          <Box
-            maxW="max-content"
-            textShadow="2px 2px rgba(0,0,0,0.25)"
-            color="white"
-            position="relative"
-            _after={{
-              zIndex: -1,
-              content: "''",
-              position: "absolute",
-              w: "100vw",
-              h: "100%",
-              p:"6rem",
-              top: "50%",
-              right: "0",
-              transform: "translate(5%, -50%)",
-              bg: "blackAlpha.800",
-            }}
-          >
+          <Box textShadow="2px 2px rgba(0,0,0,0.25)" color="white">
             <PortableText
               blocks={_rawHeroCard}
               serializers={{ types: { block: BlockRenderer } }}
