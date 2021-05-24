@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link as GatsbyLink, graphql } from "gatsby"
-import { Box, Container, Grid, Link } from "@chakra-ui/react"
+import { Box, Container, Grid, Heading, Link, Text } from "@chakra-ui/react"
 import PortableText from "@sanity/block-content-to-react"
 import imageUrlBuilder from "@sanity/image-url"
 import Layout from "../components/Layout"
@@ -18,21 +18,30 @@ const About = ({ data }) => {
     const { style = "normal" } = props.node
 
     if (style === "h1") {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase has-text-black`,
-        },
-        props.children
+      return (
+        <Heading
+          textTransform="uppercase"
+          letterSpacing="0.2rem"
+          fontSize={{ base: "2xl", md: "4xl" }}
+          fontWeight={400}
+          pb="1rem"
+        >
+          {props.children}
+        </Heading>
       )
     }
     if (style === "h2") {
-      return React.createElement(
-        style,
-        {
-          className: `title is-montserrat is-uppercase has-text-black`,
-        },
-        props.children
+      return (
+        <Heading
+          as="h2"
+          textTransform="uppercase"
+          letterSpacing="0.2rem"
+          fontSize={{ base: "xl", md: "2xl" }}
+          fontWeight={400}
+          pb="1rem"
+        >
+          {props.children}
+        </Heading>
       )
     }
 
@@ -40,8 +49,7 @@ const About = ({ data }) => {
       return <blockquote>- {props.children}</blockquote>
     }
 
-    // Fall back to default handling
-    return PortableText.defaultSerializers.types.block(props)
+    return <Text pb="1rem">{props.children}</Text>
   }
 
   const SectionRenderer = (props) => {
@@ -106,16 +114,20 @@ const About = ({ data }) => {
         styles={imageHotspot(heroImage.hotspot)}
         size="fullheight-with-navbar"
       >
-        <div className="card-about">
-          <div className="card-content">
-            <div className="content">
-              <PortableText
-                blocks={_rawHeroCard}
-                serializers={{ types: { block: CardRenderer } }}
-              />
-            </div>
-          </div>
-        </div>
+        <Box
+          bg="white"
+          color="black"
+          p="4rem 2rem"
+          maxW="55ch"
+          m={{ base: 0, md: "0 auto" }}
+          borderRadius={4}
+          boxShadow="lg"
+        >
+          <PortableText
+            blocks={_rawHeroCard}
+            serializers={{ types: { block: CardRenderer } }}
+          />
+        </Box>
       </Hero>
       <section className="section-storytelling">
         <div className="container">
