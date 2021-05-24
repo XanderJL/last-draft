@@ -117,7 +117,7 @@ const About = ({ data }) => {
         <Box
           bg="white"
           color="black"
-          p="4rem 2rem"
+          p={{ base: "2rem 1.25rem", md: "4rem 2rem" }}
           maxW="55ch"
           m={{ base: 0, md: "0 auto" }}
           borderRadius={4}
