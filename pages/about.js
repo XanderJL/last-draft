@@ -1,17 +1,87 @@
-// import * as React from "react"
-// import { Link as GatsbyLink, graphql } from "gatsby"
-// import { Box, Container, Grid, Heading, Link, Text } from "@chakra-ui/react"
-// import PortableText from "@sanity/block-content-to-react"
-// import imageUrlBuilder from "@sanity/image-url"
-// import Layout from "../components/Layout"
-// import Brands from "../components/Brands"
-// import Hero from "../components/Hero"
-// import imageHotspot from "../hooks/imageHotspot"
-// import SanityImage from "../components/SanityImage"
-// import sanityConfig from "../lib/sanityConfig"
-// import { getGatsbyImageData } from "gatsby-source-sanity"
-// import PostCard from "../components/PostCard"
-// import toPlainText from "../hooks/toPlainText"
+import { Container, Flex, Image } from "@chakra-ui/react"
+import Brands from "@components/Brands"
+import Hero from "@components/Hero"
+import Layout from "@components/Layout"
+import { PortableText } from "@lib/sanity"
+import { getClient } from "@lib/sanity.server"
+import { groq } from "next-sanity"
+
+const About = ({ data }) => {
+  const { heroImage, heroCard, sectionOne, brands } = data
+
+  return (
+    <Layout>
+      <Hero
+        placeholder={heroImage?.metadata?.lqip}
+        image={heroImage?.url}
+        minH="calc(100vh - 67px)"
+      >
+        <Container maxW="container.xl">
+          <PortableText blocks={heroCard} />
+        </Container>
+      </Hero>
+      <Container maxW="container.xl">
+        <Flex>
+          <PortableText blocks={sectionOne?.body} />
+          <Image src={sectionOne?.image?.url} />
+        </Flex>
+        <Brands brands={brands} />
+      </Container>
+    </Layout>
+  )
+}
+
+const aboutPageQuery = groq`
+  *[_type == "aboutPage"]{
+    metaDescription,
+    title,
+    heroCard,
+    "heroImage": heroImage.asset->{
+      metadata,
+      url
+    },
+    sectionOne{
+      body,
+      "image": image.asset->{
+        metadata,
+        url
+      }
+    },
+    brands[]->{
+          _id,
+          alt,
+          brandName,
+          brandUrl,
+          "logo": logo.asset->{
+             metadata,
+              url
+          }
+        },
+    publication,
+    posts[]{
+      _id,
+      "slug": slug.current,
+      category->{
+        "slug": slug.current,
+      },
+      title,
+      body,
+      previewCopy,
+      "mainImage": mainImage.asset->{
+        metadata,
+        url
+      },
+      mainAlt,
+    }
+  }[0]
+`
+
+export const getStaticProps = async () => {
+  const data = await getClient().fetch(aboutPageQuery)
+  return { props: { data } }
+}
+
+export default About
 
 // const About = ({ data }) => {
 //   const CardRenderer = (props) => {

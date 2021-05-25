@@ -1,69 +1,48 @@
 import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { Container, Grid, Link } from "@chakra-ui/react"
-import SanityImage from "./SanityImage"
+import { Container, Grid, Heading, Image } from "@chakra-ui/react"
+import Link from "./Link"
 
-const Brands = () => {
-  const data = useStaticQuery(graphql`
-    {
-      sanityAboutPage {
-        brands {
-          alt
-          brandName
-          brandUrl
-          id
-          logo {
-            asset {
-              _id
-              url
-            }
-          }
-        }
-      }
-    }
-  `)
-
+const Brands = ({ brands, ...rest }) => {
   return (
-    <section className="section-brands">
-      <Container maxW="container.lg">
-        <h1 className="title is-montserrat is-uppercase has-text-black has-text-centered is-size-4-mobile">
-          clients + partners
-        </h1>
-        <Grid
-          templateColumns={{
-            base: "minmax(0, 1fr)",
-            md: "repeat(auto-fit, minmax(250px, 1fr))",
-          }}
-          gap={2}
-        >
-          {data.sanityAboutPage.brands.map((brand) => {
-            const { id, brandUrl, logo, alt } = brand
-            return (
-              <Link
-                key={id}
-                href={brandUrl}
-                isExternal
-                display="flex"
-                flex={1}
-                justifyContent="center"
-                alignItems="center"
-                maxW={250}
-                alignSelf="center"
-                justifySelf="center"
-              >
-                <SanityImage
-                  image={logo.asset}
-                  alt={alt || ""}
-                  options={{ maxWidth: 400 }}
-                  objectFit="contain"
-                  objectPosition="center"
-                />
-              </Link>
-            )
-          })}
-        </Grid>
-      </Container>
-    </section>
+    <Container maxW="container.lg" {...rest}>
+      <Heading textTransform="uppercase" textAlign="center">
+        clients + partners
+      </Heading>
+      <Grid
+        templateColumns={{
+          base: "minmax(0, 1fr)",
+          md: "repeat(auto-fit, minmax(250px, 1fr))",
+        }}
+        gap={2}
+      >
+        {brands.map((brand) => {
+          const { _id, brandUrl, logo, alt } = brand
+          return (
+            <Link
+              key={_id}
+              href={brandUrl}
+              isExternal
+              display="flex"
+              flex={1}
+              justifyContent="center"
+              alignItems="center"
+              maxW={250}
+              alignSelf="center"
+              justifySelf="center"
+            >
+              <Image
+                src={logo?.url}
+                fallbackSrc={logo?.metadata?.lqip}
+                alt={alt || ""}
+                options={{ maxWidth: 400 }}
+                objectFit="contain"
+                objectPosition="center"
+              />
+            </Link>
+          )
+        })}
+      </Grid>
+    </Container>
   )
 }
 
