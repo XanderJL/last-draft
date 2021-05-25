@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react"
 const Hero = ({ placeholder, image, children, ...rest }) => {
   return (
     <Box
-      minH="300px"
+      minH="calc(100vh - 67px)"
       bgImage={`url(${placeholder})`}
       bgRepeat="no-repeat"
       bgSize="cover"

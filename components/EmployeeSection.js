@@ -1,6 +1,6 @@
 import * as React from "react"
 import Headshot from "../components/Headshot"
-import BioCard from "../components/BioCard"
+import BioCard from "./Cards/BioCard"
 
 const EmployeeSection = ({
   slug,

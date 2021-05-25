@@ -27,11 +27,7 @@ const Home = ({ data }) => {
   } = data
   return (
     <Layout>
-      <Hero
-        minH="calc(100vh - 67px)"
-        placeholder={heroImage?.metadata?.lqip}
-        image={heroImage?.url}
-      >
+      <Hero placeholder={heroImage?.metadata?.lqip} image={heroImage?.url}>
         <Container maxW="container.xl" color="white" textShadow="2px 2px #000">
           <PortableText
             blocks={heroCard}

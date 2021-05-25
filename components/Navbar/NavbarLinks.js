@@ -11,7 +11,7 @@ const NavbarLinks = ({ routes, ...rest }) => {
           <Link
             key={i}
             href={slug}
-            p="1.25rem"
+            p="1.25rem 1rem"
             textTransform="uppercase"
             _hover={{ bg: "gray.50" }}
           >

@@ -2,7 +2,7 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Link as GatsbyLink } from "gatsby"
 import { Box, Link } from "@chakra-ui/react"
-import SanityImage from "./SanityImage"
+import SanityImage from "../SanityImage"
 
 const PostCard = ({ title, image, children, link }) => {
   return (

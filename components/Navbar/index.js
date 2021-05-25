@@ -1,15 +1,16 @@
 import { useState } from "react"
-import { Flex, Box, Container, Text } from "@chakra-ui/react"
+import { Flex, Box, Container, Heading } from "@chakra-ui/react"
 import NavbarLinks from "./NavbarLinks"
 import routes from "@lib/routes.json"
 import MenuButton from "./MenuButton"
 import Link from "@components/Link"
+import Logo from "@components/Logo"
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false)
 
   return (
-    <Box boxShadow="md">
+    <Box boxShadow="md" bg="white">
       <Container maxW="container.xl">
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -18,9 +19,11 @@ const Navbar = () => {
           minH="67px"
         >
           <Flex justify="space-between" align="center">
-            <Link href="/" p="1.25rem">
-              <Box />
-              <Text>LAST DRAFT</Text>
+            <Link display="flex" alignItems="center" href="/">
+              <Logo boxSize={12} />
+              <Heading size="md" pl="0.5rem">
+                LAST DRAFT
+              </Heading>
             </Link>
             <MenuButton
               display={{ base: "block", md: "none" }}

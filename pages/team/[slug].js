@@ -1,6 +1,3 @@
-import * as React from "react"
-import { graphql } from "gatsby"
-import PortableText from "@sanity/block-content-to-react"
 import {
   Box,
   Container,
@@ -11,12 +8,13 @@ import {
   List,
   ListItem,
   HStack,
+  Image,
 } from "@chakra-ui/react"
-
-import Layout from "../components/Layout"
-import Serializers from "../components/Serializers"
-import EmployeeSocials from "../components/EmployeeSocials"
-import { GatsbyImage } from "gatsby-plugin-image"
+import { groq } from "next-sanity"
+import { PortableText, serializers } from "@lib/sanity"
+import Layout from "@components/Layout"
+import { getClient } from "@lib/sanity.server"
+import EmployeeSocials from "@components/EmployeeSocials"
 
 const Member = ({ data }) => {
   const {
@@ -24,16 +22,15 @@ const Member = ({ data }) => {
     lastName,
     headshot,
     jobTitle,
-    _rawQuote,
-    _rawBio,
-    _rawEducation,
-    _rawProjects,
+    quote,
+    bio,
+    education,
+    projects,
     socials,
-  } = data.sanityEmployee
-  console.log(headshot.asset.gatsbyImageData)
+  } = data
 
   const customSerializers = {
-    ...Serializers,
+    ...serializers,
     list: (props) => <List listStyleType="circle">{props.children}</List>,
     listItem: (props) => <ListItem>{props.children}</ListItem>,
   }
@@ -80,39 +77,37 @@ const Member = ({ data }) => {
                   )}
                 </HStack>
               </Box>
-              {_rawQuote && (
+              {quote && (
                 <Box
                   color="gray.600"
                   py="1.25rem"
                   fontSize="lg"
                   fontStyle="italic"
                 >
-                  <PortableText blocks={_rawQuote} serializers={Serializers} />
+                  <PortableText blocks={quote} serializers={serializers} />
                 </Box>
               )}
-              {_rawBio && (
-                <PortableText blocks={_rawBio} serializers={Serializers} />
-              )}
+              {bio && <PortableText blocks={bio} serializers={serializers} />}
             </VStack>
             <VStack flex={1} w="100%" align="flex-start" pt="2rem" spacing={12}>
-              {_rawProjects && (
+              {projects && (
                 <VStack align="flex-start">
                   <Heading as="h2" size="md" textTransform="uppercase">
                     Areas of Expertise
                   </Heading>
                   <PortableText
-                    blocks={_rawProjects}
+                    blocks={projects}
                     serializers={customSerializers}
                   />
                 </VStack>
               )}
-              {_rawEducation && (
+              {education && (
                 <VStack align="flex-start">
                   <Heading as="h2" size="md" textTransform="uppercase">
                     Education
                   </Heading>
                   <PortableText
-                    blocks={_rawEducation}
+                    blocks={education}
                     serializers={customSerializers}
                   />
                 </VStack>
@@ -120,13 +115,15 @@ const Member = ({ data }) => {
             </VStack>
           </GridItem>
           <GridItem colStart={{ base: 1, md: 2 }} rowStart={{ base: 1, md: 1 }}>
-            <GatsbyImage
-              image={headshot.asset.gatsbyImageData}
+            <Image
+              w="100%"
+              h="100%"
+              src={headshot?.url}
               alt={`Headshot of  ${firstName} ${lastName}`}
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
+              objectFit="cover"
+              bgImage={headshot?.metadata?.lqip}
+              bgSize="cover"
+              bgRepeat="no-repeat"
             />
           </GridItem>
         </Grid>
@@ -134,41 +131,39 @@ const Member = ({ data }) => {
     </Layout>
   )
 }
-
-export const data = graphql`
-  query($slug: String!) {
-    sanityEmployee(slug: { current: { eq: $slug } }) {
-      firstName
-      lastName
-      headshot {
-        asset {
-          url
-          id
-          gatsbyImageData(
-            placeholder: BLURRED
-            fit: CROP
-            layout: FULL_WIDTH
-            aspectRatio: 1
-          )
-        }
-        hotspot {
-          x
-          y
-        }
-      }
-      jobTitle
-      _rawQuote
-      _rawBio
-      _rawEducation
-      _rawProjects
-      socials {
-        facebook
-        instagram
-        linkedin
-        twitter
-      }
-    }
-  }
+const employeesQuery = groq`*[_type == "employee"]{ "slug": slug.current }`
+const singleEmployeeQuery = groq`
+  *[_type == "employee" && slug.current == $slug]{
+    firstName,
+    lastName,
+    "headshot": headshot.asset->{
+      metadata,
+      url
+    },
+    jobTitle,
+    quote,
+    bio,
+    education,
+    projects,
+    socials[]
+  }[0]
 `
+
+export const getStaticPaths = async () => {
+  const employees = await getClient().fetch(employeesQuery)
+  const paths = employees.map((employee) => ({
+    params: { slug: employee.slug },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps = async ({ params }) => {
+  const data = await getClient().fetch(singleEmployeeQuery, {
+    slug: params.slug,
+  })
+
+  return { props: { data } }
+}
 
 export default Member

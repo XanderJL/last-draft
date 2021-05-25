@@ -1,5 +1,6 @@
 import { Container, Flex, Image } from "@chakra-ui/react"
 import Brands from "@components/Brands"
+import HeroCard from "@components/Cards/HeroCard"
 import Hero from "@components/Hero"
 import Layout from "@components/Layout"
 import { PortableText } from "@lib/sanity"
@@ -11,14 +12,10 @@ const About = ({ data }) => {
 
   return (
     <Layout>
-      <Hero
-        placeholder={heroImage?.metadata?.lqip}
-        image={heroImage?.url}
-        minH="calc(100vh - 67px)"
-      >
-        <Container maxW="container.xl">
+      <Hero placeholder={heroImage?.metadata?.lqip} image={heroImage?.url}>
+        <HeroCard>
           <PortableText blocks={heroCard} />
-        </Container>
+        </HeroCard>
       </Hero>
       <Container maxW="container.xl">
         <Flex>
