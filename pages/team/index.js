@@ -2,7 +2,7 @@ import { Box, Container, Grid, Heading, Image, Text } from "@chakra-ui/react"
 import Hero from "@components/Hero"
 import Layout from "@components/Layout"
 import { groq } from "next-sanity"
-import { getClient } from "@lib/sanity.server"
+import { getClient } from "@lib/sanity/sanity.server"
 import Link from "@components/Link"
 
 const Team = ({ data }) => {

@@ -1,6 +1,6 @@
 import Layout from "@components/Layout"
 import { groq } from "next-sanity"
-import { getClient } from "@lib/sanity.server"
+import { getClient } from "@lib/sanity/sanity.server"
 import Hero from "@components/Hero"
 import { PortableText, serializers } from "@lib/sanity"
 import { Box, Container, Heading, Flex, VStack, Text } from "@chakra-ui/react"

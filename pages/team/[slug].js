@@ -13,7 +13,7 @@ import {
 import { groq } from "next-sanity"
 import { PortableText, serializers } from "@lib/sanity"
 import Layout from "@components/Layout"
-import { getClient } from "@lib/sanity.server"
+import { getClient } from "@lib/sanity/sanity.server"
 import EmployeeSocials from "@components/EmployeeSocials"
 
 const Member = ({ data }) => {

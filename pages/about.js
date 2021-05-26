@@ -4,7 +4,7 @@ import HeroCard from "@components/Cards/HeroCard"
 import Hero from "@components/Hero"
 import Layout from "@components/Layout"
 import { PortableText } from "@lib/sanity"
-import { getClient } from "@lib/sanity.server"
+import { getClient } from "@lib/sanity/sanity.server"
 import { groq } from "next-sanity"
 
 const About = ({ data }) => {

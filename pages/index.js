@@ -1,5 +1,5 @@
 import { groq } from "next-sanity"
-import { getClient } from "@lib/sanity.server"
+import { getClient } from "@lib/sanity/sanity.server"
 import Layout from "@components/Layout"
 import Hero from "@components/Hero"
 import {

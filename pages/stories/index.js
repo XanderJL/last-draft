@@ -1,22 +1,8 @@
-/** @jsx jsx */
-import * as React from "react"
-import { graphql, Link } from "gatsby"
 import { Box, Text } from "@chakra-ui/react"
-import { css, jsx } from "@emotion/react"
-import PortableText from "@sanity/block-content-to-react"
-import Layout from "../../components/Layout"
-import Hero from "../../components/Hero-old"
-import PostCard from "../../components/Cards/PostCard"
-import BlogTabs from "../../components/BlogTabs"
-import toPlainText from "../../hooks/toPlainText"
-import imageHotspot from "../../hooks/imageHotspot"
-import SubmitForm from "../../components/Forms/SubmitForm"
-import OptInModal from "../../components/Modals/OptInModal"
-import SanityImage from "../../components/SanityImage"
-import { getGatsbyImageData } from "gatsby-source-sanity"
-import sanityConfig from "../../lib/sanityConfig"
+import { groq } from "next-sanity"
+import { getClient } from "@lib/sanity/sanity.server"
 
-const TheLastDraft = ({ data }) => {
+const Stories = ({ data }) => {
   const { blog, posts, latestPosts, featuredPosts } = data
   const { title, categories, heroImage, _rawPublication } = blog
   const pubBody = _rawPublication.body
@@ -236,129 +222,65 @@ const TheLastDraft = ({ data }) => {
   )
 }
 
-export const data = graphql`
-  {
-    blog: sanityBlog {
+const blogQuery = groq`
+*[_type == "blog"]{
+  title,
+  "slug": slug.current,
+  "heroImage": heroImage.asset->{
+    metadata,
+    url
+  },
+  publication,
+  categories[]->{
+    _id,
+    "slug": slug.current,
+    title,
+    description
+  },
+  featuredPosts[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    category->{
+      "slug": slug.current,
       title
-      slug {
-        current
-      }
-      heroImage {
-        asset {
-          _id
-          url
-        }
-        hotspot {
-          x
-          y
-        }
-      }
-      _rawPublication
-      categories {
-        id
-        slug {
-          current
-        }
-        title
-        description
-      }
+    },
+    body,
+    "mainImage": mainImage.asset->{
+      metadata,
+      url
     }
-    posts: allSanityPost(sort: { fields: publishedAt, order: DESC }) {
-      edges {
-        node {
-          id
-          publishedAt
-          slug {
-            current
-          }
-          title
-          mainImage {
-            asset {
-              _id
-              url
-            }
-            hotspot {
-              x
-              y
-            }
-          }
-          previewCopy
-          _rawBody
-          category {
-            slug {
-              current
-            }
-            parentCategory {
-              slug {
-                current
-              }
-            }
-          }
-        }
-      }
-    }
-    latestPosts: allSanityPost(
-      limit: 3
-      sort: { fields: publishedAt, order: DESC }
-    ) {
-      edges {
-        node {
-          id
-          slug {
-            current
-          }
-          title
-          mainImage {
-            asset {
-              _id
-              url
-            }
-            hotspot {
-              x
-              y
-            }
-          }
-          _rawBody
-          category {
-            slug {
-              current
-            }
-            parentCategory {
-              slug {
-                current
-              }
-            }
-          }
-        }
-      }
-    }
-    featuredPosts: sanityBlog {
-      featuredPosts {
-        id
-        title
-        slug {
-          current
-        }
-        category {
-          slug {
-            current
-          }
-          title
-        }
-        _rawBody
-        mainImage {
-          asset {
-            _id
-            url
-          }
-          hotspot {
-            x
-            y
-          }
-        }
-      }
+  }
+}[0]
+`
+
+const allPostsQuery = groq`
+  *[_type == "post"] | order(publishedAt desc) {
+    _id,
+    publishedAt,
+    "slug": slug.current,
+    title,
+    "mainImage": mainImage.asset->{
+      metadata,
+      url
+    },
+    previewCopy,
+    body,
+    category->{
+      "slug": slug.current
+    },
+    parentCategory->{
+      "slug": slug.current
     }
   }
 `
 
-export default TheLastDraft
+const featuredPostsQuery = groq`
+  *[_type == "post"]{}
+`
+
+export const getStaticProps = async () => {
+  const blogData = await getClient().fetch(blogQuery)
+}
+
+export default Stories
