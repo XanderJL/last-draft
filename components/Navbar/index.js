@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isOpen, setOpen] = useState(false)
 
   return (
-    <Box boxShadow="md" bg="white">
+    <Box boxShadow="md" bg="white" zIndex={10}>
       <Container maxW="container.xl">
         <Flex
           direction={{ base: "column", md: "row" }}

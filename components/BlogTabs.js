@@ -1,42 +1,21 @@
+import { Tab, TabList, Tabs } from "@chakra-ui/tabs"
 import * as React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import Link from "./Link"
 
-const BlogTabs = () => {
-  const data = useStaticQuery(graphql`
-    {
-      blog: sanityBlog {
-        categories {
-          id
-          title
-          slug {
-            current
-          }
-        }
-      }
-    }
-  `)
-  const { categories } = data.blog
+const BlogTabs = ({ categories }) => {
   return (
-    <div className="tabs disable-scrollbars" style={{ margin: "0 1.25rem" }}>
-      <ul>
-        <Link to="/stories" className="is-montserrat is-uppercase">
-          all stories
-        </Link>
-        {categories.map(category => {
-          const { id, slug, title } = category
+    <Tabs isFitted overflowX={{ base: "scroll", md: "hidden" }}>
+      <TabList>
+        {categories.map((category) => {
+          const { _id, title, slug } = category
           return (
-            <li key={id}>
-              <Link
-                to={`/stories/${slug.current}`}
-                className="is-montserrat is-uppercase"
-              >
-                {title}
-              </Link>
-            </li>
+            <Tab key={_id} textTransform="uppercase" whiteSpace="nowrap">
+              <Link href={`/stories/${slug}`}>{title}</Link>
+            </Tab>
           )
         })}
-      </ul>
-    </div>
+      </TabList>
+    </Tabs>
   )
 }
 

@@ -1,10 +1,7 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link as GatsbyLink } from "gatsby"
-import { Box, Link } from "@chakra-ui/react"
-import SanityImage from "../SanityImage"
+import { Box, Heading, Image } from "@chakra-ui/react"
+import Link from "@components/Link"
 
-const PostCard = ({ title, image, children, link }) => {
+const PostCard = ({ title, image, placeholder, children, link }) => {
   return (
     <Box
       display="flex"
@@ -14,24 +11,22 @@ const PostCard = ({ title, image, children, link }) => {
       boxShadow="lg"
     >
       <Box className="card-image">
-        {image ? (
-          <Link as={GatsbyLink} to={link}>
-            <SanityImage
-              className="post-image"
-              image={image}
-              options={{ maxWidth: 800, maxHeight: 600 }}
-              imgStyle={{
-                objectFit: "cover",
-                width: "100%",
-                maxHeight: "240px",
-              }}
-              style={{
-                width: "100%",
-                maxHeight: "240px",
-              }}
+        {image && (
+          <Link href={link}>
+            <Image
+              w="100%"
+              maxH="240px"
+              src={image}
+              objectFit="cover"
+              objectPosition="center"
+              bgImage={placeholder}
+              bgSize="cover"
+              bgPosition="center"
+              bgRepeat="no-repeat"
+              _hover={{ opacity: 0.8 }}
             />
           </Link>
-        ) : null}
+        )}
       </Box>
       <Box
         flex={1}
@@ -41,32 +36,29 @@ const PostCard = ({ title, image, children, link }) => {
         p=" 1.25rem 1.25rem 2rem 1.25rem"
       >
         <Box pb="2rem">
-          <Link as={GatsbyLink} to={link}>
-            <h2 className="title-no-space is-size-5 is-montserrat has-text-black mb-2">
+          <Link href={link}>
+            <Heading size="md" textTransform="uppercase">
               {title}
-            </h2>
+            </Heading>
           </Link>
-          <div className="content">{children}</div>
+          <Box>{children}</Box>
         </Box>
         <Link
-          as={GatsbyLink}
-          to={link}
-          color="white"
+          as="button"
+          href={link}
           maxW="max-content"
-          className="button"
+          p="0.75rem 1.25rem"
+          bg="black"
+          color="white"
+          _hover={{
+            bg: "cyan.400",
+          }}
         >
           Read More &rsaquo;
         </Link>
       </Box>
     </Box>
   )
-}
-
-PostCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  image: PropTypes.object.isRequired,
-  link: PropTypes.string.isRequired,
-  cardStyle: PropTypes.object,
 }
 
 export default PostCard

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import {
   Box,
   Button,
@@ -7,11 +7,11 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  Image,
   Input,
   Text,
   Textarea,
 } from "@chakra-ui/react"
-import { StaticImage } from "gatsby-plugin-image"
 import { motion, AnimatePresence } from "framer-motion"
 import ReCAPTCHA from "react-google-recaptcha"
 
@@ -85,13 +85,9 @@ const OptInModal = () => {
               minW="280px"
               overflow="hidden"
             >
-              <StaticImage
-                src="../../images/forms/opt-in-cover-photo-compressed.png"
+              <Image
+                src="./forms/opt-in-cover-photo-compressed.png"
                 alt="opt-in photo"
-                layout="fixed"
-                width={800}
-                placeholder="blurred"
-                style={{ width: "100%", height: "100%" }}
               />
             </Box>
             <Box
@@ -109,14 +105,7 @@ const OptInModal = () => {
                 size="lg"
                 onClick={() => setOpen(!isOpen)}
               />
-              <StaticImage
-                src="../../images/forms/mobile-type-writer.jpg"
-                alt="type writer"
-                layout="fixed"
-                width={600}
-                placeholder="blurred"
-                style={{ width: "100%", height: "100%" }}
-              />
+              <Image src="./forms/mobile-type-writer.jpg" alt="type writer" />
             </Box>
             <Box w={{ base: "100%", md: "50%" }} minW="280px" p="2rem 1.25rem">
               <Flex justifyContent="flex-end" pb="1rem">
@@ -167,7 +156,7 @@ const OptInModal = () => {
                 </FormControl>
                 <Box display="none">
                   <div>
-                    <Textarea name="body">default</Textarea>
+                    <Textarea name="body" defaultValue="default" />
                   </div>
                   <div>
                     <input type="file" name="attachment" />
@@ -175,7 +164,9 @@ const OptInModal = () => {
                   <div id="html_element"></div>
                 </Box>
                 <FormControl {...controlStyles}>
-                  <ReCAPTCHA sitekey={process.env.GATSBY_GOOGLE_RECAPTCHA} />
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA}
+                  />
                 </FormControl>
                 <FormControl {...controlStyles}>
                   <Button

@@ -22,21 +22,12 @@ import {
 import { AiOutlineUpload } from "react-icons/ai"
 import PortableText from "@sanity/block-content-to-react"
 import { FaLinkedin, FaTwitter } from "react-icons/fa"
-import Serializers from "../Serializers"
 import ReCAPTCHA from "react-google-recaptcha"
 
 const ContactForm = ({ title, body }) => {
   const [fileName, setFileName] = useState("Select a File")
   const { isOpen, onClose } = useDisclosure()
   const theme = useTheme()
-  // useScript(
-  //   "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-  // )
-  // const onloadCallback = () => {
-  //   grecaptcha.render("html_element", {
-  //     sitekey: "6LeIvUsaAAAAAIuQ2u4l9h0jCypMB7ryfPJFydk1",
-  //   })
-  // }
 
   const controlStyles = {
     paddingBottom: "1rem",
@@ -87,7 +78,7 @@ const ContactForm = ({ title, body }) => {
       </Stack>
       {body && (
         <Flex color="black" mb="0.5rem" textAlign="center">
-          <PortableText blocks={body} serializers={Serializers} />
+          <PortableText blocks={body} />
         </Flex>
       )}
       <form

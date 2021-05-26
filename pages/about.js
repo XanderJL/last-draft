@@ -1,8 +1,9 @@
-import { Container, Flex, Image } from "@chakra-ui/react"
+import { Container, Image } from "@chakra-ui/react"
 import Brands from "@components/Brands"
 import HeroCard from "@components/Cards/HeroCard"
 import Hero from "@components/Hero"
 import Layout from "@components/Layout"
+import Section from "@components/Layout/Section"
 import { PortableText } from "@lib/sanity"
 import { getClient } from "@lib/sanity/sanity.server"
 import { groq } from "next-sanity"
@@ -18,11 +19,13 @@ const About = ({ data }) => {
         </HeroCard>
       </Hero>
       <Container maxW="container.xl">
-        <Flex>
+        <Section display="flex" flexDirection={{ base: "column", md: "row" }}>
           <PortableText blocks={sectionOne?.body} />
-          <Image src={sectionOne?.image?.url} />
-        </Flex>
-        <Brands brands={brands} />
+          <Image src={sectionOne?.image?.url} pl={{ base: 0, md: 10 }} />
+        </Section>
+        <Section>
+          <Brands brands={brands} />
+        </Section>
       </Container>
     </Layout>
   )

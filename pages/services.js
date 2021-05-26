@@ -4,7 +4,7 @@ import { getClient } from "@lib/sanity/sanity.server"
 import Hero from "@components/Hero"
 import { PortableText, serializers } from "@lib/sanity"
 import { Box, Container, Heading, Flex, VStack, Text } from "@chakra-ui/react"
-import Section from "@components/Section"
+import Section from "@components/Layout/Section"
 import { Image } from "@chakra-ui/image"
 import HeroCard from "@components/Cards/HeroCard"
 

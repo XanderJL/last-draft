@@ -7,7 +7,7 @@ const HeroCard = ({ children, ...rest }) => {
       maxW="70ch"
       bg="white"
       p={{ base: "3rem 1.25rem", md: "4rem 3rem" }}
-      m="0 auto"
+      m={{ base: "0 1.25rem", md: "0 auto" }}
       borderRadius={2}
       boxShadow="lg"
       {...rest}

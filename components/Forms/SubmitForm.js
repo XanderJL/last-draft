@@ -122,7 +122,7 @@ const SubmitForm = () => {
             />
           </FormControl>
           <FormControl {...controlStyles}>
-            <ReCAPTCHA sitekey={process.env.GATSBY_GOOGLE_RECAPTCHA} />
+            <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA} />
           </FormControl>
           <FormControl {...controlStyles}>
             <Button
