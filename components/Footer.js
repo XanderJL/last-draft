@@ -9,7 +9,7 @@ function Footer() {
       <Box bg="white" p="3rem 1.25rem">
         <Container maxW="container.xl">
           <Stack align="flex-end" spacing={6}>
-            <Link display="flex" alignItems="center" href="/" pb="1rem">
+            <Link display="flex" alignItems="center" href="/">
               <Logo boxSize={12} />
               <Heading
                 as="h3"

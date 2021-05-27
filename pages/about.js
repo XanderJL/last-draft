@@ -1,4 +1,4 @@
-import { Container, Image } from "@chakra-ui/react"
+import { Box, Container, Image } from "@chakra-ui/react"
 import Brands from "@components/Brands"
 import HeroCard from "@components/Cards/HeroCard"
 import Hero from "@components/Hero"
@@ -19,9 +19,20 @@ const About = ({ data }) => {
         </HeroCard>
       </Hero>
       <Container maxW="container.xl">
-        <Section display="flex" flexDirection={{ base: "column", md: "row" }}>
-          <PortableText blocks={sectionOne?.body} />
-          <Image src={sectionOne?.image?.url} pl={{ base: 0, md: 10 }} />
+        <Section
+          display="flex"
+          flexDirection={{ base: "column", md: "row" }}
+          alignItems={{ base: "flex-start", md: "center" }}
+          justifyContent={{ base: "flex-start", md: "space-between" }}
+        >
+          <Box maxW="70ch">
+            <PortableText blocks={sectionOne?.body} />
+          </Box>
+          <Image
+            src={sectionOne?.image?.url}
+            maxW={{ md: "600px" }}
+            pl={{ base: 0, md: 10 }}
+          />
         </Section>
         <Section>
           <Brands brands={brands} />

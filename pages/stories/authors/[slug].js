@@ -1,4 +1,4 @@
-import { Container, Heading, Image } from "@chakra-ui/react"
+import { Box, Container, Heading, Image, Stack, Text } from "@chakra-ui/react"
 import AuthorBio from "@components/AuthorBio"
 import Layout from "@components/Layout"
 import Section from "@components/Layout/Section"
@@ -8,35 +8,40 @@ import { groq } from "next-sanity"
 import toPlainText from "util/toPlainText"
 
 const Author = ({ authorData }) => {
-  const { _id, name, bio, slug, image, posts } = authorData
+  const { name, bio, slug, image, posts } = authorData
   return (
     <Layout>
-      <Container maxW="70ch">
+      <Container maxW="container.md">
         <Section>
           <AuthorBio name={name} image={image} slug={slug} bio={bio} />
         </Section>
         <Section>
-          <Heading as="h3" textTransform="uppercase">
+          <Heading as="h2" size="xl" textTransform="uppercase" pb="2rem">
             Latest Stories
           </Heading>
-          {posts.map((post) => {
-            const {
-              _id,
-              publishedAt,
-              mainImage,
-              title,
-              body,
-              category,
-              slug: postSlug,
-            } = post
-            const authorLink = `/stories/authors/${slug}`
-            const categoryLink = `/stories/${category.slug}`
-            const postLink = categoryLink + `/${postSlug}`
-
-            return (
-              <div key={_id} className="card">
-                <div className="card-header">
-                  <div className="card-header-icon">
+          <Stack spacing={8}>
+            {posts.map((post) => {
+              const {
+                _id,
+                publishedAt,
+                mainImage,
+                title,
+                body,
+                category,
+                slug: postSlug,
+              } = post
+              const authorLink = `/stories/authors/${slug}`
+              const categoryLink = `/stories/${category.slug}`
+              const postLink = categoryLink + `/${postSlug}`
+              return (
+                <Box
+                  key={_id}
+                  boxShadow="lg"
+                  border="1px solid"
+                  borderColor="gray.50"
+                  borderRadius={4}
+                >
+                  <Stack direction="row" p="1.25rem">
                     <Link href={authorLink}>
                       {image && (
                         <Image
@@ -52,39 +57,51 @@ const Author = ({ authorData }) => {
                         />
                       )}
                     </Link>
-                  </div>
-                  <div className="card-header-title">
-                    <h3 className="is-montserrat is-size-5">
-                      <Link to={authorLink}>{name}</Link> in{" "}
-                      <Link to={categoryLink}>{category.title} </Link>{" "}
-                    </h3>
-                    <h3 className="is-montserrat has-text-grey">
-                      {publishedAt}
-                    </h3>
-                  </div>
-                </div>
-                <div className="card-image">
-                  <Link to={postLink}>
+                    <div className="card-header-title">
+                      <Heading
+                        as="h3"
+                        size="md"
+                        textTransform="uppercase"
+                        letterSpacing={0}
+                      >
+                        <Link href={authorLink}>{name}</Link> in{" "}
+                        <Link href={categoryLink}>{category.title} </Link>{" "}
+                      </Heading>
+                      <Heading as="h3" size="md" letterSpacing={0}>
+                        {new Date(publishedAt).toLocaleString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </Heading>
+                    </div>
+                  </Stack>
+                  <Link href={postLink}>
                     <Image
                       src={mainImage?.url}
                       options={{ maxWidth: 1600, maxHeight: 900 }}
                     />
                   </Link>
-                </div>
-                <div className="card-content">
-                  <div className="content">
-                    <h2 className="title is-montserrat is-uppercase is-size-4-mobile">
+                  <Stack p="2rem 1.25rem" align="flex-start" spacing={6}>
+                    <Heading as="h2" size="lg" textTransform="uppercase">
                       {title}
-                    </h2>
-                    <p>{toPlainText(body).slice(0, 119) + "..."}</p>
-                  </div>
-                  <Link to={postLink} className="button is-montserrat">
-                    Read &rsaquo;
-                  </Link>
-                </div>
-              </div>
-            )
-          })}
+                    </Heading>
+                    <Text>{toPlainText(body).slice(0, 119) + "..."}</Text>
+                    <Link
+                      as="button"
+                      href={postLink}
+                      p="0.75rem 1.25rem"
+                      bg="black"
+                      color="white"
+                      _hover={{ bg: "cyan.400" }}
+                    >
+                      Read &rsaquo;
+                    </Link>
+                  </Stack>
+                </Box>
+              )
+            })}
+          </Stack>
         </Section>
       </Container>
     </Layout>

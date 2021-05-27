@@ -1,10 +1,10 @@
-import { Container, Heading, Text } from "@chakra-ui/react"
+import { Container, Heading, Image, Text } from "@chakra-ui/react"
 import { groq } from "next-sanity"
 import { getClient } from "@lib/sanity/sanity.server"
 import Layout from "@components/Layout"
 import Hero from "@components/Hero"
 import BlogTabs from "@components/BlogTabs"
-import { PortableText } from "@lib/sanity"
+import { PortableText, serializers, urlFor } from "@lib/sanity"
 import Section from "@components/Layout/Section"
 import PostCard from "@components/Cards/PostCard"
 import CardGrid from "@components/Layout/Grids/CardGrid"
@@ -26,7 +26,19 @@ const Stories = ({ blogData, recentPostData }) => {
       <Container maxW="container.xl">
         <BlogTabs categories={categories} />
         <Section>
-          <PortableText blocks={pubBody} />
+          <PortableText
+            blocks={pubBody}
+            serializers={{
+              ...serializers,
+              types: {
+                ...serializers.types,
+                blockImage: (props) => {
+                  const { image } = props.node
+                  return <Image src={urlFor(image)} maxH="140px" w="auto" />
+                },
+              },
+            }}
+          />
         </Section>
         <Section>
           <Heading textTransform="uppercase" pb="1.5rem">
@@ -34,7 +46,15 @@ const Stories = ({ blogData, recentPostData }) => {
           </Heading>
           <CardGrid>
             {recentPostData.map((post) => {
-              const { _id, title, mainImage, slug, category } = post
+              const {
+                _id,
+                title,
+                mainImage,
+                slug,
+                category,
+                previewCopy,
+                body,
+              } = post
               return (
                 <PostCard
                   key={_id}
@@ -43,7 +63,9 @@ const Stories = ({ blogData, recentPostData }) => {
                   image={mainImage?.url}
                   link={`/${category?.slug}/${slug}`}
                 >
-                  brunkus
+                  {previewCopy
+                    ? previewCopy
+                    : toPlainText(body).slice(0, 124) + "..."}
                 </PostCard>
               )
             })}
@@ -53,10 +75,10 @@ const Stories = ({ blogData, recentPostData }) => {
           const { _id, title, slug, description, posts } = category
           return (
             <Section key={_id}>
-              <Heading textTransform="uppercase" pb="0.5rem">
+              <Heading textTransform="uppercase" pb="1rem">
                 {title}
               </Heading>
-              {description && <Text pb="1.5rem">{description}</Text>}
+              {description && <Text pb="3rem">{description}</Text>}
               <CardGrid pb={{ base: 6, md: 12 }}>
                 {posts.map((post) => {
                   const {

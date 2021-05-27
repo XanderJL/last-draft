@@ -4,7 +4,7 @@ import Link from "./Link"
 
 const BlogTabs = ({ categories }) => {
   return (
-    <Tabs isFitted overflowX={{ base: "scroll", md: "hidden" }}>
+    <Tabs overflowX={{ base: "scroll", md: "hidden" }} colorScheme="cyan">
       <TabList>
         {categories.map((category) => {
           const { _id, title, slug } = category

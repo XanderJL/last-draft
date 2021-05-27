@@ -93,7 +93,7 @@ const Team = ({ data }) => {
         p={{ base: "3rem 1.25rem", md: "7rem 1.25rem" }}
         maxW="container.xl"
       >
-        <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={8}>
+        <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={8}>
           {team.map((member) => {
             const { _id, firstName, lastName, jobTitle, slug, headshot } =
               member
@@ -106,14 +106,17 @@ const Team = ({ data }) => {
               >
                 <Box
                   mb="0.25rem"
-                  maxW={300}
-                  maxH={300}
+                  maxBlockSize={220}
                   _groupHover={{ opacity: 0.8 }}
                   overflow="hidden"
                 >
                   <Image
                     src={headshot?.url}
+                    objectFit="cover"
+                    objectPosition="center"
                     bgImage={headshot?.metadata?.lqip}
+                    bgSize="cover"
+                    bgPosition="center"
                     alt={(firstName, " ", lastName)}
                   />
                 </Box>

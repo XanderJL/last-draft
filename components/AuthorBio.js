@@ -1,10 +1,10 @@
-import { Box, Heading, Image } from "@chakra-ui/react"
+import { Box, Heading, Image, Stack } from "@chakra-ui/react"
 import { PortableText } from "@lib/sanity"
 import Link from "./Link"
 
 const AuthorBio = ({ slug, name, image, bio }) => {
   return (
-    <div className=" author-bio">
+    <Stack direction={{ base: "column", md: "row" }} spacing={6}>
       <Link to={`/stories/authors/${slug}`} className="avatar-link">
         {image ? (
           <Image
@@ -39,13 +39,15 @@ const AuthorBio = ({ slug, name, image, bio }) => {
           </svg>
         )}
       </Link>
-      <Box>
+      <Box flex={1}>
         <Link href={`/stories/authors/${slug}`}>
-          <Heading textTransform="uppercase">{name}</Heading>
+          <Heading textTransform="uppercase" pb="1rem">
+            {name}
+          </Heading>
         </Link>
         <PortableText blocks={bio} />
       </Box>
-    </div>
+    </Stack>
   )
 }
 
