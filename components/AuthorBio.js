@@ -1,24 +1,23 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import PortableText from "@sanity/block-content-to-react"
-import SanityImage from "./SanityImage"
-import { Box } from "@chakra-ui/react"
+import { Box, Heading, Image } from "@chakra-ui/react"
+import { PortableText } from "@lib/sanity"
+import Link from "./Link"
 
-const AuthorBio = ({ author }) => {
-  const { slug, name, image, _rawBio } = author
+const AuthorBio = ({ slug, name, image, bio }) => {
   return (
     <div className=" author-bio">
-      <Link to={`/stories/authors/${slug.current}`} className="avatar-link">
+      <Link to={`/stories/authors/${slug}`} className="avatar-link">
         {image ? (
-          <Box boxSize="150px" borderRadius="full" overflow="hidden">
-            <SanityImage
-              className="avatar"
-              image={image.asset}
-              options={{ width: 150, height: 150 }}
-              imgStyle={{ width: "100%", height: "auto" }}
-            />
-          </Box>
+          <Image
+            boxSize={150}
+            src={image?.url}
+            objectFit="cover"
+            objectPosition="center"
+            bgImage={image?.metadata?.lqip}
+            bgSize="cover"
+            bgPosition="center"
+            bgRepeat="no-repeat"
+            borderRadius="full"
+          />
         ) : (
           <svg
             version="1.1"
@@ -40,21 +39,14 @@ const AuthorBio = ({ author }) => {
           </svg>
         )}
       </Link>
-      <div className="content">
-        <Link
-          to={`/stories/authors/${slug.current}`}
-          className="title is-montserrat is-uppercase is-size-5-mobile"
-        >
-          {name}
+      <Box>
+        <Link href={`/stories/authors/${slug}`}>
+          <Heading textTransform="uppercase">{name}</Heading>
         </Link>
-        <PortableText className="content" blocks={_rawBio} />
-      </div>
+        <PortableText blocks={bio} />
+      </Box>
     </div>
   )
-}
-
-AuthorBio.propTypes = {
-  author: PropTypes.object.isRequired,
 }
 
 export default AuthorBio

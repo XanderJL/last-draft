@@ -1,6 +1,6 @@
 import { Grid } from "@chakra-ui/react"
 
-const CardGrid = ({ children }) => {
+const CardGrid = ({ children, ...rest }) => {
   return (
     <Grid
       templateColumns={{
@@ -8,6 +8,7 @@ const CardGrid = ({ children }) => {
         md: "repeat(auto-fill, minmax(280px, 1fr))",
       }}
       gap={8}
+      {...rest}
     >
       {children}
     </Grid>

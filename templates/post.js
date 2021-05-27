@@ -7,7 +7,7 @@ import Layout from "../components/Layout"
 import Hero from "../components/Hero-old"
 import AuthorBio from "../components/AuthorBio"
 import Tags from "../components/Tags"
-import toPlainText from "../hooks/toPlainText"
+import toPlainText from "../util/toPlainText"
 import { getGatsbyImageData } from "gatsby-source-sanity"
 import sanityConfig from "../lib/sanityConfig"
 

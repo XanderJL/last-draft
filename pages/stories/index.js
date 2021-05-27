@@ -10,9 +10,11 @@ import PostCard from "@components/Cards/PostCard"
 import CardGrid from "@components/Layout/Grids/CardGrid"
 import SubmitForm from "@components/Forms/SubmitForm"
 import OptInModal from "@components/Modals/OptInModal"
+import Link from "@components/Link"
+import toPlainText from "util/toPlainText"
 
-const Stories = ({ blogData, recentPostData, categoryData }) => {
-  const { heroImage, pubBody } = blogData
+const Stories = ({ blogData, recentPostData }) => {
+  const { heroImage, pubBody, categories } = blogData
 
   return (
     <Layout>
@@ -22,7 +24,7 @@ const Stories = ({ blogData, recentPostData, categoryData }) => {
         minH="36em"
       />
       <Container maxW="container.xl">
-        <BlogTabs categories={categoryData} />
+        <BlogTabs categories={categories} />
         <Section>
           <PortableText blocks={pubBody} />
         </Section>
@@ -47,7 +49,7 @@ const Stories = ({ blogData, recentPostData, categoryData }) => {
             })}
           </CardGrid>
         </Section>
-        {categoryData.map((category) => {
+        {categories.map((category) => {
           const { _id, title, slug, description, posts } = category
           return (
             <Section key={_id}>
@@ -55,9 +57,17 @@ const Stories = ({ blogData, recentPostData, categoryData }) => {
                 {title}
               </Heading>
               {description && <Text pb="1.5rem">{description}</Text>}
-              <CardGrid>
+              <CardGrid pb={{ base: 6, md: 12 }}>
                 {posts.map((post) => {
-                  const { _id, title, mainImage, slug, category } = post
+                  const {
+                    _id,
+                    title,
+                    mainImage,
+                    slug,
+                    category,
+                    previewCopy,
+                    body,
+                  } = post
                   return (
                     <PostCard
                       key={_id}
@@ -66,11 +76,23 @@ const Stories = ({ blogData, recentPostData, categoryData }) => {
                       image={mainImage?.url}
                       link={`/${category?.slug}/${slug}`}
                     >
-                      tunkis
+                      {previewCopy
+                        ? previewCopy
+                        : toPlainText(body).slice(0, 124) + "..."}
                     </PostCard>
                   )
                 })}
               </CardGrid>
+              <Link
+                as="button"
+                href={`/stories/${slug}`}
+                p="0.75rem 1.25rem"
+                bg="black"
+                color="white"
+                _hover={{ bg: "cyan.400" }}
+              >
+                More Articles
+              </Link>
             </Section>
           )
         })}
@@ -105,29 +127,8 @@ const blogQuery = groq`
       metadata,
       url
     }
-  }
-}[0]
-`
-
-const recentPostsQuery = groq`
-  *[_type == "post"] | order(publishedAt desc){
-    _id,
-    title,
-    "slug": slug.current,
-    category->{
-      "slug": slug.current,
-      title
-    },
-    body,
-    "mainImage": mainImage.asset->{
-      metadata,
-      url
-    }
-  }[0..2]
-`
-
-const categoriesQuery = groq`
-  *[_type == "category" && !defined(parentCategory)] | order(priority desc) {
+  },
+  categories[!defined(parentCategory)]->{
     _id,
     title,
     "slug": slug.current,
@@ -151,14 +152,31 @@ const categoriesQuery = groq`
       }
     }[0..2]
   }
+}[0]
+`
+
+const recentPostsQuery = groq`
+  *[_type == "post"] | order(publishedAt desc){
+    _id,
+    title,
+    "slug": slug.current,
+    category->{
+      "slug": slug.current,
+      title
+    },
+    body,
+    "mainImage": mainImage.asset->{
+      metadata,
+      url
+    }
+  }[0..2]
 `
 
 export const getStaticProps = async () => {
   const blogData = await getClient().fetch(blogQuery)
   const recentPostData = await getClient().fetch(recentPostsQuery)
-  const categoryData = await getClient().fetch(categoriesQuery)
 
-  return { props: { blogData, recentPostData, categoryData } }
+  return { props: { blogData, recentPostData } }
 }
 
 export default Stories

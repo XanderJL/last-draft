@@ -37,7 +37,7 @@ const PostCard = ({ title, image, placeholder, children, link }) => {
       >
         <Box pb="2rem">
           <Link href={link}>
-            <Heading size="md" textTransform="uppercase">
+            <Heading pb="0.75rem" size="md" textTransform="uppercase">
               {title}
             </Heading>
           </Link>

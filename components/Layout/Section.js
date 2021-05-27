@@ -5,7 +5,7 @@ const Section = ({ children, ...rest }) => {
   return (
     <Box
       as="section"
-      p={{ base: "3rem 1.25rem", md: "5rem 1.25rem" }}
+      p={{ base: "2rem 1.25rem", md: "3rem 1.25rem" }}
       {...rest}
     >
       {children}
