@@ -65,12 +65,12 @@ const OptInModal = () => {
           flexDirection="column"
           boxShadow="xl"
           zIndex={100}
-          maxW="100vw"
+          maxW={{ base: "100vw", md: "container.md" }}
           maxH="80vh"
           position="fixed"
           marginLeft={{ base: 0, md: "1.25rem" }}
-          right={{ base: 0, md: "1rem" }}
-          bottom={{ base: 0, md: "1rem" }}
+          right={{ base: 0, md: "1.25rem" }}
+          bottom={{ base: 0, md: "1.25rem" }}
           bg="white"
           overflowY={{ base: "scroll", md: "hidden" }}
           variant={boxVariant}
@@ -79,17 +79,16 @@ const OptInModal = () => {
           exit="hidden"
         >
           <Flex direction={{ base: "column", md: "row" }} minH="700px">
-            <Box
+            <Image
+              flex={1}
               display={{ base: "none", md: "block" }}
-              w="50%"
+              w={{ base: "100%", md: "50%" }}
               minW="280px"
-              overflow="hidden"
-            >
-              <Image
-                src="./forms/opt-in-cover-photo-compressed.png"
-                alt="opt-in photo"
-              />
-            </Box>
+              src="./forms/opt-in-cover-photo-compressed.png"
+              objectFit="cover"
+              objectPosition="center"
+              alt="opt-in photo"
+            />
             <Box
               display={{ base: "block", md: "none" }}
               position="relative"

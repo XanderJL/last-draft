@@ -11,6 +11,7 @@ import {
   Grid,
   GridItem,
   Heading,
+  HStack,
   Icon,
   Text,
   VStack,
@@ -18,6 +19,7 @@ import {
 import { PortableText } from "@lib/sanity"
 import Link from "@components/Link"
 import ContactForm from "@components/Forms/ContactForm"
+import toPlainText from "util/toPlainText"
 
 const Home = ({ data }) => {
   const {
@@ -27,6 +29,7 @@ const Home = ({ data }) => {
     cardsTitle,
     contactHeading,
     contactBody,
+    testimonials,
   } = data
   const [index, setIndex] = useState(0)
   const interval = useRef()
@@ -36,9 +39,9 @@ const Home = ({ data }) => {
       () =>
         setIndex((prev) => {
           const nextIndex = prev + 1
-          return nextIndex > test.length - 1 ? 0 : nextIndex
+          return nextIndex > testimonials.length - 1 ? 0 : nextIndex
         }),
-      3000
+      9000
     )
 
     return () => clearInterval(interval.current)
@@ -129,45 +132,70 @@ const Home = ({ data }) => {
           </Grid>
         </VStack>
       </Container>
-      <Hero minH="100vh">
+      <Hero image="./index/newsletter-header.jpg" minH="100vh">
         <Box
-          mx="auto"
-          w="full"
-          maxW="70ch"
-          bg="black"
+          mx={{ base: "1.25rem", md: "auto" }}
+          maxW="container.md"
+          bg="blackAlpha.800"
           color="white"
           overflowX="hidden"
         >
           <Grid
-            w={`calc(100% * ${test.length})`}
-            templateColumns={`repeat(${test.length}, 1fr)`}
-            transform={`translateX(-${(index / 4) * 100}%)`}
+            w={`calc(100% * ${testimonials.length})`}
+            templateColumns={`repeat(${testimonials.length}, 1fr)`}
+            transform={`translateX(-${(index / testimonials.length) * 100}%)`}
             transition="transform 1000ms ease-in-out"
           >
-            {test.map((boop) => (
-              <Box>{boop}</Box>
-            ))}
+            {testimonials.map((test) => {
+              const {
+                _id,
+                brandName,
+                brandRep,
+                brandUrl,
+                repTitle,
+                testimonial,
+              } = test
+              return (
+                <Box key={_id} textAlign="center" p="3rem 2rem 0 2rem">
+                  <Text fontStyle="italic" pb="1rem">
+                    {toPlainText(testimonial)}
+                  </Text>
+                  <Link href={brandUrl} fontWeight={600} isExternal>
+                    <Text>{brandRep}</Text>
+                    <Text>{`${brandName}, ${repTitle}`}</Text>
+                  </Link>
+                </Box>
+              )
+            })}
           </Grid>
+          <HStack spacing={4} justify="center" p="2rem 0 3rem 0">
+            {testimonials.map((_, i) => (
+              <Box
+                w={2}
+                h={2}
+                bg={i === index ? "cyan.200" : "gray.500"}
+                borderRadius="full"
+                as="button"
+                onClick={() => {
+                  setIndex(i)
+                  clearInterval(interval.current)
+                }}
+                _after={{
+                  content: "''",
+                  boxSize: 4,
+                  borderRadius: "full",
+                }}
+              />
+            ))}
+          </HStack>
         </Box>
       </Hero>
-      {test.map((boop, i) => (
-        <Button
-          onClick={() => {
-            setIndex(i)
-            clearInterval(interval.current)
-          }}
-        >
-          {i + 1}
-        </Button>
-      ))}
       <Container maxW="container.xl">
         <ContactForm title={contactHeading} body={contactBody} />
       </Container>
     </Layout>
   )
 }
-
-const test = ["gumpus", "drumpus", "Daniel dumb", ":)"]
 
 const homePageQuery = groq`
   *[_type == "indexPage"]{
