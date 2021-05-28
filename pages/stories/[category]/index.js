@@ -47,7 +47,7 @@ const Category = ({ blogData, postsData }) => {
                     title={title}
                     placeholder={mainImage?.metadata?.lqip}
                     image={mainImage?.url}
-                    link={`/${category?.slug}/${slug}`}
+                    link={`/stories/${category?.slug}/${slug}`}
                   >
                     {previewCopy
                       ? previewCopy
@@ -100,10 +100,8 @@ const postsQuery = groq`
 export const getStaticPaths = async () => {
   const blog = await getClient().fetch(blogQuery)
   const paths = blog.categories.map((category) => ({
-    params: { category: [category.slug] },
+    params: { category: category.slug },
   }))
-
-  console.log(paths)
 
   return { paths, fallback: false }
 }

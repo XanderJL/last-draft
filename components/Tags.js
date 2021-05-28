@@ -1,18 +1,18 @@
-import * as React from "react"
-import PropTypes from "prop-types"
+import { Flex } from "@chakra-ui/layout"
+import { Tag } from "@chakra-ui/tag"
 
 const Tags = ({ tags }) => {
   return (
-    <div className="tags">
-      {tags.map(tag => {
-        return <span key={tag} className="tag is-primary is-light is-small">{tag}</span>
+    <Flex justify="flex-start" flexWrap="wrap">
+      {tags.map((tag) => {
+        return (
+          <Tag key={tag} mr={2} mb={2} variant="solid" bg="cyan.50" color="cyan.900">
+            {tag}
+          </Tag>
+        )
       })}
-    </div>
+    </Flex>
   )
-}
-
-Tags.propTypes = {
-  tags: PropTypes.array.isRequired,
 }
 
 export default Tags

@@ -17,9 +17,11 @@ const BlogTabs = ({ categories }) => {
         {categories.map((category) => {
           const { _id, title, slug } = category
           return (
-            <Tab key={_id} textTransform="uppercase" whiteSpace="nowrap">
-              <Link href={`/stories/${slug}`}>{title}</Link>
-            </Tab>
+            <Link href={`/stories/${slug}`}>
+              <Tab key={_id} textTransform="uppercase" whiteSpace="nowrap">
+                {title}
+              </Tab>
+            </Link>
           )
         })}
       </TabList>

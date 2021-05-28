@@ -44,7 +44,6 @@ const PostCard = ({ title, image, placeholder, children, link }) => {
           <Box>{children}</Box>
         </Box>
         <Link
-          as="button"
           href={link}
           maxW="max-content"
           p="0.75rem 1.25rem"
