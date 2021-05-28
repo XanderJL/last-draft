@@ -1,8 +1,11 @@
+import { useEffect, useState, useRef } from "react"
 import { groq } from "next-sanity"
 import { getClient } from "@lib/sanity/sanity.server"
 import Layout from "@components/Layout"
 import Hero from "@components/Hero"
 import {
+  Box,
+  Button,
   Container,
   Flex,
   Grid,
@@ -25,6 +28,22 @@ const Home = ({ data }) => {
     contactHeading,
     contactBody,
   } = data
+  const [index, setIndex] = useState(0)
+  const interval = useRef()
+
+  useEffect(() => {
+    interval.current = setInterval(
+      () =>
+        setIndex((prev) => {
+          const nextIndex = prev + 1
+          return nextIndex > test.length - 1 ? 0 : nextIndex
+        }),
+      3000
+    )
+
+    return () => clearInterval(interval.current)
+  }, [])
+
   return (
     <Layout>
       <Hero placeholder={heroImage?.metadata?.lqip} image={heroImage?.url}>
@@ -111,14 +130,44 @@ const Home = ({ data }) => {
         </VStack>
       </Container>
       <Hero minH="100vh">
-        <Container maxW="container.xl">Bleep</Container>
+        <Box
+          mx="auto"
+          w="full"
+          maxW="70ch"
+          bg="black"
+          color="white"
+          overflowX="hidden"
+        >
+          <Grid
+            w={`calc(100% * ${test.length})`}
+            templateColumns={`repeat(${test.length}, 1fr)`}
+            transform={`translateX(-${(index / 4) * 100}%)`}
+            transition="transform 1000ms ease-in-out"
+          >
+            {test.map((boop) => (
+              <Box>{boop}</Box>
+            ))}
+          </Grid>
+        </Box>
       </Hero>
+      {test.map((boop, i) => (
+        <Button
+          onClick={() => {
+            setIndex(i)
+            clearInterval(interval.current)
+          }}
+        >
+          {i + 1}
+        </Button>
+      ))}
       <Container maxW="container.xl">
         <ContactForm title={contactHeading} body={contactBody} />
       </Container>
     </Layout>
   )
 }
+
+const test = ["gumpus", "drumpus", "Daniel dumb", ":)"]
 
 const homePageQuery = groq`
   *[_type == "indexPage"]{

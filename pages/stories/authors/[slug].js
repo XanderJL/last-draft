@@ -57,7 +57,7 @@ const Author = ({ authorData }) => {
                         />
                       )}
                     </Link>
-                    <div className="card-header-title">
+                    <Box>
                       <Heading
                         as="h3"
                         size="md"
@@ -74,7 +74,7 @@ const Author = ({ authorData }) => {
                           year: "numeric",
                         })}
                       </Heading>
-                    </div>
+                    </Box>
                   </Stack>
                   <Link href={postLink}>
                     <Image

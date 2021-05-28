@@ -25,7 +25,7 @@ const Stories = ({ blogData, recentPostData }) => {
       />
       <Container maxW="container.xl">
         <BlogTabs categories={categories} />
-        <Section>
+        <Section p="0 1.25rem">
           <PortableText
             blocks={pubBody}
             serializers={{

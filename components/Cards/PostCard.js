@@ -15,7 +15,7 @@ const PostCard = ({ title, image, placeholder, children, link }) => {
           <Link href={link}>
             <Image
               w="100%"
-              maxH="240px"
+              h="240px"
               src={image}
               objectFit="cover"
               objectPosition="center"

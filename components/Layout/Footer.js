@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Heading, Stack } from "@chakra-ui/react"
 import Link from "@components/Link"
 import routes from "@lib/routes.json"
-import Logo from "./Logo"
+import Logo from "../Logo"
 
 function Footer() {
   return (
