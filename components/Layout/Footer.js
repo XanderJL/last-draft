@@ -21,7 +21,7 @@ function Footer() {
                 Last Draft
               </Heading>
             </Link>
-            <Flex direction="row-reverse" flexWrap="wrap">
+            <Flex direction="row" flexWrap="wrap">
               {routes.map((route, i) => {
                 const { slug, title } = route
                 return (
@@ -37,6 +37,7 @@ function Footer() {
                 )
               })}
               <Link
+                pl={3}
                 href="mailto: jacob@lastdraft.ca"
                 textTransform="uppercase"
                 isExternal
