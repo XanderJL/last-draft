@@ -38,7 +38,7 @@ function Footer() {
               </Link>
               <Link
                 as={GatsbyLink}
-                to="/services"
+                to="/services/for-business"
                 className="navbar-item is-montserrat is-uppercase"
               >
                 Services
