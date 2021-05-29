@@ -50,13 +50,6 @@ function Footer() {
               >
                 Team
               </Link>
-              <Link
-                as={GatsbyLink}
-                to="/stories"
-                className="navbar-item is-montserrat is-uppercase"
-              >
-                Stories
-              </Link>
               <a
                 href="mailto: jacob@lastdraft.ca"
                 className="navbar-item is-montserrat is-uppercase"
