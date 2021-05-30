@@ -12,7 +12,7 @@ const ForBusiness = ({ data }) => {
   const { title, heroImage, heroCard, services } = data
 
   return (
-    <Layout bg="gray.50">
+    <Layout title={title} bg="gray.50">
       <Hero placeholder={heroImage?.metadata?.lqip} image={heroImage?.url}>
         <HeroCard>
           <PortableText blocks={heroCard} />

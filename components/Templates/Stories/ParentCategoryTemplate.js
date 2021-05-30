@@ -12,9 +12,10 @@ import toPlainText from "util/toPlainText"
 
 const ParentCategoryTemplate = ({ blogData, categoriesData }) => {
   const { heroImage, categoryTabs } = blogData
-  const { childCategories } = categoriesData
+  const { title, description, childCategories } = categoriesData
+
   return (
-    <Layout>
+    <Layout title={title} description={description}>
       <Hero
         placeholder={heroImage?.metadata?.lqip}
         image={heroImage?.url}

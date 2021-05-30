@@ -12,8 +12,9 @@ import toPlainText from "util/toPlainText"
 const CategoryTemplate = ({ blogData, postsData }) => {
   const { heroImage, categoryTabs } = blogData
   const { category } = postsData[0]
+
   return (
-    <Layout>
+    <Layout title={category?.title} description={category?.description}>
       <Hero
         placeholder={heroImage?.metadata?.lqip}
         image={heroImage?.url}

@@ -48,6 +48,8 @@ const childCategoriesQuery = groq`
   *[_type == "category" && slug.current == $category] {
     _id,
     isParent,
+    title,
+    description,
     "childCategories": *[_type == "category" && references(^._id)]{
       _id,
       title,
@@ -80,7 +82,8 @@ const postsQuery = groq`
     category->{
       isParent,
       "slug": slug.current,
-      title
+      title,
+      description
     },
     body,
     "mainImage": mainImage.asset->{

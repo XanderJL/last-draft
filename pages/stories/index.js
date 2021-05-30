@@ -14,12 +14,10 @@ import Link from "@components/Link"
 import toPlainText from "util/toPlainText"
 
 const Stories = ({ blogData, recentPostData }) => {
-  const { heroImage, pubBody, categoryTabs } = blogData
-
-  console.log({ blogData })
+  const { title, heroImage, pubBody, categoryTabs } = blogData
 
   return (
-    <Layout>
+    <Layout title={title}>
       <Hero
         placeholder={heroImage?.metadata?.lqip}
         image={heroImage?.url}
@@ -63,7 +61,7 @@ const Stories = ({ blogData, recentPostData }) => {
                   title={title}
                   placeholder={mainImage?.metadata?.lqip}
                   image={mainImage?.url}
-                  link={`/${category?.slug}/${slug}`}
+                  link={`/stories/${category?.slug}/${slug}`}
                 >
                   {previewCopy
                     ? previewCopy

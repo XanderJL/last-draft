@@ -9,7 +9,7 @@ const Team = ({ data }) => {
   const { team, heading, subheading, heroImage } = data
 
   return (
-    <Layout>
+    <Layout title={heading}>
       <Box d={{ base: "none", md: "block" }}>
         <Hero
           placeholder={heroImage?.metadata?.lqip}

@@ -5,7 +5,6 @@ import Layout from "@components/Layout"
 import Hero from "@components/Hero"
 import {
   Box,
-  Button,
   Container,
   Flex,
   Grid,
@@ -23,6 +22,8 @@ import toPlainText from "util/toPlainText"
 
 const Home = ({ data }) => {
   const {
+    title,
+    metaDescription,
     heroImage,
     heroCard,
     cards,
@@ -48,7 +49,7 @@ const Home = ({ data }) => {
   }, [])
 
   return (
-    <Layout>
+    <Layout title={title} description={metaDescription}>
       <Hero placeholder={heroImage?.metadata?.lqip} image={heroImage?.url}>
         <Container maxW="container.xl" color="white" textShadow="2px 2px #000">
           <PortableText

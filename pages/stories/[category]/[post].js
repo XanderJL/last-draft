@@ -9,6 +9,7 @@ import Tags from "@components/Tags"
 import { PortableText } from "@lib/sanity"
 import { getClient } from "@lib/sanity/sanity.server"
 import { groq } from "next-sanity"
+import toPlainText from "util/toPlainText"
 
 const Post = ({ postData, footerCopy }) => {
   const {
@@ -23,7 +24,7 @@ const Post = ({ postData, footerCopy }) => {
   } = postData
 
   return (
-    <Layout>
+    <Layout title={title} description={toPlainText(body)}>
       <Hero
         placeholder={mainImage?.metadata?.lqip}
         image={mainImage?.url}
@@ -63,7 +64,7 @@ const Post = ({ postData, footerCopy }) => {
             bio={author?.bio}
           />
           <PortableText blocks={footerCopy.postFooter} />
-          {tags.length > 0 && <Tags tags={tags} />}
+          {tags?.length > 0 && <Tags tags={tags} />}
         </Section>
       </Container>
     </Layout>

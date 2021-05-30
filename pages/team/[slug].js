@@ -15,6 +15,7 @@ import { PortableText, serializers } from "@lib/sanity"
 import Layout from "@components/Layout"
 import { getClient } from "@lib/sanity/sanity.server"
 import EmployeeSocials from "@components/EmployeeSocials"
+import toPlainText from "util/toPlainText"
 
 const Member = ({ data }) => {
   const {
@@ -36,7 +37,10 @@ const Member = ({ data }) => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title={`${firstName && firstName} ${lastName && lastName}`}
+      description={toPlainText(bio)}
+    >
       <Container
         display="flex"
         p={{ base: "3rem 1.25rem", md: "5rem 1.25rem" }}

@@ -9,10 +9,11 @@ import { getClient } from "@lib/sanity/sanity.server"
 import { groq } from "next-sanity"
 
 const About = ({ data }) => {
-  const { heroImage, heroCard, sectionOne, brands } = data
+  const { title, metaDescription, heroImage, heroCard, sectionOne, brands } =
+    data
 
   return (
-    <Layout>
+    <Layout title={title} description={metaDescription}>
       <Hero placeholder={heroImage?.metadata?.lqip} image={heroImage?.url}>
         <HeroCard>
           <PortableText blocks={heroCard} />
