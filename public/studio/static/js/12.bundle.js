@@ -1,0 +1,1 @@
+webpackJsonp([12],{3450:function(e,r,t){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var n=t(0);t.n(n);r.default=function(e){var r=e.id;return(0,e.renderWrap)(n.createElement("iframe",{src:"https://gfycat.com/ifr/"+r,width:"100%",height:"500px",frameBorder:"0",scrolling:"no",allowFullScreen:!0}))}}});

@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "last-draft",
   "private": true,
   "description": "Last Draft's website build on Next :)",
   "version": "2.0.0",
@@ -13,7 +13,6 @@
     "next": "^10.2.2",
     "next-sanity": "^0.2.0",
     "next-seo": "^4.24.0",
-    "node-fetch": "^2.6.1",
     "prettier": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -29,7 +28,16 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build"
+    "dev": "concurrently \"next\" \"cd studio && sanity start\"",
+    "build": "next build",
+    "postbuild": "next-sitemap",
+    "build-studio": "cd studio && sanity build ../public/studio -y && cd ..",
+    "build-both": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
+    "start": "next start"
+  },
+  "devDependencies": {
+    "@sanity/cli": "^2.10.5",
+    "concurrently": "^6.2.0",
+    "next-sitemap": "^1.6.95"
   }
 }
