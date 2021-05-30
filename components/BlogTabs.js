@@ -2,19 +2,19 @@ import { useRouter } from "next/router"
 import { Tab, TabList, Tabs } from "@chakra-ui/tabs"
 import Link from "./Link"
 
-const BlogTabs = ({ categories }) => {
+const BlogTabs = ({ categoryTabs }) => {
   const router = useRouter()
 
   return (
     <Tabs
-      defaultIndex={categories.findIndex(
+      defaultIndex={categoryTabs.findIndex(
         ({ slug }) => slug === router.query.category
       )}
       overflowX={{ base: "scroll", md: "hidden" }}
       colorScheme="cyan"
     >
       <TabList>
-        {categories.map((category) => {
+        {categoryTabs.map((category) => {
           const { _id, title, slug } = category
           return (
             <Link key={_id} href={`/stories/${slug}`}>

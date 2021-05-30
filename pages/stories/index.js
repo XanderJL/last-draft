@@ -14,7 +14,9 @@ import Link from "@components/Link"
 import toPlainText from "util/toPlainText"
 
 const Stories = ({ blogData, recentPostData }) => {
-  const { heroImage, pubBody, categories } = blogData
+  const { heroImage, pubBody, categoryTabs } = blogData
+
+  console.log({ blogData })
 
   return (
     <Layout>
@@ -24,7 +26,7 @@ const Stories = ({ blogData, recentPostData }) => {
         minH="36em"
       />
       <Container maxW="container.xl">
-        <BlogTabs categories={categories} />
+        <BlogTabs categoryTabs={categoryTabs} />
         <Section p="0 1.25rem">
           <PortableText
             blocks={pubBody}
@@ -71,7 +73,7 @@ const Stories = ({ blogData, recentPostData }) => {
             })}
           </CardGrid>
         </Section>
-        {categories.map((category) => {
+        {categoryTabs.map((category) => {
           const { _id, title, slug, description, posts } = category
           return (
             <Section key={_id}>
@@ -96,7 +98,7 @@ const Stories = ({ blogData, recentPostData }) => {
                       title={title}
                       placeholder={mainImage?.metadata?.lqip}
                       image={mainImage?.url}
-                      link={`/${category?.slug}/${slug}`}
+                      link={`/stories/${category?.slug}/${slug}`}
                     >
                       {previewCopy
                         ? previewCopy
@@ -106,9 +108,8 @@ const Stories = ({ blogData, recentPostData }) => {
                 })}
               </CardGrid>
               <Link
-                as="button"
                 href={`/stories/${slug}`}
-                p="0.75rem 1.25rem"
+                p="1rem 1.25rem"
                 bg="black"
                 color="white"
                 _hover={{ bg: "cyan.400" }}
@@ -150,7 +151,10 @@ const blogQuery = groq`
       url
     }
   },
-  categories[!defined(parentCategory)]->{
+  "allCategories": *[_type == "category"]{
+    "slug": slug.current,
+  },
+  "categoryTabs": categories[!defined(parentCategory)]->{
     _id,
     title,
     "slug": slug.current,

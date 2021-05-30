@@ -1,23 +1,22 @@
-// import * as React from "react"
-// import { Link } from "gatsby"
-
-// import Layout from "../components/Layout"
+import { Container, Heading, Text } from "@chakra-ui/react"
+import Layout from "@components/Layout"
+import Section from "@components/Layout/Section"
+import Link from "@components/Link"
 
 const NotFoundPage = () => (
-  <div>beep</div>
-  //   <Layout title="404: Not found">
-  //     <section className="section">
-  //       <div className="container">
-  //         <h1 className="title">Oops!</h1>
-  //         <p className="subtitle">
-  //           It looks like the page you're after doesn't exist.
-  //         </p>
-  //         <Link className="button is-black" to="/">
-  //           Return Home
-  //         </Link>
-  //       </div>
-  //     </section>
-  //   </Layout>
+  <Layout>
+    <Container maxW="container.xl">
+      <Section>
+        <Heading>Oops!</Heading>
+        <Text>
+          The page you're looking for doesn't exist. Please{" "}
+          <Link href="/" textDecor="underline">
+            return home.
+          </Link>
+        </Text>
+      </Section>
+    </Container>
+  </Layout>
 )
 
 export default NotFoundPage
