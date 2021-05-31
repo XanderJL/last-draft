@@ -5,7 +5,7 @@ import Link from "./Link"
 const Brands = ({ brands, ...rest }) => {
   return (
     <Container maxW="container.lg" {...rest}>
-      <Heading textTransform="uppercase" textAlign="center">
+      <Heading textTransform="uppercase" textAlign="center" pb="1rem">
         clients + partners
       </Heading>
       <Grid

@@ -1,6 +1,6 @@
 const Heading = {
   baseStyle: {
-    fontWeight: 400,
+    fontWeight: 200,
     letterSpacing: "0.12rem",
   },
 }

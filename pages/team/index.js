@@ -4,6 +4,7 @@ import Layout from "@components/Layout"
 import { groq } from "next-sanity"
 import { getClient } from "@lib/sanity/sanity.server"
 import Link from "@components/Link"
+import { urlFor } from "@lib/sanity"
 
 const Team = ({ data }) => {
   const { team, heading, subheading, heroImage } = data
@@ -106,12 +107,11 @@ const Team = ({ data }) => {
               >
                 <Box
                   mb="0.25rem"
-                  maxBlockSize={220}
                   _groupHover={{ opacity: 0.8 }}
                   overflow="hidden"
                 >
                   <Image
-                    src={headshot?.url}
+                    src={urlFor(headshot?.url).width(400).height(400)}
                     objectFit="cover"
                     objectPosition="center"
                     bgImage={headshot?.metadata?.lqip}
